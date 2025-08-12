@@ -27,12 +27,14 @@ Partial Class SaveOnlineImage
         RadBtnImageFormatPNG = New RadioButton()
         RadBtnImageFormatJPG = New RadioButton()
         TxtBoxFilename = New TextBox()
-        LblFilename = New Label()
-        LblLocation = New Label()
         TxtBoxLocation = New TextBox()
         BtnLocation = New Button()
         BtnSave = New Button()
+        LblFilename = New My.Components.LabelCSY()
+        LblLocation = New My.Components.LabelCSY()
+        PicBoxThumb = New PictureBox()
         GroupBox1.SuspendLayout()
+        CType(PicBoxThumb, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' GroupBox1
@@ -52,7 +54,7 @@ Partial Class SaveOnlineImage
         ' 
         RadBtnImageFormatBMP.AutoSize = True
         RadBtnImageFormatBMP.Font = New Font("Segoe UI", 9.75F)
-        RadBtnImageFormatBMP.Location = New Point(18, 82)
+        RadBtnImageFormatBMP.Location = New Point(17, 82)
         RadBtnImageFormatBMP.Name = "RadBtnImageFormatBMP"
         RadBtnImageFormatBMP.Size = New Size(52, 21)
         RadBtnImageFormatBMP.TabIndex = 2
@@ -64,7 +66,7 @@ Partial Class SaveOnlineImage
         ' 
         RadBtnImageFormatPNG.AutoSize = True
         RadBtnImageFormatPNG.Font = New Font("Segoe UI", 9.75F)
-        RadBtnImageFormatPNG.Location = New Point(18, 53)
+        RadBtnImageFormatPNG.Location = New Point(17, 53)
         RadBtnImageFormatPNG.Name = "RadBtnImageFormatPNG"
         RadBtnImageFormatPNG.Size = New Size(52, 21)
         RadBtnImageFormatPNG.TabIndex = 1
@@ -76,12 +78,12 @@ Partial Class SaveOnlineImage
         ' 
         RadBtnImageFormatJPG.AutoSize = True
         RadBtnImageFormatJPG.Font = New Font("Segoe UI", 9.75F)
-        RadBtnImageFormatJPG.Location = New Point(18, 25)
+        RadBtnImageFormatJPG.Location = New Point(17, 25)
         RadBtnImageFormatJPG.Name = "RadBtnImageFormatJPG"
-        RadBtnImageFormatJPG.Size = New Size(47, 21)
+        RadBtnImageFormatJPG.Size = New Size(54, 21)
         RadBtnImageFormatJPG.TabIndex = 0
         RadBtnImageFormatJPG.TabStop = True
-        RadBtnImageFormatJPG.Text = "JPG"
+        RadBtnImageFormatJPG.Text = "JPEG"
         RadBtnImageFormatJPG.UseVisualStyleBackColor = True
         ' 
         ' TxtBoxFilename
@@ -89,39 +91,21 @@ Partial Class SaveOnlineImage
         TxtBoxFilename.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         TxtBoxFilename.Location = New Point(12, 27)
         TxtBoxFilename.Name = "TxtBoxFilename"
-        TxtBoxFilename.Size = New Size(300, 25)
+        TxtBoxFilename.Size = New Size(174, 25)
         TxtBoxFilename.TabIndex = 1
-        ' 
-        ' LblFilename
-        ' 
-        LblFilename.AutoSize = True
-        LblFilename.Location = New Point(12, 9)
-        LblFilename.Name = "LblFilename"
-        LblFilename.Size = New Size(175, 17)
-        LblFilename.TabIndex = 2
-        LblFilename.Text = "Filename (Without Extension)"
-        ' 
-        ' LblLocation
-        ' 
-        LblLocation.AutoSize = True
-        LblLocation.Location = New Point(12, 58)
-        LblLocation.Name = "LblLocation"
-        LblLocation.Size = New Size(57, 17)
-        LblLocation.TabIndex = 4
-        LblLocation.Text = "Location"
         ' 
         ' TxtBoxLocation
         ' 
         TxtBoxLocation.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         TxtBoxLocation.Location = New Point(12, 76)
         TxtBoxLocation.Name = "TxtBoxLocation"
-        TxtBoxLocation.Size = New Size(475, 25)
+        TxtBoxLocation.Size = New Size(296, 25)
         TxtBoxLocation.TabIndex = 3
         ' 
         ' BtnLocation
         ' 
         BtnLocation.Image = My.Resources.Resources.imageOpenImage
-        BtnLocation.Location = New Point(486, 72)
+        BtnLocation.Location = New Point(308, 72)
         BtnLocation.Name = "BtnLocation"
         BtnLocation.Size = New Size(32, 32)
         BtnLocation.TabIndex = 5
@@ -139,18 +123,46 @@ Partial Class SaveOnlineImage
         BtnSave.TextAlign = ContentAlignment.MiddleRight
         BtnSave.UseVisualStyleBackColor = True
         ' 
+        ' LblFilename
+        ' 
+        LblFilename.AutoSize = True
+        LblFilename.Location = New Point(12, 9)
+        LblFilename.Name = "LblFilename"
+        LblFilename.Size = New Size(175, 17)
+        LblFilename.TabIndex = 7
+        LblFilename.Text = "Filename (Without Extension)"
+        ' 
+        ' LblLocation
+        ' 
+        LblLocation.AutoSize = True
+        LblLocation.Location = New Point(12, 58)
+        LblLocation.Name = "LblLocation"
+        LblLocation.Size = New Size(57, 17)
+        LblLocation.TabIndex = 8
+        LblLocation.Text = "Location"
+        ' 
+        ' PicBoxThumb
+        ' 
+        PicBoxThumb.Location = New Point(187, 110)
+        PicBoxThumb.Name = "PicBoxThumb"
+        PicBoxThumb.Size = New Size(153, 153)
+        PicBoxThumb.SizeMode = PictureBoxSizeMode.Zoom
+        PicBoxThumb.TabIndex = 9
+        PicBoxThumb.TabStop = False
+        ' 
         ' SaveOnlineImage
         ' 
         AutoScaleDimensions = New SizeF(7F, 17F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(527, 275)
+        ClientSize = New Size(352, 275)
+        Controls.Add(PicBoxThumb)
         Controls.Add(BtnSave)
         Controls.Add(BtnLocation)
-        Controls.Add(LblLocation)
         Controls.Add(TxtBoxLocation)
-        Controls.Add(LblFilename)
         Controls.Add(TxtBoxFilename)
         Controls.Add(GroupBox1)
+        Controls.Add(LblFilename)
+        Controls.Add(LblLocation)
         Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FormBorderStyle = FormBorderStyle.FixedDialog
         Name = "SaveOnlineImage"
@@ -158,6 +170,7 @@ Partial Class SaveOnlineImage
         Text = "Save Selected Image"
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
+        CType(PicBoxThumb, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -167,9 +180,10 @@ Partial Class SaveOnlineImage
     Friend WithEvents RadBtnImageFormatPNG As RadioButton
     Friend WithEvents RadBtnImageFormatJPG As RadioButton
     Friend WithEvents TxtBoxFilename As TextBox
-    Friend WithEvents LblFilename As Label
-    Friend WithEvents LblLocation As Label
     Friend WithEvents TxtBoxLocation As TextBox
     Friend WithEvents BtnLocation As Button
     Friend WithEvents BtnSave As Button
+    Friend WithEvents LblFilename As My.Components.LabelCSY
+    Friend WithEvents LblLocation As My.Components.LabelCSY
+    Friend WithEvents PicBoxThumb As PictureBox
 End Class

@@ -151,6 +151,7 @@ Public Class SelectOnlineImage
     End Sub
     Private Sub BtnSaveArt_Click(sender As Object, e As EventArgs) Handles BtnSaveArt.Click
         Dim frmSaveOnlineImage As New SaveOnlineImage
+        frmSaveOnlineImage.PicBoxThumb.Image = PicBoxArt.Image
         frmSaveOnlineImage.ShowDialog()
         If frmSaveOnlineImage.DialogResult = DialogResult.OK Then
             Select Case frmSaveOnlineImage.GetFilename
