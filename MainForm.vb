@@ -1249,6 +1249,8 @@ Partial Friend Class MainForm
                     If App.tagCopy.Art.Count > 0 Then
                         tlFile.Tag.Pictures = App.tagCopy.Art.ToArray
                         App.tagArtIndex = 0
+                        wShowLyrics = False
+                        SetLyrics()
                     End If
                 Case App.CopyModes.Full
                     tlFile.Tag.Performers = App.tagCopy.Artists.ToArray
