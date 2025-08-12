@@ -402,7 +402,7 @@ Namespace My
 					ofd.Dispose()
 					ofd = Nothing
 				Case ImageSource.SelectOnline
-					Dim frmSelectOnline As New SelectImageOnline
+					Dim frmSelectOnline As New SelectOnlineImage
 					frmSelectOnline.ShowDialog()
 					If frmSelectOnline.DialogResult = DialogResult.OK Then
 						GetNewPic = frmSelectOnline.NewPic

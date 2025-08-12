@@ -4,7 +4,7 @@ Imports System.Drawing.Imaging
 Imports System.IO
 Imports SkyeTag.My
 
-Public Class SelectImageOnline
+Public Class SelectOnlineImage
 
     'Declarations
     Private NetClient As New System.Net.Http.HttpClient
