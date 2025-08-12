@@ -41,7 +41,12 @@ Public Class SelectOnlineImage
         TxtBoxSearchPhrase.Text = query
         Search()
     End Sub
-    Private Sub Frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, PicBoxArt.MouseDown, PicBoxFrontThumb.MouseDown, PicBoxBackThumb.MouseDown, LblDimBack.MouseDown, LblDimFront.MouseDown, LblStatus.MouseDown
+    Private Sub SelectOnlineImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        MBArt.Dispose()
+        MBQuery.Dispose()
+        NetClient.Dispose()
+    End Sub
+    Private Sub Frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, PicBoxArt.MouseDown, PicBoxFrontThumb.MouseDown, PicBoxBackThumb.MouseDown, LblDimBack.MouseDown, LblStatus.MouseDown
         Dim cSender As Control
         If e.Button = MouseButtons.Left AndAlso WindowState = FormWindowState.Normal Then
             mMove = True
@@ -54,7 +59,7 @@ Public Class SelectOnlineImage
         End If
         'cSender = Nothing
     End Sub
-    Private Sub Frm_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseMove, PicBoxArt.MouseMove, PicBoxFrontThumb.MouseMove, PicBoxBackThumb.MouseMove, LblDimBack.MouseMove, LblDimFront.MouseMove, LblStatus.MouseMove
+    Private Sub Frm_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseMove, PicBoxArt.MouseMove, PicBoxFrontThumb.MouseMove, PicBoxBackThumb.MouseMove, LblDimBack.MouseMove, LblStatus.MouseMove
         If mMove Then
             mPosition = MousePosition
             mPosition.Offset(mOffset.X, mOffset.Y)
@@ -62,7 +67,7 @@ Public Class SelectOnlineImage
             Location = mPosition
         End If
     End Sub
-    Private Sub Frm_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseUp, PicBoxArt.MouseUp, PicBoxFrontThumb.MouseUp, PicBoxBackThumb.MouseUp, LblDimBack.MouseUp, LblDimFront.MouseUp, LblStatus.MouseUp
+    Private Sub Frm_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseUp, PicBoxArt.MouseUp, PicBoxFrontThumb.MouseUp, PicBoxBackThumb.MouseUp, LblDimBack.MouseUp, LblStatus.MouseUp
         mMove = False
     End Sub
     Private Sub Frm_Move(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Move
@@ -92,8 +97,6 @@ Public Class SelectOnlineImage
             LblStatus.Visible = True
             LblDimFront.Text = String.Empty
             LblDimBack.Text = String.Empty
-            LblSizeFront.Text = String.Empty
-            LblSizeBack.Text = String.Empty
             PicBoxArt.Image = Nothing
             PicBoxFrontThumb.Image = Nothing
             PicBoxBackThumb.Image = Nothing
@@ -103,23 +106,19 @@ Public Class SelectOnlineImage
                 MBImageFront = MBArt.FetchFront(Guid.Parse(LVIDs.SelectedItems(0).Tag.ToString))
                 PicBoxArt.Image = New Bitmap(MBImageFront.Data)
                 PicBoxFrontThumb.Image = New Bitmap(MBImageFront.Data)
-                PicBoxFrontThumb.Image.Save(App.PicPath + "FrontThumb.bmp", Drawing.Imaging.ImageFormat.Bmp)
                 'selectedpic = New TagLib.Picture(DirectCast(MBImageFront.Data, MemoryStream).ToArray)
                 Dim ms As New MemoryStream
                 PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
                 selectedpic = New TagLib.Picture(ms.ToArray())
                 ms.Dispose()
                 LblDimFront.Text = PicBoxFrontThumb.Image.Width.ToString + " x " + PicBoxFrontThumb.Image.Height.ToString
-                LblSizeFront.Text = App.FormatFileSize(My.Computer.FileSystem.GetFileInfo(App.PicPath + "FrontThumb.bmp").Length, FormatFileSizeUnits.MegaBytes, 2, False)
                 BtnSaveArt.Enabled = True
             Catch ex As MetaBrainz.Common.HttpError
             End Try
             Try
                 MBImageBack = MBArt.FetchBack(Guid.Parse(LVIDs.SelectedItems(0).Tag.ToString))
                 PicBoxBackThumb.Image = New Bitmap(MBImageBack.Data)
-                PicBoxBackThumb.Image.Save(App.PicPath + "BackThumb.bmp", Drawing.Imaging.ImageFormat.Bmp)
                 LblDimBack.Text = PicBoxBackThumb.Image.Width.ToString + " x " + PicBoxBackThumb.Image.Height.ToString
-                LblSizeBack.Text = App.FormatFileSize(My.Computer.FileSystem.GetFileInfo(App.PicPath + "BackThumb.bmp").Length, FormatFileSizeUnits.MegaBytes, 2, False)
             Catch ex As MetaBrainz.Common.HttpError
             End Try
             LblStatus.Visible = False
@@ -186,8 +185,6 @@ Public Class SelectOnlineImage
             LVIDs.Items.Clear()
             LblDimFront.Text = String.Empty
             LblDimBack.Text = String.Empty
-            LblSizeFront.Text = String.Empty
-            LblSizeBack.Text = String.Empty
             PicBoxArt.Image = Nothing
             PicBoxFrontThumb.Image = Nothing
             PicBoxBackThumb.Image = Nothing

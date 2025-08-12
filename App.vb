@@ -122,11 +122,11 @@ Namespace My
 		Friend Const hArtist As String = "Artist"
 		Friend Const hArt As String = "Art"
 #If DEBUG Then
-        Friend ReadOnly PicPath As String = Computer.FileSystem.SpecialDirectories.Temp + "\" + Application.Info.ProductName + "DEV" 'PicPath is the path to the temporary image file.
-        Friend ReadOnly LogPath As String = Computer.FileSystem.SpecialDirectories.Temp + "\" + Application.Info.ProductName + "LogDEV.txt" 'LogPath is the path to the log file.
+		'Friend ReadOnly PicPath As String = Computer.FileSystem.SpecialDirectories.Temp + "\" + Application.Info.ProductName + "DEV" 'PicPath is the path to the temporary image file.
+		Friend ReadOnly LogPath As String = Computer.FileSystem.SpecialDirectories.Temp + "\" + Application.Info.ProductName + "LogDEV.txt" 'LogPath is the path to the log file.
 		Private ReadOnly RegPath As String = "Software\\" + Application.Info.ProductName + "DEV" 'RegPath is the path to the registry key where application settings are stored.
 #Else
-		Friend ReadOnly PicPath As String = My.Computer.FileSystem.SpecialDirectories.Temp + "\" + My.Application.Info.ProductName 'PicPath is the path to the temporary image file.
+		'Friend ReadOnly PicPath As String = My.Computer.FileSystem.SpecialDirectories.Temp + "\" + My.Application.Info.ProductName 'PicPath is the path to the temporary image file.
 		Friend ReadOnly LogPath As String = My.Computer.FileSystem.SpecialDirectories.Temp + "\" + My.Application.Info.ProductName + "Log.txt" 'LogPath is the path to the log file.
 		Private ReadOnly RegPath As String = "Software\\" + My.Application.Info.ProductName 'RegPath is the path to the registry key where application settings are stored.
 #End If
