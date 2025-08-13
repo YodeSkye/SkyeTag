@@ -56,12 +56,14 @@ Inherits System.Windows.Forms.Form
         MenuMain = New MenuStrip()
         MIFile = New ToolStripMenuItem()
         MIOpenFile = New ToolStripMenuItem()
-        MICloseFile = New ToolStripMenuItem()
+        MITrimFile = New ToolStripMenuItem()
         MIOpenLocation = New ToolStripMenuItem()
+        MICloseFile = New ToolStripMenuItem()
         ToolStripSeparator1 = New ToolStripSeparator()
         MIExit = New ToolStripMenuItem()
         MIEdit = New ToolStripMenuItem()
         MICopyTagBasic = New ToolStripMenuItem()
+        MICopyTagArt = New ToolStripMenuItem()
         MICopyTagFull = New ToolStripMenuItem()
         MIPasteTag = New ToolStripMenuItem()
         MIPlay = New ToolStripMenuItem()
@@ -81,7 +83,6 @@ Inherits System.Windows.Forms.Form
         lblTrackSeparator = New My.Components.LabelCSY()
         lblDuration = New My.Components.LabelCSY()
         lblYear = New My.Components.LabelCSY()
-        MICopyTagArt = New ToolStripMenuItem()
         cmAlbumArt.SuspendLayout()
         cmAlbumArtInsert.SuspendLayout()
         CType(picbxAlbumArt, ComponentModel.ISupportInitialize).BeginInit()
@@ -296,6 +297,7 @@ Inherits System.Windows.Forms.Form
         cmAlbumArtInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmAlbumArtInsert.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsertBefore, cmiAlbumArtInsertAfter, cmiAlbumArtInsertFirst, cmiAlbumArtInsertLast})
         cmAlbumArtInsert.Name = "cmAlbumArtInsert"
+        cmAlbumArtInsert.OwnerItem = cmiAlbumArtInsert
         cmAlbumArtInsert.Size = New Size(115, 92)
         ' 
         ' cmiAlbumArtInsertBefore
@@ -572,7 +574,7 @@ Inherits System.Windows.Forms.Form
         ' 
         ' MIFile
         ' 
-        MIFile.DropDownItems.AddRange(New ToolStripItem() {MIOpenFile, MICloseFile, MIOpenLocation, ToolStripSeparator1, MIExit})
+        MIFile.DropDownItems.AddRange(New ToolStripItem() {MIOpenFile, MITrimFile, MIOpenLocation, MICloseFile, ToolStripSeparator1, MIExit})
         MIFile.ForeColor = Color.White
         MIFile.Image = My.Resources.Resources.imageOpen
         MIFile.Name = "MIFile"
@@ -583,33 +585,40 @@ Inherits System.Windows.Forms.Form
         ' 
         MIOpenFile.Image = My.Resources.Resources.imageOpen
         MIOpenFile.Name = "MIOpenFile"
-        MIOpenFile.Size = New Size(180, 22)
+        MIOpenFile.Size = New Size(141, 22)
         MIOpenFile.Text = "Open File"
         ' 
-        ' MICloseFile
+        ' MITrimFile
         ' 
-        MICloseFile.Image = My.Resources.Resources.imageClose
-        MICloseFile.Name = "MICloseFile"
-        MICloseFile.Size = New Size(180, 22)
-        MICloseFile.Text = "Close File"
+        MITrimFile.Image = My.Resources.Resources.imageSave
+        MITrimFile.Name = "MITrimFile"
+        MITrimFile.Size = New Size(141, 22)
+        MITrimFile.Text = "Trim MP3"
         ' 
         ' MIOpenLocation
         ' 
         MIOpenLocation.Image = My.Resources.Resources.imageFolder
         MIOpenLocation.Name = "MIOpenLocation"
-        MIOpenLocation.Size = New Size(180, 22)
+        MIOpenLocation.Size = New Size(141, 22)
         MIOpenLocation.Text = "Go To Folder"
+        ' 
+        ' MICloseFile
+        ' 
+        MICloseFile.Image = My.Resources.Resources.imageClose
+        MICloseFile.Name = "MICloseFile"
+        MICloseFile.Size = New Size(141, 22)
+        MICloseFile.Text = "Close File"
         ' 
         ' ToolStripSeparator1
         ' 
         ToolStripSeparator1.Name = "ToolStripSeparator1"
-        ToolStripSeparator1.Size = New Size(177, 6)
+        ToolStripSeparator1.Size = New Size(138, 6)
         ' 
         ' MIExit
         ' 
         MIExit.Image = My.Resources.Resources.imageClose
         MIExit.Name = "MIExit"
-        MIExit.Size = New Size(180, 22)
+        MIExit.Size = New Size(141, 22)
         MIExit.Text = "Exit"
         MIExit.ToolTipText = "Ctrl+W"
         ' 
@@ -630,6 +639,14 @@ Inherits System.Windows.Forms.Form
         MICopyTagBasic.Size = New Size(180, 22)
         MICopyTagBasic.Text = "Copy Basic Tag"
         MICopyTagBasic.ToolTipText = "Copy Tag without Album Art or Lyrics"
+        ' 
+        ' MICopyTagArt
+        ' 
+        MICopyTagArt.Image = My.Resources.Resources.ImageEditCopy16
+        MICopyTagArt.Name = "MICopyTagArt"
+        MICopyTagArt.Size = New Size(180, 22)
+        MICopyTagArt.Text = "Copy Art Only"
+        MICopyTagArt.ToolTipText = "Copy ONLY Album Art"
         ' 
         ' MICopyTagFull
         ' 
@@ -795,13 +812,6 @@ Inherits System.Windows.Forms.Form
         lblYear.Text = "Year"
         lblYear.TextAlign = ContentAlignment.BottomCenter
         ' 
-        ' MICopyTagArt
-        ' 
-        MICopyTagArt.Image = My.Resources.Resources.ImageEditCopy16
-        MICopyTagArt.Name = "MICopyTagArt"
-        MICopyTagArt.Size = New Size(180, 22)
-        MICopyTagArt.Text = "Copy Art Only"
-        ' 
         ' MainForm
         ' 
         AllowDrop = True
@@ -936,4 +946,5 @@ Inherits System.Windows.Forms.Form
     Friend WithEvents txbxAlbum As TextBox
     Friend WithEvents txbxArtist As TextBox
     Friend WithEvents MICopyTagArt As ToolStripMenuItem
+    Friend WithEvents MITrimFile As ToolStripMenuItem
 End Class

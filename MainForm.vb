@@ -247,6 +247,27 @@ Partial Friend Class MainForm
     Private Sub MIOpenFile_Click(sender As Object, e As EventArgs) Handles MIOpenFile.Click
         OpenFile()
     End Sub
+    Private Sub MITrimFile_Click(sender As Object, e As EventArgs) Handles MITrimFile.Click
+        If tlFile IsNot Nothing AndAlso tlFile.MimeType.Substring(tlFile.MimeType.Length - 3) = "mp3" AndAlso Not NeedsSaved Then
+            'Save current tag
+            CopyTag(CopyModes.Full)
+            'Remove current tag
+            tlFile.RemoveTags(TagLib.TagTypes.AllTags)
+            'Create new tag
+            If tlFile.GetTag(TagLib.TagTypes.Id3v2, True) Is Nothing Then
+                App.WriteToLog("Error Trimming File - Unable to create new tag")
+            Else
+                'Save to new tag
+                PasteTag()
+                tlFile.Save()
+                App.WriteToLog("File Trimmed Successfully")
+            End If
+            'Finalize
+            SetTag()
+            ShowTag()
+            App.tagCopy = New App.TagType
+        End If
+    End Sub
     Private Sub MICloseFile_Click(sender As Object, e As EventArgs) Handles MICloseFile.Click
         CloseFile()
     End Sub
@@ -281,9 +302,19 @@ Partial Friend Class MainForm
     Private Sub MIFile_DropDownOpening(sender As Object, e As EventArgs) Handles MIFile.DropDownOpening
         MIFile.ForeColor = Color.Black
         If tlFile Is Nothing Then
+            MITrimFile.Enabled = False
             MICloseFile.Enabled = False
             MIOpenLocation.Enabled = False
         Else
+            If NeedsSaved Then
+                MITrimFile.Enabled = False
+            Else
+                If tlFile.MimeType.Substring(tlFile.MimeType.Length - 3) = "mp3" Then
+                    MITrimFile.Enabled = True
+                Else
+                    MITrimFile.Enabled = False
+                End If
+            End If
             MICloseFile.Enabled = True
             MIOpenLocation.Enabled = True
         End If
