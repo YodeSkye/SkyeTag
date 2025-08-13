@@ -260,6 +260,7 @@ Partial Friend Class MainForm
                 'Save to new tag
                 PasteTag()
                 tlFile.Save()
+                ClearSave()
                 App.WriteToLog("File Trimmed Successfully")
             End If
             'Finalize
