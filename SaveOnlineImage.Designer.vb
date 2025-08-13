@@ -22,6 +22,7 @@ Partial Class SaveOnlineImage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         GroupBox1 = New GroupBox()
         RadBtnImageFormatBMP = New RadioButton()
         RadBtnImageFormatPNG = New RadioButton()
@@ -33,6 +34,7 @@ Partial Class SaveOnlineImage
         LblFilename = New My.Components.LabelCSY()
         LblLocation = New My.Components.LabelCSY()
         PicBoxThumb = New PictureBox()
+        TipSaveOnlineImage = New ToolTip(components)
         GroupBox1.SuspendLayout()
         CType(PicBoxThumb, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -49,6 +51,7 @@ Partial Class SaveOnlineImage
         GroupBox1.TabIndex = 0
         GroupBox1.TabStop = False
         GroupBox1.Text = "Format"
+        TipSaveOnlineImage.SetToolTip(GroupBox1, "Select the File Format")
         ' 
         ' RadBtnImageFormatBMP
         ' 
@@ -109,6 +112,7 @@ Partial Class SaveOnlineImage
         BtnLocation.Name = "BtnLocation"
         BtnLocation.Size = New Size(32, 32)
         BtnLocation.TabIndex = 5
+        TipSaveOnlineImage.SetToolTip(BtnLocation, "Select a File Location")
         BtnLocation.UseVisualStyleBackColor = True
         ' 
         ' BtnSave
@@ -121,6 +125,7 @@ Partial Class SaveOnlineImage
         BtnSave.TabIndex = 6
         BtnSave.Text = "Save"
         BtnSave.TextAlign = ContentAlignment.MiddleRight
+        TipSaveOnlineImage.SetToolTip(BtnSave, "Save Image with the Selected Properties")
         BtnSave.UseVisualStyleBackColor = True
         ' 
         ' LblFilename
@@ -149,6 +154,7 @@ Partial Class SaveOnlineImage
         PicBoxThumb.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxThumb.TabIndex = 9
         PicBoxThumb.TabStop = False
+        TipSaveOnlineImage.SetToolTip(PicBoxThumb, "Thumbnail of Image to Save")
         ' 
         ' SaveOnlineImage
         ' 
@@ -186,4 +192,5 @@ Partial Class SaveOnlineImage
     Friend WithEvents LblFilename As My.Components.LabelCSY
     Friend WithEvents LblLocation As My.Components.LabelCSY
     Friend WithEvents PicBoxThumb As PictureBox
+    Friend WithEvents TipSaveOnlineImage As ToolTip
 End Class

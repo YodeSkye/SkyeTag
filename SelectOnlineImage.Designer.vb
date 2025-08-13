@@ -22,6 +22,7 @@ Partial Class SelectOnlineImage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SelectOnlineImage))
         LVIDs = New ListView()
         ColumnHeader1 = New ColumnHeader()
@@ -35,6 +36,7 @@ Partial Class SelectOnlineImage
         LblDimFront = New My.Components.LabelCSY()
         LblDimBack = New My.Components.LabelCSY()
         LblSearchPhrase = New My.Components.LabelCSY()
+        TipSelectOnlineImage = New ToolTip(components)
         CType(PicBoxArt, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicBoxBackThumb, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicBoxFrontThumb, ComponentModel.ISupportInitialize).BeginInit()
@@ -66,6 +68,7 @@ Partial Class SelectOnlineImage
         PicBoxArt.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxArt.TabIndex = 2
         PicBoxArt.TabStop = False
+        TipSelectOnlineImage.SetToolTip(PicBoxArt, "Selected Image")
         ' 
         ' BtnOK
         ' 
@@ -75,6 +78,7 @@ Partial Class SelectOnlineImage
         BtnOK.Name = "BtnOK"
         BtnOK.Size = New Size(64, 64)
         BtnOK.TabIndex = 30
+        TipSelectOnlineImage.SetToolTip(BtnOK, "Insert Image as Art")
         BtnOK.UseVisualStyleBackColor = True
         ' 
         ' PicBoxBackThumb
@@ -86,6 +90,7 @@ Partial Class SelectOnlineImage
         PicBoxBackThumb.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxBackThumb.TabIndex = 4
         PicBoxBackThumb.TabStop = False
+        TipSelectOnlineImage.SetToolTip(PicBoxBackThumb, "Back Cover Thumbnail, Click to Select")
         ' 
         ' PicBoxFrontThumb
         ' 
@@ -96,6 +101,7 @@ Partial Class SelectOnlineImage
         PicBoxFrontThumb.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxFrontThumb.TabIndex = 5
         PicBoxFrontThumb.TabStop = False
+        TipSelectOnlineImage.SetToolTip(PicBoxFrontThumb, "Front Cover Thumbnail, Click to Select")
         ' 
         ' LblStatus
         ' 
@@ -129,6 +135,7 @@ Partial Class SelectOnlineImage
         BtnSaveArt.Size = New Size(64, 64)
         BtnSaveArt.TabIndex = 20
         BtnSaveArt.TabStop = False
+        TipSelectOnlineImage.SetToolTip(BtnSaveArt, "Save Image to File")
         BtnSaveArt.UseVisualStyleBackColor = True
         ' 
         ' LblDimFront
@@ -183,7 +190,7 @@ Partial Class SelectOnlineImage
         MinimumSize = New Size(500, 500)
         Name = "SelectOnlineImage"
         StartPosition = FormStartPosition.CenterParent
-        Text = "Select Image Online (MusicBrainz)"
+        Text = "Select Image from MusicBrainz"
         CType(PicBoxArt, ComponentModel.ISupportInitialize).EndInit()
         CType(PicBoxBackThumb, ComponentModel.ISupportInitialize).EndInit()
         CType(PicBoxFrontThumb, ComponentModel.ISupportInitialize).EndInit()
@@ -203,4 +210,5 @@ Partial Class SelectOnlineImage
     Friend WithEvents LblDimFront As My.Components.LabelCSY
     Friend WithEvents LblDimBack As My.Components.LabelCSY
     Friend WithEvents LblSearchPhrase As My.Components.LabelCSY
+    Friend WithEvents TipSelectOnlineImage As ToolTip
 End Class
