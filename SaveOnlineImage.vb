@@ -1,6 +1,4 @@
 ﻿
-Imports System.Runtime.CompilerServices
-
 Public Class SaveOnlineImage
 
 	'Declarations
@@ -38,25 +36,23 @@ Public Class SaveOnlineImage
 		ofd = Nothing
 	End Sub
 	Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-		Debug.Print(System.IO.Path.GetInvalidFileNameChars)
-		Debug.Print(System.IO.Path.GetInvalidPathChars)
-		If String.IsNullOrEmpty(TxtBoxFilename.Text) OrElse TxtBoxFilename.Text.Intersect(System.IO.Path.GetInvalidFileNameChars).Any Then
+		filename = TxtBoxLocation.Text.Trim + "\" + TxtBoxFilename.Text.Trim
+		If RadBtnImageFormatJPG.Checked Then
+			filename += ".jpg"
+		ElseIf RadBtnImageFormatPNG.Checked Then
+			filename += ".png"
+		ElseIf RadBtnImageFormatBMP.Checked Then
+			filename += ".bmp"
+		End If
+		LblFilename.ResetForeColor()
+		LblLocation.ResetForeColor()
+		If String.IsNullOrEmpty(TxtBoxFilename.Text) OrElse TxtBoxFilename.Text.Intersect(System.IO.Path.GetInvalidFileNameChars).Any OrElse System.IO.File.Exists(filename) Then
 			TxtBoxFilename.Focus()
-            LblFilename.ForeColor = Color.Red
-            LblLocation.ResetForeColor()
-        ElseIf String.IsNullOrEmpty(TxtBoxLocation.Text) OrElse TxtBoxLocation.Text.Intersect(System.IO.Path.GetInvalidPathChars).Any Then
-            TxtBoxLocation.Focus()
-            LblFilename.ResetForeColor()
-            LblLocation.ForeColor = Color.Red
+			LblFilename.ForeColor = Color.Red
+		ElseIf String.IsNullOrEmpty(TxtBoxLocation.Text) OrElse TxtBoxLocation.Text.Intersect(System.IO.Path.GetInvalidPathChars).Any OrElse Not System.IO.Directory.Exists(TxtBoxLocation.Text) Then
+			TxtBoxLocation.Focus()
+			LblLocation.ForeColor = Color.Red
 		Else
-			filename = TxtBoxLocation.Text.Trim + "\" + TxtBoxFilename.Text.Trim
-			If RadBtnImageFormatJPG.Checked Then
-				filename += ".jpg"
-			ElseIf RadBtnImageFormatPNG.Checked Then
-				filename += ".png"
-			ElseIf RadBtnImageFormatBMP.Checked Then
-				filename += ".bmp"
-			End If
 			DialogResult = DialogResult.OK
 			Close()
 		End If
