@@ -1,13 +1,15 @@
 ﻿
+Imports System.Runtime.CompilerServices
+
 Public Class SaveOnlineImage
 
-    'Declarations
-    Friend ReadOnly Property GetFilename As String
-        Get
-            Return filename
-        End Get
-    End Property
-    Private filename As String = String.Empty
+	'Declarations
+	Friend ReadOnly Property GetFilename As String
+		Get
+			Return filename
+		End Get
+	End Property
+	Private filename As String = String.Empty
 
 	'Form Events
 	Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
@@ -36,10 +38,16 @@ Public Class SaveOnlineImage
 		ofd = Nothing
 	End Sub
 	Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-		If String.IsNullOrEmpty(TxtBoxFilename.Text) Then
+		Debug.Print(System.IO.Path.GetInvalidFileNameChars)
+		Debug.Print(System.IO.Path.GetInvalidPathChars)
+		If String.IsNullOrEmpty(TxtBoxFilename.Text) OrElse TxtBoxFilename.Text.Intersect(System.IO.Path.GetInvalidFileNameChars).Any Then
 			TxtBoxFilename.Focus()
-		ElseIf String.IsNullOrEmpty(TxtBoxLocation.Text) Then
-			TxtBoxLocation.Focus()
+            LblFilename.ForeColor = Color.Red
+            LblLocation.ResetForeColor()
+        ElseIf String.IsNullOrEmpty(TxtBoxLocation.Text) OrElse TxtBoxLocation.Text.Intersect(System.IO.Path.GetInvalidPathChars).Any Then
+            TxtBoxLocation.Focus()
+            LblFilename.ResetForeColor()
+            LblLocation.ForeColor = Color.Red
 		Else
 			filename = TxtBoxLocation.Text.Trim + "\" + TxtBoxFilename.Text.Trim
 			If RadBtnImageFormatJPG.Checked Then

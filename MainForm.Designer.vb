@@ -1,15 +1,15 @@
-﻿Friend Partial Class MainForm
-Inherits System.Windows.Forms.Form
-	Private components As System.ComponentModel.IContainer
-	Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-		If disposing Then
-			If components IsNot Nothing Then
-				components.Dispose
-			End If
-		End If
-		MyBase.Dispose(disposing)
-	End Sub
-    Private Sub InitializeComponent
+﻿Partial Friend Class MainForm
+    Inherits System.Windows.Forms.Form
+    Private components As System.ComponentModel.IContainer
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        If disposing Then
+            If components IsNot Nothing Then
+                components.Dispose
+            End If
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
+    Private Sub InitializeComponent()
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         btnError = New Button()
@@ -67,7 +67,7 @@ Inherits System.Windows.Forms.Form
         MICopyTagFull = New ToolStripMenuItem()
         MIPasteTag = New ToolStripMenuItem()
         MIPlay = New ToolStripMenuItem()
-        MIView = New ToolStripMenuItem()
+        MIAbout = New ToolStripMenuItem()
         MIHelp = New ToolStripMenuItem()
         MILog = New ToolStripMenuItem()
         ToolStripSeparator2 = New ToolStripSeparator()
@@ -565,7 +565,7 @@ Inherits System.Windows.Forms.Form
         ' 
         ' MenuMain
         ' 
-        MenuMain.Items.AddRange(New ToolStripItem() {MIFile, MIEdit, MIPlay, MIView})
+        MenuMain.Items.AddRange(New ToolStripItem() {MIFile, MIEdit, MIPlay, MIAbout})
         MenuMain.Location = New Point(0, 0)
         MenuMain.Name = "MenuMain"
         MenuMain.Size = New Size(384, 24)
@@ -636,7 +636,7 @@ Inherits System.Windows.Forms.Form
         ' 
         MICopyTagBasic.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagBasic.Name = "MICopyTagBasic"
-        MICopyTagBasic.Size = New Size(180, 22)
+        MICopyTagBasic.Size = New Size(154, 22)
         MICopyTagBasic.Text = "Copy Basic Tag"
         MICopyTagBasic.ToolTipText = "Copy Tag without Album Art or Lyrics"
         ' 
@@ -644,7 +644,7 @@ Inherits System.Windows.Forms.Form
         ' 
         MICopyTagArt.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagArt.Name = "MICopyTagArt"
-        MICopyTagArt.Size = New Size(180, 22)
+        MICopyTagArt.Size = New Size(154, 22)
         MICopyTagArt.Text = "Copy Art Only"
         MICopyTagArt.ToolTipText = "Copy ONLY Album Art"
         ' 
@@ -652,7 +652,7 @@ Inherits System.Windows.Forms.Form
         ' 
         MICopyTagFull.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagFull.Name = "MICopyTagFull"
-        MICopyTagFull.Size = New Size(180, 22)
+        MICopyTagFull.Size = New Size(154, 22)
         MICopyTagFull.Text = "Copy Full Tag"
         MICopyTagFull.ToolTipText = "Copy Tag WITH Album Art & Lyrics"
         ' 
@@ -660,7 +660,7 @@ Inherits System.Windows.Forms.Form
         ' 
         MIPasteTag.Image = My.Resources.Resources.ImageEditPaste16
         MIPasteTag.Name = "MIPasteTag"
-        MIPasteTag.Size = New Size(180, 22)
+        MIPasteTag.Size = New Size(154, 22)
         MIPasteTag.Text = "Paste Tag"
         ' 
         ' MIPlay
@@ -671,39 +671,39 @@ Inherits System.Windows.Forms.Form
         MIPlay.Size = New Size(57, 20)
         MIPlay.Text = "Play"
         ' 
-        ' MIView
+        ' MIAbout
         ' 
-        MIView.DropDownItems.AddRange(New ToolStripItem() {MIHelp, MILog, ToolStripSeparator2, MISettings})
-        MIView.ForeColor = Color.White
-        MIView.Image = My.Resources.Resources.ImageView
-        MIView.Name = "MIView"
-        MIView.Size = New Size(60, 20)
-        MIView.Text = "View"
+        MIAbout.DropDownItems.AddRange(New ToolStripItem() {MIHelp, MILog, ToolStripSeparator2, MISettings})
+        MIAbout.ForeColor = Color.White
+        MIAbout.Image = My.Resources.Resources.ImageView
+        MIAbout.Name = "MIAbout"
+        MIAbout.Size = New Size(68, 20)
+        MIAbout.Text = "About"
         ' 
         ' MIHelp
         ' 
         MIHelp.Image = My.Resources.Resources.imageInfo
         MIHelp.Name = "MIHelp"
-        MIHelp.Size = New Size(148, 22)
+        MIHelp.Size = New Size(180, 22)
         MIHelp.Text = "Help && About"
         ' 
         ' MILog
         ' 
         MILog.Image = My.Resources.Resources.imageLog
         MILog.Name = "MILog"
-        MILog.Size = New Size(148, 22)
+        MILog.Size = New Size(180, 22)
         MILog.Text = "Log"
         ' 
         ' ToolStripSeparator2
         ' 
         ToolStripSeparator2.Name = "ToolStripSeparator2"
-        ToolStripSeparator2.Size = New Size(145, 6)
+        ToolStripSeparator2.Size = New Size(177, 6)
         ' 
         ' MISettings
         ' 
         MISettings.Image = My.Resources.Resources.imageSettings
         MISettings.Name = "MISettings"
-        MISettings.Size = New Size(148, 22)
+        MISettings.Size = New Size(180, 22)
         MISettings.Text = "Settings"
         ' 
         ' lblFileInfo
@@ -919,7 +919,7 @@ Inherits System.Windows.Forms.Form
     Friend WithEvents MIFile As ToolStripMenuItem
     Friend WithEvents MIOpenFile As ToolStripMenuItem
     Friend WithEvents MIExit As ToolStripMenuItem
-    Friend WithEvents MIView As ToolStripMenuItem
+    Friend WithEvents MIAbout As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents MIHelp As ToolStripMenuItem
     Friend WithEvents MILog As ToolStripMenuItem

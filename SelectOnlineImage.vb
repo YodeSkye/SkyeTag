@@ -2,6 +2,7 @@
 Imports System.ComponentModel
 Imports System.Drawing.Imaging
 Imports System.IO
+Imports System.Security.Cryptography
 Imports SkyeTag.My
 
 Public Class SelectOnlineImage
@@ -160,15 +161,19 @@ Public Class SelectOnlineImage
                 Case Else
                     If PicBoxArt.Image IsNot Nothing Then
                         Dim ext As String = Path.GetExtension(frmSaveOnlineImage.GetFilename).ToLowerInvariant()
-                        Select Case ext
-                            Case ".jpg", ".jpeg"
-                                PicBoxArt.Image.Save(frmSaveOnlineImage.GetFilename, ImageFormat.Jpeg)
-                            Case ".png"
-                                PicBoxArt.Image.Save(frmSaveOnlineImage.GetFilename, ImageFormat.Png)
-                            Case ".bmp"
-                                PicBoxArt.Image.Save(frmSaveOnlineImage.GetFilename, ImageFormat.Bmp)
-                        End Select
-                        App.WriteToLog("Saved cover art to " + frmSaveOnlineImage.GetFilename, False)
+                        Try
+                            Select Case ext
+                                Case ".jpg", ".jpeg"
+                                    PicBoxArt.Image.Save(frmSaveOnlineImage.GetFilename, ImageFormat.Jpeg)
+                                Case ".png"
+                                    PicBoxArt.Image.Save(frmSaveOnlineImage.GetFilename, ImageFormat.Png)
+                                Case ".bmp"
+                                    PicBoxArt.Image.Save(frmSaveOnlineImage.GetFilename, ImageFormat.Bmp)
+                            End Select
+                            App.WriteToLog("Saved cover art to " + frmSaveOnlineImage.GetFilename, False)
+                        Catch ex As Exception
+                            App.WriteToLog("Error saving cover art to " + frmSaveOnlineImage.GetFilename + vbCr + ex.Message, False)
+                        End Try
                     End If
             End Select
         End If

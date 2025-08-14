@@ -362,17 +362,17 @@ Partial Friend Class MainForm
     Private Sub MIPlay_MouseLeave(sender As Object, e As EventArgs) Handles MIPlay.MouseLeave
         MIPlay.ForeColor = Color.White
     End Sub
-    Private Sub MIView_DropDownOpening(sender As Object, e As EventArgs) Handles MIView.DropDownOpening
-        MIView.ForeColor = Color.Black
+    Private Sub MIAbout_DropDownOpening(sender As Object, e As EventArgs) Handles MIAbout.DropDownOpening
+        MIAbout.ForeColor = Color.Black
     End Sub
-    Private Sub MIView_DropDownClosed(sender As Object, e As EventArgs) Handles MIView.DropDownClosed
-        If Not MIView.Selected Then MIView.ForeColor = Color.White
+    Private Sub MIAbout_DropDownClosed(sender As Object, e As EventArgs) Handles MIAbout.DropDownClosed
+        If Not MIAbout.Selected Then MIAbout.ForeColor = Color.White
     End Sub
-    Private Sub MIView_MouseEnter(sender As Object, e As EventArgs) Handles MIView.MouseEnter
-        MIView.ForeColor = Color.Black
+    Private Sub MIAbout_MouseEnter(sender As Object, e As EventArgs) Handles MIAbout.MouseEnter
+        MIAbout.ForeColor = Color.Black
     End Sub
-    Private Sub MIView_MouseLeave(sender As Object, e As EventArgs) Handles MIView.MouseLeave
-        If Not MIView.DropDown.Visible Then MIView.ForeColor = Color.White
+    Private Sub MIAbout_MouseLeave(sender As Object, e As EventArgs) Handles MIAbout.MouseLeave
+        If Not MIAbout.DropDown.Visible Then MIAbout.ForeColor = Color.White
     End Sub
     Private Sub MICopyTagBasic_Click(sender As Object, e As EventArgs) Handles MICopyTagBasic.Click
         CopyTag(App.CopyModes.Basic)
