@@ -356,6 +356,18 @@ Partial Friend Class MainForm
     Private Sub MIEdit_MouseLeave(sender As Object, e As EventArgs) Handles MIEdit.MouseLeave
         If Not MIEdit.DropDown.Visible Then MIEdit.ForeColor = Color.White
     End Sub
+    Private Sub MIView_DropDownOpening(sender As Object, e As EventArgs) Handles MIView.DropDownOpening
+        MIView.ForeColor = Color.Black
+    End Sub
+    Private Sub MIView_DropDownClosed(sender As Object, e As EventArgs) Handles MIView.DropDownClosed
+        If Not MIView.Selected Then MIView.ForeColor = Color.White
+    End Sub
+    Private Sub MIView_MouseEnter(sender As Object, e As EventArgs) Handles MIView.MouseEnter
+        MIView.ForeColor = Color.Black
+    End Sub
+    Private Sub MIView_MouseLeave(sender As Object, e As EventArgs) Handles MIView.MouseLeave
+        If Not MIView.DropDown.Visible Then MIView.ForeColor = Color.White
+    End Sub
     Private Sub MIPlay_MouseEnter(sender As Object, e As EventArgs) Handles MIPlay.MouseEnter
         MIPlay.ForeColor = Color.Black
     End Sub

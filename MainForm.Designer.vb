@@ -66,12 +66,12 @@
         MICopyTagArt = New ToolStripMenuItem()
         MICopyTagFull = New ToolStripMenuItem()
         MIPasteTag = New ToolStripMenuItem()
+        MIView = New ToolStripMenuItem()
+        MISettings = New ToolStripMenuItem()
         MIPlay = New ToolStripMenuItem()
         MIAbout = New ToolStripMenuItem()
         MIHelp = New ToolStripMenuItem()
         MILog = New ToolStripMenuItem()
-        ToolStripSeparator2 = New ToolStripSeparator()
-        MISettings = New ToolStripMenuItem()
         lblFileInfo = New My.Components.LabelCSY()
         lblArtist = New My.Components.LabelCSY()
         lblGenre = New My.Components.LabelCSY()
@@ -565,7 +565,7 @@
         ' 
         ' MenuMain
         ' 
-        MenuMain.Items.AddRange(New ToolStripItem() {MIFile, MIEdit, MIPlay, MIAbout})
+        MenuMain.Items.AddRange(New ToolStripItem() {MIFile, MIEdit, MIView, MIPlay, MIAbout})
         MenuMain.Location = New Point(0, 0)
         MenuMain.Name = "MenuMain"
         MenuMain.Size = New Size(384, 24)
@@ -663,6 +663,23 @@
         MIPasteTag.Size = New Size(154, 22)
         MIPasteTag.Text = "Paste Tag"
         ' 
+        ' MIView
+        ' 
+        MIView.BackColor = Color.Transparent
+        MIView.DropDownItems.AddRange(New ToolStripItem() {MISettings})
+        MIView.ForeColor = Color.White
+        MIView.Image = My.Resources.Resources.ImageView
+        MIView.Name = "MIView"
+        MIView.Size = New Size(60, 20)
+        MIView.Text = "View"
+        ' 
+        ' MISettings
+        ' 
+        MISettings.Image = My.Resources.Resources.imageSettings
+        MISettings.Name = "MISettings"
+        MISettings.Size = New Size(180, 22)
+        MISettings.Text = "Settings"
+        ' 
         ' MIPlay
         ' 
         MIPlay.ForeColor = Color.White
@@ -673,9 +690,9 @@
         ' 
         ' MIAbout
         ' 
-        MIAbout.DropDownItems.AddRange(New ToolStripItem() {MIHelp, MILog, ToolStripSeparator2, MISettings})
+        MIAbout.DropDownItems.AddRange(New ToolStripItem() {MIHelp, MILog})
         MIAbout.ForeColor = Color.White
-        MIAbout.Image = My.Resources.Resources.ImageView
+        MIAbout.Image = My.Resources.Resources.imageInfo
         MIAbout.Name = "MIAbout"
         MIAbout.Size = New Size(68, 20)
         MIAbout.Text = "About"
@@ -693,18 +710,6 @@
         MILog.Name = "MILog"
         MILog.Size = New Size(180, 22)
         MILog.Text = "Log"
-        ' 
-        ' ToolStripSeparator2
-        ' 
-        ToolStripSeparator2.Name = "ToolStripSeparator2"
-        ToolStripSeparator2.Size = New Size(177, 6)
-        ' 
-        ' MISettings
-        ' 
-        MISettings.Image = My.Resources.Resources.imageSettings
-        MISettings.Name = "MISettings"
-        MISettings.Size = New Size(180, 22)
-        MISettings.Text = "Settings"
         ' 
         ' lblFileInfo
         ' 
@@ -923,7 +928,6 @@
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents MIHelp As ToolStripMenuItem
     Friend WithEvents MILog As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents MISettings As ToolStripMenuItem
     Friend WithEvents MICloseFile As ToolStripMenuItem
     Friend WithEvents MIPlay As ToolStripMenuItem
@@ -947,4 +951,5 @@
     Friend WithEvents txbxArtist As TextBox
     Friend WithEvents MICopyTagArt As ToolStripMenuItem
     Friend WithEvents MITrimFile As ToolStripMenuItem
+    Friend WithEvents MIView As ToolStripMenuItem
 End Class
