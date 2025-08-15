@@ -30,8 +30,8 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <StartupObject>SkyeTag.My.MyApplication</StartupObject>
-    <Title>SkyeTag</Title>
-    <Description>Skye's MultiMedia Tag Viewer &amp; Editor</Description>
+    <Title>Skye Tag</Title>
+    <Description>Skye's Multimedia Tag Viewer &amp; Editor</Description>
     <AssemblyVersion>2.1</AssemblyVersion>
     <FileVersion>2.1</FileVersion>
     <PackageIcon>ImageApp.png</PackageIcon>

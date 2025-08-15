@@ -133,7 +133,7 @@ Namespace My
 
 		'Procedures
 		Friend Sub Initialize()
-			WriteToLog(My.Application.Info.ProductName + " Started")
+			WriteToLog(My.Application.Info.ProductName + " Started", False)
 			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance) 'Allows use of Windows-1252 character encoding, needed for Components context menu Proper Case function.
 			If My.Application.CommandLineArgs.Count > 0 Then
 				WriteToLog("Processing CommandLine (" + My.Application.CommandLineArgs.Count.ToString + ")", False)
@@ -145,7 +145,7 @@ Namespace My
 		Friend Sub Finalize()
 			If Settings.NeedsSaved Then SaveSettings()
 			If Settings.MetricsNeedSaved Then SaveMetrics()
-			My.App.WriteToLog(My.Application.Info.ProductName + " Closed")
+			My.App.WriteToLog(My.Application.Info.ProductName + " Closed", False)
 		End Sub
 		Friend Sub GetSettings()
 			Try
