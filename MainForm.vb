@@ -25,7 +25,6 @@ Partial Friend Class MainForm
     Private clickTimer As Timer
     Private txtboxCM As New Components.TextBoxContextMenu
     Private txtboxCMLyrics As New Components.TextBoxContextMenu
-    Private tipInfoBalloon As New ToolTip
     Private tlFile As TagLib.File
 
     'Form Events
@@ -34,7 +33,6 @@ Partial Friend Class MainForm
         'Initialize Globals
 
         'Initialize Locals
-        tipInfoBalloon.IsBalloon = True
 
         'Initialize Form
         InitializeComponent()
@@ -43,7 +41,9 @@ Partial Friend Class MainForm
         For Each name As String In System.Enum.GetNames(GetType(TagLib.PictureType)) : cobxAlbumArtType.Items.Add(name) : Next
         tipInfo.SetToolTip(btnAlbumArt, App.hArt + " Menu")
         txtboxCM.ShowExtendedTools = True
+        txtboxCM.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         txtboxCMLyrics.ShowExtendedTools = False
+        txtboxCMLyrics.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         doubleclickMaxTime = TimeSpan.FromMilliseconds(SystemInformation.DoubleClickTime)
         clickTimer = New Timer()
         clickTimer.Interval = SystemInformation.DoubleClickTime
@@ -151,7 +151,6 @@ Partial Friend Class MainForm
     Private Sub frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picbxAlbumArt.MouseDown, MyBase.MouseDown, MenuMain.MouseDown, lblYear.MouseDown, lblTrackSeparator.MouseDown, lblTrack.MouseDown, lblTitle.MouseDown, lblGenre.MouseDown, lblDuration.MouseDown, lblComments.MouseDown, lblArtist.MouseDown, lblAlbumArt.MouseDown, lblAlbum.MouseDown
         Dim cSender As Control
         If e.Button = MouseButtons.Left AndAlso Me.WindowState = FormWindowState.Normal Then
-            ResetInfoBalloon()
             mMove = True
             cSender = CType(sender, Control)
             If cSender Is lblFileInfo OrElse cSender Is Me.lblArtist OrElse cSender Is Me.lblGenre _
@@ -484,9 +483,8 @@ Partial Friend Class MainForm
                 SetSave()
             Else
                 If picsource = My.App.ImageSource.ClipBoard Then
-                    tipInfoBalloon.ToolTipIcon = ToolTipIcon.Info
-                    tipInfoBalloon.ToolTipTitle = "Album Art"
-                    tipInfoBalloon.Show("No Image On ClipBoard", Me, Me.btnAlbumArt.Left - 7, Me.btnAlbumArt.Top - 62, 4000)
+                    tipInfo.Tag = SystemIcons.Information.ToBitmap
+                    tipInfo.Show("No Image On ClipBoard", Me, Me.btnAlbumArt.Left + CInt(Me.btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnAlbumArt.Top + CInt(Me.btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
                 End If
             End If
         End If
@@ -859,11 +857,8 @@ Partial Friend Class MainForm
                 Case True
                     If My.Computer.Clipboard.ContainsText Then : InsertArtist(My.Computer.Clipboard.GetText)
                     Else
-                        ResetInfoBalloon()
-                        tipInfoBalloon.ToolTipIcon = ToolTipIcon.Info
-                        tipInfoBalloon.ToolTipTitle = My.App.hArtist
-                        tipInfoBalloon.Show(String.Empty, Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2), Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2))
-                        tipInfoBalloon.Show("No Text On ClipBoard", Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2), Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2), 4000)
+                        tipInfo.Tag = SystemIcons.Information.ToBitmap
+                        tipInfo.Show("No Text On ClipBoard", Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
                     End If
                 Case False : InsertArtist()
             End Select
@@ -989,6 +984,46 @@ Partial Friend Class MainForm
         wShowLyrics = Not wShowLyrics
         SetLyrics()
     End Sub
+    Private Sub tipInfo_Popup(sender As Object, e As PopupEventArgs) Handles tipInfo.Popup
+        Static s As Size
+        s = TextRenderer.MeasureText(tipInfo.GetToolTip(e.AssociatedControl), App.TipFont)
+        If tipInfo.Tag Is Nothing Then
+            s.Width += 14
+            s.Height += 14
+        Else
+            s.Width += CType(tipInfo.Tag, Bitmap).Width + 14
+            s.Height = CType(tipInfo.Tag, Bitmap).Height + 12
+        End If
+        e.ToolTipSize = s
+    End Sub
+    Private Sub TipPlayer_Draw(sender As Object, e As DrawToolTipEventArgs) Handles tipInfo.Draw
+
+        'Declarations
+        Dim g As Graphics = e.Graphics
+
+        'Draw background
+        Dim brbg As New SolidBrush(App.TipBackColor)
+        g.FillRectangle(brbg, e.Bounds)
+
+        'Draw border
+        Using p As New Pen(App.TipBorderColor, CInt(App.TipFont.Size / 4)) 'Scale border thickness with font
+            g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
+        End Using
+
+        'Draw text
+        If tipInfo.Tag Is Nothing Then
+            TextRenderer.DrawText(g, e.ToolTipText, App.TipFont, New Point(7, 7), App.TipTextColor)
+        Else
+            g.DrawImage(CType(tipInfo.Tag, Bitmap), New Point(7, 7))
+            TextRenderer.DrawText(g, e.ToolTipText, App.TipFont, New Point(7 + CType(tipInfo.Tag, Bitmap).Width, CInt(CType(tipInfo.Tag, Bitmap).Height / 2 - 3)), App.TipTextColor)
+            tipInfo.Tag = Nothing
+        End If
+
+        'Finalize
+        brbg.Dispose()
+        g.Dispose()
+
+    End Sub
 
     'Handlers
     Private Sub clickTimer_Tick(sender As Object, e As EventArgs)
@@ -1005,16 +1040,13 @@ Partial Friend Class MainForm
 
     'Procedures
     Friend Sub SetError()
-        ResetInfoBalloon()
         Me.btnError.Visible = True
         If Not String.IsNullOrEmpty(My.AppAlertMessage) Then
-            tipInfoBalloon.ToolTipIcon = ToolTipIcon.Error
-            tipInfoBalloon.ToolTipTitle = "An Error Has Occurred"
-            tipInfoBalloon.Show(My.AppAlertMessage, Me, Me.btnError.Right + SystemInformation.FrameBorderSize.Width, Me.btnError.Bottom + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight)
+            tipInfo.Tag = SystemIcons.Error.ToBitmap
+            tipInfo.Show(My.AppAlertMessage, Me, Me.btnError.Right + SystemInformation.FrameBorderSize.Width, Me.btnError.Bottom + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight)
         End If
     End Sub
     Friend Sub ClearError()
-        ResetInfoBalloon()
 #If DEBUG Then
 #Else
 			Me.btnError.Visible = False
@@ -1507,11 +1539,8 @@ Partial Friend Class MainForm
                 SetSave()
             Else
                 If picsource = My.App.ImageSource.ClipBoard Then
-                    ResetInfoBalloon()
-                    tipInfoBalloon.ToolTipIcon = ToolTipIcon.Info
-                    tipInfoBalloon.ToolTipTitle = My.App.hArt
-                    tipInfoBalloon.Show(String.Empty, Me, Me.btnAlbumArt.Left + CInt(Me.btnAlbumArt.Width / 2), Me.btnAlbumArt.Top + CInt(Me.btnAlbumArt.Height / 2))
-                    tipInfoBalloon.Show("No Image On ClipBoard", Me, Me.btnAlbumArt.Left + CInt(Me.btnAlbumArt.Width / 2), Me.btnAlbumArt.Top + CInt(Me.btnAlbumArt.Height / 2), 4000)
+                    tipInfo.Tag = SystemIcons.Information.ToBitmap
+                    tipInfo.Show("No Image On ClipBoard", Me, Me.btnAlbumArt.Left + CInt(Me.btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnAlbumArt.Top + CInt(Me.btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
                 End If
             End If
         End If
@@ -1585,7 +1614,6 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub SetWindowState()
-        ResetInfoBalloon()
         Me.SuspendLayout()
         Select Case wMaximized
             Case True
@@ -1604,11 +1632,6 @@ Partial Friend Class MainForm
                 Me.txbxLyrics.TextAlign = HorizontalAlignment.Left
         End Select
         Me.ResumeLayout()
-    End Sub
-    Private Sub ResetInfoBalloon()
-        If tipInfoBalloon.Active Then tipInfoBalloon.Hide(Me)
-        tipInfoBalloon.Show(String.Empty, Me, 0, 0)
-        tipInfoBalloon.Hide(Me)
     End Sub
     Private Sub CheckMove(ByRef location As Point)
         If location.X + Me.Width > My.Computer.Screen.WorkingArea.Right Then location.X = My.Computer.Screen.WorkingArea.Right - Me.Width + App.AdjustScreenBoundsNormalWindow

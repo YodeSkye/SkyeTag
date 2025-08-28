@@ -110,6 +110,10 @@ Namespace My
 		Friend FrmLog As Log
 		Private FrmHelp As Help
 		Private FrmSettings As Settings
+		Friend ReadOnly TipFont As Font = New Font("Segoe UI", 10, FontStyle.Bold) 'Font for custom drawing of tooltips
+		Friend ReadOnly TipBackColor As Color = SystemColors.Control
+		Friend ReadOnly TipTextColor As Color = Color.Black
+		Friend ReadOnly TipBorderColor As Color = SystemColors.Window
 		Friend ReadOnly InactiveTitleBarColor As Color = Color.FromArgb(255, 243, 243, 243)
 		Friend Const AdjustScreenBoundsNormalWindow As Byte = 8
 		Friend Const AdjustScreenBoundsDialogWindow As Byte = 10
