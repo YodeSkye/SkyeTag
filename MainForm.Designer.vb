@@ -20,6 +20,8 @@
         btnRestore = New Button()
         btnArtistLeft = New Button()
         btnArtistRight = New Button()
+        btnArtistInsert = New Button()
+        btnArtistDelete = New Button()
         cmAlbumArt = New ContextMenuStrip(components)
         cmiAlbumArtInsert = New ToolStripMenuItem()
         cmAlbumArtInsert = New ContextMenuStrip(components)
@@ -34,8 +36,6 @@
         cmiAlbumArtMoveRight = New ToolStripMenuItem()
         tsSeparator2 = New ToolStripSeparator()
         cmiAlbumArtDelete = New ToolStripMenuItem()
-        btnArtistInsert = New Button()
-        btnArtistDelete = New Button()
         btnAlbumArt = New Button()
         picbxAlbumArt = New PictureBox()
         txbxArtist = New TextBox()
@@ -222,6 +222,43 @@
         btnArtistRight.UseMnemonic = False
         btnArtistRight.UseVisualStyleBackColor = False
         ' 
+        ' btnArtistInsert
+        ' 
+        btnArtistInsert.AllowDrop = True
+        btnArtistInsert.CausesValidation = False
+        btnArtistInsert.FlatAppearance.BorderColor = SystemColors.ControlDark
+        btnArtistInsert.FlatAppearance.BorderSize = 0
+        btnArtistInsert.FlatAppearance.MouseDownBackColor = Color.Transparent
+        btnArtistInsert.FlatAppearance.MouseOverBackColor = Color.Transparent
+        btnArtistInsert.FlatStyle = FlatStyle.Flat
+        btnArtistInsert.Image = My.Resources.Resources.imageNew
+        btnArtistInsert.Location = New Point(116, 67)
+        btnArtistInsert.Name = "btnArtistInsert"
+        btnArtistInsert.Size = New Size(16, 16)
+        btnArtistInsert.TabIndex = 1014
+        btnArtistInsert.TabStop = False
+        tipInfo.SetToolTip(btnArtistInsert, "LeftClick = Insert New Artist (After This One)" & vbCrLf & "CtrlLeftClick = Insert Using Text From ClipBoard")
+        btnArtistInsert.UseMnemonic = False
+        btnArtistInsert.UseVisualStyleBackColor = False
+        ' 
+        ' btnArtistDelete
+        ' 
+        btnArtistDelete.CausesValidation = False
+        btnArtistDelete.FlatAppearance.BorderColor = SystemColors.ControlDark
+        btnArtistDelete.FlatAppearance.BorderSize = 0
+        btnArtistDelete.FlatAppearance.MouseDownBackColor = Color.Transparent
+        btnArtistDelete.FlatAppearance.MouseOverBackColor = Color.Transparent
+        btnArtistDelete.FlatStyle = FlatStyle.Flat
+        btnArtistDelete.Image = My.Resources.Resources.imageDelete
+        btnArtistDelete.Location = New Point(140, 66)
+        btnArtistDelete.Name = "btnArtistDelete"
+        btnArtistDelete.Size = New Size(16, 16)
+        btnArtistDelete.TabIndex = 1013
+        btnArtistDelete.TabStop = False
+        tipInfo.SetToolTip(btnArtistDelete, "LeftClick = Remove This Artist")
+        btnArtistDelete.UseMnemonic = False
+        btnArtistDelete.UseVisualStyleBackColor = False
+        ' 
         ' cmAlbumArt
         ' 
         cmAlbumArt.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
@@ -326,48 +363,10 @@
         cmiAlbumArtDelete.Size = New Size(143, 22)
         cmiAlbumArtDelete.Text = "Delete"
         ' 
-        ' btnArtistInsert
-        ' 
-        btnArtistInsert.AllowDrop = True
-        btnArtistInsert.CausesValidation = False
-        btnArtistInsert.FlatAppearance.BorderColor = SystemColors.ControlDark
-        btnArtistInsert.FlatAppearance.BorderSize = 0
-        btnArtistInsert.FlatAppearance.MouseDownBackColor = Color.Transparent
-        btnArtistInsert.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnArtistInsert.FlatStyle = FlatStyle.Flat
-        btnArtistInsert.Image = My.Resources.Resources.imageNew
-        btnArtistInsert.Location = New Point(116, 67)
-        btnArtistInsert.Name = "btnArtistInsert"
-        btnArtistInsert.Size = New Size(16, 16)
-        btnArtistInsert.TabIndex = 1014
-        btnArtistInsert.TabStop = False
-        tipInfo.SetToolTip(btnArtistInsert, "LeftClick = Insert New Artist (After This One)" & vbCrLf & "CtrlLeftClick = Insert Using Text From ClipBoard")
-        btnArtistInsert.UseMnemonic = False
-        btnArtistInsert.UseVisualStyleBackColor = False
-        ' 
-        ' btnArtistDelete
-        ' 
-        btnArtistDelete.CausesValidation = False
-        btnArtistDelete.FlatAppearance.BorderColor = SystemColors.ControlDark
-        btnArtistDelete.FlatAppearance.BorderSize = 0
-        btnArtistDelete.FlatAppearance.MouseDownBackColor = Color.Transparent
-        btnArtistDelete.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnArtistDelete.FlatStyle = FlatStyle.Flat
-        btnArtistDelete.Image = My.Resources.Resources.imageDelete
-        btnArtistDelete.Location = New Point(140, 66)
-        btnArtistDelete.Name = "btnArtistDelete"
-        btnArtistDelete.Size = New Size(16, 16)
-        btnArtistDelete.TabIndex = 1013
-        btnArtistDelete.TabStop = False
-        tipInfo.SetToolTip(btnArtistDelete, "LeftClick = Remove This Artist")
-        btnArtistDelete.UseMnemonic = False
-        btnArtistDelete.UseVisualStyleBackColor = False
-        ' 
         ' btnAlbumArt
         ' 
         btnAlbumArt.AllowDrop = True
         btnAlbumArt.CausesValidation = False
-        btnAlbumArt.ContextMenuStrip = cmAlbumArt
         btnAlbumArt.FlatAppearance.BorderColor = SystemColors.ControlDark
         btnAlbumArt.FlatAppearance.BorderSize = 0
         btnAlbumArt.FlatAppearance.MouseDownBackColor = Color.Transparent

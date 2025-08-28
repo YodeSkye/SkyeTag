@@ -938,8 +938,8 @@ Partial Friend Class MainForm
     Private Sub btnAlbumArtMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArt.MouseUp
         If My.App.MouseInBounds(CType(sender, Control), e.Location) Then
             If tlFile.Tag.Pictures.Length > 0 Then ResetLyrics()
-            Me.cmAlbumArt.Show(Me.btnAlbumArt, Point.Subtract(Point.Subtract(MousePosition, New Size(Me.Location)), New Size(Me.btnAlbumArt.Location)))
-            If e.Button = MouseButtons.Left Then Me.txbxAlbumArt.Focus()
+            Me.cmAlbumArt.Show(btnAlbumArt, btnAlbumArt.PointToClient(MousePosition)) 'Point.Subtract(Point.Subtract(MousePosition, New Size(Me.Location)), New Size(Me.btnAlbumArt.Location)))
+            Me.txbxAlbumArt.Focus()
         End If
     End Sub
     Private Sub btnAlbumArtLeftMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArtLeft.MouseUp
