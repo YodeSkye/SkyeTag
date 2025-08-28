@@ -297,7 +297,6 @@
         cmAlbumArtInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmAlbumArtInsert.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsertBefore, cmiAlbumArtInsertAfter, cmiAlbumArtInsertFirst, cmiAlbumArtInsertLast})
         cmAlbumArtInsert.Name = "cmAlbumArtInsert"
-        cmAlbumArtInsert.OwnerItem = cmiAlbumArtInsert
         cmAlbumArtInsert.Size = New Size(115, 92)
         ' 
         ' cmiAlbumArtInsertBefore
@@ -413,6 +412,7 @@
         ' txbxAlbumArt
         ' 
         txbxAlbumArt.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+        txbxAlbumArt.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         txbxAlbumArt.Location = New Point(50, 251)
         txbxAlbumArt.Name = "txbxAlbumArt"
         txbxAlbumArt.ShortcutsEnabled = False
@@ -424,6 +424,7 @@
         cobxAlbumArtType.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         cobxAlbumArtType.DropDownStyle = ComboBoxStyle.DropDownList
         cobxAlbumArtType.DropDownWidth = 130
+        cobxAlbumArtType.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         cobxAlbumArtType.FormattingEnabled = True
         cobxAlbumArtType.ItemHeight = 17
         cobxAlbumArtType.Location = New Point(256, 251)
@@ -445,6 +446,7 @@
         ' txbxYear
         ' 
         txbxYear.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        txbxYear.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         txbxYear.Location = New Point(322, 167)
         txbxYear.MaxLength = 4
         txbxYear.Name = "txbxYear"
@@ -457,6 +459,7 @@
         ' txbxTrack
         ' 
         txbxTrack.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        txbxTrack.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         txbxTrack.Location = New Point(256, 125)
         txbxTrack.MaxLength = 2
         txbxTrack.Name = "txbxTrack"
@@ -469,6 +472,7 @@
         ' txbxComments
         ' 
         txbxComments.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+        txbxComments.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         txbxComments.Location = New Point(12, 209)
         txbxComments.Name = "txbxComments"
         txbxComments.ShortcutsEnabled = False
@@ -496,6 +500,7 @@
         txbxLyrics.AcceptsTab = True
         txbxLyrics.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         txbxLyrics.BackColor = Color.Linen
+        txbxLyrics.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         txbxLyrics.HideSelection = False
         txbxLyrics.Location = New Point(13, 277)
         txbxLyrics.Multiline = True
@@ -521,6 +526,7 @@
         ' txbxDuration
         ' 
         txbxDuration.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        txbxDuration.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         txbxDuration.Location = New Point(322, 125)
         txbxDuration.Name = "txbxDuration"
         txbxDuration.ReadOnly = True
@@ -533,6 +539,7 @@
         ' txbxTrackCount
         ' 
         txbxTrackCount.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        txbxTrackCount.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         txbxTrackCount.Location = New Point(289, 125)
         txbxTrackCount.MaxLength = 2
         txbxTrackCount.Name = "txbxTrackCount"
@@ -545,6 +552,7 @@
         ' txbxGenre
         ' 
         txbxGenre.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        txbxGenre.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         txbxGenre.Location = New Point(256, 83)
         txbxGenre.Name = "txbxGenre"
         txbxGenre.ShortcutsEnabled = False
@@ -565,10 +573,11 @@
         ' 
         ' MenuMain
         ' 
+        MenuMain.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         MenuMain.Items.AddRange(New ToolStripItem() {MIFile, MIEdit, MIView, MIPlay, MIAbout})
         MenuMain.Location = New Point(0, 0)
         MenuMain.Name = "MenuMain"
-        MenuMain.Size = New Size(384, 24)
+        MenuMain.Size = New Size(384, 25)
         MenuMain.TabIndex = 1015
         MenuMain.Text = "MenuStrip1"
         ' 
@@ -578,47 +587,47 @@
         MIFile.ForeColor = Color.White
         MIFile.Image = My.Resources.Resources.imageOpen
         MIFile.Name = "MIFile"
-        MIFile.Size = New Size(53, 20)
+        MIFile.Size = New Size(55, 21)
         MIFile.Text = "File"
         ' 
         ' MIOpenFile
         ' 
         MIOpenFile.Image = My.Resources.Resources.imageOpen
         MIOpenFile.Name = "MIOpenFile"
-        MIOpenFile.Size = New Size(141, 22)
+        MIOpenFile.Size = New Size(152, 22)
         MIOpenFile.Text = "Open File"
         ' 
         ' MITrimFile
         ' 
         MITrimFile.Image = My.Resources.Resources.imageSave
         MITrimFile.Name = "MITrimFile"
-        MITrimFile.Size = New Size(141, 22)
+        MITrimFile.Size = New Size(152, 22)
         MITrimFile.Text = "Trim MP3"
         ' 
         ' MIOpenLocation
         ' 
         MIOpenLocation.Image = My.Resources.Resources.imageFolder
         MIOpenLocation.Name = "MIOpenLocation"
-        MIOpenLocation.Size = New Size(141, 22)
+        MIOpenLocation.Size = New Size(152, 22)
         MIOpenLocation.Text = "Go To Folder"
         ' 
         ' MICloseFile
         ' 
         MICloseFile.Image = My.Resources.Resources.imageClose
         MICloseFile.Name = "MICloseFile"
-        MICloseFile.Size = New Size(141, 22)
+        MICloseFile.Size = New Size(152, 22)
         MICloseFile.Text = "Close File"
         ' 
         ' ToolStripSeparator1
         ' 
         ToolStripSeparator1.Name = "ToolStripSeparator1"
-        ToolStripSeparator1.Size = New Size(138, 6)
+        ToolStripSeparator1.Size = New Size(149, 6)
         ' 
         ' MIExit
         ' 
         MIExit.Image = My.Resources.Resources.imageClose
         MIExit.Name = "MIExit"
-        MIExit.Size = New Size(141, 22)
+        MIExit.Size = New Size(152, 22)
         MIExit.Text = "Exit"
         MIExit.ToolTipText = "Ctrl+W"
         ' 
@@ -629,14 +638,14 @@
         MIEdit.ForeColor = Color.White
         MIEdit.Image = My.Resources.Resources.ImageEdit16
         MIEdit.Name = "MIEdit"
-        MIEdit.Size = New Size(55, 20)
+        MIEdit.Size = New Size(58, 21)
         MIEdit.Text = "Edit"
         ' 
         ' MICopyTagBasic
         ' 
         MICopyTagBasic.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagBasic.Name = "MICopyTagBasic"
-        MICopyTagBasic.Size = New Size(154, 22)
+        MICopyTagBasic.Size = New Size(164, 22)
         MICopyTagBasic.Text = "Copy Basic Tag"
         MICopyTagBasic.ToolTipText = "Copy Tag without Album Art or Lyrics"
         ' 
@@ -644,7 +653,7 @@
         ' 
         MICopyTagArt.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagArt.Name = "MICopyTagArt"
-        MICopyTagArt.Size = New Size(154, 22)
+        MICopyTagArt.Size = New Size(164, 22)
         MICopyTagArt.Text = "Copy Art Only"
         MICopyTagArt.ToolTipText = "Copy ONLY Album Art"
         ' 
@@ -652,7 +661,7 @@
         ' 
         MICopyTagFull.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagFull.Name = "MICopyTagFull"
-        MICopyTagFull.Size = New Size(154, 22)
+        MICopyTagFull.Size = New Size(164, 22)
         MICopyTagFull.Text = "Copy Full Tag"
         MICopyTagFull.ToolTipText = "Copy Tag WITH Album Art & Lyrics"
         ' 
@@ -660,7 +669,7 @@
         ' 
         MIPasteTag.Image = My.Resources.Resources.ImageEditPaste16
         MIPasteTag.Name = "MIPasteTag"
-        MIPasteTag.Size = New Size(154, 22)
+        MIPasteTag.Size = New Size(164, 22)
         MIPasteTag.Text = "Paste Tag"
         ' 
         ' MIView
@@ -670,14 +679,14 @@
         MIView.ForeColor = Color.White
         MIView.Image = My.Resources.Resources.ImageView
         MIView.Name = "MIView"
-        MIView.Size = New Size(60, 20)
+        MIView.Size = New Size(63, 21)
         MIView.Text = "View"
         ' 
         ' MISettings
         ' 
         MISettings.Image = My.Resources.Resources.imageSettings
         MISettings.Name = "MISettings"
-        MISettings.Size = New Size(180, 22)
+        MISettings.Size = New Size(122, 22)
         MISettings.Text = "Settings"
         ' 
         ' MIPlay
@@ -685,7 +694,7 @@
         MIPlay.ForeColor = Color.White
         MIPlay.Image = My.Resources.Resources.imageSound
         MIPlay.Name = "MIPlay"
-        MIPlay.Size = New Size(57, 20)
+        MIPlay.Size = New Size(59, 21)
         MIPlay.Text = "Play"
         ' 
         ' MIAbout
@@ -694,21 +703,21 @@
         MIAbout.ForeColor = Color.White
         MIAbout.Image = My.Resources.Resources.imageInfo
         MIAbout.Name = "MIAbout"
-        MIAbout.Size = New Size(68, 20)
+        MIAbout.Size = New Size(71, 21)
         MIAbout.Text = "About"
         ' 
         ' MIHelp
         ' 
         MIHelp.Image = My.Resources.Resources.imageInfo
         MIHelp.Name = "MIHelp"
-        MIHelp.Size = New Size(180, 22)
+        MIHelp.Size = New Size(156, 22)
         MIHelp.Text = "Help && About"
         ' 
         ' MILog
         ' 
         MILog.Image = My.Resources.Resources.imageLog
         MILog.Name = "MILog"
-        MILog.Size = New Size(180, 22)
+        MILog.Size = New Size(156, 22)
         MILog.Text = "Log"
         ' 
         ' lblFileInfo

@@ -110,6 +110,7 @@ Namespace My
 		Friend FrmLog As Log
 		Private FrmHelp As Help
 		Private FrmSettings As Settings
+		Friend ReadOnly InactiveTitleBarColor As Color = Color.FromArgb(255, 243, 243, 243)
 		Friend Const AdjustScreenBoundsNormalWindow As Byte = 8
 		Friend Const AdjustScreenBoundsDialogWindow As Byte = 10
 		Friend Const sError As String = "Error Opening File"

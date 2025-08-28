@@ -1637,7 +1637,7 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub SetInactiveColor()
-        MenuMain.BackColor = BackColor
+        MenuMain.BackColor = App.InactiveTitleBarColor
     End Sub
 
 End Class
