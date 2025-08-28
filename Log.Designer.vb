@@ -29,7 +29,7 @@ Partial Class Log
         BtnClose = New Button()
         btnRefresh = New Button()
         Lblnfo = New My.Components.LabelCSY()
-        TipLog = New ToolTip(components)
+        tipInfo = New ToolTip(components)
         TxbxSearch = New TextBox()
         LblSearch = New My.Components.LabelCSY()
         SuspendLayout()
@@ -37,6 +37,7 @@ Partial Class Log
         ' RTxBoxLog
         ' 
         RTxBoxLog.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        RTxBoxLog.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         RTxBoxLog.Location = New Point(14, 36)
         RTxBoxLog.Margin = New Padding(4, 3, 4, 3)
         RTxBoxLog.Name = "RTxBoxLog"
@@ -56,7 +57,7 @@ Partial Class Log
         BtnDelete.Size = New Size(48, 48)
         BtnDelete.TabIndex = 2
         BtnDelete.TabStop = False
-        TipLog.SetToolTip(BtnDelete, "Delete Log")
+        tipInfo.SetToolTip(BtnDelete, "Delete Log")
         BtnDelete.UseVisualStyleBackColor = True
         ' 
         ' BtnClose
@@ -69,7 +70,7 @@ Partial Class Log
         BtnClose.Size = New Size(64, 64)
         BtnClose.TabIndex = 3
         BtnClose.TabStop = False
-        TipLog.SetToolTip(BtnClose, "Close Window")
+        tipInfo.SetToolTip(BtnClose, "Close (CtrlW)")
         BtnClose.UseVisualStyleBackColor = True
         ' 
         ' btnRefresh
@@ -82,13 +83,13 @@ Partial Class Log
         btnRefresh.Size = New Size(48, 48)
         btnRefresh.TabIndex = 4
         btnRefresh.TabStop = False
-        TipLog.SetToolTip(btnRefresh, "Refresh Log")
+        tipInfo.SetToolTip(btnRefresh, "Refresh Log")
         btnRefresh.UseVisualStyleBackColor = True
         ' 
         ' Lblnfo
         ' 
         Lblnfo.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        Lblnfo.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Lblnfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Lblnfo.Location = New Point(14, 435)
         Lblnfo.Margin = New Padding(4, 0, 4, 0)
         Lblnfo.Name = "Lblnfo"
@@ -96,6 +97,10 @@ Partial Class Log
         Lblnfo.TabIndex = 1
         Lblnfo.Text = "File Info"
         Lblnfo.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' tipInfo
+        ' 
+        tipInfo.OwnerDraw = True
         ' 
         ' TxbxSearch
         ' 
@@ -152,7 +157,7 @@ Partial Class Log
     Friend WithEvents BtnDelete As Button
     Friend WithEvents BtnClose As Button
     Friend WithEvents btnRefresh As Button
-    Friend WithEvents TipLog As ToolTip
+    Friend WithEvents tipInfo As ToolTip
     Friend WithEvents TxbxSearch As TextBox
     Friend WithEvents LblSearch As My.Components.LabelCSY
 End Class

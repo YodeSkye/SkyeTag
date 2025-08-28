@@ -37,6 +37,7 @@
         tipInfo.AutomaticDelay = 100
         tipInfo.AutoPopDelay = 5000
         tipInfo.InitialDelay = 100
+        tipInfo.OwnerDraw = True
         tipInfo.ReshowDelay = 20
         ' 
         ' chkboxSaveMetrics
@@ -46,7 +47,7 @@
         chkboxSaveMetrics.Size = New Size(152, 21)
         chkboxSaveMetrics.TabIndex = 15
         chkboxSaveMetrics.Text = "Save Window Metrics"
-        tipInfo.SetToolTip(chkboxSaveMetrics, "Save Location On Exit")
+        tipInfo.SetToolTip(chkboxSaveMetrics, "Save Window Location && Size On Exit")
         chkboxSaveMetrics.UseVisualStyleBackColor = True
         ' 
         ' Settings

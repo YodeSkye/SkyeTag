@@ -88,6 +88,7 @@ Public Class Log
         SetDeleteLogConfirm()
     End Sub
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        SetDeleteLogConfirm(True)
         App.ShowLog()
     End Sub
     Private Sub Lblnfo_DoubleClick(sender As Object, e As EventArgs) Handles Lblnfo.DoubleClick
@@ -148,6 +149,35 @@ Public Class Log
             LblSearch.Visible = False
         End If
     End Sub
+    Private Sub tipInfo_Popup(sender As Object, e As PopupEventArgs) Handles tipInfo.Popup
+        Static s As Size
+        s = TextRenderer.MeasureText(tipInfo.GetToolTip(e.AssociatedControl), App.TipFont)
+        s.Width += 14
+        s.Height += 14
+        e.ToolTipSize = s
+    End Sub
+    Private Sub tipInfo_Draw(sender As Object, e As DrawToolTipEventArgs) Handles tipInfo.Draw
+
+        'Declarations
+        Dim g As Graphics = e.Graphics
+
+        'Draw background
+        Dim brbg As New SolidBrush(App.TipBackColor)
+        g.FillRectangle(brbg, e.Bounds)
+
+        'Draw border
+        Using p As New Pen(App.TipBorderColor, CInt(App.TipFont.Size / 4)) 'Scale border thickness with font
+            g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
+        End Using
+
+        'Draw text
+        TextRenderer.DrawText(g, e.ToolTipText, App.TipFont, New Point(7, 7), App.TipTextColor)
+
+        'Finalize
+        brbg.Dispose()
+        g.Dispose()
+
+    End Sub
 
     'Handlers
     Private Sub timerDeleteLog_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles timerDeleteLog.Tick
@@ -160,13 +190,11 @@ Public Class Log
             timerDeleteLog.Stop()
             DeleteLogConfirm = False
             Me.BtnDelete.ResetBackColor()
-            TipLog.Hide(Me)
-            TipLog.IsBalloon = False
+            tipInfo.Hide(Me)
         Else
             DeleteLogConfirm = True
             Me.BtnDelete.BackColor = Color.Red
-            TipLog.IsBalloon = True
-            TipLog.Show("Are You Sure?", Me, BtnDelete.Location)
+            tipInfo.Show("Are You Sure?", Me, BtnDelete.Location)
             timerDeleteLog.Start()
         End If
     End Sub

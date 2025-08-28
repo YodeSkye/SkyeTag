@@ -996,7 +996,7 @@ Partial Friend Class MainForm
         End If
         e.ToolTipSize = s
     End Sub
-    Private Sub TipPlayer_Draw(sender As Object, e As DrawToolTipEventArgs) Handles tipInfo.Draw
+    Private Sub tipInfo_Draw(sender As Object, e As DrawToolTipEventArgs) Handles tipInfo.Draw
 
         'Declarations
         Dim g As Graphics = e.Graphics

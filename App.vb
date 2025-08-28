@@ -292,12 +292,11 @@ Namespace My
 		Friend Sub ShowHelp()
 			Dim logtext As String = String.Empty
 			logtext += "Interface -->"
-			logtext += vbCr + vbTab + "Hovering over the App Button will briefly show extended media information. RightClick on the App Button will show extended media information in a balloon until closed by the user."
+			logtext += vbCr + vbTab + "Hovering over the Filename will briefly show extended media information."
 			logtext += vbCr + vbTab + "Clicking Insert on the Album Art Menu will perform the default insertion behavior, Insert Last."
 			logtext += vbCr + vbTab + "You may drag an image file or files onto the Album Art Menu Button. The file or files will be added using the default insertion behavior, Insert Last."
 			logtext += vbCr + vbCr + "Settings -->"
-			logtext += vbCr + vbTab + "AutoSave Main Window Location will save the location of the Main Window each time you exit the App."
-			logtext += vbCr + vbTab + "If you set AutoSave Main Window Location, but do not Save Settings, the location of the Main Window will be saved only the next time you exit the App. This, and the Save Current Location button, are useful if you want to change the startup location of the App permanently."
+			logtext += vbCr + vbTab + "Save Window Metrics will save the location of the Main Window and its size each time you exit the App."
 			logtext += vbCr + vbCr + "KeyBoard -->"
 			logtext += vbCr + vbTab + "Pressing CtrlW will close a window without saving."
 			logtext += vbCr + vbTab + "Pressing CtrlShiftW or Escape will minimize the window."

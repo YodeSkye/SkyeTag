@@ -91,7 +91,7 @@ Partial Class SaveOnlineImage
         ' 
         ' TxtBoxFilename
         ' 
-        TxtBoxFilename.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TxtBoxFilename.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         TxtBoxFilename.Location = New Point(12, 27)
         TxtBoxFilename.Name = "TxtBoxFilename"
         TxtBoxFilename.Size = New Size(174, 25)
@@ -99,7 +99,7 @@ Partial Class SaveOnlineImage
         ' 
         ' TxtBoxLocation
         ' 
-        TxtBoxLocation.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TxtBoxLocation.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         TxtBoxLocation.Location = New Point(12, 76)
         TxtBoxLocation.Name = "TxtBoxLocation"
         TxtBoxLocation.Size = New Size(296, 25)

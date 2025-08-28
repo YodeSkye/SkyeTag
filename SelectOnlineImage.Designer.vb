@@ -46,10 +46,11 @@ Partial Class SelectOnlineImage
         ' 
         LVIDs.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         LVIDs.Columns.AddRange(New ColumnHeader() {ColumnHeader1})
+        LVIDs.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         LVIDs.HeaderStyle = ColumnHeaderStyle.None
-        LVIDs.Location = New Point(12, 43)
+        LVIDs.Location = New Point(12, 49)
         LVIDs.Name = "LVIDs"
-        LVIDs.Size = New Size(388, 184)
+        LVIDs.Size = New Size(388, 208)
         LVIDs.TabIndex = 0
         LVIDs.UseCompatibleStateImageBehavior = False
         LVIDs.View = View.Details
@@ -62,9 +63,9 @@ Partial Class SelectOnlineImage
         ' PicBoxArt
         ' 
         PicBoxArt.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        PicBoxArt.Location = New Point(12, 233)
+        PicBoxArt.Location = New Point(12, 264)
         PicBoxArt.Name = "PicBoxArt"
-        PicBoxArt.Size = New Size(600, 600)
+        PicBoxArt.Size = New Size(600, 680)
         PicBoxArt.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxArt.TabIndex = 2
         PicBoxArt.TabStop = False
@@ -74,9 +75,9 @@ Partial Class SelectOnlineImage
         ' 
         BtnOK.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         BtnOK.Image = My.Resources.Resources.ImageOK64
-        BtnOK.Location = New Point(548, 163)
+        BtnOK.Location = New Point(548, 185)
         BtnOK.Name = "BtnOK"
-        BtnOK.Size = New Size(64, 64)
+        BtnOK.Size = New Size(64, 73)
         BtnOK.TabIndex = 30
         TipSelectOnlineImage.SetToolTip(BtnOK, "Insert Image as Art")
         BtnOK.UseVisualStyleBackColor = True
@@ -84,9 +85,9 @@ Partial Class SelectOnlineImage
         ' PicBoxBackThumb
         ' 
         PicBoxBackThumb.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        PicBoxBackThumb.Location = New Point(512, 11)
+        PicBoxBackThumb.Location = New Point(512, 12)
         PicBoxBackThumb.Name = "PicBoxBackThumb"
-        PicBoxBackThumb.Size = New Size(100, 100)
+        PicBoxBackThumb.Size = New Size(100, 113)
         PicBoxBackThumb.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxBackThumb.TabIndex = 4
         PicBoxBackThumb.TabStop = False
@@ -95,9 +96,9 @@ Partial Class SelectOnlineImage
         ' PicBoxFrontThumb
         ' 
         PicBoxFrontThumb.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        PicBoxFrontThumb.Location = New Point(406, 12)
+        PicBoxFrontThumb.Location = New Point(406, 14)
         PicBoxFrontThumb.Name = "PicBoxFrontThumb"
-        PicBoxFrontThumb.Size = New Size(100, 100)
+        PicBoxFrontThumb.Size = New Size(100, 113)
         PicBoxFrontThumb.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxFrontThumb.TabIndex = 5
         PicBoxFrontThumb.TabStop = False
@@ -108,9 +109,9 @@ Partial Class SelectOnlineImage
         LblStatus.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         LblStatus.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LblStatus.ForeColor = Color.Red
-        LblStatus.Location = New Point(406, 143)
+        LblStatus.Location = New Point(406, 162)
         LblStatus.Name = "LblStatus"
-        LblStatus.Size = New Size(206, 17)
+        LblStatus.Size = New Size(206, 19)
         LblStatus.TabIndex = 8
         LblStatus.Text = "Downloading Art..."
         LblStatus.TextAlign = ContentAlignment.MiddleCenter
@@ -119,8 +120,8 @@ Partial Class SelectOnlineImage
         ' TxtBoxSearchPhrase
         ' 
         TxtBoxSearchPhrase.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        TxtBoxSearchPhrase.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TxtBoxSearchPhrase.Location = New Point(107, 12)
+        TxtBoxSearchPhrase.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        TxtBoxSearchPhrase.Location = New Point(107, 14)
         TxtBoxSearchPhrase.Name = "TxtBoxSearchPhrase"
         TxtBoxSearchPhrase.Size = New Size(293, 25)
         TxtBoxSearchPhrase.TabIndex = 100
@@ -130,9 +131,9 @@ Partial Class SelectOnlineImage
         BtnSaveArt.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         BtnSaveArt.Enabled = False
         BtnSaveArt.Image = My.Resources.Resources.ImageSave64
-        BtnSaveArt.Location = New Point(406, 163)
+        BtnSaveArt.Location = New Point(406, 185)
         BtnSaveArt.Name = "BtnSaveArt"
-        BtnSaveArt.Size = New Size(64, 64)
+        BtnSaveArt.Size = New Size(64, 73)
         BtnSaveArt.TabIndex = 20
         BtnSaveArt.TabStop = False
         TipSelectOnlineImage.SetToolTip(BtnSaveArt, "Save Image to File")
@@ -142,9 +143,9 @@ Partial Class SelectOnlineImage
         ' 
         LblDimFront.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         LblDimFront.Font = New Font("Segoe UI", 9.75F)
-        LblDimFront.Location = New Point(406, 111)
+        LblDimFront.Location = New Point(406, 126)
         LblDimFront.Name = "LblDimFront"
-        LblDimFront.Size = New Size(100, 20)
+        LblDimFront.Size = New Size(100, 23)
         LblDimFront.TabIndex = 101
         LblDimFront.Text = "W x H"
         LblDimFront.TextAlign = ContentAlignment.TopCenter
@@ -153,9 +154,9 @@ Partial Class SelectOnlineImage
         ' 
         LblDimBack.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         LblDimBack.Font = New Font("Segoe UI", 9.75F)
-        LblDimBack.Location = New Point(512, 110)
+        LblDimBack.Location = New Point(512, 125)
         LblDimBack.Name = "LblDimBack"
-        LblDimBack.Size = New Size(100, 20)
+        LblDimBack.Size = New Size(100, 23)
         LblDimBack.TabIndex = 102
         LblDimBack.Text = "W x H"
         LblDimBack.TextAlign = ContentAlignment.TopCenter
@@ -163,18 +164,18 @@ Partial Class SelectOnlineImage
         ' LblSearchPhrase
         ' 
         LblSearchPhrase.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblSearchPhrase.Location = New Point(14, 13)
+        LblSearchPhrase.Location = New Point(14, 15)
         LblSearchPhrase.Name = "LblSearchPhrase"
-        LblSearchPhrase.Size = New Size(94, 23)
+        LblSearchPhrase.Size = New Size(94, 26)
         LblSearchPhrase.TabIndex = 103
         LblSearchPhrase.Text = "Search Phrase:"
         LblSearchPhrase.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' SelectOnlineImage
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(7F, 17F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(624, 844)
+        ClientSize = New Size(624, 957)
         Controls.Add(LblStatus)
         Controls.Add(BtnSaveArt)
         Controls.Add(TxtBoxSearchPhrase)
@@ -186,8 +187,9 @@ Partial Class SelectOnlineImage
         Controls.Add(LblDimFront)
         Controls.Add(LblDimBack)
         Controls.Add(LblSearchPhrase)
+        Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        MinimumSize = New Size(500, 500)
+        MinimumSize = New Size(500, 561)
         Name = "SelectOnlineImage"
         StartPosition = FormStartPosition.CenterParent
         Text = "Select Image from MusicBrainz"
