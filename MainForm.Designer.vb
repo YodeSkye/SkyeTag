@@ -279,7 +279,6 @@
         cmAlbumArtInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmAlbumArtInsert.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsertBefore, cmiAlbumArtInsertAfter, cmiAlbumArtInsertFirst, cmiAlbumArtInsertLast})
         cmAlbumArtInsert.Name = "cmAlbumArtInsert"
-        cmAlbumArtInsert.OwnerItem = cmiAlbumArtInsert
         cmAlbumArtInsert.Size = New Size(115, 92)
         ' 
         ' cmiAlbumArtInsertBefore

@@ -110,6 +110,7 @@ Namespace My
 		Friend FrmLog As Log
 		Private FrmHelp As Help
 		Private FrmSettings As Settings
+		Friend ReadOnly CMFont As Font = New Font("Segoe UI", 10, FontStyle.Regular) 'Font for context menus
 		Friend ReadOnly TipFont As Font = New Font("Segoe UI", 10, FontStyle.Bold) 'Font for custom drawing of tooltips
 		Friend ReadOnly TipBackColor As Color = SystemColors.Control
 		Friend ReadOnly TipTextColor As Color = Color.Black

@@ -41,9 +41,9 @@ Partial Friend Class MainForm
         For Each name As String In System.Enum.GetNames(GetType(TagLib.PictureType)) : cobxAlbumArtType.Items.Add(name) : Next
         tipInfo.SetToolTip(btnAlbumArt, App.hArt + " Menu")
         txtboxCM.ShowExtendedTools = True
-        txtboxCM.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+        txtboxCM.Font = App.CMFont
         txtboxCMLyrics.ShowExtendedTools = False
-        txtboxCMLyrics.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+        txtboxCMLyrics.Font = App.CMFont
         doubleclickMaxTime = TimeSpan.FromMilliseconds(SystemInformation.DoubleClickTime)
         clickTimer = New Timer()
         clickTimer.Interval = SystemInformation.DoubleClickTime
