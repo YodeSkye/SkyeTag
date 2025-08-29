@@ -397,6 +397,16 @@ Partial Friend Class MainForm
     Private Sub MIPasteTag_Click(sender As Object, e As EventArgs) Handles MIPasteTag.Click
         PasteTag()
     End Sub
+    Private Sub cmArtistInsert_Click(sender As Object, e As EventArgs) Handles cmArtistInsert.Click
+        InsertArtist()
+    End Sub
+    Private Sub cmArtistInsertFromClipboard_Click(sender As Object, e As EventArgs) Handles cmArtistInsertFromClipboard.Click
+        If My.Computer.Clipboard.ContainsText Then : InsertArtist(My.Computer.Clipboard.GetText)
+        Else
+            tipInfo.Tag = SystemIcons.Information.ToBitmap
+            tipInfo.Show("No Text On ClipBoard", Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+        End If
+    End Sub
     Private Sub cmAlbumArtOpening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmAlbumArt.Opening
         If tlFile.Tag.Pictures.Length = 0 Then
             Me.cmiAlbumArtSelect.Enabled = False
@@ -852,16 +862,8 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub btnArtistInsertMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistInsert.MouseUp
-        If Not tlFile.TagTypes = TagLib.TagTypes.None AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
-            Select Case My.Computer.Keyboard.CtrlKeyDown
-                Case True
-                    If My.Computer.Clipboard.ContainsText Then : InsertArtist(My.Computer.Clipboard.GetText)
-                    Else
-                        tipInfo.Tag = SystemIcons.Information.ToBitmap
-                        tipInfo.Show("No Text On ClipBoard", Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
-                    End If
-                Case False : InsertArtist()
-            End Select
+        If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) AndAlso Not tlFile.TagTypes = TagLib.TagTypes.None Then
+            InsertArtist()
         End If
     End Sub
     Private Sub btnArtistDeleteMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistDelete.MouseUp

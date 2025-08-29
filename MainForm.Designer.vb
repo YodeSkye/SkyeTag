@@ -21,6 +21,9 @@
         btnArtistLeft = New Button()
         btnArtistRight = New Button()
         btnArtistInsert = New Button()
+        cmNewArtist = New ContextMenuStrip(components)
+        cmArtistInsert = New ToolStripMenuItem()
+        cmArtistInsertFromClipboard = New ToolStripMenuItem()
         btnArtistDelete = New Button()
         cmAlbumArt = New ContextMenuStrip(components)
         cmiAlbumArtInsert = New ToolStripMenuItem()
@@ -83,6 +86,7 @@
         lblTrackSeparator = New My.Components.LabelCSY()
         lblDuration = New My.Components.LabelCSY()
         lblYear = New My.Components.LabelCSY()
+        cmNewArtist.SuspendLayout()
         cmAlbumArt.SuspendLayout()
         cmAlbumArtInsert.SuspendLayout()
         CType(picbxAlbumArt, ComponentModel.ISupportInitialize).BeginInit()
@@ -226,6 +230,7 @@
         ' 
         btnArtistInsert.AllowDrop = True
         btnArtistInsert.CausesValidation = False
+        btnArtistInsert.ContextMenuStrip = cmNewArtist
         btnArtistInsert.FlatAppearance.BorderColor = SystemColors.ControlDark
         btnArtistInsert.FlatAppearance.BorderSize = 0
         btnArtistInsert.FlatAppearance.MouseDownBackColor = Color.Transparent
@@ -237,9 +242,30 @@
         btnArtistInsert.Size = New Size(16, 16)
         btnArtistInsert.TabIndex = 1014
         btnArtistInsert.TabStop = False
-        tipInfo.SetToolTip(btnArtistInsert, "LeftClick = Insert New Artist (After This One)" & vbCrLf & "CtrlLeftClick = Insert Using Text From ClipBoard")
+        tipInfo.SetToolTip(btnArtistInsert, "LeftClick = Add New Artist" & vbCrLf & "RightClick = Menu")
         btnArtistInsert.UseMnemonic = False
         btnArtistInsert.UseVisualStyleBackColor = False
+        ' 
+        ' cmNewArtist
+        ' 
+        cmNewArtist.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmNewArtist.Items.AddRange(New ToolStripItem() {cmArtistInsert, cmArtistInsertFromClipboard})
+        cmNewArtist.Name = "ContextMenuStrip1"
+        cmNewArtist.Size = New Size(197, 70)
+        ' 
+        ' cmArtistInsert
+        ' 
+        cmArtistInsert.Image = My.Resources.Resources.imageNew
+        cmArtistInsert.Name = "cmArtistInsert"
+        cmArtistInsert.Size = New Size(196, 22)
+        cmArtistInsert.Text = "Add New Artist"
+        ' 
+        ' cmArtistInsertFromClipboard
+        ' 
+        cmArtistInsertFromClipboard.Image = My.Resources.Resources.imageNew
+        cmArtistInsertFromClipboard.Name = "cmArtistInsertFromClipboard"
+        cmArtistInsertFromClipboard.Size = New Size(196, 22)
+        cmArtistInsertFromClipboard.Text = "Add From Clipboard"
         ' 
         ' btnArtistDelete
         ' 
@@ -279,6 +305,7 @@
         cmAlbumArtInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmAlbumArtInsert.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsertBefore, cmiAlbumArtInsertAfter, cmiAlbumArtInsertFirst, cmiAlbumArtInsertLast})
         cmAlbumArtInsert.Name = "cmAlbumArtInsert"
+        cmAlbumArtInsert.OwnerItem = cmiAlbumArtInsert
         cmAlbumArtInsert.Size = New Size(115, 92)
         ' 
         ' cmiAlbumArtInsertBefore
@@ -880,6 +907,7 @@
         Name = "MainForm"
         SizeGripStyle = SizeGripStyle.Show
         StartPosition = FormStartPosition.Manual
+        cmNewArtist.ResumeLayout(False)
         cmAlbumArt.ResumeLayout(False)
         cmAlbumArtInsert.ResumeLayout(False)
         CType(picbxAlbumArt, ComponentModel.ISupportInitialize).EndInit()
@@ -961,4 +989,7 @@
     Friend WithEvents MICopyTagArt As ToolStripMenuItem
     Friend WithEvents MITrimFile As ToolStripMenuItem
     Friend WithEvents MIView As ToolStripMenuItem
+    Friend WithEvents cmNewArtist As ContextMenuStrip
+    Friend WithEvents cmArtistInsert As ToolStripMenuItem
+    Friend WithEvents cmArtistInsertFromClipboard As ToolStripMenuItem
 End Class
