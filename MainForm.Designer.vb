@@ -19,11 +19,21 @@
         btnAlbumArtLeft = New Button()
         btnRestore = New Button()
         btnArtistLeft = New Button()
+        cmArtistLeft = New ContextMenuStrip(components)
+        cmiArtistPrevious = New ToolStripMenuItem()
+        ToolStripSeparator2 = New ToolStripSeparator()
+        cmiArtistMoveLeft = New ToolStripMenuItem()
+        cmiArtistMoveFirst = New ToolStripMenuItem()
         btnArtistRight = New Button()
+        cmArtistRight = New ContextMenuStrip(components)
+        cmiArtistNext = New ToolStripMenuItem()
+        ToolStripSeparator3 = New ToolStripSeparator()
+        cmiArtistMoveRight = New ToolStripMenuItem()
+        cmiArtistMoveLast = New ToolStripMenuItem()
         btnArtistInsert = New Button()
         cmNewArtist = New ContextMenuStrip(components)
-        cmArtistInsert = New ToolStripMenuItem()
-        cmArtistInsertFromClipboard = New ToolStripMenuItem()
+        cmiArtistInsert = New ToolStripMenuItem()
+        cmiArtistInsertFromClipboard = New ToolStripMenuItem()
         btnArtistDelete = New Button()
         cmAlbumArt = New ContextMenuStrip(components)
         cmiAlbumArtInsert = New ToolStripMenuItem()
@@ -86,6 +96,8 @@
         lblTrackSeparator = New My.Components.LabelCSY()
         lblDuration = New My.Components.LabelCSY()
         lblYear = New My.Components.LabelCSY()
+        cmArtistLeft.SuspendLayout()
+        cmArtistRight.SuspendLayout()
         cmNewArtist.SuspendLayout()
         cmAlbumArt.SuspendLayout()
         cmAlbumArtInsert.SuspendLayout()
@@ -193,6 +205,7 @@
         ' btnArtistLeft
         ' 
         btnArtistLeft.CausesValidation = False
+        btnArtistLeft.ContextMenuStrip = cmArtistLeft
         btnArtistLeft.FlatAppearance.BorderColor = SystemColors.ControlDark
         btnArtistLeft.FlatAppearance.BorderSize = 0
         btnArtistLeft.FlatAppearance.MouseDownBackColor = Color.Transparent
@@ -204,13 +217,47 @@
         btnArtistLeft.Size = New Size(16, 16)
         btnArtistLeft.TabIndex = 1012
         btnArtistLeft.TabStop = False
-        tipInfo.SetToolTip(btnArtistLeft, "LeftClick = Previous Artist" & vbCrLf & "RightClick = Move Artist Left" & vbCrLf & "CtrlRightClick = Move Artist First")
+        tipInfo.SetToolTip(btnArtistLeft, "LeftClick = Previous Artist" & vbCrLf & "RightClick = Menu")
         btnArtistLeft.UseMnemonic = False
         btnArtistLeft.UseVisualStyleBackColor = False
+        ' 
+        ' cmArtistLeft
+        ' 
+        cmArtistLeft.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmArtistLeft.Items.AddRange(New ToolStripItem() {cmiArtistPrevious, ToolStripSeparator2, cmiArtistMoveLeft, cmiArtistMoveFirst})
+        cmArtistLeft.Name = "ContextMenuStrip1"
+        cmArtistLeft.Size = New Size(172, 76)
+        ' 
+        ' cmiArtistPrevious
+        ' 
+        cmiArtistPrevious.Image = My.Resources.Resources.imageAdvanceLeft
+        cmiArtistPrevious.Name = "cmiArtistPrevious"
+        cmiArtistPrevious.Size = New Size(171, 22)
+        cmiArtistPrevious.Text = "Previous Artist"
+        ' 
+        ' ToolStripSeparator2
+        ' 
+        ToolStripSeparator2.Name = "ToolStripSeparator2"
+        ToolStripSeparator2.Size = New Size(168, 6)
+        ' 
+        ' cmiArtistMoveLeft
+        ' 
+        cmiArtistMoveLeft.Image = My.Resources.Resources.imageAdvanceLeft
+        cmiArtistMoveLeft.Name = "cmiArtistMoveLeft"
+        cmiArtistMoveLeft.Size = New Size(171, 22)
+        cmiArtistMoveLeft.Text = "Move Artist Left"
+        ' 
+        ' cmiArtistMoveFirst
+        ' 
+        cmiArtistMoveFirst.Image = My.Resources.Resources.imageAdvanceFirst
+        cmiArtistMoveFirst.Name = "cmiArtistMoveFirst"
+        cmiArtistMoveFirst.Size = New Size(171, 22)
+        cmiArtistMoveFirst.Text = "Move Artist First"
         ' 
         ' btnArtistRight
         ' 
         btnArtistRight.CausesValidation = False
+        btnArtistRight.ContextMenuStrip = cmArtistRight
         btnArtistRight.FlatAppearance.BorderColor = SystemColors.ControlDark
         btnArtistRight.FlatAppearance.BorderSize = 0
         btnArtistRight.FlatAppearance.MouseDownBackColor = Color.Transparent
@@ -222,9 +269,42 @@
         btnArtistRight.Size = New Size(16, 16)
         btnArtistRight.TabIndex = 1011
         btnArtistRight.TabStop = False
-        tipInfo.SetToolTip(btnArtistRight, "LeftClick = Next Artist" & vbCrLf & "RightClick = Move Artist Right" & vbCrLf & "CtrlRightClick = Move Artist Last")
+        tipInfo.SetToolTip(btnArtistRight, "LeftClick = Next Artist" & vbCrLf & "RightClick = Menu")
         btnArtistRight.UseMnemonic = False
         btnArtistRight.UseVisualStyleBackColor = False
+        ' 
+        ' cmArtistRight
+        ' 
+        cmArtistRight.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmArtistRight.Items.AddRange(New ToolStripItem() {cmiArtistNext, ToolStripSeparator3, cmiArtistMoveRight, cmiArtistMoveLast})
+        cmArtistRight.Name = "cmArtistRight"
+        cmArtistRight.Size = New Size(181, 98)
+        ' 
+        ' cmiArtistNext
+        ' 
+        cmiArtistNext.Image = My.Resources.Resources.imageAdvanceRight
+        cmiArtistNext.Name = "cmiArtistNext"
+        cmiArtistNext.Size = New Size(180, 22)
+        cmiArtistNext.Text = "Next Artist"
+        ' 
+        ' ToolStripSeparator3
+        ' 
+        ToolStripSeparator3.Name = "ToolStripSeparator3"
+        ToolStripSeparator3.Size = New Size(177, 6)
+        ' 
+        ' cmiArtistMoveRight
+        ' 
+        cmiArtistMoveRight.Image = My.Resources.Resources.imageAdvanceRight
+        cmiArtistMoveRight.Name = "cmiArtistMoveRight"
+        cmiArtistMoveRight.Size = New Size(180, 22)
+        cmiArtistMoveRight.Text = "Move Artist Right"
+        ' 
+        ' cmiArtistMoveLast
+        ' 
+        cmiArtistMoveLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiArtistMoveLast.Name = "cmiArtistMoveLast"
+        cmiArtistMoveLast.Size = New Size(180, 22)
+        cmiArtistMoveLast.Text = "Move Artist Last"
         ' 
         ' btnArtistInsert
         ' 
@@ -249,23 +329,23 @@
         ' cmNewArtist
         ' 
         cmNewArtist.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        cmNewArtist.Items.AddRange(New ToolStripItem() {cmArtistInsert, cmArtistInsertFromClipboard})
+        cmNewArtist.Items.AddRange(New ToolStripItem() {cmiArtistInsert, cmiArtistInsertFromClipboard})
         cmNewArtist.Name = "ContextMenuStrip1"
-        cmNewArtist.Size = New Size(197, 70)
+        cmNewArtist.Size = New Size(197, 48)
         ' 
-        ' cmArtistInsert
+        ' cmiArtistInsert
         ' 
-        cmArtistInsert.Image = My.Resources.Resources.imageNew
-        cmArtistInsert.Name = "cmArtistInsert"
-        cmArtistInsert.Size = New Size(196, 22)
-        cmArtistInsert.Text = "Add New Artist"
+        cmiArtistInsert.Image = My.Resources.Resources.imageNew
+        cmiArtistInsert.Name = "cmiArtistInsert"
+        cmiArtistInsert.Size = New Size(196, 22)
+        cmiArtistInsert.Text = "Add New Artist"
         ' 
-        ' cmArtistInsertFromClipboard
+        ' cmiArtistInsertFromClipboard
         ' 
-        cmArtistInsertFromClipboard.Image = My.Resources.Resources.imageNew
-        cmArtistInsertFromClipboard.Name = "cmArtistInsertFromClipboard"
-        cmArtistInsertFromClipboard.Size = New Size(196, 22)
-        cmArtistInsertFromClipboard.Text = "Add From Clipboard"
+        cmiArtistInsertFromClipboard.Image = My.Resources.Resources.imageNew
+        cmiArtistInsertFromClipboard.Name = "cmiArtistInsertFromClipboard"
+        cmiArtistInsertFromClipboard.Size = New Size(196, 22)
+        cmiArtistInsertFromClipboard.Text = "Add From Clipboard"
         ' 
         ' btnArtistDelete
         ' 
@@ -907,6 +987,8 @@
         Name = "MainForm"
         SizeGripStyle = SizeGripStyle.Show
         StartPosition = FormStartPosition.Manual
+        cmArtistLeft.ResumeLayout(False)
+        cmArtistRight.ResumeLayout(False)
         cmNewArtist.ResumeLayout(False)
         cmAlbumArt.ResumeLayout(False)
         cmAlbumArtInsert.ResumeLayout(False)
@@ -990,6 +1072,16 @@
     Friend WithEvents MITrimFile As ToolStripMenuItem
     Friend WithEvents MIView As ToolStripMenuItem
     Friend WithEvents cmNewArtist As ContextMenuStrip
-    Friend WithEvents cmArtistInsert As ToolStripMenuItem
-    Friend WithEvents cmArtistInsertFromClipboard As ToolStripMenuItem
+    Friend WithEvents cmiArtistInsert As ToolStripMenuItem
+    Friend WithEvents cmiArtistInsertFromClipboard As ToolStripMenuItem
+    Friend WithEvents cmArtistLeft As ContextMenuStrip
+    Friend WithEvents cmiArtistPrevious As ToolStripMenuItem
+    Friend WithEvents cmiArtistMoveLeft As ToolStripMenuItem
+    Friend WithEvents cmiArtistMoveFirst As ToolStripMenuItem
+    Friend WithEvents cmArtistRight As ContextMenuStrip
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents cmiArtistNext As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents cmiArtistMoveRight As ToolStripMenuItem
+    Friend WithEvents cmiArtistMoveLast As ToolStripMenuItem
 End Class

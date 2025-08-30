@@ -397,15 +397,37 @@ Partial Friend Class MainForm
     Private Sub MIPasteTag_Click(sender As Object, e As EventArgs) Handles MIPasteTag.Click
         PasteTag()
     End Sub
-    Private Sub cmArtistInsert_Click(sender As Object, e As EventArgs) Handles cmArtistInsert.Click
+    Private Sub cmiArtistInsert_Click(sender As Object, e As EventArgs) Handles cmiArtistInsert.Click
         InsertArtist()
     End Sub
-    Private Sub cmArtistInsertFromClipboard_Click(sender As Object, e As EventArgs) Handles cmArtistInsertFromClipboard.Click
+    Private Sub cmiArtistInsertFromClipboard_Click(sender As Object, e As EventArgs) Handles cmiArtistInsertFromClipboard.Click
         If My.Computer.Clipboard.ContainsText Then : InsertArtist(My.Computer.Clipboard.GetText)
         Else
             tipInfo.Tag = SystemIcons.Information.ToBitmap
             tipInfo.Show("No Text On ClipBoard", Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
         End If
+    End Sub
+    Private Sub cmiArtistPrevious_Click(sender As Object, e As EventArgs) Handles cmiArtistPrevious.Click
+        My.tagArtistIndex -= 1
+        If My.tagArtistIndex < 0 Then My.tagArtistIndex = 0
+        ShowTag()
+    End Sub
+    Private Sub cmiArtistMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveLeft.Click
+        MoveArtist(rMove.Left)
+    End Sub
+    Private Sub cmiArtistMoveFirst_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveFirst.Click
+        MoveArtist(rMove.First)
+    End Sub
+    Private Sub cmiArtistNext_Click(sender As Object, e As EventArgs) Handles cmiArtistNext.Click
+        My.tagArtistIndex += 1
+        If My.tagArtistIndex > tlFile.Tag.Performers.Length - 1 Then My.tagArtistIndex = tlFile.Tag.Performers.Length - 1
+        ShowTag()
+    End Sub
+    Private Sub cmiArtistMoveRight_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveRight.Click
+        MoveArtist(rMove.Right)
+    End Sub
+    Private Sub cmiArtistMoveLast_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveLast.Click
+        MoveArtist(rMove.Last)
     End Sub
     Private Sub cmAlbumArtOpening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmAlbumArt.Opening
         If tlFile.Tag.Pictures.Length = 0 Then
@@ -880,31 +902,37 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub btnArtistLeftMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistLeft.MouseUp
-        If My.App.MouseInBounds(CType(sender, Control), e.Location) Then
-            Select Case e.Button
-                Case MouseButtons.Left
-                    My.tagArtistIndex -= 1
-                    If My.tagArtistIndex < 0 Then My.tagArtistIndex = 0
-                    ShowTag()
-                Case MouseButtons.Right
-                    If My.Computer.Keyboard.CtrlKeyDown Then : MoveArtist(rMove.First)
-                    Else : MoveArtist(rMove.Left)
-                    End If
-            End Select
+        If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
+            My.tagArtistIndex -= 1
+            If My.tagArtistIndex < 0 Then My.tagArtistIndex = 0
+            ShowTag()
+            'Select Case e.Button
+            '    Case MouseButtons.Left
+            '        My.tagArtistIndex -= 1
+            '        If My.tagArtistIndex < 0 Then My.tagArtistIndex = 0
+            '        ShowTag()
+            '    Case MouseButtons.Right
+            '        If My.Computer.Keyboard.CtrlKeyDown Then : MoveArtist(rMove.First)
+            '        Else : MoveArtist(rMove.Left)
+            '        End If
+            'End Select
         End If
     End Sub
     Private Sub btnArtistRightMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistRight.MouseUp
-        If My.App.MouseInBounds(CType(sender, Control), e.Location) Then
-            Select Case e.Button
-                Case MouseButtons.Left
-                    My.tagArtistIndex += 1
-                    If My.tagArtistIndex > tlFile.Tag.Performers.Length - 1 Then My.tagArtistIndex = tlFile.Tag.Performers.Length - 1
-                    ShowTag()
-                Case MouseButtons.Right
-                    If My.Computer.Keyboard.CtrlKeyDown Then : MoveArtist(rMove.Last)
-                    Else : MoveArtist(rMove.Right)
-                    End If
-            End Select
+        If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
+            My.tagArtistIndex += 1
+            If My.tagArtistIndex > tlFile.Tag.Performers.Length - 1 Then My.tagArtistIndex = tlFile.Tag.Performers.Length - 1
+            ShowTag()
+            'Select Case e.Button
+            '    Case MouseButtons.Left
+            '        My.tagArtistIndex += 1
+            '        If My.tagArtistIndex > tlFile.Tag.Performers.Length - 1 Then My.tagArtistIndex = tlFile.Tag.Performers.Length - 1
+            '        ShowTag()
+            '    Case MouseButtons.Right
+            '        If My.Computer.Keyboard.CtrlKeyDown Then : MoveArtist(rMove.Last)
+            '        Else : MoveArtist(rMove.Right)
+            '        End If
+            'End Select
         End If
     End Sub
     Private Sub btnAlbumArtDragEnter(sender As Object, e As DragEventArgs) Handles btnAlbumArt.DragEnter
