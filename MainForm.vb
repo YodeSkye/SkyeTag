@@ -429,155 +429,55 @@ Partial Friend Class MainForm
     Private Sub cmiArtistMoveLast_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveLast.Click
         MoveArtist(rMove.Last)
     End Sub
-    Private Sub cmAlbumArtOpening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmAlbumArt.Opening
+    Private Sub cmAlbumArt_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmAlbumArt.Opening
         If tlFile.Tag.Pictures.Length = 0 Then
             Me.cmiAlbumArtSelect.Enabled = False
             Me.cmiAlbumArtExport.Enabled = False
             Me.cmiAlbumArtMoveLeft.Enabled = False
+            Me.cmiAlbumArtMoveFirst.Enabled = False
             Me.cmiAlbumArtMoveRight.Enabled = False
+            Me.cmiAlbumArtMoveLast.Enabled = False
             Me.cmiAlbumArtDelete.Enabled = False
+            Me.cmiAlbumArtInsert.DropDown = cmImageSource
         Else
             Me.cmiAlbumArtSelect.Enabled = True
             Me.cmiAlbumArtExport.Enabled = True
-            If My.tagArtIndex = 0 Then : Me.cmiAlbumArtMoveLeft.Enabled = False
-            Else : Me.cmiAlbumArtMoveLeft.Enabled = True
+            If My.tagArtIndex = 0 Then
+                Me.cmiAlbumArtMoveLeft.Enabled = False
+                Me.cmiAlbumArtMoveFirst.Enabled = False
+            Else
+                Me.cmiAlbumArtMoveLeft.Enabled = True
+                Me.cmiAlbumArtMoveFirst.Enabled = True
             End If
-            If My.tagArtIndex = tlFile.Tag.Pictures.Length - 1 Then : Me.cmiAlbumArtMoveRight.Enabled = False
-            Else : Me.cmiAlbumArtMoveRight.Enabled = True
+            If My.tagArtIndex = tlFile.Tag.Pictures.Length - 1 Then
+                Me.cmiAlbumArtMoveRight.Enabled = False
+                Me.cmiAlbumArtMoveLast.Enabled = False
+            Else
+                Me.cmiAlbumArtMoveRight.Enabled = True
+                Me.cmiAlbumArtMoveLast.Enabled = True
             End If
             Me.cmiAlbumArtDelete.Enabled = True
+            Me.cmiAlbumArtInsert.DropDown = cmAlbumArtInsert
         End If
         If tlFile.TagTypes = TagLib.TagTypes.None Then : Me.cmiAlbumArtInsert.Enabled = False
         Else : Me.cmiAlbumArtInsert.Enabled = True
         End If
     End Sub
-    Private Sub cmiAlbumArtInsertBeforeMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtInsertBefore.MouseUp
-        If My.Computer.Keyboard.CtrlKeyDown Then
-            InsertArt(My.tagArtIndex, My.App.ImageSource.ClipBoard)
-        ElseIf My.Computer.Keyboard.ShiftKeyDown Then
-            InsertArt(My.tagArtIndex, My.App.ImageSource.SelectOnline)
-        Else
-            InsertArt(My.tagArtIndex, My.App.ImageSource.SelectFile)
-        End If
+    Private Sub cmImageSource_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmImageSource.Opening
+        Debug.Print(cmImageSource.OwnerItem.Name)
+        cmImageSource.Tag = cmImageSource.OwnerItem.Name
     End Sub
-    Private Sub cmiAlbumArtInsertFirstMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtInsertFirst.MouseUp
-        If My.Computer.Keyboard.CtrlKeyDown Then
-            InsertArt(0, My.App.ImageSource.ClipBoard)
-        ElseIf My.Computer.Keyboard.ShiftKeyDown Then
-            InsertArt(0, My.App.ImageSource.SelectOnline)
-        Else
-            InsertArt(0, My.App.ImageSource.SelectFile)
-        End If
+    Private Sub cmiAlbumArtMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveLeft.Click
+        MoveArt(rMove.Left)
     End Sub
-    Private Sub cmiAlbumArtInsertAfterMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtInsertAfter.MouseUp
-        If My.Computer.Keyboard.CtrlKeyDown Then
-            InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, My.tagArtIndex + 1)), My.App.ImageSource.ClipBoard)
-        ElseIf My.Computer.Keyboard.ShiftKeyDown Then
-            InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, My.tagArtIndex + 1)), My.App.ImageSource.SelectOnline)
-        Else
-            InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, My.tagArtIndex + 1)), My.App.ImageSource.SelectFile)
-        End If
+    Private Sub cmiAlbumArtMoveFirst_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveFirst.Click
+        MoveArt(rMove.First)
     End Sub
-    Private Sub cmiAlbumArtInsertLastMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtInsertLast.MouseUp, cmiAlbumArtInsert.MouseUp
-        If Me.cmAlbumArt.Visible Then Me.cmAlbumArt.Close()
-        If My.Computer.Keyboard.CtrlKeyDown Then
-            InsertArt(tlFile.Tag.Pictures.Length, My.App.ImageSource.ClipBoard)
-        ElseIf My.Computer.Keyboard.ShiftKeyDown Then
-            InsertArt(tlFile.Tag.Pictures.Length, My.App.ImageSource.SelectOnline)
-        Else
-            InsertArt(tlFile.Tag.Pictures.Length, My.App.ImageSource.SelectFile)
-        End If
+    Private Sub cmiAlbumArtMoveRight_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveRight.Click
+        MoveArt(rMove.Right)
     End Sub
-    Private Sub cmiAlbumArtSelectMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtSelect.MouseUp
-        If tlFile.Tag.Pictures.Length > 0 Then
-            Dim picsource As My.App.ImageSource
-            If My.Computer.Keyboard.CtrlKeyDown Then
-                picsource = My.App.ImageSource.ClipBoard
-            ElseIf My.Computer.Keyboard.ShiftKeyDown Then
-                picsource = My.App.ImageSource.SelectOnline
-            Else
-                picsource = My.App.ImageSource.SelectFile
-            End If
-            Dim newpic As TagLib.IPicture
-            newpic = My.App.GetNewPic(picsource)
-            If newpic IsNot Nothing Then
-                Dim piclist As New Collections.Generic.List(Of TagLib.IPicture)
-                For Each pic As TagLib.IPicture In tlFile.Tag.Pictures : piclist.Add(pic) : Next
-                newpic.Description = tlFile.Tag.Pictures(My.tagArtIndex).Description
-                newpic.Type = tlFile.Tag.Pictures(My.tagArtIndex).Type
-                piclist(My.tagArtIndex) = newpic
-                tlFile.Tag.Pictures = piclist.ToArray
-                piclist.Clear()
-                piclist = Nothing
-                newpic = Nothing
-                picsource = Nothing
-                ShowTag()
-                SetSave()
-            Else
-                If picsource = My.App.ImageSource.ClipBoard Then
-                    tipInfo.Tag = SystemIcons.Information.ToBitmap
-                    tipInfo.Show("No Image On ClipBoard", Me, Me.btnAlbumArt.Left + CInt(Me.btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnAlbumArt.Top + CInt(Me.btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
-                End If
-            End If
-        End If
-    End Sub
-    Private Sub cmiAlbumArtExportMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtExport.MouseUp
-        If My.Computer.Keyboard.CtrlKeyDown Then
-            Dim ms As New IO.MemoryStream(tlFile.Tag.Pictures(My.tagArtIndex).Data.Data)
-            My.Computer.Clipboard.SetImage(Image.FromStream(ms))
-            ms.Dispose()
-            ms = Nothing
-        Else
-            Dim sfd As New SaveFileDialog
-            sfd.Title = "Save Image File"
-            Dim saveFormat As Drawing.Imaging.ImageFormat
-            If My.Computer.Keyboard.ShiftKeyDown Then
-                saveFormat = Drawing.Imaging.ImageFormat.Bmp
-                sfd.Filter = "Windows Bitmap Files|*.bmp"
-            Else
-                Select Case tlFile.Tag.Pictures(My.tagArtIndex).MimeType
-                    Case "image/jpeg"
-                        saveFormat = Drawing.Imaging.ImageFormat.Jpeg
-                        sfd.Filter = "JPEG Files|*.jpg;*.jpeg"
-                    Case "image/png"
-                        saveFormat = Drawing.Imaging.ImageFormat.Png
-                        sfd.Filter = "PNG Files|*.png"
-                    Case Else
-                        saveFormat = Drawing.Imaging.ImageFormat.Bmp
-                        sfd.Filter = "Windows Bitmap Files|*.bmp"
-                End Select
-            End If
-            sfd.Filter += "|All Files|*.*"
-            Dim result As DialogResult = sfd.ShowDialog(Me)
-            If result = DialogResult.OK AndAlso Not String.IsNullOrEmpty(sfd.FileName) Then
-                Dim ms As New IO.MemoryStream(tlFile.Tag.Pictures(My.tagArtIndex).Data.Data)
-                Dim im As Image = Image.FromStream(ms)
-                im.Save(sfd.FileName, saveFormat)
-                im.Dispose()
-                im = Nothing
-                ms.Dispose()
-                ms = Nothing
-            End If
-            My.App.WriteToLog("Album Art Exported To " + sfd.FileName)
-            result = Nothing
-            saveFormat = Nothing
-            sfd.Dispose()
-            sfd = Nothing
-        End If
-    End Sub
-    Private Sub cmiAlbumArtMoveLeftMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtMoveLeft.MouseUp
-        If e.Button = MouseButtons.Left AndAlso Not My.tagArtIndex = 0 Then
-            If My.Computer.Keyboard.CtrlKeyDown Then : MoveArt(rMove.First)
-            Else : MoveArt(rMove.Left)
-            End If
-        End If
-    End Sub
-    Private Sub cmiAlbumArtMoveRightMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtMoveRight.MouseUp
-        If e.Button = MouseButtons.Left AndAlso Not My.tagArtIndex = tlFile.Tag.Pictures.Length - 1 Then
-            If My.Computer.Keyboard.CtrlKeyDown Then : MoveArt(rMove.Last)
-            Else : MoveArt(rMove.Right)
-            End If
-        End If
+    Private Sub cmiAlbumArtMoveLast_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveLast.Click
+        MoveArt(rMove.Last)
     End Sub
     Private Sub cmiAlbumArtDeleteMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtDelete.MouseUp
         If tlFile.Tag.Pictures.Length > 0 Then
@@ -593,6 +493,38 @@ Partial Friend Class MainForm
             ShowTag()
             SetSave()
         End If
+    End Sub
+    Private Sub cmiArtPrevious_Click(sender As Object, e As EventArgs) Handles cmiArtPrevious.Click
+        txbxAlbumArt.CausesValidation = False
+        cobxAlbumArtType.CausesValidation = False
+        My.tagArtIndex -= 1
+        If My.tagArtIndex < 0 Then My.tagArtIndex = 0
+        ShowTag()
+        ResetLyrics()
+        txbxAlbumArt.CausesValidation = True
+        cobxAlbumArtType.CausesValidation = True
+    End Sub
+    Private Sub cmiArtMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiArtMoveLeft.Click
+        MoveArt(rMove.Left)
+    End Sub
+    Private Sub cmiArtMoveFirst_Click(sender As Object, e As EventArgs) Handles cmiArtMoveFirst.Click
+        MoveArt(rMove.First)
+    End Sub
+    Private Sub cmiArtNext_Click(sender As Object, e As EventArgs) Handles cmiArtNext.Click
+        txbxAlbumArt.CausesValidation = False
+        cobxAlbumArtType.CausesValidation = False
+        My.tagArtIndex += 1
+        If My.tagArtIndex > tlFile.Tag.Pictures.Length - 1 Then My.tagArtIndex = tlFile.Tag.Pictures.Length - 1
+        ShowTag()
+        ResetLyrics()
+        txbxAlbumArt.CausesValidation = True
+        cobxAlbumArtType.CausesValidation = True
+    End Sub
+    Private Sub cmiArtMoveRight_Click(sender As Object, e As EventArgs) Handles cmiArtMoveRight.Click
+        MoveArt(rMove.Right)
+    End Sub
+    Private Sub cmiArtMoveLast_Click(sender As Object, e As EventArgs) Handles cmiArtMoveLast.Click
+        MoveArt(rMove.Last)
     End Sub
     Private Sub ctrlAlbumArtEnter(sender As Object, e As EventArgs) Handles txbxAlbumArt.Enter, cobxAlbumArtType.Enter
         ResetLyrics()
@@ -889,7 +821,7 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub btnArtistDeleteMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistDelete.MouseUp
-        If tlFile.Tag.Performers.Length > 1 AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
+        If e.Button = MouseButtons.Left AndAlso tlFile.Tag.Performers.Length > 1 AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
             Dim alist As New Collections.Generic.List(Of String)
             For Each s As String In tlFile.Tag.Performers : alist.Add(s) : Next
             alist.RemoveAt(My.tagArtistIndex)
@@ -973,41 +905,27 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub btnAlbumArtLeftMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArtLeft.MouseUp
-        If My.App.MouseInBounds(CType(sender, Control), e.Location) Then
-            Select Case e.Button
-                Case MouseButtons.Left
-                    txbxAlbumArt.CausesValidation = False
-                    cobxAlbumArtType.CausesValidation = False
-                    My.tagArtIndex -= 1
-                    If My.tagArtIndex < 0 Then My.tagArtIndex = 0
-                    ShowTag()
-                    ResetLyrics()
-                    txbxAlbumArt.CausesValidation = True
-                    cobxAlbumArtType.CausesValidation = True
-                Case MouseButtons.Right
-                    If My.Computer.Keyboard.CtrlKeyDown Then : MoveArt(rMove.First)
-                    Else : MoveArt(rMove.Left)
-                    End If
-            End Select
+        If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
+            txbxAlbumArt.CausesValidation = False
+            cobxAlbumArtType.CausesValidation = False
+            My.tagArtIndex -= 1
+            If My.tagArtIndex < 0 Then My.tagArtIndex = 0
+            ShowTag()
+            ResetLyrics()
+            txbxAlbumArt.CausesValidation = True
+            cobxAlbumArtType.CausesValidation = True
         End If
     End Sub
     Private Sub btnAlbumArtRightMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArtRight.MouseUp
-        If My.App.MouseInBounds(CType(sender, Control), e.Location) Then
-            Select Case e.Button
-                Case MouseButtons.Left
-                    txbxAlbumArt.CausesValidation = False
-                    cobxAlbumArtType.CausesValidation = False
-                    My.tagArtIndex += 1
-                    If My.tagArtIndex > tlFile.Tag.Pictures.Length - 1 Then My.tagArtIndex = tlFile.Tag.Pictures.Length - 1
-                    ShowTag()
-                    ResetLyrics()
-                    txbxAlbumArt.CausesValidation = True
-                    cobxAlbumArtType.CausesValidation = True
-                Case MouseButtons.Right
-                    If My.Computer.Keyboard.CtrlKeyDown Then : MoveArt(rMove.Last)
-                    Else : MoveArt(rMove.Right)
-                    End If
-            End Select
+        If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
+            txbxAlbumArt.CausesValidation = False
+            cobxAlbumArtType.CausesValidation = False
+            My.tagArtIndex += 1
+            If My.tagArtIndex > tlFile.Tag.Pictures.Length - 1 Then My.tagArtIndex = tlFile.Tag.Pictures.Length - 1
+            ShowTag()
+            ResetLyrics()
+            txbxAlbumArt.CausesValidation = True
+            cobxAlbumArtType.CausesValidation = True
         End If
     End Sub
     Private Sub btnLyricsClick(sender As Object, e As EventArgs) Handles btnLyrics.Click
@@ -1692,5 +1610,122 @@ Partial Friend Class MainForm
     Private Sub SetInactiveColor()
         MenuMain.BackColor = App.InactiveTitleBarColor
     End Sub
+
+    'Private Sub cmiAlbumArtSelectMouseUp(sender As Object, e As MouseEventArgs)
+    '    If tlFile.Tag.Pictures.Length > 0 Then
+    '        Dim picsource As ImageSource
+    '        If Computer.Keyboard.CtrlKeyDown Then
+    '            picsource = ImageSource.ClipBoard
+    '        ElseIf Computer.Keyboard.ShiftKeyDown Then
+    '            picsource = ImageSource.SelectOnline
+    '        Else
+    '            picsource = ImageSource.SelectFile
+    '        End If
+    '        Dim newpic As TagLib.IPicture
+    '        newpic = GetNewPic(picsource)
+    '        If newpic IsNot Nothing Then
+    '            Dim piclist As New List(Of TagLib.IPicture)
+    '            For Each pic In tlFile.Tag.Pictures : piclist.Add(pic) : Next
+    '            newpic.Description = tlFile.Tag.Pictures(tagArtIndex).Description
+    '            newpic.Type = tlFile.Tag.Pictures(tagArtIndex).Type
+    '            piclist(tagArtIndex) = newpic
+    '            tlFile.Tag.Pictures = piclist.ToArray
+    '            piclist.Clear()
+    '            piclist = Nothing
+    '            newpic = Nothing
+    '            picsource = Nothing
+    '            ShowTag()
+    '            SetSave()
+    '        Else
+    '            If picsource = My.App.ImageSource.ClipBoard Then
+    '                tipInfo.Tag = SystemIcons.Information.ToBitmap
+    '                tipInfo.Show("No Image On ClipBoard", Me, btnAlbumArt.Left + CInt(btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, btnAlbumArt.Top + CInt(btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+    '            End If
+    '        End If
+    '    End If
+    'End Sub
+    'Private Sub cmiAlbumArtInsertLastMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtInsertLast.MouseUp
+    '    If cmAlbumArt.Visible Then cmAlbumArt.Close()
+
+    '    If Computer.Keyboard.CtrlKeyDown Then
+    '        InsertArt(tlFile.Tag.Pictures.Length, ImageSource.ClipBoard)
+    '    ElseIf Computer.Keyboard.ShiftKeyDown Then
+    '        InsertArt(tlFile.Tag.Pictures.Length, ImageSource.SelectOnline)
+    '    Else
+    '        InsertArt(tlFile.Tag.Pictures.Length, ImageSource.SelectFile)
+    '    End If
+    'End Sub
+    'Private Sub cmiAlbumArtInsertBeforeMouseUp(sender As Object, e As MouseEventArgs)
+    '    If Computer.Keyboard.CtrlKeyDown Then
+    '        InsertArt(tagArtIndex, ImageSource.ClipBoard)
+    '    ElseIf Computer.Keyboard.ShiftKeyDown Then
+    '        InsertArt(tagArtIndex, ImageSource.SelectOnline)
+    '    Else
+    '        InsertArt(tagArtIndex, ImageSource.SelectFile)
+    '    End If
+    'End Sub
+    'Private Sub cmiAlbumArtInsertFirstMouseUp(sender As Object, e As MouseEventArgs)
+    '    If Computer.Keyboard.CtrlKeyDown Then
+    '        InsertArt(0, ImageSource.ClipBoard)
+    '    ElseIf Computer.Keyboard.ShiftKeyDown Then
+    '        InsertArt(0, ImageSource.SelectOnline)
+    '    Else
+    '        InsertArt(0, ImageSource.SelectFile)
+    '    End If
+    'End Sub
+    'Private Sub cmiAlbumArtInsertAfterMouseUp(sender As Object, e As MouseEventArgs)
+    '    If Computer.Keyboard.CtrlKeyDown Then
+    '        InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, tagArtIndex + 1)), ImageSource.ClipBoard)
+    '    ElseIf Computer.Keyboard.ShiftKeyDown Then
+    '        InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, tagArtIndex + 1)), ImageSource.SelectOnline)
+    '    Else
+    '        InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, tagArtIndex + 1)), ImageSource.SelectFile)
+    '    End If
+    'End Sub
+
+    'Private Sub cmiAlbumArtExportMouseUp(sender As Object, e As MouseEventArgs)
+    '    If Computer.Keyboard.CtrlKeyDown Then
+    '        Dim ms As New IO.MemoryStream(tlFile.Tag.Pictures(tagArtIndex).Data.Data)
+    '        Computer.Clipboard.SetImage(Image.FromStream(ms))
+    '        ms.Dispose()
+    '        ms = Nothing
+    '    Else
+    '        Dim sfd As New SaveFileDialog
+    '        sfd.Title = "Save Image File"
+    '        Dim saveFormat As Imaging.ImageFormat
+    '        If Computer.Keyboard.ShiftKeyDown Then
+    '            saveFormat = Imaging.ImageFormat.Bmp
+    '            sfd.Filter = "Windows Bitmap Files|*.bmp"
+    '        Else
+    '            Select Case tlFile.Tag.Pictures(tagArtIndex).MimeType
+    '                Case "image/jpeg"
+    '                    saveFormat = Imaging.ImageFormat.Jpeg
+    '                    sfd.Filter = "JPEG Files|*.jpg;*.jpeg"
+    '                Case "image/png"
+    '                    saveFormat = Imaging.ImageFormat.Png
+    '                    sfd.Filter = "PNG Files|*.png"
+    '                Case Else
+    '                    saveFormat = Imaging.ImageFormat.Bmp
+    '                    sfd.Filter = "Windows Bitmap Files|*.bmp"
+    '            End Select
+    '        End If
+    '        sfd.Filter += "|All Files|*.*"
+    '        Dim result = sfd.ShowDialog(Me)
+    '        If result = DialogResult.OK AndAlso Not String.IsNullOrEmpty(sfd.FileName) Then
+    '            Dim ms As New IO.MemoryStream(tlFile.Tag.Pictures(tagArtIndex).Data.Data)
+    '            Dim im = Image.FromStream(ms)
+    '            im.Save(sfd.FileName, saveFormat)
+    '            im.Dispose
+    '            im = Nothing
+    '            ms.Dispose()
+    '            ms = Nothing
+    '        End If
+    '        WriteToLog("Album Art Exported To " + sfd.FileName)
+    '        result = Nothing
+    '        saveFormat = Nothing
+    '        sfd.Dispose()
+    '        sfd = Nothing
+    '    End If
+    'End Sub
 
 End Class

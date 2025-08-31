@@ -16,7 +16,17 @@
         tipInfo = New ToolTip(components)
         btnSave = New Button()
         btnAlbumArtRight = New Button()
+        cmArtRight = New ContextMenuStrip(components)
+        cmiArtNext = New ToolStripMenuItem()
+        ToolStripSeparator5 = New ToolStripSeparator()
+        cmiArtMoveRight = New ToolStripMenuItem()
+        cmiArtMoveLast = New ToolStripMenuItem()
         btnAlbumArtLeft = New Button()
+        cmArtLeft = New ContextMenuStrip(components)
+        cmiArtPrevious = New ToolStripMenuItem()
+        ToolStripSeparator4 = New ToolStripSeparator()
+        cmiArtMoveLeft = New ToolStripMenuItem()
+        cmiArtMoveFirst = New ToolStripMenuItem()
         btnRestore = New Button()
         btnArtistLeft = New Button()
         cmArtistLeft = New ContextMenuStrip(components)
@@ -36,17 +46,27 @@
         cmiArtistInsertFromClipboard = New ToolStripMenuItem()
         btnArtistDelete = New Button()
         cmAlbumArt = New ContextMenuStrip(components)
+        cmiAlbumArtSelect = New ToolStripMenuItem()
+        cmImageSource = New ContextMenuStrip(components)
+        cmiSelectFromFile = New ToolStripMenuItem()
+        cmiSelectFromOnline = New ToolStripMenuItem()
+        cmiPasteFromClipboard = New ToolStripMenuItem()
+        cmiAlbumArtInsertLast = New ToolStripMenuItem()
         cmiAlbumArtInsert = New ToolStripMenuItem()
         cmAlbumArtInsert = New ContextMenuStrip(components)
         cmiAlbumArtInsertBefore = New ToolStripMenuItem()
-        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
         cmiAlbumArtInsertFirst = New ToolStripMenuItem()
-        cmiAlbumArtInsertLast = New ToolStripMenuItem()
-        cmiAlbumArtSelect = New ToolStripMenuItem()
+        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
         cmiAlbumArtExport = New ToolStripMenuItem()
+        cmExport = New ContextMenuStrip(components)
+        cmiExportToFile = New ToolStripMenuItem()
+        cmiExportToBitmap = New ToolStripMenuItem()
+        cmiExportToClipboard = New ToolStripMenuItem()
         tsSeparator1 = New ToolStripSeparator()
         cmiAlbumArtMoveLeft = New ToolStripMenuItem()
+        cmiAlbumArtMoveFirst = New ToolStripMenuItem()
         cmiAlbumArtMoveRight = New ToolStripMenuItem()
+        cmiAlbumArtMoveLast = New ToolStripMenuItem()
         tsSeparator2 = New ToolStripSeparator()
         cmiAlbumArtDelete = New ToolStripMenuItem()
         btnAlbumArt = New Button()
@@ -96,11 +116,15 @@
         lblTrackSeparator = New My.Components.LabelCSY()
         lblDuration = New My.Components.LabelCSY()
         lblYear = New My.Components.LabelCSY()
+        cmArtRight.SuspendLayout()
+        cmArtLeft.SuspendLayout()
         cmArtistLeft.SuspendLayout()
         cmArtistRight.SuspendLayout()
         cmNewArtist.SuspendLayout()
         cmAlbumArt.SuspendLayout()
+        cmImageSource.SuspendLayout()
         cmAlbumArtInsert.SuspendLayout()
+        cmExport.SuspendLayout()
         CType(picbxAlbumArt, ComponentModel.ISupportInitialize).BeginInit()
         panelAlbumArt.SuspendLayout()
         MenuMain.SuspendLayout()
@@ -151,6 +175,7 @@
         ' btnAlbumArtRight
         ' 
         btnAlbumArtRight.CausesValidation = False
+        btnAlbumArtRight.ContextMenuStrip = cmArtRight
         btnAlbumArtRight.FlatAppearance.BorderColor = SystemColors.ControlDark
         btnAlbumArtRight.FlatAppearance.BorderSize = 0
         btnAlbumArtRight.FlatAppearance.MouseDownBackColor = Color.Transparent
@@ -162,13 +187,48 @@
         btnAlbumArtRight.Size = New Size(16, 16)
         btnAlbumArtRight.TabIndex = 0
         btnAlbumArtRight.TabStop = False
-        tipInfo.SetToolTip(btnAlbumArtRight, "LeftClick = Next Image" & vbCrLf & "RightClick = Move Right" & vbCrLf & "CtrlRightClick = Move Last")
+        tipInfo.SetToolTip(btnAlbumArtRight, "LeftClick = Next Image" & vbCrLf & "RightClick = Menu")
         btnAlbumArtRight.UseMnemonic = False
         btnAlbumArtRight.UseVisualStyleBackColor = False
+        ' 
+        ' cmArtRight
+        ' 
+        cmArtRight.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmArtRight.Items.AddRange(New ToolStripItem() {cmiArtNext, ToolStripSeparator5, cmiArtMoveRight, cmiArtMoveLast})
+        cmArtRight.Name = "cmArtRight"
+        cmArtRight.Size = New Size(184, 76)
+        ' 
+        ' cmiArtNext
+        ' 
+        cmiArtNext.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmiArtNext.Image = My.Resources.Resources.imageAdvanceRight
+        cmiArtNext.Name = "cmiArtNext"
+        cmiArtNext.Size = New Size(183, 22)
+        cmiArtNext.Text = "Next Image"
+        ' 
+        ' ToolStripSeparator5
+        ' 
+        ToolStripSeparator5.Name = "ToolStripSeparator5"
+        ToolStripSeparator5.Size = New Size(180, 6)
+        ' 
+        ' cmiArtMoveRight
+        ' 
+        cmiArtMoveRight.Image = My.Resources.Resources.imageAdvanceRight
+        cmiArtMoveRight.Name = "cmiArtMoveRight"
+        cmiArtMoveRight.Size = New Size(183, 22)
+        cmiArtMoveRight.Text = "Move Image Right"
+        ' 
+        ' cmiArtMoveLast
+        ' 
+        cmiArtMoveLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiArtMoveLast.Name = "cmiArtMoveLast"
+        cmiArtMoveLast.Size = New Size(183, 22)
+        cmiArtMoveLast.Text = "Move Image Last"
         ' 
         ' btnAlbumArtLeft
         ' 
         btnAlbumArtLeft.CausesValidation = False
+        btnAlbumArtLeft.ContextMenuStrip = cmArtLeft
         btnAlbumArtLeft.FlatAppearance.BorderColor = SystemColors.ControlDark
         btnAlbumArtLeft.FlatAppearance.BorderSize = 0
         btnAlbumArtLeft.FlatAppearance.MouseDownBackColor = Color.Transparent
@@ -180,9 +240,43 @@
         btnAlbumArtLeft.Size = New Size(16, 16)
         btnAlbumArtLeft.TabIndex = 0
         btnAlbumArtLeft.TabStop = False
-        tipInfo.SetToolTip(btnAlbumArtLeft, "LeftClick = Previous Image" & vbCrLf & "RightClick = Move Left" & vbCrLf & "CtrlRightClick = Move First")
+        tipInfo.SetToolTip(btnAlbumArtLeft, "LeftClick = Previous Image" & vbCrLf & "RightClick = Menu")
         btnAlbumArtLeft.UseMnemonic = False
         btnAlbumArtLeft.UseVisualStyleBackColor = False
+        ' 
+        ' cmArtLeft
+        ' 
+        cmArtLeft.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmArtLeft.Items.AddRange(New ToolStripItem() {cmiArtPrevious, ToolStripSeparator4, cmiArtMoveLeft, cmiArtMoveFirst})
+        cmArtLeft.Name = "cmArtLeft"
+        cmArtLeft.Size = New Size(178, 76)
+        ' 
+        ' cmiArtPrevious
+        ' 
+        cmiArtPrevious.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmiArtPrevious.Image = My.Resources.Resources.imageAdvanceLeft
+        cmiArtPrevious.Name = "cmiArtPrevious"
+        cmiArtPrevious.Size = New Size(177, 22)
+        cmiArtPrevious.Text = "Previous Image"
+        ' 
+        ' ToolStripSeparator4
+        ' 
+        ToolStripSeparator4.Name = "ToolStripSeparator4"
+        ToolStripSeparator4.Size = New Size(174, 6)
+        ' 
+        ' cmiArtMoveLeft
+        ' 
+        cmiArtMoveLeft.Image = My.Resources.Resources.imageAdvanceLeft
+        cmiArtMoveLeft.Name = "cmiArtMoveLeft"
+        cmiArtMoveLeft.Size = New Size(177, 22)
+        cmiArtMoveLeft.Text = "Move Image Left"
+        ' 
+        ' cmiArtMoveFirst
+        ' 
+        cmiArtMoveFirst.Image = My.Resources.Resources.imageAdvanceFirst
+        cmiArtMoveFirst.Name = "cmiArtMoveFirst"
+        cmiArtMoveFirst.Size = New Size(177, 22)
+        cmiArtMoveFirst.Text = "Move Image First"
         ' 
         ' btnRestore
         ' 
@@ -230,6 +324,7 @@
         ' 
         ' cmiArtistPrevious
         ' 
+        cmiArtistPrevious.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         cmiArtistPrevious.Image = My.Resources.Resources.imageAdvanceLeft
         cmiArtistPrevious.Name = "cmiArtistPrevious"
         cmiArtistPrevious.Size = New Size(171, 22)
@@ -278,32 +373,33 @@
         cmArtistRight.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmArtistRight.Items.AddRange(New ToolStripItem() {cmiArtistNext, ToolStripSeparator3, cmiArtistMoveRight, cmiArtistMoveLast})
         cmArtistRight.Name = "cmArtistRight"
-        cmArtistRight.Size = New Size(181, 98)
+        cmArtistRight.Size = New Size(178, 76)
         ' 
         ' cmiArtistNext
         ' 
+        cmiArtistNext.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         cmiArtistNext.Image = My.Resources.Resources.imageAdvanceRight
         cmiArtistNext.Name = "cmiArtistNext"
-        cmiArtistNext.Size = New Size(180, 22)
+        cmiArtistNext.Size = New Size(177, 22)
         cmiArtistNext.Text = "Next Artist"
         ' 
         ' ToolStripSeparator3
         ' 
         ToolStripSeparator3.Name = "ToolStripSeparator3"
-        ToolStripSeparator3.Size = New Size(177, 6)
+        ToolStripSeparator3.Size = New Size(174, 6)
         ' 
         ' cmiArtistMoveRight
         ' 
         cmiArtistMoveRight.Image = My.Resources.Resources.imageAdvanceRight
         cmiArtistMoveRight.Name = "cmiArtistMoveRight"
-        cmiArtistMoveRight.Size = New Size(180, 22)
+        cmiArtistMoveRight.Size = New Size(177, 22)
         cmiArtistMoveRight.Text = "Move Artist Right"
         ' 
         ' cmiArtistMoveLast
         ' 
         cmiArtistMoveLast.Image = My.Resources.Resources.imageAdvanceLast
         cmiArtistMoveLast.Name = "cmiArtistMoveLast"
-        cmiArtistMoveLast.Size = New Size(180, 22)
+        cmiArtistMoveLast.Size = New Size(177, 22)
         cmiArtistMoveLast.Text = "Move Artist Last"
         ' 
         ' btnArtistInsert
@@ -335,6 +431,7 @@
         ' 
         ' cmiArtistInsert
         ' 
+        cmiArtistInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         cmiArtistInsert.Image = My.Resources.Resources.imageNew
         cmiArtistInsert.Name = "cmiArtistInsert"
         cmiArtistInsert.Size = New Size(196, 22)
@@ -368,105 +465,170 @@
         ' cmAlbumArt
         ' 
         cmAlbumArt.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        cmAlbumArt.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsert, cmiAlbumArtSelect, cmiAlbumArtExport, tsSeparator1, cmiAlbumArtMoveLeft, cmiAlbumArtMoveRight, tsSeparator2, cmiAlbumArtDelete})
+        cmAlbumArt.Items.AddRange(New ToolStripItem() {cmiAlbumArtSelect, cmiAlbumArtInsert, cmiAlbumArtExport, tsSeparator1, cmiAlbumArtMoveLeft, cmiAlbumArtMoveFirst, cmiAlbumArtMoveRight, cmiAlbumArtMoveLast, tsSeparator2, cmiAlbumArtDelete})
         cmAlbumArt.Name = "cmAlbumArt"
-        cmAlbumArt.Size = New Size(144, 148)
+        cmAlbumArt.Size = New Size(184, 214)
+        ' 
+        ' cmiAlbumArtSelect
+        ' 
+        cmiAlbumArtSelect.DropDown = cmImageSource
+        cmiAlbumArtSelect.Image = My.Resources.Resources.imageOpenImage
+        cmiAlbumArtSelect.Name = "cmiAlbumArtSelect"
+        cmiAlbumArtSelect.Size = New Size(183, 22)
+        cmiAlbumArtSelect.Text = "Select Image"
+        ' 
+        ' cmImageSource
+        ' 
+        cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
+        cmImageSource.Name = "cm"
+        cmImageSource.Size = New Size(189, 70)
+        ' 
+        ' cmiSelectFromFile
+        ' 
+        cmiSelectFromFile.Image = My.Resources.Resources.imageOpen
+        cmiSelectFromFile.Name = "cmiSelectFromFile"
+        cmiSelectFromFile.Size = New Size(188, 22)
+        cmiSelectFromFile.Text = "Select From File"
+        ' 
+        ' cmiSelectFromOnline
+        ' 
+        cmiSelectFromOnline.Image = My.Resources.Resources.ImageOnline16
+        cmiSelectFromOnline.Name = "cmiSelectFromOnline"
+        cmiSelectFromOnline.Size = New Size(188, 22)
+        cmiSelectFromOnline.Text = "Select From Online"
+        ' 
+        ' cmiPasteFromClipboard
+        ' 
+        cmiPasteFromClipboard.Image = My.Resources.Resources.ImageEditPaste16
+        cmiPasteFromClipboard.Name = "cmiPasteFromClipboard"
+        cmiPasteFromClipboard.Size = New Size(188, 22)
+        cmiPasteFromClipboard.Text = "Paste From Clipboard"
+        ' 
+        ' cmiAlbumArtInsertLast
+        ' 
+        cmiAlbumArtInsertLast.DropDown = cmImageSource
+        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
+        cmiAlbumArtInsertLast.Size = New Size(114, 22)
+        cmiAlbumArtInsertLast.Text = "Last"
         ' 
         ' cmiAlbumArtInsert
         ' 
         cmiAlbumArtInsert.DropDown = cmAlbumArtInsert
         cmiAlbumArtInsert.Image = My.Resources.Resources.imageNew
         cmiAlbumArtInsert.Name = "cmiAlbumArtInsert"
-        cmiAlbumArtInsert.Size = New Size(143, 22)
-        cmiAlbumArtInsert.Text = "Insert"
+        cmiAlbumArtInsert.Size = New Size(183, 22)
+        cmiAlbumArtInsert.Text = "Add New Image"
         ' 
         ' cmAlbumArtInsert
         ' 
         cmAlbumArtInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        cmAlbumArtInsert.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsertBefore, cmiAlbumArtInsertAfter, cmiAlbumArtInsertFirst, cmiAlbumArtInsertLast})
+        cmAlbumArtInsert.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsertBefore, cmiAlbumArtInsertFirst, cmiAlbumArtInsertAfter, cmiAlbumArtInsertLast})
         cmAlbumArtInsert.Name = "cmAlbumArtInsert"
-        cmAlbumArtInsert.OwnerItem = cmiAlbumArtInsert
         cmAlbumArtInsert.Size = New Size(115, 92)
         ' 
         ' cmiAlbumArtInsertBefore
         ' 
+        cmiAlbumArtInsertBefore.DropDown = cmImageSource
         cmiAlbumArtInsertBefore.Image = My.Resources.Resources.imageAdvanceLeft
         cmiAlbumArtInsertBefore.Name = "cmiAlbumArtInsertBefore"
         cmiAlbumArtInsertBefore.Size = New Size(114, 22)
         cmiAlbumArtInsertBefore.Text = "Before"
-        cmiAlbumArtInsertBefore.ToolTipText = "LeftClick = Select From File" & vbCrLf & "ShiftLeftClick = Select From Online" & vbCrLf & "CtrlLeftClick = Paste From ClipBoard"
-        ' 
-        ' cmiAlbumArtInsertAfter
-        ' 
-        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
-        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
-        cmiAlbumArtInsertAfter.Size = New Size(114, 22)
-        cmiAlbumArtInsertAfter.Text = "After"
-        cmiAlbumArtInsertAfter.ToolTipText = "LeftClick = Select From File" & vbCrLf & "ShiftLeftClick = Select From Online" & vbCrLf & "CtrlLeftClick = Paste From ClipBoard"
         ' 
         ' cmiAlbumArtInsertFirst
         ' 
+        cmiAlbumArtInsertFirst.DropDown = cmImageSource
         cmiAlbumArtInsertFirst.Image = My.Resources.Resources.imageAdvanceFirst
         cmiAlbumArtInsertFirst.Name = "cmiAlbumArtInsertFirst"
         cmiAlbumArtInsertFirst.Size = New Size(114, 22)
         cmiAlbumArtInsertFirst.Text = "First"
-        cmiAlbumArtInsertFirst.ToolTipText = "LeftClick = Select From File" & vbCrLf & "ShiftLeftClick = Select From Online" & vbCrLf & "CtrlLeftClick = Paste From ClipBoard"
         ' 
-        ' cmiAlbumArtInsertLast
+        ' cmiAlbumArtInsertAfter
         ' 
-        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
-        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
-        cmiAlbumArtInsertLast.Size = New Size(114, 22)
-        cmiAlbumArtInsertLast.Text = "Last"
-        cmiAlbumArtInsertLast.ToolTipText = "Default" & vbCrLf & "LeftClick = Select From File" & vbCrLf & "ShiftLeftClick = Select From Online" & vbCrLf & "CtrlLeftClick = Paste From ClipBoard"
-        ' 
-        ' cmiAlbumArtSelect
-        ' 
-        cmiAlbumArtSelect.Image = My.Resources.Resources.imageOpenImage
-        cmiAlbumArtSelect.Name = "cmiAlbumArtSelect"
-        cmiAlbumArtSelect.Size = New Size(143, 22)
-        cmiAlbumArtSelect.Text = "Select"
-        cmiAlbumArtSelect.ToolTipText = "LeftClick = Select From File" & vbCrLf & "ShiftLeftClick = Select From Online" & vbCrLf & "CtrlLeftClick = Paste From ClipBoard"
+        cmiAlbumArtInsertAfter.DropDown = cmImageSource
+        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
+        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
+        cmiAlbumArtInsertAfter.Size = New Size(114, 22)
+        cmiAlbumArtInsertAfter.Text = "After"
         ' 
         ' cmiAlbumArtExport
         ' 
+        cmiAlbumArtExport.DropDown = cmExport
         cmiAlbumArtExport.Image = My.Resources.Resources.imageSave
         cmiAlbumArtExport.Name = "cmiAlbumArtExport"
-        cmiAlbumArtExport.Size = New Size(143, 22)
-        cmiAlbumArtExport.Text = "Export"
-        cmiAlbumArtExport.ToolTipText = "LeftClick = Save To File" & vbCrLf & "ShiftLeftClick = Save As Windows Bitmap File" & vbCrLf & "CtrlLeftClick = Copy To ClipBoard"
+        cmiAlbumArtExport.Size = New Size(183, 22)
+        cmiAlbumArtExport.Text = "Export Image"
+        ' 
+        ' cmExport
+        ' 
+        cmExport.Items.AddRange(New ToolStripItem() {cmiExportToFile, cmiExportToBitmap, cmiExportToClipboard})
+        cmExport.Name = "cmExport"
+        cmExport.Size = New Size(150, 70)
+        ' 
+        ' cmiExportToFile
+        ' 
+        cmiExportToFile.Image = My.Resources.Resources.imageOpen
+        cmiExportToFile.Name = "cmiExportToFile"
+        cmiExportToFile.Size = New Size(149, 22)
+        cmiExportToFile.Text = "To File"
+        ' 
+        ' cmiExportToBitmap
+        ' 
+        cmiExportToBitmap.Image = My.Resources.Resources.imageOpen
+        cmiExportToBitmap.Name = "cmiExportToBitmap"
+        cmiExportToBitmap.Size = New Size(149, 22)
+        cmiExportToBitmap.Text = "To Bitmap File"
+        ' 
+        ' cmiExportToClipboard
+        ' 
+        cmiExportToClipboard.Image = My.Resources.Resources.ImageEditPaste16
+        cmiExportToClipboard.Name = "cmiExportToClipboard"
+        cmiExportToClipboard.Size = New Size(149, 22)
+        cmiExportToClipboard.Text = "To Clipboard"
         ' 
         ' tsSeparator1
         ' 
         tsSeparator1.Name = "tsSeparator1"
-        tsSeparator1.Size = New Size(140, 6)
+        tsSeparator1.Size = New Size(180, 6)
         ' 
         ' cmiAlbumArtMoveLeft
         ' 
         cmiAlbumArtMoveLeft.Image = My.Resources.Resources.imageAdvanceLeft
         cmiAlbumArtMoveLeft.Name = "cmiAlbumArtMoveLeft"
-        cmiAlbumArtMoveLeft.Size = New Size(143, 22)
-        cmiAlbumArtMoveLeft.Text = "Move Left"
-        cmiAlbumArtMoveLeft.ToolTipText = "LeftClick = Move Left" & vbCrLf & "CtrlLeftClick = Move First"
+        cmiAlbumArtMoveLeft.Size = New Size(183, 22)
+        cmiAlbumArtMoveLeft.Text = "Move Image Left"
+        ' 
+        ' cmiAlbumArtMoveFirst
+        ' 
+        cmiAlbumArtMoveFirst.Image = My.Resources.Resources.imageAdvanceFirst
+        cmiAlbumArtMoveFirst.Name = "cmiAlbumArtMoveFirst"
+        cmiAlbumArtMoveFirst.Size = New Size(183, 22)
+        cmiAlbumArtMoveFirst.Text = "Move Image First"
         ' 
         ' cmiAlbumArtMoveRight
         ' 
         cmiAlbumArtMoveRight.Image = My.Resources.Resources.imageAdvanceRight
         cmiAlbumArtMoveRight.Name = "cmiAlbumArtMoveRight"
-        cmiAlbumArtMoveRight.Size = New Size(143, 22)
-        cmiAlbumArtMoveRight.Text = "Move Right"
-        cmiAlbumArtMoveRight.ToolTipText = "LeftClick = Move Right" & vbCrLf & "CtrlLeftClick = Move Last"
+        cmiAlbumArtMoveRight.Size = New Size(183, 22)
+        cmiAlbumArtMoveRight.Text = "Move Image Right"
+        ' 
+        ' cmiAlbumArtMoveLast
+        ' 
+        cmiAlbumArtMoveLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiAlbumArtMoveLast.Name = "cmiAlbumArtMoveLast"
+        cmiAlbumArtMoveLast.Size = New Size(183, 22)
+        cmiAlbumArtMoveLast.Text = "Move Image Last"
         ' 
         ' tsSeparator2
         ' 
         tsSeparator2.Name = "tsSeparator2"
-        tsSeparator2.Size = New Size(140, 6)
+        tsSeparator2.Size = New Size(180, 6)
         ' 
         ' cmiAlbumArtDelete
         ' 
         cmiAlbumArtDelete.Image = My.Resources.Resources.imageDelete
         cmiAlbumArtDelete.Name = "cmiAlbumArtDelete"
-        cmiAlbumArtDelete.Size = New Size(143, 22)
+        cmiAlbumArtDelete.Size = New Size(183, 22)
         cmiAlbumArtDelete.Text = "Delete"
         ' 
         ' btnAlbumArt
@@ -987,11 +1149,15 @@
         Name = "MainForm"
         SizeGripStyle = SizeGripStyle.Show
         StartPosition = FormStartPosition.Manual
+        cmArtRight.ResumeLayout(False)
+        cmArtLeft.ResumeLayout(False)
         cmArtistLeft.ResumeLayout(False)
         cmArtistRight.ResumeLayout(False)
         cmNewArtist.ResumeLayout(False)
         cmAlbumArt.ResumeLayout(False)
+        cmImageSource.ResumeLayout(False)
         cmAlbumArtInsert.ResumeLayout(False)
+        cmExport.ResumeLayout(False)
         CType(picbxAlbumArt, ComponentModel.ISupportInitialize).EndInit()
         panelAlbumArt.ResumeLayout(False)
         MenuMain.ResumeLayout(False)
@@ -1084,4 +1250,24 @@
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents cmiArtistMoveRight As ToolStripMenuItem
     Friend WithEvents cmiArtistMoveLast As ToolStripMenuItem
+    Friend WithEvents cmArtLeft As ContextMenuStrip
+    Friend WithEvents cmArtRight As ContextMenuStrip
+    Friend WithEvents cmiArtPrevious As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents cmiArtMoveLeft As ToolStripMenuItem
+    Friend WithEvents cmiArtMoveFirst As ToolStripMenuItem
+    Friend WithEvents cmiArtNext As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents cmiArtMoveRight As ToolStripMenuItem
+    Friend WithEvents cmiArtMoveLast As ToolStripMenuItem
+    Friend WithEvents cmiAlbumArtMoveFirst As ToolStripMenuItem
+    Friend WithEvents cmiAlbumArtMoveLast As ToolStripMenuItem
+    Friend WithEvents cmImageSource As ContextMenuStrip
+    Friend WithEvents cmiSelectFromFile As ToolStripMenuItem
+    Friend WithEvents cmiSelectFromOnline As ToolStripMenuItem
+    Friend WithEvents cmiPasteFromClipboard As ToolStripMenuItem
+    Friend WithEvents cmExport As ContextMenuStrip
+    Friend WithEvents cmiExportToFile As ToolStripMenuItem
+    Friend WithEvents cmiExportToBitmap As ToolStripMenuItem
+    Friend WithEvents cmiExportToClipboard As ToolStripMenuItem
 End Class
