@@ -481,7 +481,8 @@
         ' 
         cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
         cmImageSource.Name = "cm"
-        cmImageSource.Size = New Size(189, 92)
+        cmImageSource.OwnerItem = cmiAlbumArtInsertLast
+        cmImageSource.Size = New Size(189, 70)
         ' 
         ' cmiSelectFromFile
         ' 
@@ -564,28 +565,27 @@
         ' 
         cmExport.Items.AddRange(New ToolStripItem() {cmiExportToFile, cmiExportToBitmap, cmiExportToClipboard})
         cmExport.Name = "cmExport"
-        cmExport.OwnerItem = cmiAlbumArtExport
-        cmExport.Size = New Size(150, 70)
+        cmExport.Size = New Size(181, 92)
         ' 
         ' cmiExportToFile
         ' 
         cmiExportToFile.Image = My.Resources.Resources.imageOpen
         cmiExportToFile.Name = "cmiExportToFile"
-        cmiExportToFile.Size = New Size(149, 22)
+        cmiExportToFile.Size = New Size(180, 22)
         cmiExportToFile.Text = "To File"
         ' 
         ' cmiExportToBitmap
         ' 
         cmiExportToBitmap.Image = My.Resources.Resources.imageOpen
         cmiExportToBitmap.Name = "cmiExportToBitmap"
-        cmiExportToBitmap.Size = New Size(149, 22)
+        cmiExportToBitmap.Size = New Size(180, 22)
         cmiExportToBitmap.Text = "To Bitmap File"
         ' 
         ' cmiExportToClipboard
         ' 
         cmiExportToClipboard.Image = My.Resources.Resources.ImageEditPaste16
         cmiExportToClipboard.Name = "cmiExportToClipboard"
-        cmiExportToClipboard.Size = New Size(149, 22)
+        cmiExportToClipboard.Size = New Size(180, 22)
         cmiExportToClipboard.Text = "To Clipboard"
         ' 
         ' tsSeparator1

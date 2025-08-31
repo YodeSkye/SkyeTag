@@ -13,6 +13,11 @@ Partial Friend Class MainForm
         Right
         Last
     End Enum
+    Private Enum ExportDestination
+        File
+        BitmapFile
+        Clipboard
+    End Enum
     Private mMove As Boolean = False
     Private mOffset, mPosition As Point
     Private wMaximized As Boolean = False
@@ -471,60 +476,41 @@ Partial Friend Class MainForm
         Debug.Print("SelectFromFile For " + cmImageSource.Tag.ToString)
         Select Case cmImageSource.Tag.ToString
             Case cmiAlbumArtSelect.Name
-
+                UpdateArt(ImageSource.SelectFile)
             Case cmiAlbumArtInsert.Name
-
+                InsertArt(0, ImageSource.SelectFile)
             Case cmiAlbumArtInsertBefore.Name
-
+                InsertArt(tagArtIndex, ImageSource.SelectFile)
             Case cmiAlbumArtInsertFirst.Name
-
+                InsertArt(0, ImageSource.SelectFile)
             Case cmiAlbumArtInsertAfter.Name
-
+                InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, tagArtIndex + 1)), ImageSource.SelectFile)
             Case cmiAlbumArtInsertLast.Name
-
+                InsertArt(tlFile.Tag.Pictures.Length, ImageSource.SelectFile)
         End Select
     End Sub
     Private Sub cmiSelectFromOnline_Click(sender As Object, e As EventArgs) Handles cmiSelectFromOnline.Click
         Debug.Print("SelectFromOnline For " + cmImageSource.Tag.ToString)
         Select Case cmImageSource.Tag.ToString
             Case cmiAlbumArtSelect.Name
-
+                UpdateArt(ImageSource.SelectOnline)
             Case cmiAlbumArtInsert.Name
-
+                InsertArt(0, ImageSource.SelectOnline)
             Case cmiAlbumArtInsertBefore.Name
-
+                InsertArt(tagArtIndex, ImageSource.SelectOnline)
             Case cmiAlbumArtInsertFirst.Name
-
+                InsertArt(0, ImageSource.SelectOnline)
             Case cmiAlbumArtInsertAfter.Name
-
+                InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, tagArtIndex + 1)), ImageSource.SelectOnline)
             Case cmiAlbumArtInsertLast.Name
-
+                InsertArt(tlFile.Tag.Pictures.Length, ImageSource.SelectOnline)
         End Select
     End Sub
     Private Sub cmiPasteFromClipboard_Click(sender As Object, e As EventArgs) Handles cmiPasteFromClipboard.Click
         Debug.Print("SelectPasteFromClipboard For " + cmImageSource.Tag.ToString)
         Select Case cmImageSource.Tag.ToString
             Case cmiAlbumArtSelect.Name
-                If tlFile.Tag.Pictures.Length > 0 Then
-                    Dim newpic As TagLib.IPicture
-                    newpic = GetNewPic(ImageSource.ClipBoard)
-                    If newpic IsNot Nothing Then
-                        Dim piclist As New List(Of TagLib.IPicture)
-                        For Each pic As TagLib.IPicture In tlFile.Tag.Pictures : piclist.Add(pic) : Next
-                        newpic.Description = tlFile.Tag.Pictures(tagArtIndex).Description
-                        newpic.Type = tlFile.Tag.Pictures(tagArtIndex).Type
-                        piclist(tagArtIndex) = newpic
-                        tlFile.Tag.Pictures = piclist.ToArray
-                        piclist.Clear()
-                        piclist = Nothing
-                        newpic = Nothing
-                        ShowTag()
-                        SetSave()
-                    Else
-                        tipInfo.Tag = SystemIcons.Information.ToBitmap
-                        tipInfo.Show("No Image On ClipBoard", Me, btnAlbumArt.Left + CInt(btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, btnAlbumArt.Top + CInt(btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
-                    End If
-                End If
+                UpdateArt(ImageSource.ClipBoard)
             Case cmiAlbumArtInsert.Name
                 InsertArt(0, ImageSource.ClipBoard)
             Case cmiAlbumArtInsertBefore.Name
@@ -536,6 +522,15 @@ Partial Friend Class MainForm
             Case cmiAlbumArtInsertLast.Name
                 InsertArt(tlFile.Tag.Pictures.Length, ImageSource.ClipBoard)
         End Select
+    End Sub
+    Private Sub cmiExportToFile_Click(sender As Object, e As EventArgs) Handles cmiExportToFile.Click
+        ExportArt(ExportDestination.File)
+    End Sub
+    Private Sub cmiExportToBitmap_Click(sender As Object, e As EventArgs) Handles cmiExportToBitmap.Click
+        ExportArt(ExportDestination.BitmapFile)
+    End Sub
+    Private Sub cmiExportToClipboard_Click(sender As Object, e As EventArgs) Handles cmiExportToClipboard.Click
+        ExportArt(ExportDestination.Clipboard)
     End Sub
     Private Sub cmiAlbumArtMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveLeft.Click
         MoveArt(rMove.Left)
@@ -1534,6 +1529,30 @@ Partial Friend Class MainForm
             SetSave()
         End If
     End Sub
+    Private Sub UpdateArt(picsource As My.App.ImageSource)
+        If tlFile.Tag.Pictures.Length > 0 Then
+            Dim newpic As TagLib.IPicture = GetNewPic(picsource)
+            If newpic Is Nothing Then
+                If picsource = My.App.ImageSource.ClipBoard Then
+                    tipInfo.Tag = SystemIcons.Information.ToBitmap
+                    tipInfo.Show("No Image On ClipBoard", Me, btnAlbumArt.Left + CInt(btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, btnAlbumArt.Top + CInt(btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+                End If
+            Else
+                Dim piclist As New List(Of TagLib.IPicture)
+                For Each pic As TagLib.IPicture In tlFile.Tag.Pictures : piclist.Add(pic) : Next
+                newpic.Description = tlFile.Tag.Pictures(tagArtIndex).Description
+                newpic.Type = tlFile.Tag.Pictures(tagArtIndex).Type
+                piclist(tagArtIndex) = newpic
+                tlFile.Tag.Pictures = piclist.ToArray
+                piclist.Clear()
+                piclist = Nothing
+                newpic = Nothing
+                picsource = Nothing
+                ShowTag()
+                SetSave()
+            End If
+        End If
+    End Sub
     Private Sub InsertArt(index As Integer, picsource As My.App.ImageSource, Optional picpath As String = Nothing)
         If Not tlFile.TagTypes = TagLib.TagTypes.None Then
             Dim newpic As TagLib.IPicture
@@ -1562,6 +1581,51 @@ Partial Friend Class MainForm
                 End If
             End If
         End If
+    End Sub
+    Private Sub ExportArt(destination As ExportDestination)
+        Select Case destination
+            Case ExportDestination.Clipboard
+                Dim ms As New IO.MemoryStream(tlFile.Tag.Pictures(tagArtIndex).Data.Data)
+                Computer.Clipboard.SetImage(Image.FromStream(ms))
+                ms.Dispose()
+                ms = Nothing
+            Case ExportDestination.File, ExportDestination.BitmapFile
+                Dim sfd As New SaveFileDialog
+                sfd.Title = "Save Image File"
+                Dim saveFormat As Imaging.ImageFormat
+                If destination = ExportDestination.BitmapFile Then
+                    saveFormat = Imaging.ImageFormat.Bmp
+                    sfd.Filter = "Windows Bitmap Files|*.bmp"
+                Else
+                    Select Case tlFile.Tag.Pictures(tagArtIndex).MimeType
+                        Case "image/jpeg"
+                            saveFormat = Imaging.ImageFormat.Jpeg
+                            sfd.Filter = "JPEG Files|*.jpg;*.jpeg"
+                        Case "image/png"
+                            saveFormat = Imaging.ImageFormat.Png
+                            sfd.Filter = "PNG Files|*.png"
+                        Case Else
+                            saveFormat = Imaging.ImageFormat.Bmp
+                            sfd.Filter = "Windows Bitmap Files|*.bmp"
+                    End Select
+                End If
+                sfd.Filter += "|All Files|*.*"
+                Dim result As DialogResult = sfd.ShowDialog(Me)
+                If result = DialogResult.OK AndAlso Not String.IsNullOrEmpty(sfd.FileName) Then
+                    Dim ms As New IO.MemoryStream(tlFile.Tag.Pictures(tagArtIndex).Data.Data)
+                    Dim im As Image = Image.FromStream(ms)
+                    im.Save(sfd.FileName, saveFormat)
+                    im.Dispose()
+                    im = Nothing
+                    ms.Dispose()
+                    ms = Nothing
+                End If
+                WriteToLog("Album Art Exported To " + sfd.FileName)
+                result = Nothing
+                saveFormat = Nothing
+                sfd.Dispose()
+                sfd = Nothing
+        End Select
     End Sub
     Private Sub MoveArt(move As rMove)
         If tlFile.Tag.Pictures.Length > 1 Then
@@ -1680,122 +1744,5 @@ Partial Friend Class MainForm
     Private Sub SetInactiveColor()
         MenuMain.BackColor = App.InactiveTitleBarColor
     End Sub
-
-    'Private Sub cmiAlbumArtSelectMouseUp(sender As Object, e As MouseEventArgs)
-    '    If tlFile.Tag.Pictures.Length > 0 Then
-    '        Dim picsource As ImageSource
-    '        If Computer.Keyboard.CtrlKeyDown Then
-    '            picsource = ImageSource.ClipBoard
-    '        ElseIf Computer.Keyboard.ShiftKeyDown Then
-    '            picsource = ImageSource.SelectOnline
-    '        Else
-    '            picsource = ImageSource.SelectFile
-    '        End If
-    '        Dim newpic As TagLib.IPicture
-    '        newpic = GetNewPic(picsource)
-    '        If newpic IsNot Nothing Then
-    '            Dim piclist As New List(Of TagLib.IPicture)
-    '            For Each pic In tlFile.Tag.Pictures : piclist.Add(pic) : Next
-    '            newpic.Description = tlFile.Tag.Pictures(tagArtIndex).Description
-    '            newpic.Type = tlFile.Tag.Pictures(tagArtIndex).Type
-    '            piclist(tagArtIndex) = newpic
-    '            tlFile.Tag.Pictures = piclist.ToArray
-    '            piclist.Clear()
-    '            piclist = Nothing
-    '            newpic = Nothing
-    '            picsource = Nothing
-    '            ShowTag()
-    '            SetSave()
-    '        Else
-    '            If picsource = My.App.ImageSource.ClipBoard Then
-    '                tipInfo.Tag = SystemIcons.Information.ToBitmap
-    '                tipInfo.Show("No Image On ClipBoard", Me, btnAlbumArt.Left + CInt(btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, btnAlbumArt.Top + CInt(btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
-    '            End If
-    '        End If
-    '    End If
-    'End Sub
-    'Private Sub cmiAlbumArtInsertLastMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtInsertLast.MouseUp
-    '    If cmAlbumArt.Visible Then cmAlbumArt.Close()
-
-    '    If Computer.Keyboard.CtrlKeyDown Then
-    '        InsertArt(tlFile.Tag.Pictures.Length, ImageSource.ClipBoard)
-    '    ElseIf Computer.Keyboard.ShiftKeyDown Then
-    '        InsertArt(tlFile.Tag.Pictures.Length, ImageSource.SelectOnline)
-    '    Else
-    '        InsertArt(tlFile.Tag.Pictures.Length, ImageSource.SelectFile)
-    '    End If
-    'End Sub
-    'Private Sub cmiAlbumArtInsertBeforeMouseUp(sender As Object, e As MouseEventArgs)
-    '    If Computer.Keyboard.CtrlKeyDown Then
-    '        InsertArt(tagArtIndex, ImageSource.ClipBoard)
-    '    ElseIf Computer.Keyboard.ShiftKeyDown Then
-    '        InsertArt(tagArtIndex, ImageSource.SelectOnline)
-    '    Else
-    '        InsertArt(tagArtIndex, ImageSource.SelectFile)
-    '    End If
-    'End Sub
-    'Private Sub cmiAlbumArtInsertFirstMouseUp(sender As Object, e As MouseEventArgs)
-    '    If Computer.Keyboard.CtrlKeyDown Then
-    '        InsertArt(0, ImageSource.ClipBoard)
-    '    ElseIf Computer.Keyboard.ShiftKeyDown Then
-    '        InsertArt(0, ImageSource.SelectOnline)
-    '    Else
-    '        InsertArt(0, ImageSource.SelectFile)
-    '    End If
-    'End Sub
-    'Private Sub cmiAlbumArtInsertAfterMouseUp(sender As Object, e As MouseEventArgs)
-    '    If Computer.Keyboard.CtrlKeyDown Then
-    '        InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, tagArtIndex + 1)), ImageSource.ClipBoard)
-    '    ElseIf Computer.Keyboard.ShiftKeyDown Then
-    '        InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, tagArtIndex + 1)), ImageSource.SelectOnline)
-    '    Else
-    '        InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, tagArtIndex + 1)), ImageSource.SelectFile)
-    '    End If
-    'End Sub
-
-    'Private Sub cmiAlbumArtExportMouseUp(sender As Object, e As MouseEventArgs)
-    '    If Computer.Keyboard.CtrlKeyDown Then
-    '        Dim ms As New IO.MemoryStream(tlFile.Tag.Pictures(tagArtIndex).Data.Data)
-    '        Computer.Clipboard.SetImage(Image.FromStream(ms))
-    '        ms.Dispose()
-    '        ms = Nothing
-    '    Else
-    '        Dim sfd As New SaveFileDialog
-    '        sfd.Title = "Save Image File"
-    '        Dim saveFormat As Imaging.ImageFormat
-    '        If Computer.Keyboard.ShiftKeyDown Then
-    '            saveFormat = Imaging.ImageFormat.Bmp
-    '            sfd.Filter = "Windows Bitmap Files|*.bmp"
-    '        Else
-    '            Select Case tlFile.Tag.Pictures(tagArtIndex).MimeType
-    '                Case "image/jpeg"
-    '                    saveFormat = Imaging.ImageFormat.Jpeg
-    '                    sfd.Filter = "JPEG Files|*.jpg;*.jpeg"
-    '                Case "image/png"
-    '                    saveFormat = Imaging.ImageFormat.Png
-    '                    sfd.Filter = "PNG Files|*.png"
-    '                Case Else
-    '                    saveFormat = Imaging.ImageFormat.Bmp
-    '                    sfd.Filter = "Windows Bitmap Files|*.bmp"
-    '            End Select
-    '        End If
-    '        sfd.Filter += "|All Files|*.*"
-    '        Dim result = sfd.ShowDialog(Me)
-    '        If result = DialogResult.OK AndAlso Not String.IsNullOrEmpty(sfd.FileName) Then
-    '            Dim ms As New IO.MemoryStream(tlFile.Tag.Pictures(tagArtIndex).Data.Data)
-    '            Dim im = Image.FromStream(ms)
-    '            im.Save(sfd.FileName, saveFormat)
-    '            im.Dispose
-    '            im = Nothing
-    '            ms.Dispose()
-    '            ms = Nothing
-    '        End If
-    '        WriteToLog("Album Art Exported To " + sfd.FileName)
-    '        result = Nothing
-    '        saveFormat = Nothing
-    '        sfd.Dispose()
-    '        sfd = Nothing
-    '    End If
-    'End Sub
 
 End Class
