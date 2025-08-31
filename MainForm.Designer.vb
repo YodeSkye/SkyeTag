@@ -51,12 +51,12 @@
         cmiSelectFromFile = New ToolStripMenuItem()
         cmiSelectFromOnline = New ToolStripMenuItem()
         cmiPasteFromClipboard = New ToolStripMenuItem()
-        cmiAlbumArtInsertLast = New ToolStripMenuItem()
         cmiAlbumArtInsert = New ToolStripMenuItem()
         cmAlbumArtInsert = New ContextMenuStrip(components)
         cmiAlbumArtInsertBefore = New ToolStripMenuItem()
         cmiAlbumArtInsertFirst = New ToolStripMenuItem()
         cmiAlbumArtInsertAfter = New ToolStripMenuItem()
+        cmiAlbumArtInsertLast = New ToolStripMenuItem()
         cmiAlbumArtExport = New ToolStripMenuItem()
         cmExport = New ContextMenuStrip(components)
         cmiExportToFile = New ToolStripMenuItem()
@@ -467,7 +467,7 @@
         cmAlbumArt.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmAlbumArt.Items.AddRange(New ToolStripItem() {cmiAlbumArtSelect, cmiAlbumArtInsert, cmiAlbumArtExport, tsSeparator1, cmiAlbumArtMoveLeft, cmiAlbumArtMoveFirst, cmiAlbumArtMoveRight, cmiAlbumArtMoveLast, tsSeparator2, cmiAlbumArtDelete})
         cmAlbumArt.Name = "cmAlbumArt"
-        cmAlbumArt.Size = New Size(184, 214)
+        cmAlbumArt.Size = New Size(184, 192)
         ' 
         ' cmiAlbumArtSelect
         ' 
@@ -481,7 +481,7 @@
         ' 
         cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
         cmImageSource.Name = "cm"
-        cmImageSource.Size = New Size(189, 70)
+        cmImageSource.Size = New Size(189, 92)
         ' 
         ' cmiSelectFromFile
         ' 
@@ -504,14 +504,6 @@
         cmiPasteFromClipboard.Size = New Size(188, 22)
         cmiPasteFromClipboard.Text = "Paste From Clipboard"
         ' 
-        ' cmiAlbumArtInsertLast
-        ' 
-        cmiAlbumArtInsertLast.DropDown = cmImageSource
-        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
-        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
-        cmiAlbumArtInsertLast.Size = New Size(114, 22)
-        cmiAlbumArtInsertLast.Text = "Last"
-        ' 
         ' cmiAlbumArtInsert
         ' 
         cmiAlbumArtInsert.DropDown = cmAlbumArtInsert
@@ -525,6 +517,7 @@
         cmAlbumArtInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmAlbumArtInsert.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsertBefore, cmiAlbumArtInsertFirst, cmiAlbumArtInsertAfter, cmiAlbumArtInsertLast})
         cmAlbumArtInsert.Name = "cmAlbumArtInsert"
+        cmAlbumArtInsert.OwnerItem = cmiAlbumArtInsert
         cmAlbumArtInsert.Size = New Size(115, 92)
         ' 
         ' cmiAlbumArtInsertBefore
@@ -551,6 +544,14 @@
         cmiAlbumArtInsertAfter.Size = New Size(114, 22)
         cmiAlbumArtInsertAfter.Text = "After"
         ' 
+        ' cmiAlbumArtInsertLast
+        ' 
+        cmiAlbumArtInsertLast.DropDown = cmImageSource
+        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
+        cmiAlbumArtInsertLast.Size = New Size(114, 22)
+        cmiAlbumArtInsertLast.Text = "Last"
+        ' 
         ' cmiAlbumArtExport
         ' 
         cmiAlbumArtExport.DropDown = cmExport
@@ -563,6 +564,7 @@
         ' 
         cmExport.Items.AddRange(New ToolStripItem() {cmiExportToFile, cmiExportToBitmap, cmiExportToClipboard})
         cmExport.Name = "cmExport"
+        cmExport.OwnerItem = cmiAlbumArtExport
         cmExport.Size = New Size(150, 70)
         ' 
         ' cmiExportToFile

@@ -464,8 +464,78 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub cmImageSource_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmImageSource.Opening
-        Debug.Print(cmImageSource.OwnerItem.Name)
+        'Debug.Print(cmImageSource.OwnerItem.Name)
         cmImageSource.Tag = cmImageSource.OwnerItem.Name
+    End Sub
+    Private Sub cmiSelectFromFile_Click(sender As Object, e As EventArgs) Handles cmiSelectFromFile.Click
+        Debug.Print("SelectFromFile For " + cmImageSource.Tag.ToString)
+        Select Case cmImageSource.Tag.ToString
+            Case cmiAlbumArtSelect.Name
+
+            Case cmiAlbumArtInsert.Name
+
+            Case cmiAlbumArtInsertBefore.Name
+
+            Case cmiAlbumArtInsertFirst.Name
+
+            Case cmiAlbumArtInsertAfter.Name
+
+            Case cmiAlbumArtInsertLast.Name
+
+        End Select
+    End Sub
+    Private Sub cmiSelectFromOnline_Click(sender As Object, e As EventArgs) Handles cmiSelectFromOnline.Click
+        Debug.Print("SelectFromOnline For " + cmImageSource.Tag.ToString)
+        Select Case cmImageSource.Tag.ToString
+            Case cmiAlbumArtSelect.Name
+
+            Case cmiAlbumArtInsert.Name
+
+            Case cmiAlbumArtInsertBefore.Name
+
+            Case cmiAlbumArtInsertFirst.Name
+
+            Case cmiAlbumArtInsertAfter.Name
+
+            Case cmiAlbumArtInsertLast.Name
+
+        End Select
+    End Sub
+    Private Sub cmiPasteFromClipboard_Click(sender As Object, e As EventArgs) Handles cmiPasteFromClipboard.Click
+        Debug.Print("SelectPasteFromClipboard For " + cmImageSource.Tag.ToString)
+        Select Case cmImageSource.Tag.ToString
+            Case cmiAlbumArtSelect.Name
+                If tlFile.Tag.Pictures.Length > 0 Then
+                    Dim newpic As TagLib.IPicture
+                    newpic = GetNewPic(ImageSource.ClipBoard)
+                    If newpic IsNot Nothing Then
+                        Dim piclist As New List(Of TagLib.IPicture)
+                        For Each pic As TagLib.IPicture In tlFile.Tag.Pictures : piclist.Add(pic) : Next
+                        newpic.Description = tlFile.Tag.Pictures(tagArtIndex).Description
+                        newpic.Type = tlFile.Tag.Pictures(tagArtIndex).Type
+                        piclist(tagArtIndex) = newpic
+                        tlFile.Tag.Pictures = piclist.ToArray
+                        piclist.Clear()
+                        piclist = Nothing
+                        newpic = Nothing
+                        ShowTag()
+                        SetSave()
+                    Else
+                        tipInfo.Tag = SystemIcons.Information.ToBitmap
+                        tipInfo.Show("No Image On ClipBoard", Me, btnAlbumArt.Left + CInt(btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, btnAlbumArt.Top + CInt(btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+                    End If
+                End If
+            Case cmiAlbumArtInsert.Name
+                InsertArt(0, ImageSource.ClipBoard)
+            Case cmiAlbumArtInsertBefore.Name
+                InsertArt(tagArtIndex, ImageSource.ClipBoard)
+            Case cmiAlbumArtInsertFirst.Name
+                InsertArt(0, ImageSource.ClipBoard)
+            Case cmiAlbumArtInsertAfter.Name
+                InsertArt(CInt(IIf(tlFile.Tag.Pictures.Length = 0, 0, tagArtIndex + 1)), ImageSource.ClipBoard)
+            Case cmiAlbumArtInsertLast.Name
+                InsertArt(tlFile.Tag.Pictures.Length, ImageSource.ClipBoard)
+        End Select
     End Sub
     Private Sub cmiAlbumArtMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveLeft.Click
         MoveArt(rMove.Left)
