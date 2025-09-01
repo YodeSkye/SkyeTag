@@ -1,6 +1,5 @@
 ﻿
 Imports System.ComponentModel
-Imports System.Reflection.Emit
 
 Namespace My.Components
 
@@ -10,6 +9,7 @@ Namespace My.Components
 	<System.ComponentModel.DefaultProperty("PercentageMode")>
 	Friend Class ProgressEX
 		Inherits System.Windows.Forms.UserControl
+
 		''' <summary>
 		''' Specifies how the percentage value should be drawn
 		''' </summary>
@@ -83,7 +83,7 @@ Namespace My.Components
 		''' <summary>
 		'''  Gets or sets the maximum value of the range of the control. 
 		''' </summary>
-		<System.ComponentModel.Category("Layout"), System.ComponentModel.Description("Specify the maximum value the progress can be increased to"), DefaultValue(100)>
+		<System.ComponentModel.Category("Layout"), System.ComponentModel.Description("Specify the maximum value the progress can increased to"), DefaultValue(100)>
 		Public Property Maximum As Integer
 			Get
 				Return maxValue
@@ -96,7 +96,7 @@ Namespace My.Components
 		''' <summary>
 		''' Gets or sets the minimum value of the range of the control.
 		''' </summary>
-		<System.ComponentModel.Category("Layout"), System.ComponentModel.Description("Specify the minimum value the progress can be decreased to"), DefaultValue(0)>
+		<System.ComponentModel.Category("Layout"), System.ComponentModel.Description("Specify the minimum value the progress can decreased to"), DefaultValue(0)>
 		Public Property Minimum As Integer
 			Get
 				Return minValue
@@ -189,7 +189,7 @@ Namespace My.Components
 			AddHandler Me.Resize, New System.EventHandler(AddressOf Me.ProgressEXResize)
 			AddHandler Me.Paint, New System.Windows.Forms.PaintEventHandler(AddressOf Me.ProgressEXPaint)
 			'Designer Stuff
-			maxValue = Me.Width
+			maxValue = 100 'Me.Width
 			minValue = 0
 			stepValue = 1
 			percentageDrawMode = percentageDrawModes.Center
@@ -285,11 +285,12 @@ Namespace My.Components
 	''' Extended Listview control with Insertion Line for drag/drop operations.
 	''' </summary>
 	Friend Class ListViewEX
-
 		Inherits ListView
 
 		Private _LineBefore As Integer = -1
 		Private _LineAfter As Integer = -1
+		Private _InsertionLineColor As Color = Color.Teal
+
 		<DefaultValue(-1)>
 		Public Property LineBefore As Integer
 			Get
@@ -308,13 +309,22 @@ Namespace My.Components
 				_LineAfter = value
 			End Set
 		End Property
+		<ComponentModel.Category("Appearance"), ComponentModel.Description("Specify the color used to draw the Insertion Line"), DefaultValue(GetType(Color), "Color.Teal")>
+		Public Property InsertionLineColor As Color
+			Get
+				Return _InsertionLineColor
+			End Get
+			Set(ByVal value As Color)
+				_InsertionLineColor = value
+			End Set
+		End Property
 
 		Public Sub New()
 			SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
 		End Sub
 		Protected Overrides Sub WndProc(ByRef m As Message)
 			MyBase.WndProc(m)
-			If m.Msg = WinAPI.WM_PAINT Then
+			If m.Msg = WinAPI.WM_PAINT And m.HWnd = Handle Then
 				If LineBefore >= 0 AndAlso LineBefore < Items.Count Then
 					Dim rc As Rectangle = Items(LineBefore).GetBounds(ItemBoundsPortion.Label)
 					DrawInsertionLine(rc.Left, rc.Right, rc.Top)
@@ -327,13 +337,16 @@ Namespace My.Components
 		End Sub
 		Private Sub DrawInsertionLine(ByVal X1 As Integer, ByVal X2 As Integer, ByVal Y As Integer)
 			Using g As Graphics = Me.CreateGraphics()
-				Dim p As New Pen(Color.Teal)
+				Dim p As New Pen(_InsertionLineColor)
 				p.Width = 3
 				g.DrawLine(p, X1, Y, X2 - 1, Y)
 				Dim leftTriangle As Point() = New Point(2) {New Point(X1, Y - 4), New Point(X1 + 7, Y), New Point(X1, Y + 4)}
 				Dim rightTriangle As Point() = New Point(2) {New Point(X2, Y - 4), New Point(X2 - 8, Y), New Point(X2, Y + 4)}
-				g.FillPolygon(Brushes.Teal, leftTriangle)
-				g.FillPolygon(Brushes.Teal, rightTriangle)
+				Dim b As New SolidBrush(_InsertionLineColor)
+				g.FillPolygon(b, leftTriangle)
+				g.FillPolygon(b, rightTriangle)
+				b.Dispose()
+				p.Dispose()
 			End Using
 		End Sub
 
@@ -343,11 +356,8 @@ Namespace My.Components
 	''' Changes basic .NET label to OPTIONALLY copy on double-click
 	''' </summary>
 	Public Class LabelCSY
-
 		Inherits System.Windows.Forms.Label
-		''' <summary>
-		''' Gets or sets a value indicating whether the label should copy its text to the clipboard on double-click.
-		''' </summary>
+
 		<DefaultValue(False)>
 		Public Property CopyOnDoubleClick As Boolean
 		Protected Overrides Sub DefWndProc(ByRef m As Message)
@@ -356,7 +366,7 @@ Namespace My.Components
 					If CopyOnDoubleClick Then
 						MyBase.DefWndProc(m)
 					Else
-						m.Result = CType(0, IntPtr)
+						m.Result = IntPtr.Zero
 					End If
 				Case Else
 					MyBase.DefWndProc(m)
@@ -379,7 +389,7 @@ Namespace My.Components
 
 		'Declarations
 		<DefaultValue(False)>
-		Public Property ShowExtendedTools As Boolean = False
+		Public Property ShowExtendedTools As Boolean
 		Private txbx As TextBox
 
 		'Control Events
@@ -395,13 +405,13 @@ Namespace My.Components
 			Me.Items.Add("Proper Case", Nothing, AddressOf ProperCaseClick)
 			Me.Items.Add("-")
 			Me.Items.Add("Select All", Nothing, AddressOf SelectAllClick)
-			Me.Items(0).Image = Global.SkyeTag.My.Resources.Resources.ImageEditUndo16
-			Me.Items(2).Image = Global.SkyeTag.My.Resources.Resources.ImageEditCut16
-			Me.Items(3).Image = Global.SkyeTag.My.Resources.Resources.ImageEditCopy16
-			Me.Items(4).Image = Global.SkyeTag.My.Resources.Resources.ImageEditPaste16
-			Me.Items(5).Image = Global.SkyeTag.My.Resources.Resources.ImageEditDelete16
-			Me.Items(7).Image = Global.SkyeTag.My.Resources.Resources.ImageEditSelectAll16
-			Me.Items(9).Image = Global.SkyeTag.My.Resources.Resources.ImageEditSelectAll16
+			Me.Items(0).Image = My.Resources.Resources.ImageEditUndo16
+			Me.Items(2).Image = My.Resources.Resources.ImageEditCut16
+			Me.Items(3).Image = My.Resources.Resources.ImageEditCopy16
+			Me.Items(4).Image = My.Resources.Resources.ImageEditPaste16
+			Me.Items(5).Image = My.Resources.Resources.ImageEditDelete16
+			Me.Items(7).Image = My.Resources.Resources.ImageEditSelectAll16
+			Me.Items(9).Image = My.Resources.Resources.ImageEditSelectAll16
 		End Sub
 		Friend Sub Display(ByRef sender As TextBox, ByVal e As MouseEventArgs)
 			If e.Button = MouseButtons.Right Then
@@ -514,7 +524,6 @@ Namespace My.Components
 	''' 5.	Set ShortcutsEnabled property to False.
 	''' </summary>
 	Friend Class RichTextBoxContextMenu
-
 		Inherits System.Windows.Forms.ContextMenuStrip
 
 		'Declarations
@@ -531,12 +540,12 @@ Namespace My.Components
 			Me.Items.Add("Delete", Nothing, AddressOf DeleteClick)
 			Me.Items.Add("-")
 			Me.Items.Add("Select All", Nothing, AddressOf SelectAllClick)
-			Me.Items(0).Image = Global.SkyeTag.My.Resources.Resources.ImageEditUndo16
-			Me.Items(2).Image = Global.SkyeTag.My.Resources.Resources.ImageEditCut16
-			Me.Items(3).Image = Global.SkyeTag.My.Resources.Resources.ImageEditCopy16
-			Me.Items(4).Image = Global.SkyeTag.My.Resources.Resources.ImageEditPaste16
-			Me.Items(5).Image = Global.SkyeTag.My.Resources.Resources.ImageEditDelete16
-			Me.Items(7).Image = Global.SkyeTag.My.Resources.Resources.ImageEditSelectAll16
+			Me.Items(0).Image = My.Resources.Resources.ImageEditUndo16
+			Me.Items(2).Image = My.Resources.Resources.ImageEditCut16
+			Me.Items(3).Image = My.Resources.Resources.ImageEditCopy16
+			Me.Items(4).Image = My.Resources.Resources.ImageEditPaste16
+			Me.Items(5).Image = My.Resources.Resources.ImageEditDelete16
+			Me.Items(7).Image = My.Resources.Resources.ImageEditSelectAll16
 		End Sub
 		Friend Sub Display(ByRef sender As RichTextBox, ByVal e As MouseEventArgs)
 			If e.Button = MouseButtons.Right Then
