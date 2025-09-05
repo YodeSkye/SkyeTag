@@ -51,12 +51,12 @@
         cmiSelectFromFile = New ToolStripMenuItem()
         cmiSelectFromOnline = New ToolStripMenuItem()
         cmiPasteFromClipboard = New ToolStripMenuItem()
+        cmiAlbumArtInsertLast = New ToolStripMenuItem()
         cmiAlbumArtInsert = New ToolStripMenuItem()
         cmAlbumArtInsert = New ContextMenuStrip(components)
         cmiAlbumArtInsertBefore = New ToolStripMenuItem()
         cmiAlbumArtInsertFirst = New ToolStripMenuItem()
         cmiAlbumArtInsertAfter = New ToolStripMenuItem()
-        cmiAlbumArtInsertLast = New ToolStripMenuItem()
         cmiAlbumArtExport = New ToolStripMenuItem()
         cmExport = New ContextMenuStrip(components)
         cmiExportToFile = New ToolStripMenuItem()
@@ -481,7 +481,7 @@
         ' 
         cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
         cmImageSource.Name = "cm"
-        cmImageSource.OwnerItem = cmiAlbumArtInsertLast
+        cmImageSource.OwnerItem = cmiAlbumArtInsertAfter
         cmImageSource.Size = New Size(189, 70)
         ' 
         ' cmiSelectFromFile
@@ -504,6 +504,14 @@
         cmiPasteFromClipboard.Name = "cmiPasteFromClipboard"
         cmiPasteFromClipboard.Size = New Size(188, 22)
         cmiPasteFromClipboard.Text = "Paste From Clipboard"
+        ' 
+        ' cmiAlbumArtInsertLast
+        ' 
+        cmiAlbumArtInsertLast.DropDown = cmImageSource
+        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
+        cmiAlbumArtInsertLast.Size = New Size(114, 22)
+        cmiAlbumArtInsertLast.Text = "Last"
         ' 
         ' cmiAlbumArtInsert
         ' 
@@ -545,14 +553,6 @@
         cmiAlbumArtInsertAfter.Size = New Size(114, 22)
         cmiAlbumArtInsertAfter.Text = "After"
         ' 
-        ' cmiAlbumArtInsertLast
-        ' 
-        cmiAlbumArtInsertLast.DropDown = cmImageSource
-        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
-        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
-        cmiAlbumArtInsertLast.Size = New Size(114, 22)
-        cmiAlbumArtInsertLast.Text = "Last"
-        ' 
         ' cmiAlbumArtExport
         ' 
         cmiAlbumArtExport.DropDown = cmExport
@@ -565,27 +565,28 @@
         ' 
         cmExport.Items.AddRange(New ToolStripItem() {cmiExportToFile, cmiExportToBitmap, cmiExportToClipboard})
         cmExport.Name = "cmExport"
-        cmExport.Size = New Size(181, 92)
+        cmExport.OwnerItem = cmiAlbumArtExport
+        cmExport.Size = New Size(150, 70)
         ' 
         ' cmiExportToFile
         ' 
         cmiExportToFile.Image = My.Resources.Resources.imageOpen
         cmiExportToFile.Name = "cmiExportToFile"
-        cmiExportToFile.Size = New Size(180, 22)
+        cmiExportToFile.Size = New Size(149, 22)
         cmiExportToFile.Text = "To File"
         ' 
         ' cmiExportToBitmap
         ' 
         cmiExportToBitmap.Image = My.Resources.Resources.imageOpen
         cmiExportToBitmap.Name = "cmiExportToBitmap"
-        cmiExportToBitmap.Size = New Size(180, 22)
+        cmiExportToBitmap.Size = New Size(149, 22)
         cmiExportToBitmap.Text = "To Bitmap File"
         ' 
         ' cmiExportToClipboard
         ' 
         cmiExportToClipboard.Image = My.Resources.Resources.ImageEditPaste16
         cmiExportToClipboard.Name = "cmiExportToClipboard"
-        cmiExportToClipboard.Size = New Size(180, 22)
+        cmiExportToClipboard.Size = New Size(149, 22)
         cmiExportToClipboard.Text = "To Clipboard"
         ' 
         ' tsSeparator1
@@ -916,7 +917,7 @@
         ' 
         MICopyTagBasic.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagBasic.Name = "MICopyTagBasic"
-        MICopyTagBasic.Size = New Size(164, 22)
+        MICopyTagBasic.Size = New Size(180, 22)
         MICopyTagBasic.Text = "Copy Basic Tag"
         MICopyTagBasic.ToolTipText = "Copy Tag without Album Art or Lyrics"
         ' 
@@ -924,23 +925,23 @@
         ' 
         MICopyTagArt.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagArt.Name = "MICopyTagArt"
-        MICopyTagArt.Size = New Size(164, 22)
+        MICopyTagArt.Size = New Size(180, 22)
         MICopyTagArt.Text = "Copy Art Only"
-        MICopyTagArt.ToolTipText = "Copy ONLY Album Art"
+        MICopyTagArt.ToolTipText = "Copy only Album Art"
         ' 
         ' MICopyTagFull
         ' 
         MICopyTagFull.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagFull.Name = "MICopyTagFull"
-        MICopyTagFull.Size = New Size(164, 22)
+        MICopyTagFull.Size = New Size(180, 22)
         MICopyTagFull.Text = "Copy Full Tag"
-        MICopyTagFull.ToolTipText = "Copy Tag WITH Album Art & Lyrics"
+        MICopyTagFull.ToolTipText = "Copy Tag with Album Art and Lyrics"
         ' 
         ' MIPasteTag
         ' 
         MIPasteTag.Image = My.Resources.Resources.ImageEditPaste16
         MIPasteTag.Name = "MIPasteTag"
-        MIPasteTag.Size = New Size(164, 22)
+        MIPasteTag.Size = New Size(180, 22)
         MIPasteTag.Text = "Paste Tag"
         ' 
         ' MIView

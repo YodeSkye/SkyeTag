@@ -104,6 +104,7 @@ Partial Friend Class MainForm
         End Try
     End Sub
     Private Sub frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CustomDrawToolTip(MIEdit.DropDown)
         SetTag()
         ShowTag()
     End Sub
@@ -1743,6 +1744,50 @@ Partial Friend Class MainForm
     End Sub
     Private Sub SetInactiveColor()
         MenuMain.BackColor = App.InactiveTitleBarColor
+    End Sub
+    Private Sub CustomDrawToolTip(MyToolStrip As ToolStrip)
+
+        'Initialize
+        Dim MyField As Reflection.PropertyInfo = MyToolStrip.GetType().GetProperty("ToolTip", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
+        Dim MyToolTip As ToolTip = CType(MyField.GetValue(MyToolStrip), ToolTip)
+
+        'Configure ToolTip
+        MyToolTip.OwnerDraw = True
+
+        'Draw
+        AddHandler MyToolTip.Popup,
+            Sub(sender, e)
+                'args.ToolTipSize = New Size(args.ToolTipSize.Width * 2, args.ToolTipSize.Height * 2)
+                Dim s As Size
+                s = TextRenderer.MeasureText(CType(sender, ToolTip).GetToolTip(e.AssociatedControl), App.TipFont)
+                s.Width += 14
+                s.Height += 14
+                e.ToolTipSize = s
+            End Sub
+        AddHandler MyToolTip.Draw,
+            Sub(sender, e)
+
+                'Declarations
+                Dim g As Graphics = e.Graphics
+
+                'Draw background
+                Dim brbg As New SolidBrush(App.TipBackColor)
+                g.FillRectangle(brbg, e.Bounds)
+
+                'Draw border
+                Using p As New Pen(App.TipBorderColor, CInt(App.TipFont.Size / 4)) 'Scale border thickness with font
+                    g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
+                End Using
+
+                'Draw text
+                TextRenderer.DrawText(g, e.ToolTipText, App.TipFont, New Point(7, 7), App.TipTextColor)
+
+                'Finalize
+                brbg.Dispose()
+                g.Dispose()
+
+            End Sub
+
     End Sub
 
 End Class
