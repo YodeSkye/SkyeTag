@@ -33,9 +33,9 @@ Partial Class SelectOnlineImage
         LblStatus = New Label()
         TxtBoxSearchPhrase = New TextBox()
         BtnSaveArt = New Button()
-        LblDimFront = New My.Components.LabelCSY()
-        LblDimBack = New My.Components.LabelCSY()
-        LblSearchPhrase = New My.Components.LabelCSY()
+        LblDimFront = New Skye.UI.Label
+        LblDimBack = New Skye.UI.Label
+        LblSearchPhrase = New Skye.UI.Label
         tipInfo = New ToolTip(components)
         CType(PicBoxArt, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicBoxBackThumb, ComponentModel.ISupportInitialize).BeginInit()
@@ -213,8 +213,8 @@ Partial Class SelectOnlineImage
     Friend WithEvents LblStatus As Label
     Friend WithEvents TxtBoxSearchPhrase As TextBox
     Friend WithEvents BtnSaveArt As Button
-    Friend WithEvents LblDimFront As My.Components.LabelCSY
-    Friend WithEvents LblDimBack As My.Components.LabelCSY
-    Friend WithEvents LblSearchPhrase As My.Components.LabelCSY
+    Friend WithEvents LblDimFront As Skye.UI.Label
+    Friend WithEvents LblDimBack As Skye.UI.Label
+    Friend WithEvents LblSearchPhrase As Skye.UI.Label
     Friend WithEvents tipInfo As ToolTip
 End Class

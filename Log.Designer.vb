@@ -28,10 +28,10 @@ Partial Class Log
         BtnDelete = New Button()
         BtnClose = New Button()
         btnRefresh = New Button()
-        Lblnfo = New My.Components.LabelCSY()
+        Lblnfo = New Skye.UI.Label
         tipInfo = New ToolTip(components)
         TxbxSearch = New TextBox()
-        LblSearch = New My.Components.LabelCSY()
+        LblSearch = New Skye.UI.Label
         SuspendLayout()
         ' 
         ' RTxBoxLog
@@ -152,12 +152,12 @@ Partial Class Log
 
     End Sub
 
-    Friend WithEvents Lblnfo As My.Components.LabelCSY
+    Friend WithEvents Lblnfo As Skye.UI.Label
     Friend WithEvents RTxBoxLog As RichTextBox
     Friend WithEvents BtnDelete As Button
     Friend WithEvents BtnClose As Button
     Friend WithEvents btnRefresh As Button
     Friend WithEvents tipInfo As ToolTip
     Friend WithEvents TxbxSearch As TextBox
-    Friend WithEvents LblSearch As My.Components.LabelCSY
+    Friend WithEvents LblSearch As Skye.UI.Label
 End Class

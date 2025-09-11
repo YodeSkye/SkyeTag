@@ -26,7 +26,7 @@ Partial Class Help
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Help))
         BtnClose = New Button()
         RTxBoxHelp = New RichTextBox()
-        LblVersion = New My.Components.LabelCSY()
+        LblVersion = New Skye.UI.Label()
         tipInfo = New ToolTip(components)
         SuspendLayout()
         ' 
@@ -95,7 +95,7 @@ Partial Class Help
         ResumeLayout(False)
 
     End Sub
-    Friend WithEvents LblVersion As My.Components.LabelCSY
+    Friend WithEvents LblVersion As Skye.UI.Label
     Friend WithEvents BtnClose As Button
     Friend WithEvents RTxBoxHelp As RichTextBox
     Friend WithEvents tipInfo As ToolTip

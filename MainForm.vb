@@ -28,16 +28,12 @@ Partial Friend Class MainForm
     Private lastClick As DateTime
     Private doubleclickMaxTime As TimeSpan
     Private clickTimer As Timer
-    Private txtboxCM As New Components.TextBoxContextMenu
-    Private txtboxCMLyrics As New Components.TextBoxContextMenu
+    Private txtboxCM As New Skye.UI.TextBoxContextMenu
+    Private txtboxCMLyrics As New Skye.UI.TextBoxContextMenu
     Private tlFile As TagLib.File
 
     'Form Events
     Friend Sub New()
-
-        'Initialize Globals
-
-        'Initialize Locals
 
         'Initialize Form
         InitializeComponent()
@@ -69,12 +65,12 @@ Partial Friend Class MainForm
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
         Try
             Select Case m.Msg
-                Case My.WinAPI.WM_SYSCOMMAND
+                Case Skye.WinAPI.WM_SYSCOMMAND
                     Select Case CInt(m.WParam)
-                        Case My.WinAPI.SC_MAXIMIZE, My.WinAPI.SC_MAXIMIZE_TBAR
+                        Case Skye.WinAPI.SC_MAXIMIZE, Skye.WinAPI.SC_MAXIMIZE_TBAR
                             wMaximized = True
                             SetWindowState()
-                        Case My.WinAPI.SC_RESTORE, My.WinAPI.SC_RESTORE_TBAR
+                        Case Skye.WinAPI.SC_RESTORE, Skye.WinAPI.SC_RESTORE_TBAR
                             If Me.WindowState = FormWindowState.Minimized Then
                                 Select Case wMaximized
                                     Case True : Me.WindowState = FormWindowState.Maximized
@@ -85,7 +81,7 @@ Partial Friend Class MainForm
                                 SetWindowState()
                             End If
                     End Select
-                Case My.WinAPI.WM_ACTIVATE
+                Case Skye.WinAPI.WM_ACTIVATE
                     Select Case CInt(m.WParam)
                         Case 0
                             IsFocused = False
@@ -94,7 +90,7 @@ Partial Friend Class MainForm
                             IsFocused = True
                             SetAccentColor()
                     End Select
-                Case My.WinAPI.WM_DWMCOLORIZATIONCOLORCHANGED
+                Case Skye.WinAPI.WM_DWMCOLORIZATIONCOLORCHANGED
                     SetAccentColor()
             End Select
         Catch ex As Exception
@@ -104,6 +100,17 @@ Partial Friend Class MainForm
         End Try
     End Sub
     Private Sub frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txbxTitle.ContextMenuStrip = txtboxCM
+        txbxGenre.ContextMenuStrip = txtboxCM
+        txbxComments.ContextMenuStrip = txtboxCM
+        txbxArtist.ContextMenuStrip = txtboxCM
+        txbxAlbum.ContextMenuStrip = txtboxCM
+        txbxAlbumArt.ContextMenuStrip = txtboxCM
+        txbxLyrics.ContextMenuStrip = txtboxCMLyrics
+        txbxYear.ContextMenuStrip = txtboxCMLyrics
+        txbxDuration.ContextMenuStrip = txtboxCMLyrics
+        txbxTrackCount.ContextMenuStrip = txtboxCMLyrics
+        txbxTrack.ContextMenuStrip = txtboxCMLyrics
         CustomDrawToolTip(MIEdit.DropDown)
         SetTag()
         ShowTag()
@@ -617,7 +624,7 @@ Partial Friend Class MainForm
     Private Sub lblFileInfo_MouseEnter(sender As Object, e As EventArgs) Handles lblFileInfo.MouseEnter
         If Not String.IsNullOrEmpty(lblFileInfo.Text) Then
             Cursor = Cursors.Hand
-            lblFileInfo.ForeColor = WinAPI.GetSystemColor(WinAPI.COLOR_HOTLIGHT)
+            lblFileInfo.ForeColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HOTLIGHT)
         End If
     End Sub
     Private Sub lblFileInfo_MouseLeave(sender As Object, e As EventArgs) Handles lblFileInfo.MouseLeave
@@ -627,18 +634,12 @@ Partial Friend Class MainForm
     Private Sub lblAlbumArtClick(sender As Object, e As EventArgs)
         If tlFile.Tag.Pictures.Length > 0 Then ResetLyrics()
     End Sub
-    Private Sub txtbox_MouseUp(sender As Object, e As MouseEventArgs) Handles txbxYear.MouseUp, txbxTrackCount.MouseUp, txbxTrack.MouseUp, txbxTitle.MouseUp, txbxGenre.MouseUp, txbxDuration.MouseDown, txbxComments.MouseUp, txbxArtist.MouseUp, txbxAlbumArt.MouseUp, txbxAlbum.MouseUp
-        txtboxCM.Display(DirectCast(sender, TextBox), e)
-    End Sub
     Private Sub txbx_MouseLeave(sender As Object, e As EventArgs) Handles txbxYear.MouseLeave, txbxTrackCount.MouseLeave, txbxTrack.MouseLeave, txbxTitle.MouseLeave, txbxGenre.MouseLeave, txbxComments.MouseLeave, txbxArtist.MouseLeave, txbxAlbum.MouseLeave
         tipInfo.Active = False
         tipInfo.Active = True
     End Sub
     Private Sub txtbox_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txbxYear.PreviewKeyDown, txbxTrackCount.PreviewKeyDown, txbxTrack.PreviewKeyDown, txbxTitle.PreviewKeyDown, txbxGenre.PreviewKeyDown, txbxDuration.PreviewKeyDown, txbxComments.PreviewKeyDown, txbxArtist.PreviewKeyDown, txbxAlbumArt.PreviewKeyDown, txbxAlbum.PreviewKeyDown
         txtboxCM.ShortcutKeys(DirectCast(sender, TextBox), e)
-    End Sub
-    Private Sub txbxLyrics_MouseUp(sender As Object, e As MouseEventArgs) Handles txbxLyrics.MouseUp
-        txtboxCMLyrics.Display(DirectCast(sender, TextBox), e)
     End Sub
     Private Sub txbxLyrics_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txbxLyrics.PreviewKeyDown
         txtboxCMLyrics.ShortcutKeys(DirectCast(sender, TextBox), e)
@@ -1660,7 +1661,7 @@ Partial Friend Class MainForm
         Select Case wShowLyrics
             Case True
                 Me.panelAlbumArt.SendToBack()
-                Me.btnLyrics.BackColor = WinAPI.GetSystemColor(COLOR_HIGHLIGHT) 'Color.Linen
+                Me.btnLyrics.BackColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HIGHLIGHT) 'Color.Linen
                 Me.btnLyrics.FlatAppearance.MouseDownBackColor = SystemColors.Control
                 Me.btnLyrics.FlatAppearance.MouseOverBackColor = SystemColors.Control
                 Me.txbxLyrics.Focus()
@@ -1668,8 +1669,8 @@ Partial Friend Class MainForm
                 Me.txbxLyrics.SendToBack()
                 Me.btnLyrics.Image = Resources.Resources.imageDocument 'DirectCast(My.AppResources.GetObject("imageDocument"), Image)
                 Me.btnLyrics.BackColor = SystemColors.Control
-                Me.btnLyrics.FlatAppearance.MouseDownBackColor = WinAPI.GetSystemColor(COLOR_HIGHLIGHT) 'Color.Linen
-                Me.btnLyrics.FlatAppearance.MouseOverBackColor = WinAPI.GetSystemColor(COLOR_HIGHLIGHT) 'Color.Linen
+                Me.btnLyrics.FlatAppearance.MouseDownBackColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HIGHLIGHT) 'Color.Linen
+                Me.btnLyrics.FlatAppearance.MouseOverBackColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HIGHLIGHT) 'Color.Linen
                 Me.tipInfo.SetToolTip(Me.btnLyrics, "Show Lyrics")
         End Select
     End Sub
@@ -1735,7 +1736,7 @@ Partial Friend Class MainForm
             Dim regvalue As Integer
             regkey = Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\DWM")
             regvalue = CInt(regkey.GetValue("AccentColor"))
-            c = Color.FromArgb(255, WinAPI.GetRValue(regvalue), WinAPI.GetGValue(regvalue), WinAPI.GetBValue(regvalue))
+            c = Color.FromArgb(255, Skye.WinAPI.GetRValue(regvalue), Skye.WinAPI.GetGValue(regvalue), Skye.WinAPI.GetBValue(regvalue))
             MenuMain.BackColor = c
             regkey.Close()
             regkey.Dispose()

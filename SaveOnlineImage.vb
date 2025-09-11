@@ -14,7 +14,7 @@ Public Class SaveOnlineImage
 	'Form Events
 	Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
 		Try
-			If m.Msg = My.WinAPI.WM_SYSCOMMAND AndAlso m.WParam.ToInt32 = My.WinAPI.SC_CLOSE Then
+			If m.Msg = Skye.WinAPI.WM_SYSCOMMAND AndAlso m.WParam.ToInt32 = Skye.WinAPI.SC_CLOSE Then
 				DialogResult = DialogResult.Cancel
 			End If
 		Catch ex As Exception

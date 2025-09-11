@@ -6,7 +6,7 @@ Public Class Log
     'Declarations
     Private mMove As Boolean = False
     Private mOffset, mPosition As Point
-    Private RTxBoxCM As New Components.RichTextBoxContextMenu
+    Private RTxBoxCM As New Skye.UI.RichTextBoxContextMenu
     Private LogSearchTitle As String
     Private LogSearchInActiveColor As Color
     Private DeleteLogConfirm As Boolean = False
@@ -19,6 +19,7 @@ Public Class Log
         timerDeleteLog.Interval = 5000
         LogSearchTitle = TxbxSearch.Text
         LogSearchInActiveColor = TxbxSearch.ForeColor
+        RTxBoxLog.ContextMenuStrip = RTxBoxCM
 
         'Center in FrmMain
         Left = CType((frmMain.Left + frmMain.Width / 2) - Width / 2, Integer)
@@ -93,9 +94,6 @@ Public Class Log
     End Sub
     Private Sub Lblnfo_DoubleClick(sender As Object, e As EventArgs) Handles Lblnfo.DoubleClick
         App.OpenFileLocation(LogPath)
-    End Sub
-    Private Sub RTxBoxLog_MouseUp(sender As Object, e As MouseEventArgs) Handles RTxBoxLog.MouseUp
-        RTxBoxCM.Display(DirectCast(sender, RichTextBox), e)
     End Sub
     Private Sub RTxBoxLog_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles RTxBoxLog.PreviewKeyDown
         RTxBoxCM.ShortcutKeys(DirectCast(sender, RichTextBox), e)

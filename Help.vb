@@ -6,9 +6,12 @@ Public Class Help
     'Declarations
     Private mMove As Boolean = False
     Private mOffset, mPosition As Point
-    Private RTxBoxCM As New My.Components.RichTextBoxContextMenu
+    Private RTxBoxCM As New Skye.UI.RichTextBoxContextMenu
 
     'Form Events
+    Private Sub Help_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        RTxBoxHelp.ContextMenuStrip = RTxBoxCM
+    End Sub
     Private Sub frm_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown, LblVersion.MouseDown
         Dim cSender As Control
         If e.Button = MouseButtons.Left AndAlso Me.WindowState = FormWindowState.Normal Then
@@ -52,9 +55,6 @@ Public Class Help
     End Sub
 
     'Control Events
-    Private Sub RTxBoxHelp_MouseUp(sender As Object, e As MouseEventArgs) Handles RTxBoxHelp.MouseUp
-        RTxBoxCM.Display(CType(sender, RichTextBox), e)
-    End Sub
     Private Sub RTxBoxHelp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles RTxBoxHelp.PreviewKeyDown
         RTxBoxCM.ShortcutKeys(CType(sender, RichTextBox), e)
     End Sub

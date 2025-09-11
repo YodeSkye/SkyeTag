@@ -31,8 +31,8 @@ Partial Class SaveOnlineImage
         TxtBoxLocation = New TextBox()
         BtnLocation = New Button()
         BtnSave = New Button()
-        LblFilename = New My.Components.LabelCSY()
-        LblLocation = New My.Components.LabelCSY()
+        LblFilename = New Skye.UI.Label
+        LblLocation = New Skye.UI.Label
         PicBoxThumb = New PictureBox()
         tipInfo = New ToolTip(components)
         GroupBox1.SuspendLayout()
@@ -193,8 +193,8 @@ Partial Class SaveOnlineImage
     Friend WithEvents TxtBoxLocation As TextBox
     Friend WithEvents BtnLocation As Button
     Friend WithEvents BtnSave As Button
-    Friend WithEvents LblFilename As My.Components.LabelCSY
-    Friend WithEvents LblLocation As My.Components.LabelCSY
+    Friend WithEvents LblFilename As Skye.UI.Label
+    Friend WithEvents LblLocation As Skye.UI.Label
     Friend WithEvents PicBoxThumb As PictureBox
     Friend WithEvents tipInfo As ToolTip
 End Class

@@ -105,17 +105,17 @@
         MIAbout = New ToolStripMenuItem()
         MIHelp = New ToolStripMenuItem()
         MILog = New ToolStripMenuItem()
-        lblFileInfo = New My.Components.LabelCSY()
-        lblArtist = New My.Components.LabelCSY()
-        lblGenre = New My.Components.LabelCSY()
-        lblTitle = New My.Components.LabelCSY()
-        lblAlbum = New My.Components.LabelCSY()
-        lblComments = New My.Components.LabelCSY()
-        lblAlbumArt = New My.Components.LabelCSY()
-        lblTrack = New My.Components.LabelCSY()
-        lblTrackSeparator = New My.Components.LabelCSY()
-        lblDuration = New My.Components.LabelCSY()
-        lblYear = New My.Components.LabelCSY()
+        lblFileInfo = New Skye.UI.Label
+        lblArtist = New Skye.UI.Label
+        lblGenre = New Skye.UI.Label
+        lblTitle = New Skye.UI.Label
+        lblAlbum = New Skye.UI.Label
+        lblComments = New Skye.UI.Label
+        lblAlbumArt = New Skye.UI.Label
+        lblTrack = New Skye.UI.Label
+        lblTrackSeparator = New Skye.UI.Label
+        lblDuration = New Skye.UI.Label
+        lblYear = New Skye.UI.Label
         cmArtRight.SuspendLayout()
         cmArtLeft.SuspendLayout()
         cmArtistLeft.SuspendLayout()
@@ -1220,17 +1220,17 @@
     Friend WithEvents MICloseFile As ToolStripMenuItem
     Friend WithEvents MIPlay As ToolStripMenuItem
     Friend WithEvents MIOpenLocation As ToolStripMenuItem
-    Friend WithEvents lblFileInfo As My.Components.LabelCSY
-    Friend WithEvents lblArtist As My.Components.LabelCSY
-    Friend WithEvents lblGenre As My.Components.LabelCSY
-    Friend WithEvents lblTitle As My.Components.LabelCSY
-    Friend WithEvents lblAlbum As My.Components.LabelCSY
-    Friend WithEvents lblComments As My.Components.LabelCSY
-    Friend WithEvents lblAlbumArt As My.Components.LabelCSY
-    Friend WithEvents lblTrack As My.Components.LabelCSY
-    Friend WithEvents lblTrackSeparator As My.Components.LabelCSY
-    Friend WithEvents lblDuration As My.Components.LabelCSY
-    Friend WithEvents lblYear As My.Components.LabelCSY
+    Friend WithEvents lblFileInfo As Skye.UI.Label
+    Friend WithEvents lblArtist As Skye.UI.Label
+    Friend WithEvents lblGenre As Skye.UI.Label
+    Friend WithEvents lblTitle As Skye.UI.Label
+    Friend WithEvents lblAlbum As Skye.UI.Label
+    Friend WithEvents lblComments As Skye.UI.Label
+    Friend WithEvents lblAlbumArt As Skye.UI.Label
+    Friend WithEvents lblTrack As Skye.UI.Label
+    Friend WithEvents lblTrackSeparator As Skye.UI.Label
+    Friend WithEvents lblDuration As Skye.UI.Label
+    Friend WithEvents lblYear As Skye.UI.Label
     Friend WithEvents MIEdit As ToolStripMenuItem
     Friend WithEvents MICopyTagBasic As ToolStripMenuItem
     Friend WithEvents MICopyTagFull As ToolStripMenuItem

@@ -27,9 +27,9 @@ Partial Friend Class Settings
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
         Try
             Select Case m.Msg
-                Case My.WinAPI.WM_SYSCOMMAND
+                Case Skye.WinAPI.WM_SYSCOMMAND
                     Select Case CInt(m.WParam)
-                        Case My.WinAPI.SC_CLOSE : My.App.CloseSettings()
+                        Case Skye.WinAPI.SC_CLOSE : My.App.CloseSettings()
                         Case Else : MyBase.WndProc(m)
                     End Select
                 Case Else : MyBase.WndProc(m)
