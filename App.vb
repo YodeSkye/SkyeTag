@@ -5,7 +5,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Namespace My
 
 	Partial Friend Class MyApplication
-		'App Declarations
+
 		'App Events
 		Public Sub New()
 			MyBase.New(VisualBasic.ApplicationServices.AuthenticationMode.Windows)
@@ -24,7 +24,7 @@ Namespace My
 		Protected Overrides Sub OnCreateMainForm()
 			Me.MainForm = My.App.frmMain
 		End Sub
-		'App Procedures
+
 	End Class
 
 	Friend Module App
