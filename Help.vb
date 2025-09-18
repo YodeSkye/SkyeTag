@@ -61,35 +61,6 @@ Public Class Help
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Close()
     End Sub
-    Private Sub tipInfo_Popup(sender As Object, e As PopupEventArgs) Handles tipInfo.Popup
-        Static s As Size
-        s = TextRenderer.MeasureText(tipInfo.GetToolTip(e.AssociatedControl), App.TipFont)
-        s.Width += 14
-        s.Height += 14
-        e.ToolTipSize = s
-    End Sub
-    Private Sub tipInfo_Draw(sender As Object, e As DrawToolTipEventArgs) Handles tipInfo.Draw
-
-        'Declarations
-        Dim g As Graphics = e.Graphics
-
-        'Draw background
-        Dim brbg As New SolidBrush(App.TipBackColor)
-        g.FillRectangle(brbg, e.Bounds)
-
-        'Draw border
-        Using p As New Pen(App.TipBorderColor, CInt(App.TipFont.Size / 4)) 'Scale border thickness with font
-            g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
-        End Using
-
-        'Draw text
-        TextRenderer.DrawText(g, e.ToolTipText, App.TipFont, New Point(7, 7), App.TipTextColor)
-
-        'Finalize
-        brbg.Dispose()
-        g.Dispose()
-
-    End Sub
 
     'Procedures
     Private Sub ToggleMaximized()

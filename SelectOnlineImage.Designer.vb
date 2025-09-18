@@ -22,7 +22,6 @@ Partial Class SelectOnlineImage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SelectOnlineImage))
         LVIDs = New ListView()
         ColumnHeader1 = New ColumnHeader()
@@ -33,10 +32,10 @@ Partial Class SelectOnlineImage
         LblStatus = New Label()
         TxtBoxSearchPhrase = New TextBox()
         BtnSaveArt = New Button()
-        LblDimFront = New Skye.UI.Label
-        LblDimBack = New Skye.UI.Label
-        LblSearchPhrase = New Skye.UI.Label
-        tipInfo = New ToolTip(components)
+        LblDimFront = New Skye.UI.Label()
+        LblDimBack = New Skye.UI.Label()
+        LblSearchPhrase = New Skye.UI.Label()
+        tipInfo = New Skye.UI.ToolTip()
         CType(PicBoxArt, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicBoxBackThumb, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicBoxFrontThumb, ComponentModel.ISupportInitialize).BeginInit()
@@ -52,6 +51,7 @@ Partial Class SelectOnlineImage
         LVIDs.Name = "LVIDs"
         LVIDs.Size = New Size(388, 208)
         LVIDs.TabIndex = 0
+        tipInfo.SetToolTipIcon(LVIDs, Nothing)
         LVIDs.UseCompatibleStateImageBehavior = False
         LVIDs.View = View.Details
         ' 
@@ -70,6 +70,7 @@ Partial Class SelectOnlineImage
         PicBoxArt.TabIndex = 2
         PicBoxArt.TabStop = False
         tipInfo.SetToolTip(PicBoxArt, "Selected Image")
+        tipInfo.SetToolTipIcon(PicBoxArt, Nothing)
         ' 
         ' BtnOK
         ' 
@@ -80,6 +81,7 @@ Partial Class SelectOnlineImage
         BtnOK.Size = New Size(64, 73)
         BtnOK.TabIndex = 30
         tipInfo.SetToolTip(BtnOK, "Insert Image as Art")
+        tipInfo.SetToolTipIcon(BtnOK, Nothing)
         BtnOK.UseVisualStyleBackColor = True
         ' 
         ' PicBoxBackThumb
@@ -92,6 +94,7 @@ Partial Class SelectOnlineImage
         PicBoxBackThumb.TabIndex = 4
         PicBoxBackThumb.TabStop = False
         tipInfo.SetToolTip(PicBoxBackThumb, "Back Cover Thumbnail, Click to Select")
+        tipInfo.SetToolTipIcon(PicBoxBackThumb, Nothing)
         ' 
         ' PicBoxFrontThumb
         ' 
@@ -103,6 +106,7 @@ Partial Class SelectOnlineImage
         PicBoxFrontThumb.TabIndex = 5
         PicBoxFrontThumb.TabStop = False
         tipInfo.SetToolTip(PicBoxFrontThumb, "Front Cover Thumbnail, Click to Select")
+        tipInfo.SetToolTipIcon(PicBoxFrontThumb, Nothing)
         ' 
         ' LblStatus
         ' 
@@ -115,6 +119,7 @@ Partial Class SelectOnlineImage
         LblStatus.TabIndex = 8
         LblStatus.Text = "Downloading Art..."
         LblStatus.TextAlign = ContentAlignment.MiddleCenter
+        tipInfo.SetToolTipIcon(LblStatus, Nothing)
         LblStatus.Visible = False
         ' 
         ' TxtBoxSearchPhrase
@@ -125,6 +130,7 @@ Partial Class SelectOnlineImage
         TxtBoxSearchPhrase.Name = "TxtBoxSearchPhrase"
         TxtBoxSearchPhrase.Size = New Size(293, 25)
         TxtBoxSearchPhrase.TabIndex = 100
+        tipInfo.SetToolTipIcon(TxtBoxSearchPhrase, Nothing)
         ' 
         ' BtnSaveArt
         ' 
@@ -137,6 +143,7 @@ Partial Class SelectOnlineImage
         BtnSaveArt.TabIndex = 20
         BtnSaveArt.TabStop = False
         tipInfo.SetToolTip(BtnSaveArt, "Save Image to File")
+        tipInfo.SetToolTipIcon(BtnSaveArt, Nothing)
         BtnSaveArt.UseVisualStyleBackColor = True
         ' 
         ' LblDimFront
@@ -149,6 +156,7 @@ Partial Class SelectOnlineImage
         LblDimFront.TabIndex = 101
         LblDimFront.Text = "W x H"
         LblDimFront.TextAlign = ContentAlignment.TopCenter
+        tipInfo.SetToolTipIcon(LblDimFront, Nothing)
         ' 
         ' LblDimBack
         ' 
@@ -160,6 +168,7 @@ Partial Class SelectOnlineImage
         LblDimBack.TabIndex = 102
         LblDimBack.Text = "W x H"
         LblDimBack.TextAlign = ContentAlignment.TopCenter
+        tipInfo.SetToolTipIcon(LblDimBack, Nothing)
         ' 
         ' LblSearchPhrase
         ' 
@@ -170,10 +179,17 @@ Partial Class SelectOnlineImage
         LblSearchPhrase.TabIndex = 103
         LblSearchPhrase.Text = "Search Phrase:"
         LblSearchPhrase.TextAlign = ContentAlignment.MiddleCenter
+        tipInfo.SetToolTipIcon(LblSearchPhrase, Nothing)
         ' 
         ' tipInfo
         ' 
+        tipInfo.BackColor = SystemColors.Control
+        tipInfo.BorderColor = SystemColors.Window
+        tipInfo.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.ForeColor = SystemColors.WindowText
+        tipInfo.InitialDelay = 100
         tipInfo.OwnerDraw = True
+        tipInfo.ReshowDelay = 20
         ' 
         ' SelectOnlineImage
         ' 
@@ -197,6 +213,7 @@ Partial Class SelectOnlineImage
         Name = "SelectOnlineImage"
         StartPosition = FormStartPosition.CenterParent
         Text = "Select Image from MusicBrainz"
+        tipInfo.SetToolTipIcon(Me, Nothing)
         CType(PicBoxArt, ComponentModel.ISupportInitialize).EndInit()
         CType(PicBoxBackThumb, ComponentModel.ISupportInitialize).EndInit()
         CType(PicBoxFrontThumb, ComponentModel.ISupportInitialize).EndInit()
@@ -216,5 +233,5 @@ Partial Class SelectOnlineImage
     Friend WithEvents LblDimFront As Skye.UI.Label
     Friend WithEvents LblDimBack As Skye.UI.Label
     Friend WithEvents LblSearchPhrase As Skye.UI.Label
-    Friend WithEvents tipInfo As ToolTip
+    Friend WithEvents tipInfo As Skye.UI.ToolTip
 End Class

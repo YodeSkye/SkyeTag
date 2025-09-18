@@ -10,9 +10,8 @@
 		MyBase.Dispose(disposing)
 	End Sub
     Private Sub InitializeComponent
-        components = New ComponentModel.Container()
         btnClose = New Button()
-        tipInfo = New ToolTip(components)
+        tipInfo = New Skye.UI.ToolTip()
         chkboxSaveMetrics = New CheckBox()
         SuspendLayout()
         ' 
@@ -30,12 +29,15 @@
         btnClose.TabIndex = 0
         btnClose.TextAlign = ContentAlignment.MiddleRight
         tipInfo.SetToolTip(btnClose, "Close (CtrlW)")
+        tipInfo.SetToolTipIcon(btnClose, Nothing)
         btnClose.UseMnemonic = False
         ' 
         ' tipInfo
         ' 
-        tipInfo.AutomaticDelay = 100
-        tipInfo.AutoPopDelay = 5000
+        tipInfo.BackColor = SystemColors.Control
+        tipInfo.BorderColor = SystemColors.Window
+        tipInfo.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.ForeColor = SystemColors.WindowText
         tipInfo.InitialDelay = 100
         tipInfo.OwnerDraw = True
         tipInfo.ReshowDelay = 20
@@ -48,6 +50,7 @@
         chkboxSaveMetrics.TabIndex = 15
         chkboxSaveMetrics.Text = "Save Window Metrics"
         tipInfo.SetToolTip(chkboxSaveMetrics, "Save Window Location && Size On Exit")
+        tipInfo.SetToolTipIcon(chkboxSaveMetrics, Nothing)
         chkboxSaveMetrics.UseVisualStyleBackColor = True
         ' 
         ' Settings
@@ -67,10 +70,11 @@
         Name = "Settings"
         SizeGripStyle = SizeGripStyle.Hide
         StartPosition = FormStartPosition.Manual
+        tipInfo.SetToolTipIcon(Me, Nothing)
         ResumeLayout(False)
 
     End Sub
     Private WithEvents chkboxSaveMetrics As System.Windows.Forms.CheckBox
-    Friend WithEvents tipInfo As System.Windows.Forms.ToolTip
+    Friend WithEvents tipInfo As Skye.UI.ToolTip
     Private WithEvents btnClose As System.Windows.Forms.Button
 End Class

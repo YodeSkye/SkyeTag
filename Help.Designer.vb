@@ -22,12 +22,11 @@ Partial Class Help
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Help))
         BtnClose = New Button()
         RTxBoxHelp = New RichTextBox()
         LblVersion = New Skye.UI.Label()
-        tipInfo = New ToolTip(components)
+        tipInfo = New Skye.UI.ToolTip()
         SuspendLayout()
         ' 
         ' BtnClose
@@ -40,6 +39,7 @@ Partial Class Help
         BtnClose.Size = New Size(64, 73)
         BtnClose.TabIndex = 2
         tipInfo.SetToolTip(BtnClose, "Close (CtrlW)")
+        tipInfo.SetToolTipIcon(BtnClose, Nothing)
         BtnClose.UseVisualStyleBackColor = True
         ' 
         ' RTxBoxHelp
@@ -55,6 +55,7 @@ Partial Class Help
         RTxBoxHelp.Size = New Size(856, 315)
         RTxBoxHelp.TabIndex = 3
         RTxBoxHelp.Text = ""
+        tipInfo.SetToolTipIcon(RTxBoxHelp, Nothing)
         ' 
         ' LblVersion
         ' 
@@ -67,11 +68,14 @@ Partial Class Help
         LblVersion.TabIndex = 1
         LblVersion.Text = "LabelCSY2"
         LblVersion.TextAlign = ContentAlignment.MiddleCenter
+        tipInfo.SetToolTipIcon(LblVersion, Nothing)
         ' 
         ' tipInfo
         ' 
-        tipInfo.AutomaticDelay = 100
-        tipInfo.AutoPopDelay = 5000
+        tipInfo.BackColor = SystemColors.Control
+        tipInfo.BorderColor = SystemColors.Window
+        tipInfo.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.ForeColor = SystemColors.WindowText
         tipInfo.InitialDelay = 100
         tipInfo.OwnerDraw = True
         tipInfo.ReshowDelay = 20
@@ -92,11 +96,12 @@ Partial Class Help
         Name = "Help"
         StartPosition = FormStartPosition.CenterParent
         Text = "Help & About"
+        tipInfo.SetToolTipIcon(Me, Nothing)
         ResumeLayout(False)
 
     End Sub
     Friend WithEvents LblVersion As Skye.UI.Label
     Friend WithEvents BtnClose As Button
     Friend WithEvents RTxBoxHelp As RichTextBox
-    Friend WithEvents tipInfo As ToolTip
+    Friend WithEvents tipInfo As Skye.UI.ToolTip
 End Class

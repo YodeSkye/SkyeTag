@@ -111,6 +111,7 @@ Partial Friend Class MainForm
         txbxDuration.ContextMenuStrip = txtboxCMLyrics
         txbxTrackCount.ContextMenuStrip = txtboxCMLyrics
         txbxTrack.ContextMenuStrip = txtboxCMLyrics
+
         CustomDrawToolTip(MIEdit.DropDown)
         SetTag()
         ShowTag()
@@ -999,46 +1000,6 @@ Partial Friend Class MainForm
         wShowLyrics = Not wShowLyrics
         SetLyrics()
     End Sub
-    Private Sub tipInfo_Popup(sender As Object, e As PopupEventArgs) Handles tipInfo.Popup
-        Static s As Size
-        s = TextRenderer.MeasureText(tipInfo.GetToolTip(e.AssociatedControl), App.TipFont)
-        If tipInfo.Tag Is Nothing Then
-            s.Width += 14
-            s.Height += 14
-        Else
-            s.Width += CType(tipInfo.Tag, Bitmap).Width + 14
-            s.Height = CType(tipInfo.Tag, Bitmap).Height + 12
-        End If
-        e.ToolTipSize = s
-    End Sub
-    Private Sub tipInfo_Draw(sender As Object, e As DrawToolTipEventArgs) Handles tipInfo.Draw
-
-        'Declarations
-        Dim g As Graphics = e.Graphics
-
-        'Draw background
-        Dim brbg As New SolidBrush(App.TipBackColor)
-        g.FillRectangle(brbg, e.Bounds)
-
-        'Draw border
-        Using p As New Pen(App.TipBorderColor, CInt(App.TipFont.Size / 4)) 'Scale border thickness with font
-            g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
-        End Using
-
-        'Draw text
-        If tipInfo.Tag Is Nothing Then
-            TextRenderer.DrawText(g, e.ToolTipText, App.TipFont, New Point(7, 7), App.TipTextColor)
-        Else
-            g.DrawImage(CType(tipInfo.Tag, Bitmap), New Point(7, 7))
-            TextRenderer.DrawText(g, e.ToolTipText, App.TipFont, New Point(7 + CType(tipInfo.Tag, Bitmap).Width, CInt(CType(tipInfo.Tag, Bitmap).Height / 2 - 3)), App.TipTextColor)
-            tipInfo.Tag = Nothing
-        End If
-
-        'Finalize
-        brbg.Dispose()
-        g.Dispose()
-
-    End Sub
 
     'Handlers
     Private Sub clickTimer_Tick(sender As Object, e As EventArgs)
@@ -1113,7 +1074,7 @@ Partial Friend Class MainForm
                 sExtendedInfo = fInfo.Name
                 lblFileInfo.Text = fInfo.Name
                 sExtendedInfo += vbCr + "@" + fInfo.DirectoryName
-                sExtendedInfo += vbCr + My.App.FormatFileSize(My.Computer.FileSystem.GetFileInfo(My.tagPath).Length, My.App.FormatFileSizeUnits.Auto, 2, False)
+                sExtendedInfo += vbCr + Skye.Common.FormatFileSize(My.Computer.FileSystem.GetFileInfo(My.tagPath).Length, Skye.Common.FormatFileSizeUnits.Auto, 2, False)
                 If tlFile.Properties IsNot Nothing Then
                     sExtendedInfo += vbCr + "Type: " + tlFile.Properties.MediaTypes.ToString + " (" + tlFile.Properties.Description + ")"
                     Me.cobxGenre.Items.Clear()
@@ -1252,7 +1213,7 @@ Partial Friend Class MainForm
                 End Try
                 ms.Dispose()
                 ms = Nothing
-                If Me.picbxAlbumArt.Image IsNot Nothing Then Me.tipInfo.SetToolTip(Me.picbxAlbumArt, Me.picbxAlbumArt.Image.Size.Width.ToString + "x" + Me.picbxAlbumArt.Image.Size.Height.ToString + vbCr + tlFile.Tag.Pictures(My.tagArtIndex).MimeType + vbCr + My.App.FormatFileSize(tlFile.Tag.Pictures(My.tagArtIndex).Data.Data.Length, My.App.FormatFileSizeUnits.Auto))
+                If Me.picbxAlbumArt.Image IsNot Nothing Then Me.tipInfo.SetToolTip(Me.picbxAlbumArt, Me.picbxAlbumArt.Image.Size.Width.ToString + "x" + Me.picbxAlbumArt.Image.Size.Height.ToString + vbCr + tlFile.Tag.Pictures(My.tagArtIndex).MimeType + vbCr + Skye.Common.FormatFileSize(tlFile.Tag.Pictures(My.tagArtIndex).Data.Data.Length, Skye.Common.FormatFileSizeUnits.Auto))
             Else
                 Me.lblAlbumArt.Text = My.App.hArt
                 Me.lblAlbumArt.Enabled = False
@@ -1754,13 +1715,14 @@ Partial Friend Class MainForm
 
         'Configure ToolTip
         MyToolTip.OwnerDraw = True
+        MyToolTip.InitialDelay = 100
+        MyToolTip.ReshowDelay = 20
 
         'Draw
         AddHandler MyToolTip.Popup,
             Sub(sender, e)
-                'args.ToolTipSize = New Size(args.ToolTipSize.Width * 2, args.ToolTipSize.Height * 2)
                 Dim s As Size
-                s = TextRenderer.MeasureText(CType(sender, ToolTip).GetToolTip(e.AssociatedControl), App.TipFont)
+                s = TextRenderer.MeasureText(CType(sender, ToolTip).GetToolTip(e.AssociatedControl), tipInfo.Font)
                 s.Width += 14
                 s.Height += 14
                 e.ToolTipSize = s
@@ -1772,16 +1734,16 @@ Partial Friend Class MainForm
                 Dim g As Graphics = e.Graphics
 
                 'Draw background
-                Dim brbg As New SolidBrush(App.TipBackColor)
+                Dim brbg As New SolidBrush(tipInfo.BackColor)
                 g.FillRectangle(brbg, e.Bounds)
 
                 'Draw border
-                Using p As New Pen(App.TipBorderColor, CInt(App.TipFont.Size / 4)) 'Scale border thickness with font
+                Using p As New Pen(tipInfo.BorderColor, CInt(tipInfo.Font.Size / 4)) 'Scale border thickness with font
                     g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
                 End Using
 
                 'Draw text
-                TextRenderer.DrawText(g, e.ToolTipText, App.TipFont, New Point(7, 7), App.TipTextColor)
+                TextRenderer.DrawText(g, e.ToolTipText, tipInfo.Font, New Point(7, 7), tipInfo.ForeColor)
 
                 'Finalize
                 brbg.Dispose()

@@ -111,10 +111,6 @@ Namespace My
 		Private FrmHelp As Help
 		Private FrmSettings As Settings
 		Friend ReadOnly CMFont As Font = New Font("Segoe UI", 10, FontStyle.Regular) 'Font for context menus
-		Friend ReadOnly TipFont As Font = New Font("Segoe UI", 10, FontStyle.Bold) 'Font for custom drawing of tooltips
-		Friend ReadOnly TipBackColor As Color = SystemColors.Control
-		Friend ReadOnly TipTextColor As Color = Color.Black
-		Friend ReadOnly TipBorderColor As Color = SystemColors.Window
 		Friend ReadOnly InactiveTitleBarColor As Color = Color.FromArgb(255, 243, 243, 243)
 		Friend Const AdjustScreenBoundsNormalWindow As Byte = 8
 		Friend Const AdjustScreenBoundsDialogWindow As Byte = 10
@@ -140,7 +136,7 @@ Namespace My
 		'Procedures
 		Friend Sub Initialize()
 			WriteToLog(My.Application.Info.ProductName + " Started", False)
-			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance) 'Allows use of Windows-1252 character encoding, needed for Components context menu Proper Case function.
+			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance) 'Allows use of Windows-1252 character encoding, needed for Skye Library context menu Proper Case function.
 			If My.Application.CommandLineArgs.Count > 0 Then
 				WriteToLog("Processing CommandLine (" + My.Application.CommandLineArgs.Count.ToString + ")", False)
 				ProcessPassedParameters(My.Application.CommandLineArgs)
@@ -450,44 +446,6 @@ Namespace My
 		Friend Function MouseInBounds(ByRef control As Control, ByRef mouseposition As Point) As Boolean
 			If mouseposition.X >= 0 AndAlso mouseposition.X <= control.Width AndAlso mouseposition.Y >= 0 AndAlso mouseposition.Y <= control.Height Then Return True
 			Return False
-		End Function
-		Friend Function FormatFileSize(filesizeinbytes As Long, unit As FormatFileSizeUnits, Optional decimalDigits As Integer = 2, Optional omitThousandSeparators As Boolean = False) As String 'Converts a number of bytes into Kbytes, Megabytes, or Gigabytes
-			'Simple Error Checking
-			If filesizeinbytes <= 0 Then Return "0 B"
-			'Auto-Select Best Units Of Measure
-			If unit = FormatFileSizeUnits.Auto Then
-				Select Case filesizeinbytes
-					Case Is < 1023
-						unit = FormatFileSizeUnits.Bytes
-						decimalDigits = 0
-					Case Is < 1024 * 1023 : unit = FormatFileSizeUnits.KiloBytes
-					Case Is < 1048576 * 1023 : unit = FormatFileSizeUnits.MegaBytes
-					Case Else : unit = FormatFileSizeUnits.GigaBytes
-				End Select
-			End If
-			'Evaluate The Decimal Value
-			Dim value As Decimal
-			Dim suffix As String = ""
-			Select Case unit
-				Case FormatFileSizeUnits.Bytes
-					value = CDec(filesizeinbytes)
-					suffix = " B"
-				Case FormatFileSizeUnits.KiloBytes
-					value = CDec(filesizeinbytes / 1024)
-					suffix = " KB"
-				Case FormatFileSizeUnits.MegaBytes
-					value = CDec(filesizeinbytes / 1048576)
-					suffix = " MB"
-				Case FormatFileSizeUnits.GigaBytes
-					value = CDec(filesizeinbytes / 1073741824)
-					suffix = " GB"
-			End Select
-			'Get The String Representation
-			Dim format As String
-			If omitThousandSeparators Then : format = "F" & decimalDigits.ToString
-			Else : format = "N" & decimalDigits.ToString
-			End If
-			Return value.ToString(format) & suffix
 		End Function
 
 	End Module

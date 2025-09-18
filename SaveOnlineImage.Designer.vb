@@ -22,7 +22,6 @@ Partial Class SaveOnlineImage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New ComponentModel.Container()
         GroupBox1 = New GroupBox()
         RadBtnImageFormatBMP = New RadioButton()
         RadBtnImageFormatPNG = New RadioButton()
@@ -31,10 +30,10 @@ Partial Class SaveOnlineImage
         TxtBoxLocation = New TextBox()
         BtnLocation = New Button()
         BtnSave = New Button()
-        LblFilename = New Skye.UI.Label
-        LblLocation = New Skye.UI.Label
+        LblFilename = New Skye.UI.Label()
+        LblLocation = New Skye.UI.Label()
         PicBoxThumb = New PictureBox()
-        tipInfo = New ToolTip(components)
+        tipInfo = New Skye.UI.ToolTip()
         GroupBox1.SuspendLayout()
         CType(PicBoxThumb, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -52,6 +51,7 @@ Partial Class SaveOnlineImage
         GroupBox1.TabStop = False
         GroupBox1.Text = "Format"
         tipInfo.SetToolTip(GroupBox1, "Select the File Format")
+        tipInfo.SetToolTipIcon(GroupBox1, Nothing)
         ' 
         ' RadBtnImageFormatBMP
         ' 
@@ -63,6 +63,7 @@ Partial Class SaveOnlineImage
         RadBtnImageFormatBMP.TabIndex = 2
         RadBtnImageFormatBMP.TabStop = True
         RadBtnImageFormatBMP.Text = "BMP"
+        tipInfo.SetToolTipIcon(RadBtnImageFormatBMP, Nothing)
         RadBtnImageFormatBMP.UseVisualStyleBackColor = True
         ' 
         ' RadBtnImageFormatPNG
@@ -75,6 +76,7 @@ Partial Class SaveOnlineImage
         RadBtnImageFormatPNG.TabIndex = 1
         RadBtnImageFormatPNG.TabStop = True
         RadBtnImageFormatPNG.Text = "PNG"
+        tipInfo.SetToolTipIcon(RadBtnImageFormatPNG, Nothing)
         RadBtnImageFormatPNG.UseVisualStyleBackColor = True
         ' 
         ' RadBtnImageFormatJPG
@@ -87,6 +89,7 @@ Partial Class SaveOnlineImage
         RadBtnImageFormatJPG.TabIndex = 0
         RadBtnImageFormatJPG.TabStop = True
         RadBtnImageFormatJPG.Text = "JPEG"
+        tipInfo.SetToolTipIcon(RadBtnImageFormatJPG, Nothing)
         RadBtnImageFormatJPG.UseVisualStyleBackColor = True
         ' 
         ' TxtBoxFilename
@@ -96,6 +99,7 @@ Partial Class SaveOnlineImage
         TxtBoxFilename.Name = "TxtBoxFilename"
         TxtBoxFilename.Size = New Size(174, 25)
         TxtBoxFilename.TabIndex = 1
+        tipInfo.SetToolTipIcon(TxtBoxFilename, Nothing)
         ' 
         ' TxtBoxLocation
         ' 
@@ -104,6 +108,7 @@ Partial Class SaveOnlineImage
         TxtBoxLocation.Name = "TxtBoxLocation"
         TxtBoxLocation.Size = New Size(296, 25)
         TxtBoxLocation.TabIndex = 3
+        tipInfo.SetToolTipIcon(TxtBoxLocation, Nothing)
         ' 
         ' BtnLocation
         ' 
@@ -113,6 +118,7 @@ Partial Class SaveOnlineImage
         BtnLocation.Size = New Size(32, 32)
         BtnLocation.TabIndex = 5
         tipInfo.SetToolTip(BtnLocation, "Select a File Location")
+        tipInfo.SetToolTipIcon(BtnLocation, Nothing)
         BtnLocation.UseVisualStyleBackColor = True
         ' 
         ' BtnSave
@@ -126,6 +132,7 @@ Partial Class SaveOnlineImage
         BtnSave.Text = "Save"
         BtnSave.TextAlign = ContentAlignment.MiddleRight
         tipInfo.SetToolTip(BtnSave, "Save Image with the Selected Properties")
+        tipInfo.SetToolTipIcon(BtnSave, Nothing)
         BtnSave.UseVisualStyleBackColor = True
         ' 
         ' LblFilename
@@ -136,6 +143,7 @@ Partial Class SaveOnlineImage
         LblFilename.Size = New Size(175, 17)
         LblFilename.TabIndex = 7
         LblFilename.Text = "Filename (Without Extension)"
+        tipInfo.SetToolTipIcon(LblFilename, Nothing)
         ' 
         ' LblLocation
         ' 
@@ -145,6 +153,7 @@ Partial Class SaveOnlineImage
         LblLocation.Size = New Size(57, 17)
         LblLocation.TabIndex = 8
         LblLocation.Text = "Location"
+        tipInfo.SetToolTipIcon(LblLocation, Nothing)
         ' 
         ' PicBoxThumb
         ' 
@@ -155,10 +164,17 @@ Partial Class SaveOnlineImage
         PicBoxThumb.TabIndex = 9
         PicBoxThumb.TabStop = False
         tipInfo.SetToolTip(PicBoxThumb, "Thumbnail of Image to Save")
+        tipInfo.SetToolTipIcon(PicBoxThumb, Nothing)
         ' 
         ' tipInfo
         ' 
+        tipInfo.BackColor = SystemColors.Control
+        tipInfo.BorderColor = SystemColors.Window
+        tipInfo.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.ForeColor = SystemColors.WindowText
+        tipInfo.InitialDelay = 100
         tipInfo.OwnerDraw = True
+        tipInfo.ReshowDelay = 20
         ' 
         ' SaveOnlineImage
         ' 
@@ -178,6 +194,7 @@ Partial Class SaveOnlineImage
         Name = "SaveOnlineImage"
         StartPosition = FormStartPosition.CenterParent
         Text = "Save Selected Image"
+        tipInfo.SetToolTipIcon(Me, Nothing)
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         CType(PicBoxThumb, ComponentModel.ISupportInitialize).EndInit()
@@ -196,5 +213,5 @@ Partial Class SaveOnlineImage
     Friend WithEvents LblFilename As Skye.UI.Label
     Friend WithEvents LblLocation As Skye.UI.Label
     Friend WithEvents PicBoxThumb As PictureBox
-    Friend WithEvents tipInfo As ToolTip
+    Friend WithEvents tipInfo As Skye.UI.ToolTip
 End Class

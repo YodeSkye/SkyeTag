@@ -13,7 +13,7 @@
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         btnError = New Button()
-        tipInfo = New ToolTip(components)
+        tipInfo = New Skye.UI.ToolTip()
         btnSave = New Button()
         btnAlbumArtRight = New Button()
         cmArtRight = New ContextMenuStrip(components)
@@ -105,17 +105,17 @@
         MIAbout = New ToolStripMenuItem()
         MIHelp = New ToolStripMenuItem()
         MILog = New ToolStripMenuItem()
-        lblFileInfo = New Skye.UI.Label
-        lblArtist = New Skye.UI.Label
-        lblGenre = New Skye.UI.Label
-        lblTitle = New Skye.UI.Label
-        lblAlbum = New Skye.UI.Label
-        lblComments = New Skye.UI.Label
-        lblAlbumArt = New Skye.UI.Label
-        lblTrack = New Skye.UI.Label
-        lblTrackSeparator = New Skye.UI.Label
-        lblDuration = New Skye.UI.Label
-        lblYear = New Skye.UI.Label
+        lblFileInfo = New Skye.UI.Label()
+        lblArtist = New Skye.UI.Label()
+        lblGenre = New Skye.UI.Label()
+        lblTitle = New Skye.UI.Label()
+        lblAlbum = New Skye.UI.Label()
+        lblComments = New Skye.UI.Label()
+        lblAlbumArt = New Skye.UI.Label()
+        lblTrack = New Skye.UI.Label()
+        lblTrackSeparator = New Skye.UI.Label()
+        lblDuration = New Skye.UI.Label()
+        lblYear = New Skye.UI.Label()
         cmArtRight.SuspendLayout()
         cmArtLeft.SuspendLayout()
         cmArtistLeft.SuspendLayout()
@@ -145,12 +145,15 @@
         btnError.TabIndex = 25
         btnError.TabStop = False
         tipInfo.SetToolTip(btnError, "An Error Has Occurred" & vbCrLf & "Click To Clear Error" & vbCrLf & "RightClick = View Log")
+        tipInfo.SetToolTipIcon(btnError, Nothing)
         btnError.Visible = False
         ' 
         ' tipInfo
         ' 
-        tipInfo.AutomaticDelay = 100
-        tipInfo.AutoPopDelay = 5000
+        tipInfo.BackColor = SystemColors.Control
+        tipInfo.BorderColor = SystemColors.Window
+        tipInfo.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.ForeColor = SystemColors.WindowText
         tipInfo.InitialDelay = 100
         tipInfo.OwnerDraw = True
         tipInfo.ReshowDelay = 20
@@ -171,6 +174,7 @@
         btnSave.Text = "Save"
         btnSave.TextAlign = ContentAlignment.MiddleRight
         tipInfo.SetToolTip(btnSave, "Save Tag To File")
+        tipInfo.SetToolTipIcon(btnSave, Nothing)
         ' 
         ' btnAlbumArtRight
         ' 
@@ -188,6 +192,7 @@
         btnAlbumArtRight.TabIndex = 0
         btnAlbumArtRight.TabStop = False
         tipInfo.SetToolTip(btnAlbumArtRight, "LeftClick = Next Image" & vbCrLf & "RightClick = Menu")
+        tipInfo.SetToolTipIcon(btnAlbumArtRight, Nothing)
         btnAlbumArtRight.UseMnemonic = False
         btnAlbumArtRight.UseVisualStyleBackColor = False
         ' 
@@ -197,6 +202,7 @@
         cmArtRight.Items.AddRange(New ToolStripItem() {cmiArtNext, ToolStripSeparator5, cmiArtMoveRight, cmiArtMoveLast})
         cmArtRight.Name = "cmArtRight"
         cmArtRight.Size = New Size(184, 76)
+        tipInfo.SetToolTipIcon(cmArtRight, Nothing)
         ' 
         ' cmiArtNext
         ' 
@@ -241,6 +247,7 @@
         btnAlbumArtLeft.TabIndex = 0
         btnAlbumArtLeft.TabStop = False
         tipInfo.SetToolTip(btnAlbumArtLeft, "LeftClick = Previous Image" & vbCrLf & "RightClick = Menu")
+        tipInfo.SetToolTipIcon(btnAlbumArtLeft, Nothing)
         btnAlbumArtLeft.UseMnemonic = False
         btnAlbumArtLeft.UseVisualStyleBackColor = False
         ' 
@@ -250,6 +257,7 @@
         cmArtLeft.Items.AddRange(New ToolStripItem() {cmiArtPrevious, ToolStripSeparator4, cmiArtMoveLeft, cmiArtMoveFirst})
         cmArtLeft.Name = "cmArtLeft"
         cmArtLeft.Size = New Size(178, 76)
+        tipInfo.SetToolTipIcon(cmArtLeft, Nothing)
         ' 
         ' cmiArtPrevious
         ' 
@@ -295,6 +303,7 @@
         btnRestore.Text = "Undo"
         btnRestore.TextAlign = ContentAlignment.MiddleRight
         tipInfo.SetToolTip(btnRestore, "Restore Original Tag")
+        tipInfo.SetToolTipIcon(btnRestore, Nothing)
         ' 
         ' btnArtistLeft
         ' 
@@ -312,6 +321,7 @@
         btnArtistLeft.TabIndex = 1012
         btnArtistLeft.TabStop = False
         tipInfo.SetToolTip(btnArtistLeft, "LeftClick = Previous Artist" & vbCrLf & "RightClick = Menu")
+        tipInfo.SetToolTipIcon(btnArtistLeft, Nothing)
         btnArtistLeft.UseMnemonic = False
         btnArtistLeft.UseVisualStyleBackColor = False
         ' 
@@ -321,6 +331,7 @@
         cmArtistLeft.Items.AddRange(New ToolStripItem() {cmiArtistPrevious, ToolStripSeparator2, cmiArtistMoveLeft, cmiArtistMoveFirst})
         cmArtistLeft.Name = "ContextMenuStrip1"
         cmArtistLeft.Size = New Size(172, 76)
+        tipInfo.SetToolTipIcon(cmArtistLeft, Nothing)
         ' 
         ' cmiArtistPrevious
         ' 
@@ -365,6 +376,7 @@
         btnArtistRight.TabIndex = 1011
         btnArtistRight.TabStop = False
         tipInfo.SetToolTip(btnArtistRight, "LeftClick = Next Artist" & vbCrLf & "RightClick = Menu")
+        tipInfo.SetToolTipIcon(btnArtistRight, Nothing)
         btnArtistRight.UseMnemonic = False
         btnArtistRight.UseVisualStyleBackColor = False
         ' 
@@ -374,6 +386,7 @@
         cmArtistRight.Items.AddRange(New ToolStripItem() {cmiArtistNext, ToolStripSeparator3, cmiArtistMoveRight, cmiArtistMoveLast})
         cmArtistRight.Name = "cmArtistRight"
         cmArtistRight.Size = New Size(178, 76)
+        tipInfo.SetToolTipIcon(cmArtistRight, Nothing)
         ' 
         ' cmiArtistNext
         ' 
@@ -419,6 +432,7 @@
         btnArtistInsert.TabIndex = 1014
         btnArtistInsert.TabStop = False
         tipInfo.SetToolTip(btnArtistInsert, "LeftClick = Add New Artist" & vbCrLf & "RightClick = Menu")
+        tipInfo.SetToolTipIcon(btnArtistInsert, Nothing)
         btnArtistInsert.UseMnemonic = False
         btnArtistInsert.UseVisualStyleBackColor = False
         ' 
@@ -428,6 +442,7 @@
         cmNewArtist.Items.AddRange(New ToolStripItem() {cmiArtistInsert, cmiArtistInsertFromClipboard})
         cmNewArtist.Name = "ContextMenuStrip1"
         cmNewArtist.Size = New Size(197, 48)
+        tipInfo.SetToolTipIcon(cmNewArtist, Nothing)
         ' 
         ' cmiArtistInsert
         ' 
@@ -459,6 +474,7 @@
         btnArtistDelete.TabIndex = 1013
         btnArtistDelete.TabStop = False
         tipInfo.SetToolTip(btnArtistDelete, "LeftClick = Remove This Artist")
+        tipInfo.SetToolTipIcon(btnArtistDelete, Nothing)
         btnArtistDelete.UseMnemonic = False
         btnArtistDelete.UseVisualStyleBackColor = False
         ' 
@@ -468,6 +484,7 @@
         cmAlbumArt.Items.AddRange(New ToolStripItem() {cmiAlbumArtSelect, cmiAlbumArtInsert, cmiAlbumArtExport, tsSeparator1, cmiAlbumArtMoveLeft, cmiAlbumArtMoveFirst, cmiAlbumArtMoveRight, cmiAlbumArtMoveLast, tsSeparator2, cmiAlbumArtDelete})
         cmAlbumArt.Name = "cmAlbumArt"
         cmAlbumArt.Size = New Size(184, 192)
+        tipInfo.SetToolTipIcon(cmAlbumArt, Nothing)
         ' 
         ' cmiAlbumArtSelect
         ' 
@@ -483,6 +500,7 @@
         cmImageSource.Name = "cm"
         cmImageSource.OwnerItem = cmiAlbumArtInsertAfter
         cmImageSource.Size = New Size(189, 70)
+        tipInfo.SetToolTipIcon(cmImageSource, Nothing)
         ' 
         ' cmiSelectFromFile
         ' 
@@ -528,6 +546,7 @@
         cmAlbumArtInsert.Name = "cmAlbumArtInsert"
         cmAlbumArtInsert.OwnerItem = cmiAlbumArtInsert
         cmAlbumArtInsert.Size = New Size(115, 92)
+        tipInfo.SetToolTipIcon(cmAlbumArtInsert, Nothing)
         ' 
         ' cmiAlbumArtInsertBefore
         ' 
@@ -567,6 +586,7 @@
         cmExport.Name = "cmExport"
         cmExport.OwnerItem = cmiAlbumArtExport
         cmExport.Size = New Size(150, 70)
+        tipInfo.SetToolTipIcon(cmExport, Nothing)
         ' 
         ' cmiExportToFile
         ' 
@@ -649,6 +669,7 @@
         btnAlbumArt.Size = New Size(16, 17)
         btnAlbumArt.TabIndex = 0
         btnAlbumArt.TabStop = False
+        tipInfo.SetToolTipIcon(btnAlbumArt, Nothing)
         btnAlbumArt.UseMnemonic = False
         btnAlbumArt.UseVisualStyleBackColor = False
         ' 
@@ -660,6 +681,7 @@
         picbxAlbumArt.Size = New Size(360, 229)
         picbxAlbumArt.TabIndex = 1001
         picbxAlbumArt.TabStop = False
+        tipInfo.SetToolTipIcon(picbxAlbumArt, Nothing)
         ' 
         ' txbxArtist
         ' 
@@ -670,6 +692,7 @@
         txbxArtist.ShortcutsEnabled = False
         txbxArtist.Size = New Size(238, 25)
         txbxArtist.TabIndex = 10
+        tipInfo.SetToolTipIcon(txbxArtist, Nothing)
         ' 
         ' txbxAlbum
         ' 
@@ -680,6 +703,7 @@
         txbxAlbum.ShortcutsEnabled = False
         txbxAlbum.Size = New Size(304, 25)
         txbxAlbum.TabIndex = 30
+        tipInfo.SetToolTipIcon(txbxAlbum, Nothing)
         ' 
         ' txbxAlbumArt
         ' 
@@ -690,6 +714,7 @@
         txbxAlbumArt.ShortcutsEnabled = False
         txbxAlbumArt.Size = New Size(200, 25)
         txbxAlbumArt.TabIndex = 100
+        tipInfo.SetToolTipIcon(txbxAlbumArt, Nothing)
         ' 
         ' cobxAlbumArtType
         ' 
@@ -704,6 +729,7 @@
         cobxAlbumArtType.Name = "cobxAlbumArtType"
         cobxAlbumArtType.Size = New Size(117, 25)
         cobxAlbumArtType.TabIndex = 110
+        tipInfo.SetToolTipIcon(cobxAlbumArtType, Nothing)
         ' 
         ' txbxTitle
         ' 
@@ -714,6 +740,7 @@
         txbxTitle.ShortcutsEnabled = False
         txbxTitle.Size = New Size(238, 25)
         txbxTitle.TabIndex = 20
+        tipInfo.SetToolTipIcon(txbxTitle, Nothing)
         ' 
         ' txbxYear
         ' 
@@ -727,6 +754,7 @@
         txbxYear.TabIndex = 35
         txbxYear.Text = "8888"
         txbxYear.TextAlign = HorizontalAlignment.Center
+        tipInfo.SetToolTipIcon(txbxYear, Nothing)
         ' 
         ' txbxTrack
         ' 
@@ -740,6 +768,7 @@
         txbxTrack.TabIndex = 25
         txbxTrack.Text = "88"
         txbxTrack.TextAlign = HorizontalAlignment.Center
+        tipInfo.SetToolTipIcon(txbxTrack, Nothing)
         ' 
         ' txbxComments
         ' 
@@ -750,6 +779,7 @@
         txbxComments.ShortcutsEnabled = False
         txbxComments.Size = New Size(361, 25)
         txbxComments.TabIndex = 50
+        tipInfo.SetToolTipIcon(txbxComments, Nothing)
         ' 
         ' cobxGenre
         ' 
@@ -765,6 +795,7 @@
         cobxGenre.Sorted = True
         cobxGenre.TabIndex = 15
         cobxGenre.TabStop = False
+        tipInfo.SetToolTipIcon(cobxGenre, Nothing)
         ' 
         ' txbxLyrics
         ' 
@@ -782,6 +813,7 @@
         txbxLyrics.Size = New Size(360, 229)
         txbxLyrics.TabIndex = 0
         txbxLyrics.TabStop = False
+        tipInfo.SetToolTipIcon(txbxLyrics, Nothing)
         txbxLyrics.WordWrap = False
         ' 
         ' btnLyrics
@@ -794,6 +826,7 @@
         btnLyrics.Size = New Size(32, 36)
         btnLyrics.TabIndex = 95
         btnLyrics.TabStop = False
+        tipInfo.SetToolTipIcon(btnLyrics, Nothing)
         ' 
         ' txbxDuration
         ' 
@@ -807,6 +840,7 @@
         txbxDuration.TabStop = False
         txbxDuration.Text = "8:00:88"
         txbxDuration.TextAlign = HorizontalAlignment.Center
+        tipInfo.SetToolTipIcon(txbxDuration, Nothing)
         ' 
         ' txbxTrackCount
         ' 
@@ -820,6 +854,7 @@
         txbxTrackCount.TabIndex = 26
         txbxTrackCount.Text = "88"
         txbxTrackCount.TextAlign = HorizontalAlignment.Center
+        tipInfo.SetToolTipIcon(txbxTrackCount, Nothing)
         ' 
         ' txbxGenre
         ' 
@@ -830,6 +865,7 @@
         txbxGenre.ShortcutsEnabled = False
         txbxGenre.Size = New Size(106, 25)
         txbxGenre.TabIndex = 15
+        tipInfo.SetToolTipIcon(txbxGenre, Nothing)
         ' 
         ' panelAlbumArt
         ' 
@@ -842,6 +878,7 @@
         panelAlbumArt.Name = "panelAlbumArt"
         panelAlbumArt.Size = New Size(360, 229)
         panelAlbumArt.TabIndex = 0
+        tipInfo.SetToolTipIcon(panelAlbumArt, Nothing)
         ' 
         ' MenuMain
         ' 
@@ -852,6 +889,7 @@
         MenuMain.Size = New Size(384, 25)
         MenuMain.TabIndex = 1015
         MenuMain.Text = "MenuStrip1"
+        tipInfo.SetToolTipIcon(MenuMain, Nothing)
         ' 
         ' MIFile
         ' 
@@ -917,7 +955,7 @@
         ' 
         MICopyTagBasic.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagBasic.Name = "MICopyTagBasic"
-        MICopyTagBasic.Size = New Size(180, 22)
+        MICopyTagBasic.Size = New Size(164, 22)
         MICopyTagBasic.Text = "Copy Basic Tag"
         MICopyTagBasic.ToolTipText = "Copy Tag without Album Art or Lyrics"
         ' 
@@ -925,7 +963,7 @@
         ' 
         MICopyTagArt.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagArt.Name = "MICopyTagArt"
-        MICopyTagArt.Size = New Size(180, 22)
+        MICopyTagArt.Size = New Size(164, 22)
         MICopyTagArt.Text = "Copy Art Only"
         MICopyTagArt.ToolTipText = "Copy only Album Art"
         ' 
@@ -933,7 +971,7 @@
         ' 
         MICopyTagFull.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagFull.Name = "MICopyTagFull"
-        MICopyTagFull.Size = New Size(180, 22)
+        MICopyTagFull.Size = New Size(164, 22)
         MICopyTagFull.Text = "Copy Full Tag"
         MICopyTagFull.ToolTipText = "Copy Tag with Album Art and Lyrics"
         ' 
@@ -941,7 +979,7 @@
         ' 
         MIPasteTag.Image = My.Resources.Resources.ImageEditPaste16
         MIPasteTag.Name = "MIPasteTag"
-        MIPasteTag.Size = New Size(180, 22)
+        MIPasteTag.Size = New Size(164, 22)
         MIPasteTag.Text = "Paste Tag"
         ' 
         ' MIView
@@ -1002,6 +1040,7 @@
         lblFileInfo.TabIndex = 1016
         lblFileInfo.Text = "File Info"
         lblFileInfo.TextAlign = ContentAlignment.TopCenter
+        tipInfo.SetToolTipIcon(lblFileInfo, Nothing)
         ' 
         ' lblArtist
         ' 
@@ -1011,6 +1050,7 @@
         lblArtist.TabIndex = 1017
         lblArtist.Text = "Artist"
         lblArtist.TextAlign = ContentAlignment.BottomLeft
+        tipInfo.SetToolTipIcon(lblArtist, Nothing)
         ' 
         ' lblGenre
         ' 
@@ -1021,6 +1061,7 @@
         lblGenre.TabIndex = 1018
         lblGenre.Text = "Genre"
         lblGenre.TextAlign = ContentAlignment.BottomLeft
+        tipInfo.SetToolTipIcon(lblGenre, Nothing)
         ' 
         ' lblTitle
         ' 
@@ -1030,6 +1071,7 @@
         lblTitle.TabIndex = 1019
         lblTitle.Text = "Title"
         lblTitle.TextAlign = ContentAlignment.BottomLeft
+        tipInfo.SetToolTipIcon(lblTitle, Nothing)
         ' 
         ' lblAlbum
         ' 
@@ -1039,6 +1081,7 @@
         lblAlbum.TabIndex = 1020
         lblAlbum.Text = "Album"
         lblAlbum.TextAlign = ContentAlignment.BottomLeft
+        tipInfo.SetToolTipIcon(lblAlbum, Nothing)
         ' 
         ' lblComments
         ' 
@@ -1048,6 +1091,7 @@
         lblComments.TabIndex = 1021
         lblComments.Text = "Comments"
         lblComments.TextAlign = ContentAlignment.BottomLeft
+        tipInfo.SetToolTipIcon(lblComments, Nothing)
         ' 
         ' lblAlbumArt
         ' 
@@ -1057,6 +1101,7 @@
         lblAlbumArt.TabIndex = 1022
         lblAlbumArt.Text = "Art"
         lblAlbumArt.TextAlign = ContentAlignment.BottomLeft
+        tipInfo.SetToolTipIcon(lblAlbumArt, Nothing)
         ' 
         ' lblTrack
         ' 
@@ -1067,6 +1112,7 @@
         lblTrack.TabIndex = 1023
         lblTrack.Text = "Track"
         lblTrack.TextAlign = ContentAlignment.BottomCenter
+        tipInfo.SetToolTipIcon(lblTrack, Nothing)
         ' 
         ' lblTrackSeparator
         ' 
@@ -1077,6 +1123,7 @@
         lblTrackSeparator.TabIndex = 1024
         lblTrackSeparator.Text = "/"
         lblTrackSeparator.TextAlign = ContentAlignment.MiddleCenter
+        tipInfo.SetToolTipIcon(lblTrackSeparator, Nothing)
         ' 
         ' lblDuration
         ' 
@@ -1087,6 +1134,7 @@
         lblDuration.TabIndex = 1025
         lblDuration.Text = "Duration"
         lblDuration.TextAlign = ContentAlignment.BottomCenter
+        tipInfo.SetToolTipIcon(lblDuration, Nothing)
         ' 
         ' lblYear
         ' 
@@ -1097,6 +1145,7 @@
         lblYear.TabIndex = 1026
         lblYear.Text = "Year"
         lblYear.TextAlign = ContentAlignment.BottomCenter
+        tipInfo.SetToolTipIcon(lblYear, Nothing)
         ' 
         ' MainForm
         ' 
@@ -1152,6 +1201,7 @@
         Name = "MainForm"
         SizeGripStyle = SizeGripStyle.Show
         StartPosition = FormStartPosition.Manual
+        tipInfo.SetToolTipIcon(Me, Nothing)
         cmArtRight.ResumeLayout(False)
         cmArtLeft.ResumeLayout(False)
         cmArtistLeft.ResumeLayout(False)
@@ -1207,7 +1257,7 @@
     Private WithEvents btnRestore As System.Windows.Forms.Button
     Private WithEvents btnLyrics As System.Windows.Forms.Button
     Private WithEvents btnSave As System.Windows.Forms.Button
-    Friend WithEvents tipInfo As System.Windows.Forms.ToolTip
+    Friend WithEvents tipInfo As Skye.UI.ToolTip
     Friend WithEvents MenuMain As MenuStrip
     Friend WithEvents MIFile As ToolStripMenuItem
     Friend WithEvents MIOpenFile As ToolStripMenuItem
