@@ -1,12 +1,9 @@
 ﻿
-Imports System.Diagnostics
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
-
 Namespace My
 
 	Partial Friend Class MyApplication
 
-		'App Events
+		'Events
 		Public Sub New()
 			MyBase.New(VisualBasic.ApplicationServices.AuthenticationMode.Windows)
 			Me.IsSingleInstance = False
@@ -307,7 +304,7 @@ Namespace My
 			FrmHelp = New Help
 			FrmHelp.Text = My.Application.Info.ProductName + " " + FrmHelp.Text
 			FrmHelp.RTxBoxHelp.Text = logtext
-			FrmHelp.LblVersion.Text = "v" + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString
+			FrmHelp.LblVersion.Text = "v" + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString + "." + My.Application.Info.Version.Build.ToString
 			logtext = String.Empty
 			FrmHelp.ShowDialog()
 		End Sub
