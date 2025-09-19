@@ -22,13 +22,14 @@ Partial Class Log
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Log))
         RTxBoxLog = New RichTextBox()
         BtnDelete = New Button()
         BtnClose = New Button()
         btnRefresh = New Button()
         Lblnfo = New Skye.UI.Label()
-        tipInfo = New Skye.UI.ToolTip()
+        tipInfo = New Skye.UI.ToolTip(components)
         TxbxSearch = New TextBox()
         LblSearch = New Skye.UI.Label()
         SuspendLayout()

@@ -22,6 +22,7 @@ Partial Class SaveOnlineImage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         GroupBox1 = New GroupBox()
         RadBtnImageFormatBMP = New RadioButton()
         RadBtnImageFormatPNG = New RadioButton()
@@ -33,7 +34,7 @@ Partial Class SaveOnlineImage
         LblFilename = New Skye.UI.Label()
         LblLocation = New Skye.UI.Label()
         PicBoxThumb = New PictureBox()
-        tipInfo = New Skye.UI.ToolTip()
+        tipInfo = New Skye.UI.ToolTip(components)
         GroupBox1.SuspendLayout()
         CType(PicBoxThumb, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()

@@ -10,8 +10,9 @@
 		MyBase.Dispose(disposing)
 	End Sub
     Private Sub InitializeComponent
+        components = New ComponentModel.Container()
         btnClose = New Button()
-        tipInfo = New Skye.UI.ToolTip()
+        tipInfo = New Skye.UI.ToolTip(components)
         chkboxSaveMetrics = New CheckBox()
         SuspendLayout()
         ' 

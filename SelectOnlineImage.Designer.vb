@@ -22,6 +22,7 @@ Partial Class SelectOnlineImage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SelectOnlineImage))
         LVIDs = New ListView()
         ColumnHeader1 = New ColumnHeader()
@@ -35,7 +36,7 @@ Partial Class SelectOnlineImage
         LblDimFront = New Skye.UI.Label()
         LblDimBack = New Skye.UI.Label()
         LblSearchPhrase = New Skye.UI.Label()
-        tipInfo = New Skye.UI.ToolTip()
+        tipInfo = New Skye.UI.ToolTip(components)
         CType(PicBoxArt, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicBoxBackThumb, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicBoxFrontThumb, ComponentModel.ISupportInitialize).BeginInit()

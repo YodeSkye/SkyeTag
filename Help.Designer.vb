@@ -22,11 +22,12 @@ Partial Class Help
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Help))
         BtnClose = New Button()
         RTxBoxHelp = New RichTextBox()
         LblVersion = New Skye.UI.Label()
-        tipInfo = New Skye.UI.ToolTip()
+        tipInfo = New Skye.UI.ToolTip(components)
         SuspendLayout()
         ' 
         ' BtnClose

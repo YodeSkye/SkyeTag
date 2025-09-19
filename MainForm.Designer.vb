@@ -13,7 +13,7 @@
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         btnError = New Button()
-        tipInfo = New Skye.UI.ToolTip()
+        tipInfo = New Skye.UI.ToolTip(components)
         btnSave = New Button()
         btnAlbumArtRight = New Button()
         cmArtRight = New ContextMenuStrip(components)
@@ -51,12 +51,12 @@
         cmiSelectFromFile = New ToolStripMenuItem()
         cmiSelectFromOnline = New ToolStripMenuItem()
         cmiPasteFromClipboard = New ToolStripMenuItem()
-        cmiAlbumArtInsertLast = New ToolStripMenuItem()
+        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
         cmiAlbumArtInsert = New ToolStripMenuItem()
         cmAlbumArtInsert = New ContextMenuStrip(components)
         cmiAlbumArtInsertBefore = New ToolStripMenuItem()
         cmiAlbumArtInsertFirst = New ToolStripMenuItem()
-        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
+        cmiAlbumArtInsertLast = New ToolStripMenuItem()
         cmiAlbumArtExport = New ToolStripMenuItem()
         cmExport = New ContextMenuStrip(components)
         cmiExportToFile = New ToolStripMenuItem()
@@ -498,7 +498,7 @@
         ' 
         cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
         cmImageSource.Name = "cm"
-        cmImageSource.OwnerItem = cmiAlbumArtInsertAfter
+        cmImageSource.OwnerItem = cmiAlbumArtInsertLast
         cmImageSource.Size = New Size(189, 70)
         tipInfo.SetToolTipIcon(cmImageSource, Nothing)
         ' 
@@ -523,13 +523,13 @@
         cmiPasteFromClipboard.Size = New Size(188, 22)
         cmiPasteFromClipboard.Text = "Paste From Clipboard"
         ' 
-        ' cmiAlbumArtInsertLast
+        ' cmiAlbumArtInsertAfter
         ' 
-        cmiAlbumArtInsertLast.DropDown = cmImageSource
-        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
-        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
-        cmiAlbumArtInsertLast.Size = New Size(114, 22)
-        cmiAlbumArtInsertLast.Text = "Last"
+        cmiAlbumArtInsertAfter.DropDown = cmImageSource
+        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
+        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
+        cmiAlbumArtInsertAfter.Size = New Size(114, 22)
+        cmiAlbumArtInsertAfter.Text = "After"
         ' 
         ' cmiAlbumArtInsert
         ' 
@@ -564,13 +564,13 @@
         cmiAlbumArtInsertFirst.Size = New Size(114, 22)
         cmiAlbumArtInsertFirst.Text = "First"
         ' 
-        ' cmiAlbumArtInsertAfter
+        ' cmiAlbumArtInsertLast
         ' 
-        cmiAlbumArtInsertAfter.DropDown = cmImageSource
-        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
-        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
-        cmiAlbumArtInsertAfter.Size = New Size(114, 22)
-        cmiAlbumArtInsertAfter.Text = "After"
+        cmiAlbumArtInsertLast.DropDown = cmImageSource
+        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
+        cmiAlbumArtInsertLast.Size = New Size(114, 22)
+        cmiAlbumArtInsertLast.Text = "Last"
         ' 
         ' cmiAlbumArtExport
         ' 
