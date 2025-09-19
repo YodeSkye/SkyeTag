@@ -30,7 +30,7 @@
         btnClose.TabIndex = 0
         btnClose.TextAlign = ContentAlignment.MiddleRight
         tipInfo.SetToolTip(btnClose, "Close (CtrlW)")
-        tipInfo.SetToolTipIcon(btnClose, Nothing)
+        tipInfo.SetToolTipImage(btnClose, Nothing)
         btnClose.UseMnemonic = False
         ' 
         ' tipInfo
@@ -51,7 +51,7 @@
         chkboxSaveMetrics.TabIndex = 15
         chkboxSaveMetrics.Text = "Save Window Metrics"
         tipInfo.SetToolTip(chkboxSaveMetrics, "Save Window Location && Size On Exit")
-        tipInfo.SetToolTipIcon(chkboxSaveMetrics, Nothing)
+        tipInfo.SetToolTipImage(chkboxSaveMetrics, Nothing)
         chkboxSaveMetrics.UseVisualStyleBackColor = True
         ' 
         ' Settings
@@ -71,7 +71,7 @@
         Name = "Settings"
         SizeGripStyle = SizeGripStyle.Hide
         StartPosition = FormStartPosition.Manual
-        tipInfo.SetToolTipIcon(Me, Nothing)
+        tipInfo.SetToolTipImage(Me, Nothing)
         ResumeLayout(False)
 
     End Sub

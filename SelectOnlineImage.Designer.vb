@@ -52,7 +52,7 @@ Partial Class SelectOnlineImage
         LVIDs.Name = "LVIDs"
         LVIDs.Size = New Size(388, 208)
         LVIDs.TabIndex = 0
-        tipInfo.SetToolTipIcon(LVIDs, Nothing)
+        tipInfo.SetToolTipImage(LVIDs, Nothing)
         LVIDs.UseCompatibleStateImageBehavior = False
         LVIDs.View = View.Details
         ' 
@@ -71,7 +71,7 @@ Partial Class SelectOnlineImage
         PicBoxArt.TabIndex = 2
         PicBoxArt.TabStop = False
         tipInfo.SetToolTip(PicBoxArt, "Selected Image")
-        tipInfo.SetToolTipIcon(PicBoxArt, Nothing)
+        tipInfo.SetToolTipImage(PicBoxArt, Nothing)
         ' 
         ' BtnOK
         ' 
@@ -82,7 +82,7 @@ Partial Class SelectOnlineImage
         BtnOK.Size = New Size(64, 73)
         BtnOK.TabIndex = 30
         tipInfo.SetToolTip(BtnOK, "Insert Image as Art")
-        tipInfo.SetToolTipIcon(BtnOK, Nothing)
+        tipInfo.SetToolTipImage(BtnOK, Nothing)
         BtnOK.UseVisualStyleBackColor = True
         ' 
         ' PicBoxBackThumb
@@ -95,7 +95,7 @@ Partial Class SelectOnlineImage
         PicBoxBackThumb.TabIndex = 4
         PicBoxBackThumb.TabStop = False
         tipInfo.SetToolTip(PicBoxBackThumb, "Back Cover Thumbnail, Click to Select")
-        tipInfo.SetToolTipIcon(PicBoxBackThumb, Nothing)
+        tipInfo.SetToolTipImage(PicBoxBackThumb, Nothing)
         ' 
         ' PicBoxFrontThumb
         ' 
@@ -107,7 +107,7 @@ Partial Class SelectOnlineImage
         PicBoxFrontThumb.TabIndex = 5
         PicBoxFrontThumb.TabStop = False
         tipInfo.SetToolTip(PicBoxFrontThumb, "Front Cover Thumbnail, Click to Select")
-        tipInfo.SetToolTipIcon(PicBoxFrontThumb, Nothing)
+        tipInfo.SetToolTipImage(PicBoxFrontThumb, Nothing)
         ' 
         ' LblStatus
         ' 
@@ -120,7 +120,7 @@ Partial Class SelectOnlineImage
         LblStatus.TabIndex = 8
         LblStatus.Text = "Downloading Art..."
         LblStatus.TextAlign = ContentAlignment.MiddleCenter
-        tipInfo.SetToolTipIcon(LblStatus, Nothing)
+        tipInfo.SetToolTipImage(LblStatus, Nothing)
         LblStatus.Visible = False
         ' 
         ' TxtBoxSearchPhrase
@@ -131,7 +131,7 @@ Partial Class SelectOnlineImage
         TxtBoxSearchPhrase.Name = "TxtBoxSearchPhrase"
         TxtBoxSearchPhrase.Size = New Size(293, 25)
         TxtBoxSearchPhrase.TabIndex = 100
-        tipInfo.SetToolTipIcon(TxtBoxSearchPhrase, Nothing)
+        tipInfo.SetToolTipImage(TxtBoxSearchPhrase, Nothing)
         ' 
         ' BtnSaveArt
         ' 
@@ -144,7 +144,7 @@ Partial Class SelectOnlineImage
         BtnSaveArt.TabIndex = 20
         BtnSaveArt.TabStop = False
         tipInfo.SetToolTip(BtnSaveArt, "Save Image to File")
-        tipInfo.SetToolTipIcon(BtnSaveArt, Nothing)
+        tipInfo.SetToolTipImage(BtnSaveArt, Nothing)
         BtnSaveArt.UseVisualStyleBackColor = True
         ' 
         ' LblDimFront
@@ -157,7 +157,7 @@ Partial Class SelectOnlineImage
         LblDimFront.TabIndex = 101
         LblDimFront.Text = "W x H"
         LblDimFront.TextAlign = ContentAlignment.TopCenter
-        tipInfo.SetToolTipIcon(LblDimFront, Nothing)
+        tipInfo.SetToolTipImage(LblDimFront, Nothing)
         ' 
         ' LblDimBack
         ' 
@@ -169,7 +169,7 @@ Partial Class SelectOnlineImage
         LblDimBack.TabIndex = 102
         LblDimBack.Text = "W x H"
         LblDimBack.TextAlign = ContentAlignment.TopCenter
-        tipInfo.SetToolTipIcon(LblDimBack, Nothing)
+        tipInfo.SetToolTipImage(LblDimBack, Nothing)
         ' 
         ' LblSearchPhrase
         ' 
@@ -180,7 +180,7 @@ Partial Class SelectOnlineImage
         LblSearchPhrase.TabIndex = 103
         LblSearchPhrase.Text = "Search Phrase:"
         LblSearchPhrase.TextAlign = ContentAlignment.MiddleCenter
-        tipInfo.SetToolTipIcon(LblSearchPhrase, Nothing)
+        tipInfo.SetToolTipImage(LblSearchPhrase, Nothing)
         ' 
         ' tipInfo
         ' 
@@ -214,7 +214,7 @@ Partial Class SelectOnlineImage
         Name = "SelectOnlineImage"
         StartPosition = FormStartPosition.CenterParent
         Text = "Select Image from MusicBrainz"
-        tipInfo.SetToolTipIcon(Me, Nothing)
+        tipInfo.SetToolTipImage(Me, Nothing)
         CType(PicBoxArt, ComponentModel.ISupportInitialize).EndInit()
         CType(PicBoxBackThumb, ComponentModel.ISupportInitialize).EndInit()
         CType(PicBoxFrontThumb, ComponentModel.ISupportInitialize).EndInit()

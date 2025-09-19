@@ -52,7 +52,7 @@ Partial Class SaveOnlineImage
         GroupBox1.TabStop = False
         GroupBox1.Text = "Format"
         tipInfo.SetToolTip(GroupBox1, "Select the File Format")
-        tipInfo.SetToolTipIcon(GroupBox1, Nothing)
+        tipInfo.SetToolTipImage(GroupBox1, Nothing)
         ' 
         ' RadBtnImageFormatBMP
         ' 
@@ -64,7 +64,7 @@ Partial Class SaveOnlineImage
         RadBtnImageFormatBMP.TabIndex = 2
         RadBtnImageFormatBMP.TabStop = True
         RadBtnImageFormatBMP.Text = "BMP"
-        tipInfo.SetToolTipIcon(RadBtnImageFormatBMP, Nothing)
+        tipInfo.SetToolTipImage(RadBtnImageFormatBMP, Nothing)
         RadBtnImageFormatBMP.UseVisualStyleBackColor = True
         ' 
         ' RadBtnImageFormatPNG
@@ -77,7 +77,7 @@ Partial Class SaveOnlineImage
         RadBtnImageFormatPNG.TabIndex = 1
         RadBtnImageFormatPNG.TabStop = True
         RadBtnImageFormatPNG.Text = "PNG"
-        tipInfo.SetToolTipIcon(RadBtnImageFormatPNG, Nothing)
+        tipInfo.SetToolTipImage(RadBtnImageFormatPNG, Nothing)
         RadBtnImageFormatPNG.UseVisualStyleBackColor = True
         ' 
         ' RadBtnImageFormatJPG
@@ -90,7 +90,7 @@ Partial Class SaveOnlineImage
         RadBtnImageFormatJPG.TabIndex = 0
         RadBtnImageFormatJPG.TabStop = True
         RadBtnImageFormatJPG.Text = "JPEG"
-        tipInfo.SetToolTipIcon(RadBtnImageFormatJPG, Nothing)
+        tipInfo.SetToolTipImage(RadBtnImageFormatJPG, Nothing)
         RadBtnImageFormatJPG.UseVisualStyleBackColor = True
         ' 
         ' TxtBoxFilename
@@ -100,7 +100,7 @@ Partial Class SaveOnlineImage
         TxtBoxFilename.Name = "TxtBoxFilename"
         TxtBoxFilename.Size = New Size(174, 25)
         TxtBoxFilename.TabIndex = 1
-        tipInfo.SetToolTipIcon(TxtBoxFilename, Nothing)
+        tipInfo.SetToolTipImage(TxtBoxFilename, Nothing)
         ' 
         ' TxtBoxLocation
         ' 
@@ -109,7 +109,7 @@ Partial Class SaveOnlineImage
         TxtBoxLocation.Name = "TxtBoxLocation"
         TxtBoxLocation.Size = New Size(296, 25)
         TxtBoxLocation.TabIndex = 3
-        tipInfo.SetToolTipIcon(TxtBoxLocation, Nothing)
+        tipInfo.SetToolTipImage(TxtBoxLocation, Nothing)
         ' 
         ' BtnLocation
         ' 
@@ -119,7 +119,7 @@ Partial Class SaveOnlineImage
         BtnLocation.Size = New Size(32, 32)
         BtnLocation.TabIndex = 5
         tipInfo.SetToolTip(BtnLocation, "Select a File Location")
-        tipInfo.SetToolTipIcon(BtnLocation, Nothing)
+        tipInfo.SetToolTipImage(BtnLocation, Nothing)
         BtnLocation.UseVisualStyleBackColor = True
         ' 
         ' BtnSave
@@ -133,7 +133,7 @@ Partial Class SaveOnlineImage
         BtnSave.Text = "Save"
         BtnSave.TextAlign = ContentAlignment.MiddleRight
         tipInfo.SetToolTip(BtnSave, "Save Image with the Selected Properties")
-        tipInfo.SetToolTipIcon(BtnSave, Nothing)
+        tipInfo.SetToolTipImage(BtnSave, Nothing)
         BtnSave.UseVisualStyleBackColor = True
         ' 
         ' LblFilename
@@ -144,7 +144,7 @@ Partial Class SaveOnlineImage
         LblFilename.Size = New Size(175, 17)
         LblFilename.TabIndex = 7
         LblFilename.Text = "Filename (Without Extension)"
-        tipInfo.SetToolTipIcon(LblFilename, Nothing)
+        tipInfo.SetToolTipImage(LblFilename, Nothing)
         ' 
         ' LblLocation
         ' 
@@ -154,7 +154,7 @@ Partial Class SaveOnlineImage
         LblLocation.Size = New Size(57, 17)
         LblLocation.TabIndex = 8
         LblLocation.Text = "Location"
-        tipInfo.SetToolTipIcon(LblLocation, Nothing)
+        tipInfo.SetToolTipImage(LblLocation, Nothing)
         ' 
         ' PicBoxThumb
         ' 
@@ -165,7 +165,7 @@ Partial Class SaveOnlineImage
         PicBoxThumb.TabIndex = 9
         PicBoxThumb.TabStop = False
         tipInfo.SetToolTip(PicBoxThumb, "Thumbnail of Image to Save")
-        tipInfo.SetToolTipIcon(PicBoxThumb, Nothing)
+        tipInfo.SetToolTipImage(PicBoxThumb, Nothing)
         ' 
         ' tipInfo
         ' 
@@ -195,7 +195,7 @@ Partial Class SaveOnlineImage
         Name = "SaveOnlineImage"
         StartPosition = FormStartPosition.CenterParent
         Text = "Save Selected Image"
-        tipInfo.SetToolTipIcon(Me, Nothing)
+        tipInfo.SetToolTipImage(Me, Nothing)
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         CType(PicBoxThumb, ComponentModel.ISupportInitialize).EndInit()

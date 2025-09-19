@@ -40,7 +40,7 @@ Partial Class Help
         BtnClose.Size = New Size(64, 73)
         BtnClose.TabIndex = 2
         tipInfo.SetToolTip(BtnClose, "Close (CtrlW)")
-        tipInfo.SetToolTipIcon(BtnClose, Nothing)
+        tipInfo.SetToolTipImage(BtnClose, Nothing)
         BtnClose.UseVisualStyleBackColor = True
         ' 
         ' RTxBoxHelp
@@ -56,7 +56,7 @@ Partial Class Help
         RTxBoxHelp.Size = New Size(856, 315)
         RTxBoxHelp.TabIndex = 3
         RTxBoxHelp.Text = ""
-        tipInfo.SetToolTipIcon(RTxBoxHelp, Nothing)
+        tipInfo.SetToolTipImage(RTxBoxHelp, Nothing)
         ' 
         ' LblVersion
         ' 
@@ -69,7 +69,7 @@ Partial Class Help
         LblVersion.TabIndex = 1
         LblVersion.Text = "LabelCSY2"
         LblVersion.TextAlign = ContentAlignment.MiddleCenter
-        tipInfo.SetToolTipIcon(LblVersion, Nothing)
+        tipInfo.SetToolTipImage(LblVersion, Nothing)
         ' 
         ' tipInfo
         ' 
@@ -97,7 +97,7 @@ Partial Class Help
         Name = "Help"
         StartPosition = FormStartPosition.CenterParent
         Text = "Help & About"
-        tipInfo.SetToolTipIcon(Me, Nothing)
+        tipInfo.SetToolTipImage(Me, Nothing)
         ResumeLayout(False)
 
     End Sub

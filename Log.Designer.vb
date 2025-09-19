@@ -45,7 +45,7 @@ Partial Class Log
         RTxBoxLog.Size = New Size(905, 395)
         RTxBoxLog.TabIndex = 0
         RTxBoxLog.Text = ""
-        tipInfo.SetToolTipIcon(RTxBoxLog, Nothing)
+        tipInfo.SetToolTipImage(RTxBoxLog, Nothing)
         RTxBoxLog.WordWrap = False
         ' 
         ' BtnDelete
@@ -59,7 +59,7 @@ Partial Class Log
         BtnDelete.TabIndex = 2
         BtnDelete.TabStop = False
         tipInfo.SetToolTip(BtnDelete, "Delete Log")
-        tipInfo.SetToolTipIcon(BtnDelete, Nothing)
+        tipInfo.SetToolTipImage(BtnDelete, Nothing)
         BtnDelete.UseVisualStyleBackColor = True
         ' 
         ' BtnClose
@@ -73,7 +73,7 @@ Partial Class Log
         BtnClose.TabIndex = 3
         BtnClose.TabStop = False
         tipInfo.SetToolTip(BtnClose, "Close (CtrlW)")
-        tipInfo.SetToolTipIcon(BtnClose, Nothing)
+        tipInfo.SetToolTipImage(BtnClose, Nothing)
         BtnClose.UseVisualStyleBackColor = True
         ' 
         ' btnRefresh
@@ -87,7 +87,7 @@ Partial Class Log
         btnRefresh.TabIndex = 4
         btnRefresh.TabStop = False
         tipInfo.SetToolTip(btnRefresh, "Refresh Log")
-        tipInfo.SetToolTipIcon(btnRefresh, Nothing)
+        tipInfo.SetToolTipImage(btnRefresh, Nothing)
         btnRefresh.UseVisualStyleBackColor = True
         ' 
         ' Lblnfo
@@ -101,7 +101,7 @@ Partial Class Log
         Lblnfo.TabIndex = 1
         Lblnfo.Text = "File Info"
         Lblnfo.TextAlign = ContentAlignment.MiddleCenter
-        tipInfo.SetToolTipIcon(Lblnfo, Nothing)
+        tipInfo.SetToolTipImage(Lblnfo, Nothing)
         ' 
         ' tipInfo
         ' 
@@ -124,7 +124,7 @@ Partial Class Log
         TxbxSearch.Size = New Size(406, 18)
         TxbxSearch.TabIndex = 5
         TxbxSearch.Text = "Search Log"
-        tipInfo.SetToolTipIcon(TxbxSearch, Nothing)
+        tipInfo.SetToolTipImage(TxbxSearch, Nothing)
         ' 
         ' LblSearch
         ' 
@@ -138,7 +138,7 @@ Partial Class Log
         LblSearch.TabIndex = 6
         LblSearch.Text = "Searching the Log..."
         LblSearch.TextAlign = ContentAlignment.MiddleRight
-        tipInfo.SetToolTipIcon(LblSearch, Nothing)
+        tipInfo.SetToolTipImage(LblSearch, Nothing)
         LblSearch.Visible = False
         ' 
         ' Log
@@ -160,7 +160,7 @@ Partial Class Log
         Name = "Log"
         StartPosition = FormStartPosition.Manual
         Text = "Log"
-        tipInfo.SetToolTipIcon(Me, Nothing)
+        tipInfo.SetToolTipImage(Me, Nothing)
         ResumeLayout(False)
         PerformLayout()
 
