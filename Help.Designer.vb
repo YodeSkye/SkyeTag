@@ -27,20 +27,20 @@ Partial Class Help
         BtnClose = New Button()
         RTxBoxHelp = New RichTextBox()
         LblVersion = New Skye.UI.Label()
-        tipInfo = New Skye.UI.ToolTip(components)
+        tipInfo = New Skye.UI.ToolTipEX(components)
         SuspendLayout()
         ' 
         ' BtnClose
         ' 
         BtnClose.Anchor = AnchorStyles.Bottom
+        tipInfo.SetImage(BtnClose, Nothing)
         BtnClose.Image = My.Resources.Resources.ImageOK64
         BtnClose.Location = New Point(410, 375)
         BtnClose.Margin = New Padding(4, 3, 4, 3)
         BtnClose.Name = "BtnClose"
         BtnClose.Size = New Size(64, 73)
         BtnClose.TabIndex = 2
-        tipInfo.SetToolTip(BtnClose, "Close (CtrlW)")
-        tipInfo.SetToolTipImage(BtnClose, Nothing)
+        tipInfo.SetText(BtnClose, "Close (CtrlW)")
         BtnClose.UseVisualStyleBackColor = True
         ' 
         ' RTxBoxHelp
@@ -48,6 +48,7 @@ Partial Class Help
         RTxBoxHelp.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         RTxBoxHelp.BorderStyle = BorderStyle.None
         RTxBoxHelp.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.SetImage(RTxBoxHelp, Nothing)
         RTxBoxHelp.Location = New Point(14, 16)
         RTxBoxHelp.Margin = New Padding(4, 3, 4, 3)
         RTxBoxHelp.Name = "RTxBoxHelp"
@@ -56,12 +57,12 @@ Partial Class Help
         RTxBoxHelp.Size = New Size(856, 315)
         RTxBoxHelp.TabIndex = 3
         RTxBoxHelp.Text = ""
-        tipInfo.SetToolTipImage(RTxBoxHelp, Nothing)
         ' 
         ' LblVersion
         ' 
         LblVersion.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         LblVersion.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.SetImage(LblVersion, Nothing)
         LblVersion.Location = New Point(14, 338)
         LblVersion.Margin = New Padding(4, 0, 4, 0)
         LblVersion.Name = "LblVersion"
@@ -69,17 +70,16 @@ Partial Class Help
         LblVersion.TabIndex = 1
         LblVersion.Text = "LabelCSY2"
         LblVersion.TextAlign = ContentAlignment.MiddleCenter
-        tipInfo.SetToolTipImage(LblVersion, Nothing)
         ' 
         ' tipInfo
         ' 
-        tipInfo.BackColor = SystemColors.Control
-        tipInfo.BorderColor = SystemColors.Window
-        tipInfo.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipInfo.ForeColor = SystemColors.WindowText
-        tipInfo.InitialDelay = 100
-        tipInfo.OwnerDraw = True
-        tipInfo.ReshowDelay = 20
+        tipInfo.BackColor = Color.White
+        tipInfo.BorderColor = Color.Gainsboro
+        tipInfo.FadeInRate = 25
+        tipInfo.FadeOutRate = 25
+        tipInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.ShowBorder = False
+        tipInfo.ShowDelay = 100
         ' 
         ' Help
         ' 
@@ -91,18 +91,18 @@ Partial Class Help
         Controls.Add(LblVersion)
         Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        tipInfo.SetImage(Me, Nothing)
         KeyPreview = True
         Margin = New Padding(4, 3, 4, 3)
         MinimumSize = New Size(600, 300)
         Name = "Help"
         StartPosition = FormStartPosition.CenterParent
         Text = "Help & About"
-        tipInfo.SetToolTipImage(Me, Nothing)
         ResumeLayout(False)
 
     End Sub
     Friend WithEvents LblVersion As Skye.UI.Label
     Friend WithEvents BtnClose As Button
     Friend WithEvents RTxBoxHelp As RichTextBox
-    Friend WithEvents tipInfo As Skye.UI.ToolTip
+    Friend WithEvents tipInfo As Skye.UI.ToolTipEX
 End Class

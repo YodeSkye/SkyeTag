@@ -34,7 +34,7 @@ Partial Class SaveOnlineImage
         LblFilename = New Skye.UI.Label()
         LblLocation = New Skye.UI.Label()
         PicBoxThumb = New PictureBox()
-        tipInfo = New Skye.UI.ToolTip(components)
+        tipInfo = New Skye.UI.ToolTipEX(components)
         GroupBox1.SuspendLayout()
         CType(PicBoxThumb, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -45,137 +45,137 @@ Partial Class SaveOnlineImage
         GroupBox1.Controls.Add(RadBtnImageFormatPNG)
         GroupBox1.Controls.Add(RadBtnImageFormatJPG)
         GroupBox1.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        tipInfo.SetImage(GroupBox1, Nothing)
         GroupBox1.Location = New Point(12, 107)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Size = New Size(83, 120)
         GroupBox1.TabIndex = 0
         GroupBox1.TabStop = False
         GroupBox1.Text = "Format"
-        tipInfo.SetToolTip(GroupBox1, "Select the File Format")
-        tipInfo.SetToolTipImage(GroupBox1, Nothing)
+        tipInfo.SetText(GroupBox1, "Select the File Format")
         ' 
         ' RadBtnImageFormatBMP
         ' 
         RadBtnImageFormatBMP.AutoSize = True
         RadBtnImageFormatBMP.Font = New Font("Segoe UI", 9.75F)
+        tipInfo.SetImage(RadBtnImageFormatBMP, Nothing)
         RadBtnImageFormatBMP.Location = New Point(17, 82)
         RadBtnImageFormatBMP.Name = "RadBtnImageFormatBMP"
         RadBtnImageFormatBMP.Size = New Size(52, 21)
         RadBtnImageFormatBMP.TabIndex = 2
         RadBtnImageFormatBMP.TabStop = True
         RadBtnImageFormatBMP.Text = "BMP"
-        tipInfo.SetToolTipImage(RadBtnImageFormatBMP, Nothing)
         RadBtnImageFormatBMP.UseVisualStyleBackColor = True
         ' 
         ' RadBtnImageFormatPNG
         ' 
         RadBtnImageFormatPNG.AutoSize = True
         RadBtnImageFormatPNG.Font = New Font("Segoe UI", 9.75F)
+        tipInfo.SetImage(RadBtnImageFormatPNG, Nothing)
         RadBtnImageFormatPNG.Location = New Point(17, 53)
         RadBtnImageFormatPNG.Name = "RadBtnImageFormatPNG"
         RadBtnImageFormatPNG.Size = New Size(52, 21)
         RadBtnImageFormatPNG.TabIndex = 1
         RadBtnImageFormatPNG.TabStop = True
         RadBtnImageFormatPNG.Text = "PNG"
-        tipInfo.SetToolTipImage(RadBtnImageFormatPNG, Nothing)
         RadBtnImageFormatPNG.UseVisualStyleBackColor = True
         ' 
         ' RadBtnImageFormatJPG
         ' 
         RadBtnImageFormatJPG.AutoSize = True
         RadBtnImageFormatJPG.Font = New Font("Segoe UI", 9.75F)
+        tipInfo.SetImage(RadBtnImageFormatJPG, Nothing)
         RadBtnImageFormatJPG.Location = New Point(17, 25)
         RadBtnImageFormatJPG.Name = "RadBtnImageFormatJPG"
         RadBtnImageFormatJPG.Size = New Size(54, 21)
         RadBtnImageFormatJPG.TabIndex = 0
         RadBtnImageFormatJPG.TabStop = True
         RadBtnImageFormatJPG.Text = "JPEG"
-        tipInfo.SetToolTipImage(RadBtnImageFormatJPG, Nothing)
         RadBtnImageFormatJPG.UseVisualStyleBackColor = True
         ' 
         ' TxtBoxFilename
         ' 
         TxtBoxFilename.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        tipInfo.SetImage(TxtBoxFilename, Nothing)
         TxtBoxFilename.Location = New Point(12, 27)
         TxtBoxFilename.Name = "TxtBoxFilename"
         TxtBoxFilename.Size = New Size(174, 25)
         TxtBoxFilename.TabIndex = 1
-        tipInfo.SetToolTipImage(TxtBoxFilename, Nothing)
         ' 
         ' TxtBoxLocation
         ' 
         TxtBoxLocation.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        tipInfo.SetImage(TxtBoxLocation, Nothing)
         TxtBoxLocation.Location = New Point(12, 76)
         TxtBoxLocation.Name = "TxtBoxLocation"
         TxtBoxLocation.Size = New Size(296, 25)
         TxtBoxLocation.TabIndex = 3
-        tipInfo.SetToolTipImage(TxtBoxLocation, Nothing)
         ' 
         ' BtnLocation
         ' 
+        tipInfo.SetImage(BtnLocation, Nothing)
         BtnLocation.Image = My.Resources.Resources.imageOpenImage
         BtnLocation.Location = New Point(308, 72)
         BtnLocation.Name = "BtnLocation"
         BtnLocation.Size = New Size(32, 32)
         BtnLocation.TabIndex = 5
-        tipInfo.SetToolTip(BtnLocation, "Select a File Location")
-        tipInfo.SetToolTipImage(BtnLocation, Nothing)
+        tipInfo.SetText(BtnLocation, "Select a File Location")
         BtnLocation.UseVisualStyleBackColor = True
         ' 
         ' BtnSave
         ' 
+        tipInfo.SetImage(BtnSave, Nothing)
         BtnSave.Image = My.Resources.Resources.imageSave
         BtnSave.ImageAlign = ContentAlignment.MiddleLeft
         BtnSave.Location = New Point(11, 233)
         BtnSave.Name = "BtnSave"
         BtnSave.Size = New Size(84, 32)
         BtnSave.TabIndex = 6
+        tipInfo.SetText(BtnSave, "Save Image with the Selected Properties")
         BtnSave.Text = "Save"
         BtnSave.TextAlign = ContentAlignment.MiddleRight
-        tipInfo.SetToolTip(BtnSave, "Save Image with the Selected Properties")
-        tipInfo.SetToolTipImage(BtnSave, Nothing)
         BtnSave.UseVisualStyleBackColor = True
         ' 
         ' LblFilename
         ' 
         LblFilename.AutoSize = True
+        tipInfo.SetImage(LblFilename, Nothing)
         LblFilename.Location = New Point(12, 9)
         LblFilename.Name = "LblFilename"
         LblFilename.Size = New Size(175, 17)
         LblFilename.TabIndex = 7
         LblFilename.Text = "Filename (Without Extension)"
-        tipInfo.SetToolTipImage(LblFilename, Nothing)
         ' 
         ' LblLocation
         ' 
         LblLocation.AutoSize = True
+        tipInfo.SetImage(LblLocation, Nothing)
         LblLocation.Location = New Point(12, 58)
         LblLocation.Name = "LblLocation"
         LblLocation.Size = New Size(57, 17)
         LblLocation.TabIndex = 8
         LblLocation.Text = "Location"
-        tipInfo.SetToolTipImage(LblLocation, Nothing)
         ' 
         ' PicBoxThumb
         ' 
+        tipInfo.SetImage(PicBoxThumb, Nothing)
         PicBoxThumb.Location = New Point(187, 110)
         PicBoxThumb.Name = "PicBoxThumb"
         PicBoxThumb.Size = New Size(153, 153)
         PicBoxThumb.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxThumb.TabIndex = 9
         PicBoxThumb.TabStop = False
-        tipInfo.SetToolTip(PicBoxThumb, "Thumbnail of Image to Save")
-        tipInfo.SetToolTipImage(PicBoxThumb, Nothing)
+        tipInfo.SetText(PicBoxThumb, "Thumbnail of Image to Save")
         ' 
         ' tipInfo
         ' 
-        tipInfo.BackColor = SystemColors.Control
-        tipInfo.BorderColor = SystemColors.Window
-        tipInfo.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipInfo.ForeColor = SystemColors.WindowText
-        tipInfo.InitialDelay = 100
-        tipInfo.OwnerDraw = True
-        tipInfo.ReshowDelay = 20
+        tipInfo.BackColor = Color.White
+        tipInfo.BorderColor = Color.Gainsboro
+        tipInfo.FadeInRate = 25
+        tipInfo.FadeOutRate = 25
+        tipInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.ShowBorder = False
+        tipInfo.ShowDelay = 100
         ' 
         ' SaveOnlineImage
         ' 
@@ -192,10 +192,10 @@ Partial Class SaveOnlineImage
         Controls.Add(LblLocation)
         Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FormBorderStyle = FormBorderStyle.FixedDialog
+        tipInfo.SetImage(Me, Nothing)
         Name = "SaveOnlineImage"
-        StartPosition = FormStartPosition.CenterParent
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Save Selected Image"
-        tipInfo.SetToolTipImage(Me, Nothing)
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         CType(PicBoxThumb, ComponentModel.ISupportInitialize).EndInit()
@@ -214,5 +214,5 @@ Partial Class SaveOnlineImage
     Friend WithEvents LblFilename As Skye.UI.Label
     Friend WithEvents LblLocation As Skye.UI.Label
     Friend WithEvents PicBoxThumb As PictureBox
-    Friend WithEvents tipInfo As Skye.UI.ToolTip
+    Friend WithEvents tipInfo As Skye.UI.ToolTipEX
 End Class

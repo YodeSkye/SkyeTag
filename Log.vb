@@ -159,11 +159,12 @@ Public Class Log
             timerDeleteLog.Stop()
             DeleteLogConfirm = False
             Me.BtnDelete.ResetBackColor()
-            tipInfo.Hide(Me)
+            tipAlert.HideTooltip()
         Else
             DeleteLogConfirm = True
             Me.BtnDelete.BackColor = Color.Red
-            tipInfo.Show("Are You Sure?", Me, BtnDelete.Location)
+            tipInfo.HideTooltip()
+            tipAlert.ShowTooltipAtCursor("Are You Sure?")
             timerDeleteLog.Start()
         End If
     End Sub

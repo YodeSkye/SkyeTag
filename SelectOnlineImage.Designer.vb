@@ -36,7 +36,7 @@ Partial Class SelectOnlineImage
         LblDimFront = New Skye.UI.Label()
         LblDimBack = New Skye.UI.Label()
         LblSearchPhrase = New Skye.UI.Label()
-        tipInfo = New Skye.UI.ToolTip(components)
+        tipInfo = New Skye.UI.ToolTipEX(components)
         CType(PicBoxArt, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicBoxBackThumb, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicBoxFrontThumb, ComponentModel.ISupportInitialize).BeginInit()
@@ -48,11 +48,11 @@ Partial Class SelectOnlineImage
         LVIDs.Columns.AddRange(New ColumnHeader() {ColumnHeader1})
         LVIDs.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         LVIDs.HeaderStyle = ColumnHeaderStyle.None
+        tipInfo.SetImage(LVIDs, Nothing)
         LVIDs.Location = New Point(12, 49)
         LVIDs.Name = "LVIDs"
         LVIDs.Size = New Size(388, 208)
         LVIDs.TabIndex = 0
-        tipInfo.SetToolTipImage(LVIDs, Nothing)
         LVIDs.UseCompatibleStateImageBehavior = False
         LVIDs.View = View.Details
         ' 
@@ -64,133 +64,133 @@ Partial Class SelectOnlineImage
         ' PicBoxArt
         ' 
         PicBoxArt.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        tipInfo.SetImage(PicBoxArt, Nothing)
         PicBoxArt.Location = New Point(12, 264)
         PicBoxArt.Name = "PicBoxArt"
         PicBoxArt.Size = New Size(600, 680)
         PicBoxArt.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxArt.TabIndex = 2
         PicBoxArt.TabStop = False
-        tipInfo.SetToolTip(PicBoxArt, "Selected Image")
-        tipInfo.SetToolTipImage(PicBoxArt, Nothing)
+        tipInfo.SetText(PicBoxArt, "Selected Image")
         ' 
         ' BtnOK
         ' 
         BtnOK.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        tipInfo.SetImage(BtnOK, Nothing)
         BtnOK.Image = My.Resources.Resources.ImageOK64
         BtnOK.Location = New Point(548, 185)
         BtnOK.Name = "BtnOK"
         BtnOK.Size = New Size(64, 73)
         BtnOK.TabIndex = 30
-        tipInfo.SetToolTip(BtnOK, "Insert Image as Art")
-        tipInfo.SetToolTipImage(BtnOK, Nothing)
+        tipInfo.SetText(BtnOK, "Insert Image as Art")
         BtnOK.UseVisualStyleBackColor = True
         ' 
         ' PicBoxBackThumb
         ' 
         PicBoxBackThumb.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        tipInfo.SetImage(PicBoxBackThumb, Nothing)
         PicBoxBackThumb.Location = New Point(512, 12)
         PicBoxBackThumb.Name = "PicBoxBackThumb"
         PicBoxBackThumb.Size = New Size(100, 113)
         PicBoxBackThumb.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxBackThumb.TabIndex = 4
         PicBoxBackThumb.TabStop = False
-        tipInfo.SetToolTip(PicBoxBackThumb, "Back Cover Thumbnail, Click to Select")
-        tipInfo.SetToolTipImage(PicBoxBackThumb, Nothing)
+        tipInfo.SetText(PicBoxBackThumb, "Back Cover Thumbnail, Click to Select")
         ' 
         ' PicBoxFrontThumb
         ' 
         PicBoxFrontThumb.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        tipInfo.SetImage(PicBoxFrontThumb, Nothing)
         PicBoxFrontThumb.Location = New Point(406, 14)
         PicBoxFrontThumb.Name = "PicBoxFrontThumb"
         PicBoxFrontThumb.Size = New Size(100, 113)
         PicBoxFrontThumb.SizeMode = PictureBoxSizeMode.Zoom
         PicBoxFrontThumb.TabIndex = 5
         PicBoxFrontThumb.TabStop = False
-        tipInfo.SetToolTip(PicBoxFrontThumb, "Front Cover Thumbnail, Click to Select")
-        tipInfo.SetToolTipImage(PicBoxFrontThumb, Nothing)
+        tipInfo.SetText(PicBoxFrontThumb, "Front Cover Thumbnail, Click to Select")
         ' 
         ' LblStatus
         ' 
         LblStatus.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         LblStatus.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LblStatus.ForeColor = Color.Red
+        tipInfo.SetImage(LblStatus, Nothing)
         LblStatus.Location = New Point(406, 162)
         LblStatus.Name = "LblStatus"
         LblStatus.Size = New Size(206, 19)
         LblStatus.TabIndex = 8
         LblStatus.Text = "Downloading Art..."
         LblStatus.TextAlign = ContentAlignment.MiddleCenter
-        tipInfo.SetToolTipImage(LblStatus, Nothing)
         LblStatus.Visible = False
         ' 
         ' TxtBoxSearchPhrase
         ' 
         TxtBoxSearchPhrase.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         TxtBoxSearchPhrase.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        tipInfo.SetImage(TxtBoxSearchPhrase, Nothing)
         TxtBoxSearchPhrase.Location = New Point(107, 14)
         TxtBoxSearchPhrase.Name = "TxtBoxSearchPhrase"
         TxtBoxSearchPhrase.Size = New Size(293, 25)
         TxtBoxSearchPhrase.TabIndex = 100
-        tipInfo.SetToolTipImage(TxtBoxSearchPhrase, Nothing)
         ' 
         ' BtnSaveArt
         ' 
         BtnSaveArt.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         BtnSaveArt.Enabled = False
+        tipInfo.SetImage(BtnSaveArt, Nothing)
         BtnSaveArt.Image = My.Resources.Resources.ImageSave64
         BtnSaveArt.Location = New Point(406, 185)
         BtnSaveArt.Name = "BtnSaveArt"
         BtnSaveArt.Size = New Size(64, 73)
         BtnSaveArt.TabIndex = 20
         BtnSaveArt.TabStop = False
-        tipInfo.SetToolTip(BtnSaveArt, "Save Image to File")
-        tipInfo.SetToolTipImage(BtnSaveArt, Nothing)
+        tipInfo.SetText(BtnSaveArt, "Save Image to File")
         BtnSaveArt.UseVisualStyleBackColor = True
         ' 
         ' LblDimFront
         ' 
         LblDimFront.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         LblDimFront.Font = New Font("Segoe UI", 9.75F)
+        tipInfo.SetImage(LblDimFront, Nothing)
         LblDimFront.Location = New Point(406, 126)
         LblDimFront.Name = "LblDimFront"
         LblDimFront.Size = New Size(100, 23)
         LblDimFront.TabIndex = 101
         LblDimFront.Text = "W x H"
         LblDimFront.TextAlign = ContentAlignment.TopCenter
-        tipInfo.SetToolTipImage(LblDimFront, Nothing)
         ' 
         ' LblDimBack
         ' 
         LblDimBack.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         LblDimBack.Font = New Font("Segoe UI", 9.75F)
+        tipInfo.SetImage(LblDimBack, Nothing)
         LblDimBack.Location = New Point(512, 125)
         LblDimBack.Name = "LblDimBack"
         LblDimBack.Size = New Size(100, 23)
         LblDimBack.TabIndex = 102
         LblDimBack.Text = "W x H"
         LblDimBack.TextAlign = ContentAlignment.TopCenter
-        tipInfo.SetToolTipImage(LblDimBack, Nothing)
         ' 
         ' LblSearchPhrase
         ' 
         LblSearchPhrase.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        tipInfo.SetImage(LblSearchPhrase, Nothing)
         LblSearchPhrase.Location = New Point(14, 15)
         LblSearchPhrase.Name = "LblSearchPhrase"
         LblSearchPhrase.Size = New Size(94, 26)
         LblSearchPhrase.TabIndex = 103
         LblSearchPhrase.Text = "Search Phrase:"
         LblSearchPhrase.TextAlign = ContentAlignment.MiddleCenter
-        tipInfo.SetToolTipImage(LblSearchPhrase, Nothing)
         ' 
         ' tipInfo
         ' 
-        tipInfo.BackColor = SystemColors.Control
-        tipInfo.BorderColor = SystemColors.Window
-        tipInfo.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipInfo.ForeColor = SystemColors.WindowText
-        tipInfo.InitialDelay = 100
-        tipInfo.OwnerDraw = True
-        tipInfo.ReshowDelay = 20
+        tipInfo.BackColor = Color.White
+        tipInfo.BorderColor = Color.Gainsboro
+        tipInfo.FadeInRate = 25
+        tipInfo.FadeOutRate = 25
+        tipInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.ShowBorder = False
+        tipInfo.ShowDelay = 100
         ' 
         ' SelectOnlineImage
         ' 
@@ -210,11 +210,11 @@ Partial Class SelectOnlineImage
         Controls.Add(LblSearchPhrase)
         Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        tipInfo.SetImage(Me, Nothing)
         MinimumSize = New Size(500, 561)
         Name = "SelectOnlineImage"
-        StartPosition = FormStartPosition.CenterParent
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Select Image from MusicBrainz"
-        tipInfo.SetToolTipImage(Me, Nothing)
         CType(PicBoxArt, ComponentModel.ISupportInitialize).EndInit()
         CType(PicBoxBackThumb, ComponentModel.ISupportInitialize).EndInit()
         CType(PicBoxFrontThumb, ComponentModel.ISupportInitialize).EndInit()
@@ -234,5 +234,5 @@ Partial Class SelectOnlineImage
     Friend WithEvents LblDimFront As Skye.UI.Label
     Friend WithEvents LblDimBack As Skye.UI.Label
     Friend WithEvents LblSearchPhrase As Skye.UI.Label
-    Friend WithEvents tipInfo As Skye.UI.ToolTip
+    Friend WithEvents tipInfo As Skye.UI.ToolTipEX
 End Class

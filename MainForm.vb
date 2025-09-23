@@ -1,5 +1,6 @@
 ﻿
 Imports Microsoft.Win32
+Imports Skye.UI
 Imports SkyeTag.My
 Imports System.Diagnostics
 Imports System.Runtime.CompilerServices
@@ -40,7 +41,7 @@ Partial Friend Class MainForm
         Text = My.Application.Info.ProductName
         lblFileInfo.Text = String.Empty
         For Each name As String In System.Enum.GetNames(GetType(TagLib.PictureType)) : cobxAlbumArtType.Items.Add(name) : Next
-        tipInfo.SetToolTip(btnAlbumArt, App.hArt + " Menu")
+        tipInfo.SetText(btnAlbumArt, App.hArt + " Menu")
         txtboxCM.ShowExtendedTools = True
         txtboxCM.Font = App.CMFont
         txtboxCMLyrics.ShowExtendedTools = False
@@ -56,7 +57,7 @@ Partial Friend Class MainForm
         'Size = App.Settings.StartSize
         Location = New Point(My.Computer.Screen.WorkingArea.Left + CInt(My.Computer.Screen.WorkingArea.Width / 2) - CInt(Width / 2), My.Computer.Screen.WorkingArea.Top + 50)
         btnError.Visible = True
-        tipInfo.SetToolTip(btnError, tipInfo.GetToolTip(btnError) + vbCr + "CtrlRightClick = Test Error")
+        tipInfo.SetText(btnError, tipInfo.GetText(btnError) + vbCr + "CtrlRightClick = Test Error")
 #Else
 		Location = App.Settings.StartLocation
 		Size = App.Settings.StartSize
@@ -123,42 +124,42 @@ Partial Friend Class MainForm
     Private Sub frm_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
         Dim g As Graphics = Me.CreateGraphics
         If tlFile Is Nothing Then
-            Me.tipInfo.SetToolTip(Me.txbxArtist, Nothing)
+            Me.tipInfo.SetText(Me.txbxArtist, Nothing)
         Else
             If tlFile.Tag.Performers.Length = 1 Then
                 If g.MeasureString(Me.txbxArtist.Text, Me.txbxArtist.Font).Width > Me.txbxArtist.Width Then
-                    Me.tipInfo.SetToolTip(Me.txbxArtist, Me.txbxArtist.Text)
-                Else : Me.tipInfo.SetToolTip(Me.txbxArtist, Nothing)
+                    Me.tipInfo.SetText(Me.txbxArtist, Me.txbxArtist.Text)
+                Else : Me.tipInfo.SetText(Me.txbxArtist, Nothing)
                 End If
             ElseIf tlFile.Tag.Performers.Length > 1 Then
-                Me.tipInfo.SetToolTip(Me.txbxArtist, tlFile.Tag.JoinedPerformers)
+                Me.tipInfo.SetText(Me.txbxArtist, tlFile.Tag.JoinedPerformers)
             Else
-                Me.tipInfo.SetToolTip(Me.txbxArtist, Nothing)
+                Me.tipInfo.SetText(Me.txbxArtist, Nothing)
             End If
         End If
         If g.MeasureString(Me.txbxGenre.Text, Me.txbxGenre.Font).Width > Me.txbxGenre.Width Then
-            Me.tipInfo.SetToolTip(Me.txbxGenre, Me.txbxGenre.Text)
-        Else : Me.tipInfo.SetToolTip(Me.txbxGenre, Nothing)
+            Me.tipInfo.SetText(Me.txbxGenre, Me.txbxGenre.Text)
+        Else : Me.tipInfo.SetText(Me.txbxGenre, Nothing)
         End If
         If g.MeasureString(Me.txbxTitle.Text, Me.txbxTitle.Font).Width > Me.txbxTitle.Width Then
-            Me.tipInfo.SetToolTip(Me.txbxTitle, Me.txbxTitle.Text)
-        Else : Me.tipInfo.SetToolTip(Me.txbxTitle, Nothing)
+            Me.tipInfo.SetText(Me.txbxTitle, Me.txbxTitle.Text)
+        Else : Me.tipInfo.SetText(Me.txbxTitle, Nothing)
         End If
         If g.MeasureString(Me.txbxAlbum.Text, Me.txbxAlbum.Font).Width > Me.txbxAlbum.Width Then
-            Me.tipInfo.SetToolTip(Me.txbxAlbum, Me.txbxAlbum.Text)
-        Else : Me.tipInfo.SetToolTip(Me.txbxAlbum, Nothing)
+            Me.tipInfo.SetText(Me.txbxAlbum, Me.txbxAlbum.Text)
+        Else : Me.tipInfo.SetText(Me.txbxAlbum, Nothing)
         End If
         If g.MeasureString(Me.txbxComments.Text, Me.txbxComments.Font).Width > Me.txbxComments.Width Then
-            Me.tipInfo.SetToolTip(Me.txbxComments, Me.txbxComments.Text)
-        Else : Me.tipInfo.SetToolTip(Me.txbxComments, Nothing)
+            Me.tipInfo.SetText(Me.txbxComments, Me.txbxComments.Text)
+        Else : Me.tipInfo.SetText(Me.txbxComments, Nothing)
         End If
         If g.MeasureString(Me.txbxAlbumArt.Text, Me.txbxAlbumArt.Font).Width > Me.txbxAlbumArt.Width Then
-            Me.tipInfo.SetToolTip(Me.txbxAlbumArt, Me.txbxAlbumArt.Text)
-        Else : Me.tipInfo.SetToolTip(Me.txbxAlbumArt, Nothing)
+            Me.tipInfo.SetText(Me.txbxAlbumArt, Me.txbxAlbumArt.Text)
+        Else : Me.tipInfo.SetText(Me.txbxAlbumArt, Nothing)
         End If
         If tlFile IsNot Nothing AndAlso tlFile.Tag.Pictures.Length > 0 AndAlso g.MeasureString(Me.cobxAlbumArtType.Text, Me.cobxAlbumArtType.Font).Width > Me.cobxAlbumArtType.Width - 15 Then
-            Me.tipInfo.SetToolTip(Me.cobxAlbumArtType, Me.cobxAlbumArtType.Text)
-        Else : Me.tipInfo.SetToolTip(Me.cobxAlbumArtType, Nothing)
+            Me.tipInfo.SetText(Me.cobxAlbumArtType, Me.cobxAlbumArtType.Text)
+        Else : Me.tipInfo.SetText(Me.cobxAlbumArtType, Nothing)
         End If
         g.Dispose()
     End Sub
@@ -417,8 +418,9 @@ Partial Friend Class MainForm
     Private Sub cmiArtistInsertFromClipboard_Click(sender As Object, e As EventArgs) Handles cmiArtistInsertFromClipboard.Click
         If My.Computer.Clipboard.ContainsText Then : InsertArtist(My.Computer.Clipboard.GetText)
         Else
-            tipInfo.Tag = SystemIcons.Information.ToBitmap
-            tipInfo.Show("No Text On ClipBoard", Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+            'tipInfo.Tag = SystemIcons.Information.ToBitmap
+            'tipInfo.Show("No Text On ClipBoard", Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+            tipAlert.ShowTooltip(btnArtistInsert, "No Text On ClipBoard", SystemIcons.Information.ToBitmap)
         End If
     End Sub
     Private Sub cmiArtistPrevious_Click(sender As Object, e As EventArgs) Handles cmiArtistPrevious.Click
@@ -635,10 +637,10 @@ Partial Friend Class MainForm
     Private Sub lblAlbumArtClick(sender As Object, e As EventArgs)
         If tlFile.Tag.Pictures.Length > 0 Then ResetLyrics()
     End Sub
-    Private Sub txbx_MouseLeave(sender As Object, e As EventArgs) Handles txbxYear.MouseLeave, txbxTrackCount.MouseLeave, txbxTrack.MouseLeave, txbxTitle.MouseLeave, txbxGenre.MouseLeave, txbxComments.MouseLeave, txbxArtist.MouseLeave, txbxAlbum.MouseLeave
-        tipInfo.Active = False
-        tipInfo.Active = True
-    End Sub
+    'Private Sub txbx_MouseLeave(sender As Object, e As EventArgs) Handles txbxYear.MouseLeave, txbxTrackCount.MouseLeave, txbxTrack.MouseLeave, txbxTitle.MouseLeave, txbxGenre.MouseLeave, txbxComments.MouseLeave, txbxArtist.MouseLeave, txbxAlbum.MouseLeave
+    '    'tipInfo.Active = False
+    '    'tipInfo.Active = True
+    'End Sub
     Private Sub txtbox_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txbxYear.PreviewKeyDown, txbxTrackCount.PreviewKeyDown, txbxTrack.PreviewKeyDown, txbxTitle.PreviewKeyDown, txbxGenre.PreviewKeyDown, txbxDuration.PreviewKeyDown, txbxComments.PreviewKeyDown, txbxArtist.PreviewKeyDown, txbxAlbumArt.PreviewKeyDown, txbxAlbum.PreviewKeyDown
         txtboxCM.ShortcutKeys(DirectCast(sender, TextBox), e)
     End Sub
@@ -1018,8 +1020,9 @@ Partial Friend Class MainForm
     Friend Sub SetError()
         Me.btnError.Visible = True
         If Not String.IsNullOrEmpty(My.AppAlertMessage) Then
-            tipInfo.Tag = SystemIcons.Error.ToBitmap
-            tipInfo.Show(My.AppAlertMessage, Me, Me.btnError.Right + SystemInformation.FrameBorderSize.Width, Me.btnError.Bottom + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight)
+            'tipInfo.Tag = SystemIcons.Error.ToBitmap
+            'tipInfo.Show(My.AppAlertMessage, Me, Me.btnError.Right + SystemInformation.FrameBorderSize.Width, Me.btnError.Bottom + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight)
+            tipAlert.ShowTooltip(btnError, My.AppAlertMessage, SystemIcons.Error.ToBitmap)
         End If
     End Sub
     Friend Sub ClearError()
@@ -1063,7 +1066,7 @@ Partial Friend Class MainForm
     End Sub
     Private Sub SetTag()
         ClearFile()
-        If String.IsNullOrEmpty(My.tagPath) Then : Me.tipInfo.SetToolTip(Me.lblFileInfo, My.App.sNoFile)
+        If String.IsNullOrEmpty(My.tagPath) Then : Me.tipInfo.SetText(Me.lblFileInfo, My.App.sNoFile)
         Else
             Static fInfo As IO.FileInfo
             Static sExtendedInfo As String
@@ -1102,7 +1105,7 @@ Partial Friend Class MainForm
                     End Select
                 End If
                 sExtendedInfo += vbCr + "Tags: " + tlFile.TagTypes.ToString
-                Me.tipInfo.SetToolTip(lblFileInfo, sExtendedInfo)
+                Me.tipInfo.SetText(lblFileInfo, sExtendedInfo)
                 sExtendedInfo = Nothing
                 My.tagArtistIndex = 0
                 My.tagArtIndex = 0
@@ -1110,43 +1113,43 @@ Partial Friend Class MainForm
             Catch ex As TagLib.UnsupportedFormatException
                 If My.Computer.FileSystem.DirectoryExists(My.tagPath) Then
                     My.App.WriteToLog("Tag NOT Opened (" + My.App.sNotFile + ")")
-                    Me.tipInfo.SetToolTip(Me.btnError, My.tagPath + vbCr + My.App.sNotFile)
+                    Me.tipInfo.SetText(Me.btnError, My.tagPath + vbCr + My.App.sNotFile)
                     My.AppAlertMessage = My.App.sNotFile
                 Else
                     My.App.WriteToLog("Tag NOT Opened (" + My.App.sUnSupportedFile + ")")
-                    Me.tipInfo.SetToolTip(Me.btnError, My.tagPath + vbCr + My.App.sUnSupportedFile)
+                    Me.tipInfo.SetText(Me.btnError, My.tagPath + vbCr + My.App.sUnSupportedFile)
                     My.AppAlertMessage = My.App.sUnSupportedFile
                 End If
                 My.App.ErrorNotification()
                 ClearFile()
             Catch ex As TagLib.CorruptFileException
                 My.App.WriteToLog("Tag NOT Opened (" + My.App.sBadFile + ")")
-                Me.tipInfo.SetToolTip(Me.btnError, My.tagPath + vbCr + My.App.sBadFile)
+                Me.tipInfo.SetText(Me.btnError, My.tagPath + vbCr + My.App.sBadFile)
                 My.AppAlertMessage = My.App.sBadFile
                 My.App.ErrorNotification()
                 ClearFile()
             Catch ex As Xml.XmlException
                 My.App.WriteToLog("Tag NOT Opened (" + My.App.sBadFile + ")")
-                Me.tipInfo.SetToolTip(Me.btnError, My.tagPath + vbCr + My.App.sBadFile)
+                Me.tipInfo.SetText(Me.btnError, My.tagPath + vbCr + My.App.sBadFile)
                 My.AppAlertMessage = My.App.sBadFile
                 My.App.ErrorNotification()
                 ClearFile()
             Catch ex As IO.FileNotFoundException
                 My.App.WriteToLog("Tag NOT Opened (" + My.App.sNotFound + ")")
-                Me.tipInfo.SetToolTip(Me.btnError, My.tagPath + vbCr + My.App.sNotFound)
+                Me.tipInfo.SetText(Me.btnError, My.tagPath + vbCr + My.App.sNotFound)
                 My.AppAlertMessage = My.App.sNotFound
                 My.App.ErrorNotification()
                 ClearFile()
             Catch ex As IO.IOException
                 My.App.WriteToLog("Tag NOT Opened (" + My.App.sUnAccessibleFile + ")")
-                Me.tipInfo.SetToolTip(Me.btnError, My.tagPath + vbCr + My.App.sUnAccessibleFile)
+                Me.tipInfo.SetText(Me.btnError, My.tagPath + vbCr + My.App.sUnAccessibleFile)
                 My.AppAlertMessage = My.App.sUnAccessibleFile
                 My.App.ErrorNotification()
                 ClearFile()
             Catch ex As Exception
                 My.App.WriteToLog("Tag NOT Opened (" + My.App.sError + ")")
                 My.App.WriteToLog(ex.ToString, False)
-                Me.tipInfo.SetToolTip(Me.btnError, My.tagPath + vbCr + My.App.sError)
+                Me.tipInfo.SetText(Me.btnError, My.tagPath + vbCr + My.App.sError)
                 My.AppAlertMessage = My.App.sError + vbCr + ex.ToString
                 My.App.ErrorNotification()
                 ClearFile()
@@ -1213,7 +1216,7 @@ Partial Friend Class MainForm
                 End Try
                 ms.Dispose()
                 ms = Nothing
-                If Me.picbxAlbumArt.Image IsNot Nothing Then Me.tipInfo.SetToolTip(Me.picbxAlbumArt, Me.picbxAlbumArt.Image.Size.Width.ToString + "x" + Me.picbxAlbumArt.Image.Size.Height.ToString + vbCr + tlFile.Tag.Pictures(My.tagArtIndex).MimeType + vbCr + Skye.Common.FormatFileSize(tlFile.Tag.Pictures(My.tagArtIndex).Data.Data.Length, Skye.Common.FormatFileSizeUnits.Auto))
+                If Me.picbxAlbumArt.Image IsNot Nothing Then Me.tipInfo.SetText(Me.picbxAlbumArt, Me.picbxAlbumArt.Image.Size.Width.ToString + "x" + Me.picbxAlbumArt.Image.Size.Height.ToString + vbCr + tlFile.Tag.Pictures(My.tagArtIndex).MimeType + vbCr + Skye.Common.FormatFileSize(tlFile.Tag.Pictures(My.tagArtIndex).Data.Data.Length, Skye.Common.FormatFileSizeUnits.Auto))
             Else
                 Me.lblAlbumArt.Text = My.App.hArt
                 Me.lblAlbumArt.Enabled = False
@@ -1230,7 +1233,7 @@ Partial Friend Class MainForm
         End If
         If My.tagPath = String.Empty Then
             Me.lblFileInfo.Text = My.App.sNoFile
-            Me.tipInfo.SetToolTip(Me.lblFileInfo, My.App.sNoFile)
+            Me.tipInfo.SetText(Me.lblFileInfo, My.App.sNoFile)
         End If
         Me.ResumeLayout()
     End Sub
@@ -1497,8 +1500,9 @@ Partial Friend Class MainForm
             Dim newpic As TagLib.IPicture = GetNewPic(picsource)
             If newpic Is Nothing Then
                 If picsource = My.App.ImageSource.ClipBoard Then
-                    tipInfo.Tag = SystemIcons.Information.ToBitmap
-                    tipInfo.Show("No Image On ClipBoard", Me, btnAlbumArt.Left + CInt(btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, btnAlbumArt.Top + CInt(btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+                    'tipInfo.Tag = SystemIcons.Information.ToBitmap
+                    'tipInfo.Show("No Image On ClipBoard", Me, btnAlbumArt.Left + CInt(btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, btnAlbumArt.Top + CInt(btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+                    tipAlert.ShowTooltip(btnAlbumArt, "No Image On ClipBoard", SystemIcons.Information.ToBitmap)
                 End If
             Else
                 Dim piclist As New List(Of TagLib.IPicture)
@@ -1539,8 +1543,9 @@ Partial Friend Class MainForm
                 SetSave()
             Else
                 If picsource = My.App.ImageSource.ClipBoard Then
-                    tipInfo.Tag = SystemIcons.Information.ToBitmap
-                    tipInfo.Show("No Image On ClipBoard", Me, Me.btnAlbumArt.Left + CInt(Me.btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnAlbumArt.Top + CInt(Me.btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+                    'tipInfo.Tag = SystemIcons.Information.ToBitmap
+                    'tipInfo.Show("No Image On ClipBoard", Me, Me.btnAlbumArt.Left + CInt(Me.btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnAlbumArt.Top + CInt(Me.btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
+                    tipAlert.ShowTooltip(btnAlbumArt, "No Image On ClipBoard", SystemIcons.Information.ToBitmap)
                 End If
             End If
         End If
@@ -1632,7 +1637,7 @@ Partial Friend Class MainForm
                 Me.btnLyrics.BackColor = SystemColors.Control
                 Me.btnLyrics.FlatAppearance.MouseDownBackColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HIGHLIGHT) 'Color.Linen
                 Me.btnLyrics.FlatAppearance.MouseOverBackColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HIGHLIGHT) 'Color.Linen
-                Me.tipInfo.SetToolTip(Me.btnLyrics, "Show Lyrics")
+                Me.tipInfo.SetText(Me.btnLyrics, "Show Lyrics")
         End Select
     End Sub
     Private Sub ResetLyrics()
@@ -1711,7 +1716,7 @@ Partial Friend Class MainForm
 
         'Initialize
         Dim MyField As Reflection.PropertyInfo = MyToolStrip.GetType().GetProperty("ToolTip", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
-        Dim MyToolTip As ToolTip = CType(MyField.GetValue(MyToolStrip), ToolTip)
+        Dim MyToolTip As System.Windows.Forms.ToolTip = CType(MyField.GetValue(MyToolStrip), System.Windows.Forms.ToolTip)
 
         'Configure ToolTip
         MyToolTip.OwnerDraw = True
@@ -1722,7 +1727,7 @@ Partial Friend Class MainForm
         AddHandler MyToolTip.Popup,
             Sub(sender, e)
                 Dim s As Size
-                s = TextRenderer.MeasureText(CType(sender, ToolTip).GetToolTip(e.AssociatedControl), tipInfo.Font)
+                s = TextRenderer.MeasureText(CType(sender, System.Windows.Forms.ToolTip).GetToolTip(e.AssociatedControl), tipInfo.Font)
                 s.Width += 14
                 s.Height += 14
                 e.ToolTipSize = s
@@ -1738,9 +1743,9 @@ Partial Friend Class MainForm
                 g.FillRectangle(brbg, e.Bounds)
 
                 'Draw border
-                Using p As New Pen(tipInfo.BorderColor, CInt(tipInfo.Font.Size / 4)) 'Scale border thickness with font
-                    g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
-                End Using
+                'Using p As New Pen(tipInfoEX.BorderColor, CInt(tipInfoEX.Font.Size / 4)) 'Scale border thickness with font
+                '    g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
+                'End Using
 
                 'Draw text
                 TextRenderer.DrawText(g, e.ToolTipText, tipInfo.Font, New Point(7, 7), tipInfo.ForeColor)
