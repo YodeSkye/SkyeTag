@@ -1,9 +1,11 @@
 ﻿
-Imports Microsoft.Win32
-Imports Skye.UI
-Imports SkyeTag.My
 Imports System.Diagnostics
 Imports System.Runtime.CompilerServices
+Imports System.Runtime.InteropServices
+Imports Microsoft.Win32
+Imports Skye
+Imports Skye.UI
+Imports SkyeTag.My
 
 Partial Friend Class MainForm
 
@@ -59,8 +61,8 @@ Partial Friend Class MainForm
         btnError.Visible = True
         tipInfo.SetText(btnError, tipInfo.GetText(btnError) + vbCr + "CtrlRightClick = Test Error")
 #Else
-		Location = App.Settings.StartLocation
-		Size = App.Settings.StartSize
+        Location = App.Settings.StartLocation
+        Size = App.Settings.StartSize
 #End If
     End Sub
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
@@ -116,6 +118,14 @@ Partial Friend Class MainForm
         CustomDrawToolTip(MIEdit.DropDown)
         SetTag()
         ShowTag()
+    End Sub
+    Private Sub frm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+#If DEBUG Then
+#Else
+        Me.Activate()
+        Me.TopMost = True
+        Me.TopMost = False
+#End If
     End Sub
     Private Sub frm_Closing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If App.FrmLog IsNot Nothing Then App.FrmLog.Close()
