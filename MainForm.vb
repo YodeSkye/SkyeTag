@@ -120,12 +120,7 @@ Partial Friend Class MainForm
         ShowTag()
     End Sub
     Private Sub frm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-#If DEBUG Then
-#Else
-        Me.Activate()
-        Me.TopMost = True
-        Me.TopMost = False
-#End If
+        TopMost = False
     End Sub
     Private Sub frm_Closing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If App.FrmLog IsNot Nothing Then App.FrmLog.Close()
