@@ -420,7 +420,7 @@ Partial Friend Class MainForm
         Else
             'tipInfo.Tag = SystemIcons.Information.ToBitmap
             'tipInfo.Show("No Text On ClipBoard", Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
-            tipAlert.ShowTooltip(btnArtistInsert, "No Text On ClipBoard", SystemIcons.Information.ToBitmap)
+            tipInfo.ShowTooltip(btnArtistInsert, "No Text On ClipBoard", SystemIcons.Information.ToBitmap)
         End If
     End Sub
     Private Sub cmiArtistPrevious_Click(sender As Object, e As EventArgs) Handles cmiArtistPrevious.Click
@@ -1022,7 +1022,7 @@ Partial Friend Class MainForm
         If Not String.IsNullOrEmpty(My.AppAlertMessage) Then
             'tipInfo.Tag = SystemIcons.Error.ToBitmap
             'tipInfo.Show(My.AppAlertMessage, Me, Me.btnError.Right + SystemInformation.FrameBorderSize.Width, Me.btnError.Bottom + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight)
-            tipAlert.ShowTooltip(btnError, My.AppAlertMessage, SystemIcons.Error.ToBitmap)
+            tipInfo.ShowTooltip(btnError, My.AppAlertMessage, SystemIcons.Error.ToBitmap)
         End If
     End Sub
     Friend Sub ClearError()
@@ -1502,7 +1502,7 @@ Partial Friend Class MainForm
                 If picsource = My.App.ImageSource.ClipBoard Then
                     'tipInfo.Tag = SystemIcons.Information.ToBitmap
                     'tipInfo.Show("No Image On ClipBoard", Me, btnAlbumArt.Left + CInt(btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, btnAlbumArt.Top + CInt(btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
-                    tipAlert.ShowTooltip(btnAlbumArt, "No Image On ClipBoard", SystemIcons.Information.ToBitmap)
+                    tipInfo.ShowTooltip(btnAlbumArt, "No Image On ClipBoard", SystemIcons.Information.ToBitmap)
                 End If
             Else
                 Dim piclist As New List(Of TagLib.IPicture)
@@ -1545,7 +1545,7 @@ Partial Friend Class MainForm
                 If picsource = My.App.ImageSource.ClipBoard Then
                     'tipInfo.Tag = SystemIcons.Information.ToBitmap
                     'tipInfo.Show("No Image On ClipBoard", Me, Me.btnAlbumArt.Left + CInt(Me.btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnAlbumArt.Top + CInt(Me.btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
-                    tipAlert.ShowTooltip(btnAlbumArt, "No Image On ClipBoard", SystemIcons.Information.ToBitmap)
+                    tipInfo.ShowTooltip(btnAlbumArt, "No Image On ClipBoard", SystemIcons.Information.ToBitmap)
                 End If
             End If
         End If

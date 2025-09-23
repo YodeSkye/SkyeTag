@@ -116,7 +116,6 @@
         lblDuration = New Skye.UI.Label()
         lblYear = New Skye.UI.Label()
         tipInfo = New Skye.UI.ToolTipEX(components)
-        tipAlert = New Skye.UI.ToolTipEX(components)
         cmArtRight.SuspendLayout()
         cmArtLeft.SuspendLayout()
         cmArtistLeft.SuspendLayout()
@@ -139,9 +138,8 @@
         btnError.FlatAppearance.BorderSize = 0
         btnError.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnError.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnError.Image = My.Resources.Resources.imageError
         tipInfo.SetImage(btnError, My.Resources.Resources.imageError)
-        tipAlert.SetImage(btnError, Nothing)
+        btnError.Image = My.Resources.Resources.imageError
         btnError.Location = New Point(340, 517)
         btnError.Name = "btnError"
         btnError.Size = New Size(32, 32)
@@ -157,9 +155,8 @@
         btnSave.FlatAppearance.BorderSize = 2
         btnSave.FlatAppearance.MouseDownBackColor = Color.GhostWhite
         btnSave.FlatAppearance.MouseOverBackColor = SystemColors.Info
-        btnSave.Image = My.Resources.Resources.imageSave
         tipInfo.SetImage(btnSave, My.Resources.Resources.imageSave)
-        tipAlert.SetImage(btnSave, Nothing)
+        btnSave.Image = My.Resources.Resources.imageSave
         btnSave.ImageAlign = ContentAlignment.MiddleLeft
         btnSave.Location = New Point(10, 518)
         btnSave.Name = "btnSave"
@@ -178,9 +175,8 @@
         btnAlbumArtRight.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnAlbumArtRight.FlatAppearance.MouseOverBackColor = Color.Transparent
         btnAlbumArtRight.FlatStyle = FlatStyle.Flat
-        btnAlbumArtRight.Image = My.Resources.Resources.imageAdvanceRight
         tipInfo.SetImage(btnAlbumArtRight, Nothing)
-        tipAlert.SetImage(btnAlbumArtRight, Nothing)
+        btnAlbumArtRight.Image = My.Resources.Resources.imageAdvanceRight
         btnAlbumArtRight.Location = New Point(233, 236)
         btnAlbumArtRight.Name = "btnAlbumArtRight"
         btnAlbumArtRight.Size = New Size(16, 16)
@@ -194,7 +190,6 @@
         ' 
         cmArtRight.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(cmArtRight, Nothing)
-        tipAlert.SetImage(cmArtRight, Nothing)
         cmArtRight.Items.AddRange(New ToolStripItem() {cmiArtNext, ToolStripSeparator5, cmiArtMoveRight, cmiArtMoveLast})
         cmArtRight.Name = "cmArtRight"
         cmArtRight.Size = New Size(184, 76)
@@ -235,9 +230,8 @@
         btnAlbumArtLeft.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnAlbumArtLeft.FlatAppearance.MouseOverBackColor = Color.Transparent
         btnAlbumArtLeft.FlatStyle = FlatStyle.Flat
-        btnAlbumArtLeft.Image = My.Resources.Resources.imageAdvanceLeft
         tipInfo.SetImage(btnAlbumArtLeft, Nothing)
-        tipAlert.SetImage(btnAlbumArtLeft, Nothing)
+        btnAlbumArtLeft.Image = My.Resources.Resources.imageAdvanceLeft
         btnAlbumArtLeft.Location = New Point(217, 236)
         btnAlbumArtLeft.Name = "btnAlbumArtLeft"
         btnAlbumArtLeft.Size = New Size(16, 16)
@@ -251,7 +245,6 @@
         ' 
         cmArtLeft.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(cmArtLeft, Nothing)
-        tipAlert.SetImage(cmArtLeft, Nothing)
         cmArtLeft.Items.AddRange(New ToolStripItem() {cmiArtPrevious, ToolStripSeparator4, cmiArtMoveLeft, cmiArtMoveFirst})
         cmArtLeft.Name = "cmArtLeft"
         cmArtLeft.Size = New Size(178, 76)
@@ -291,9 +284,8 @@
         btnRestore.FlatAppearance.BorderSize = 2
         btnRestore.FlatAppearance.MouseDownBackColor = Color.GhostWhite
         btnRestore.FlatAppearance.MouseOverBackColor = SystemColors.Info
-        btnRestore.Image = My.Resources.Resources.imageRestore
         tipInfo.SetImage(btnRestore, My.Resources.Resources.imageRestore)
-        tipAlert.SetImage(btnRestore, Nothing)
+        btnRestore.Image = My.Resources.Resources.imageRestore
         btnRestore.ImageAlign = ContentAlignment.MiddleLeft
         btnRestore.Location = New Point(95, 518)
         btnRestore.Name = "btnRestore"
@@ -312,9 +304,8 @@
         btnArtistLeft.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnArtistLeft.FlatAppearance.MouseOverBackColor = Color.Transparent
         btnArtistLeft.FlatStyle = FlatStyle.Flat
-        btnArtistLeft.Image = My.Resources.Resources.imageAdvanceLeft
         tipInfo.SetImage(btnArtistLeft, Nothing)
-        tipAlert.SetImage(btnArtistLeft, Nothing)
+        btnArtistLeft.Image = My.Resources.Resources.imageAdvanceLeft
         btnArtistLeft.Location = New Point(217, 68)
         btnArtistLeft.Name = "btnArtistLeft"
         btnArtistLeft.Size = New Size(16, 16)
@@ -328,7 +319,6 @@
         ' 
         cmArtistLeft.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(cmArtistLeft, Nothing)
-        tipAlert.SetImage(cmArtistLeft, Nothing)
         cmArtistLeft.Items.AddRange(New ToolStripItem() {cmiArtistPrevious, ToolStripSeparator2, cmiArtistMoveLeft, cmiArtistMoveFirst})
         cmArtistLeft.Name = "ContextMenuStrip1"
         cmArtistLeft.Size = New Size(172, 76)
@@ -369,9 +359,8 @@
         btnArtistRight.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnArtistRight.FlatAppearance.MouseOverBackColor = Color.Transparent
         btnArtistRight.FlatStyle = FlatStyle.Flat
-        btnArtistRight.Image = My.Resources.Resources.imageAdvanceRight
         tipInfo.SetImage(btnArtistRight, Nothing)
-        tipAlert.SetImage(btnArtistRight, Nothing)
+        btnArtistRight.Image = My.Resources.Resources.imageAdvanceRight
         btnArtistRight.Location = New Point(233, 68)
         btnArtistRight.Name = "btnArtistRight"
         btnArtistRight.Size = New Size(16, 16)
@@ -385,7 +374,6 @@
         ' 
         cmArtistRight.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(cmArtistRight, Nothing)
-        tipAlert.SetImage(cmArtistRight, Nothing)
         cmArtistRight.Items.AddRange(New ToolStripItem() {cmiArtistNext, ToolStripSeparator3, cmiArtistMoveRight, cmiArtistMoveLast})
         cmArtistRight.Name = "cmArtistRight"
         cmArtistRight.Size = New Size(178, 76)
@@ -427,9 +415,8 @@
         btnArtistInsert.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnArtistInsert.FlatAppearance.MouseOverBackColor = Color.Transparent
         btnArtistInsert.FlatStyle = FlatStyle.Flat
-        btnArtistInsert.Image = My.Resources.Resources.imageNew
         tipInfo.SetImage(btnArtistInsert, Nothing)
-        tipAlert.SetImage(btnArtistInsert, Nothing)
+        btnArtistInsert.Image = My.Resources.Resources.imageNew
         btnArtistInsert.Location = New Point(116, 67)
         btnArtistInsert.Name = "btnArtistInsert"
         btnArtistInsert.Size = New Size(16, 16)
@@ -443,7 +430,6 @@
         ' 
         cmNewArtist.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(cmNewArtist, Nothing)
-        tipAlert.SetImage(cmNewArtist, Nothing)
         cmNewArtist.Items.AddRange(New ToolStripItem() {cmiArtistInsert, cmiArtistInsertFromClipboard})
         cmNewArtist.Name = "ContextMenuStrip1"
         cmNewArtist.Size = New Size(197, 48)
@@ -471,9 +457,8 @@
         btnArtistDelete.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnArtistDelete.FlatAppearance.MouseOverBackColor = Color.Transparent
         btnArtistDelete.FlatStyle = FlatStyle.Flat
-        btnArtistDelete.Image = My.Resources.Resources.imageDelete
         tipInfo.SetImage(btnArtistDelete, Nothing)
-        tipAlert.SetImage(btnArtistDelete, Nothing)
+        btnArtistDelete.Image = My.Resources.Resources.imageDelete
         btnArtistDelete.Location = New Point(140, 66)
         btnArtistDelete.Name = "btnArtistDelete"
         btnArtistDelete.Size = New Size(16, 16)
@@ -487,7 +472,6 @@
         ' 
         cmAlbumArt.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(cmAlbumArt, Nothing)
-        tipAlert.SetImage(cmAlbumArt, Nothing)
         cmAlbumArt.Items.AddRange(New ToolStripItem() {cmiAlbumArtSelect, cmiAlbumArtInsert, cmiAlbumArtExport, tsSeparator1, cmiAlbumArtMoveLeft, cmiAlbumArtMoveFirst, cmiAlbumArtMoveRight, cmiAlbumArtMoveLast, tsSeparator2, cmiAlbumArtDelete})
         cmAlbumArt.Name = "cmAlbumArt"
         cmAlbumArt.Size = New Size(184, 192)
@@ -503,7 +487,6 @@
         ' cmImageSource
         ' 
         tipInfo.SetImage(cmImageSource, Nothing)
-        tipAlert.SetImage(cmImageSource, Nothing)
         cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
         cmImageSource.Name = "cm"
         cmImageSource.OwnerItem = cmiAlbumArtInsertLast
@@ -550,7 +533,6 @@
         ' 
         cmAlbumArtInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(cmAlbumArtInsert, Nothing)
-        tipAlert.SetImage(cmAlbumArtInsert, Nothing)
         cmAlbumArtInsert.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsertBefore, cmiAlbumArtInsertFirst, cmiAlbumArtInsertAfter, cmiAlbumArtInsertLast})
         cmAlbumArtInsert.Name = "cmAlbumArtInsert"
         cmAlbumArtInsert.OwnerItem = cmiAlbumArtInsert
@@ -591,7 +573,6 @@
         ' cmExport
         ' 
         tipInfo.SetImage(cmExport, Nothing)
-        tipAlert.SetImage(cmExport, Nothing)
         cmExport.Items.AddRange(New ToolStripItem() {cmiExportToFile, cmiExportToBitmap, cmiExportToClipboard})
         cmExport.Name = "cmExport"
         cmExport.OwnerItem = cmiAlbumArtExport
@@ -672,9 +653,8 @@
         btnAlbumArt.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnAlbumArt.FlatAppearance.MouseOverBackColor = Color.Transparent
         btnAlbumArt.FlatStyle = FlatStyle.Flat
-        btnAlbumArt.Image = My.Resources.Resources.imageImage
         tipInfo.SetImage(btnAlbumArt, Nothing)
-        tipAlert.SetImage(btnAlbumArt, Nothing)
+        btnAlbumArt.Image = My.Resources.Resources.imageImage
         btnAlbumArt.Location = New Point(140, 233)
         btnAlbumArt.Name = "btnAlbumArt"
         btnAlbumArt.Size = New Size(16, 17)
@@ -687,7 +667,6 @@
         ' 
         picbxAlbumArt.ContextMenuStrip = cmAlbumArt
         tipInfo.SetImage(picbxAlbumArt, Nothing)
-        tipAlert.SetImage(picbxAlbumArt, Nothing)
         picbxAlbumArt.Location = New Point(0, 0)
         picbxAlbumArt.Name = "picbxAlbumArt"
         picbxAlbumArt.Size = New Size(360, 229)
@@ -698,7 +677,6 @@
         ' 
         txbxArtist.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         txbxArtist.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipAlert.SetImage(txbxArtist, Nothing)
         tipInfo.SetImage(txbxArtist, Nothing)
         txbxArtist.Location = New Point(12, 83)
         txbxArtist.Name = "txbxArtist"
@@ -710,7 +688,6 @@
         ' 
         txbxAlbum.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         txbxAlbum.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipAlert.SetImage(txbxAlbum, Nothing)
         tipInfo.SetImage(txbxAlbum, Nothing)
         txbxAlbum.Location = New Point(12, 167)
         txbxAlbum.Name = "txbxAlbum"
@@ -722,7 +699,6 @@
         ' 
         txbxAlbumArt.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         txbxAlbumArt.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
-        tipAlert.SetImage(txbxAlbumArt, Nothing)
         tipInfo.SetImage(txbxAlbumArt, Nothing)
         txbxAlbumArt.Location = New Point(50, 251)
         txbxAlbumArt.Name = "txbxAlbumArt"
@@ -738,7 +714,6 @@
         cobxAlbumArtType.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
         cobxAlbumArtType.FormattingEnabled = True
         tipInfo.SetImage(cobxAlbumArtType, Nothing)
-        tipAlert.SetImage(cobxAlbumArtType, Nothing)
         cobxAlbumArtType.ItemHeight = 17
         cobxAlbumArtType.Location = New Point(256, 251)
         cobxAlbumArtType.MaxDropDownItems = 7
@@ -750,7 +725,6 @@
         ' 
         txbxTitle.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         txbxTitle.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipAlert.SetImage(txbxTitle, Nothing)
         tipInfo.SetImage(txbxTitle, Nothing)
         txbxTitle.Location = New Point(12, 125)
         txbxTitle.Name = "txbxTitle"
@@ -762,7 +736,6 @@
         ' 
         txbxYear.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         txbxYear.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
-        tipAlert.SetImage(txbxYear, Nothing)
         tipInfo.SetImage(txbxYear, Nothing)
         txbxYear.Location = New Point(322, 167)
         txbxYear.MaxLength = 4
@@ -777,7 +750,6 @@
         ' 
         txbxTrack.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         txbxTrack.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
-        tipAlert.SetImage(txbxTrack, Nothing)
         tipInfo.SetImage(txbxTrack, Nothing)
         txbxTrack.Location = New Point(256, 125)
         txbxTrack.MaxLength = 2
@@ -792,7 +764,6 @@
         ' 
         txbxComments.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         txbxComments.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
-        tipAlert.SetImage(txbxComments, Nothing)
         tipInfo.SetImage(txbxComments, Nothing)
         txbxComments.Location = New Point(12, 209)
         txbxComments.Name = "txbxComments"
@@ -808,7 +779,6 @@
         cobxGenre.FlatStyle = FlatStyle.Flat
         cobxGenre.FormattingEnabled = True
         tipInfo.SetImage(cobxGenre, Nothing)
-        tipAlert.SetImage(cobxGenre, Nothing)
         cobxGenre.ItemHeight = 17
         cobxGenre.Location = New Point(253, 83)
         cobxGenre.Name = "cobxGenre"
@@ -825,7 +795,6 @@
         txbxLyrics.BackColor = Color.Linen
         txbxLyrics.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         txbxLyrics.HideSelection = False
-        tipAlert.SetImage(txbxLyrics, Nothing)
         tipInfo.SetImage(txbxLyrics, Nothing)
         txbxLyrics.Location = New Point(13, 277)
         txbxLyrics.Multiline = True
@@ -843,7 +812,6 @@
         btnLyrics.FlatAppearance.BorderColor = Color.Black
         btnLyrics.FlatStyle = FlatStyle.Flat
         tipInfo.SetImage(btnLyrics, Nothing)
-        tipAlert.SetImage(btnLyrics, Nothing)
         btnLyrics.Location = New Point(13, 240)
         btnLyrics.Name = "btnLyrics"
         btnLyrics.Size = New Size(32, 36)
@@ -854,7 +822,6 @@
         ' 
         txbxDuration.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         txbxDuration.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
-        tipAlert.SetImage(txbxDuration, Nothing)
         tipInfo.SetImage(txbxDuration, Nothing)
         txbxDuration.Location = New Point(322, 125)
         txbxDuration.Name = "txbxDuration"
@@ -869,7 +836,6 @@
         ' 
         txbxTrackCount.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         txbxTrackCount.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
-        tipAlert.SetImage(txbxTrackCount, Nothing)
         tipInfo.SetImage(txbxTrackCount, Nothing)
         txbxTrackCount.Location = New Point(289, 125)
         txbxTrackCount.MaxLength = 2
@@ -884,7 +850,6 @@
         ' 
         txbxGenre.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         txbxGenre.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
-        tipAlert.SetImage(txbxGenre, Nothing)
         tipInfo.SetImage(txbxGenre, Nothing)
         txbxGenre.Location = New Point(256, 83)
         txbxGenre.Name = "txbxGenre"
@@ -899,7 +864,6 @@
         panelAlbumArt.CausesValidation = False
         panelAlbumArt.ContextMenuStrip = cmAlbumArt
         panelAlbumArt.Controls.Add(picbxAlbumArt)
-        tipAlert.SetImage(panelAlbumArt, Nothing)
         tipInfo.SetImage(panelAlbumArt, Nothing)
         panelAlbumArt.Location = New Point(13, 277)
         panelAlbumArt.Name = "panelAlbumArt"
@@ -910,7 +874,6 @@
         ' 
         MenuMain.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(MenuMain, Nothing)
-        tipAlert.SetImage(MenuMain, Nothing)
         MenuMain.Items.AddRange(New ToolStripItem() {MIFile, MIEdit, MIView, MIPlay, MIAbout})
         MenuMain.Location = New Point(0, 0)
         MenuMain.Name = "MenuMain"
@@ -1061,7 +1024,6 @@
         ' 
         lblFileInfo.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         lblFileInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold Or FontStyle.Underline, GraphicsUnit.Point, CByte(0))
-        tipAlert.SetImage(lblFileInfo, Nothing)
         tipInfo.SetImage(lblFileInfo, Nothing)
         lblFileInfo.Location = New Point(12, 38)
         lblFileInfo.Name = "lblFileInfo"
@@ -1072,7 +1034,6 @@
         ' 
         ' lblArtist
         ' 
-        tipAlert.SetImage(lblArtist, Nothing)
         tipInfo.SetImage(lblArtist, Nothing)
         lblArtist.Location = New Point(11, 65)
         lblArtist.Name = "lblArtist"
@@ -1084,7 +1045,6 @@
         ' lblGenre
         ' 
         lblGenre.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        tipAlert.SetImage(lblGenre, Nothing)
         tipInfo.SetImage(lblGenre, Nothing)
         lblGenre.Location = New Point(254, 65)
         lblGenre.Name = "lblGenre"
@@ -1095,7 +1055,6 @@
         ' 
         ' lblTitle
         ' 
-        tipAlert.SetImage(lblTitle, Nothing)
         tipInfo.SetImage(lblTitle, Nothing)
         lblTitle.Location = New Point(11, 107)
         lblTitle.Name = "lblTitle"
@@ -1106,7 +1065,6 @@
         ' 
         ' lblAlbum
         ' 
-        tipAlert.SetImage(lblAlbum, Nothing)
         tipInfo.SetImage(lblAlbum, Nothing)
         lblAlbum.Location = New Point(11, 149)
         lblAlbum.Name = "lblAlbum"
@@ -1117,7 +1075,6 @@
         ' 
         ' lblComments
         ' 
-        tipAlert.SetImage(lblComments, Nothing)
         tipInfo.SetImage(lblComments, Nothing)
         lblComments.Location = New Point(11, 191)
         lblComments.Name = "lblComments"
@@ -1128,7 +1085,6 @@
         ' 
         ' lblAlbumArt
         ' 
-        tipAlert.SetImage(lblAlbumArt, Nothing)
         tipInfo.SetImage(lblAlbumArt, Nothing)
         lblAlbumArt.Location = New Point(49, 233)
         lblAlbumArt.Name = "lblAlbumArt"
@@ -1140,7 +1096,6 @@
         ' lblTrack
         ' 
         lblTrack.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        tipAlert.SetImage(lblTrack, Nothing)
         tipInfo.SetImage(lblTrack, Nothing)
         lblTrack.Location = New Point(258, 107)
         lblTrack.Name = "lblTrack"
@@ -1152,7 +1107,6 @@
         ' lblTrackSeparator
         ' 
         lblTrackSeparator.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        tipAlert.SetImage(lblTrackSeparator, Nothing)
         tipInfo.SetImage(lblTrackSeparator, Nothing)
         lblTrackSeparator.Location = New Point(277, 126)
         lblTrackSeparator.Name = "lblTrackSeparator"
@@ -1164,7 +1118,6 @@
         ' lblDuration
         ' 
         lblDuration.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        tipAlert.SetImage(lblDuration, Nothing)
         tipInfo.SetImage(lblDuration, Nothing)
         lblDuration.Location = New Point(319, 107)
         lblDuration.Name = "lblDuration"
@@ -1176,7 +1129,6 @@
         ' lblYear
         ' 
         lblYear.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        tipAlert.SetImage(lblYear, Nothing)
         tipInfo.SetImage(lblYear, Nothing)
         lblYear.Location = New Point(324, 149)
         lblYear.Name = "lblYear"
@@ -1193,20 +1145,9 @@
         tipInfo.FadeInRate = 25
         tipInfo.FadeOutRate = 25
         tipInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.HideDelay = 3000
         tipInfo.ShowBorder = False
         tipInfo.ShowDelay = 100
-        ' 
-        ' tipAlert
-        ' 
-        tipAlert.BackColor = Color.White
-        tipAlert.BorderColor = Color.Gainsboro
-        tipAlert.CopyOnRightClick = True
-        tipAlert.FadeInRate = 25
-        tipAlert.FadeOutRate = 25
-        tipAlert.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipAlert.HideDelay = 5000
-        tipAlert.ShowBorder = False
-        tipAlert.ShowDelay = 100
         ' 
         ' MainForm
         ' 
@@ -1255,7 +1196,6 @@
         Controls.Add(lblYear)
         Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        tipAlert.SetImage(Me, Nothing)
         tipInfo.SetImage(Me, Nothing)
         KeyPreview = True
         MainMenuStrip = MenuMain
@@ -1385,5 +1325,4 @@
     Friend WithEvents cmiExportToBitmap As ToolStripMenuItem
     Friend WithEvents cmiExportToClipboard As ToolStripMenuItem
     Friend WithEvents tipInfo As Skye.UI.ToolTipEX
-    Friend WithEvents tipAlert As Skye.UI.ToolTipEX
 End Class
