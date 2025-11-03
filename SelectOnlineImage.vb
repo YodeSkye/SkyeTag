@@ -2,27 +2,30 @@
 Imports System.ComponentModel
 Imports System.Drawing.Imaging
 Imports System.IO
-Imports System.Security.Cryptography
+Imports System.Threading
+Imports MetaBrainz.MusicBrainz.Interfaces
+Imports MetaBrainz.MusicBrainz.Interfaces.Entities
+Imports MetaBrainz.MusicBrainz.Interfaces.Searches
 Imports SkyeTag.My
 
 Public Class SelectOnlineImage
 
     'Declarations
+    Private mMove As Boolean = False
+    Private mOffset, mPosition As Point
     Private NetClient As New System.Net.Http.HttpClient
     Private MBQuery As New MetaBrainz.MusicBrainz.Query(NetClient)
     Private MBArt As New MetaBrainz.MusicBrainz.CoverArt.CoverArt(NetClient)
     Private MBImageFront As MetaBrainz.MusicBrainz.CoverArt.CoverArtImage = Nothing
     Private MBImageBack As MetaBrainz.MusicBrainz.CoverArt.CoverArtImage = Nothing
+    Private query As String = String.Empty
+    Private selectedpic As TagLib.IPicture = Nothing
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
     Friend ReadOnly Property NewPic As TagLib.IPicture
         Get
             Return selectedpic
         End Get
     End Property
-    Private query As String = String.Empty
-    Private selectedpic As TagLib.IPicture = Nothing
-    Private mMove As Boolean = False
-    Private mOffset, mPosition As Point
 
     'Form Events
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
@@ -31,21 +34,27 @@ Public Class SelectOnlineImage
                 DialogResult = DialogResult.Cancel
             End If
         Catch ex As Exception
-            My.App.WriteToLog("SelectImageOnline WndProc Handler Error" + Chr(13) + ex.ToString)
+            My.App.WriteToLog("SelectOnlineImage WndProc Handler Error" + Chr(13) + ex.ToString)
         Finally
             MyBase.WndProc(m)
         End Try
     End Sub
     Private Sub Frm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        query = App.frmMain.txbxArtist.Text + " " + frmMain.txbxAlbum.Text
-        If query = " " Then query = String.Empty
+        query = BuildQuery(App.frmMain.txbxArtist.Text.Trim(), App.frmMain.txbxAlbum.Text.Trim())
         TxtBoxSearchPhrase.Text = query
         Search()
     End Sub
     Private Sub SelectOnlineImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        MBArt.Dispose()
-        MBQuery.Dispose()
-        NetClient.Dispose()
+        MBImageFront?.Dispose()
+        MBImageFront = Nothing
+        MBImageBack?.Dispose()
+        MBImageBack = Nothing
+        MBArt?.Dispose()
+        MBArt = Nothing
+        MBQuery?.Dispose()
+        MBQuery = Nothing
+        NetClient?.Dispose()
+        NetClient = Nothing
     End Sub
     Private Sub Frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, PicBoxArt.MouseDown, PicBoxFrontThumb.MouseDown, PicBoxBackThumb.MouseDown, LblDimBack.MouseDown, LblStatus.MouseDown
         Dim cSender As Control
@@ -92,7 +101,7 @@ Public Class SelectOnlineImage
             Search()
         End If
     End Sub
-    Private Sub LVIDs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LVIDs.SelectedIndexChanged
+    Private Async Sub LVIDs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LVIDs.SelectedIndexChanged
         If LVIDs.SelectedItems.Count > 0 Then
             LVIDs.Enabled = False
             LblStatus.Visible = True
@@ -103,25 +112,29 @@ Public Class SelectOnlineImage
             PicBoxBackThumb.Image = Nothing
             BtnSaveArt.Enabled = False
             Refresh()
+
             Try
-                MBImageFront = MBArt.FetchFront(Guid.Parse(LVIDs.SelectedItems(0).Tag.ToString))
+                MBImageFront = Await MBArt.FetchFrontAsync(Guid.Parse(LVIDs.SelectedItems(0).Tag.ToString))
                 PicBoxArt.Image = New Bitmap(MBImageFront.Data)
                 PicBoxFrontThumb.Image = New Bitmap(MBImageFront.Data)
-                'selectedpic = New TagLib.Picture(DirectCast(MBImageFront.Data, MemoryStream).ToArray)
-                Dim ms As New MemoryStream
-                PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
-                selectedpic = New TagLib.Picture(ms.ToArray())
-                ms.Dispose()
+                Using ms As New MemoryStream
+                    PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
+                    selectedpic = New TagLib.Picture(ms.ToArray())
+                End Using
                 LblDimFront.Text = PicBoxFrontThumb.Image.Width.ToString + " x " + PicBoxFrontThumb.Image.Height.ToString
                 BtnSaveArt.Enabled = True
-            Catch ex As MetaBrainz.Common.HttpError
+            Catch ex As Exception
+                Debug.WriteLine("Fetch Front Error: " & ex.GetType().FullName & ": " & ex.Message)
             End Try
+
             Try
-                MBImageBack = MBArt.FetchBack(Guid.Parse(LVIDs.SelectedItems(0).Tag.ToString))
+                MBImageBack = Await MBArt.FetchBackAsync(Guid.Parse(LVIDs.SelectedItems(0).Tag.ToString))
                 PicBoxBackThumb.Image = New Bitmap(MBImageBack.Data)
                 LblDimBack.Text = PicBoxBackThumb.Image.Width.ToString + " x " + PicBoxBackThumb.Image.Height.ToString
-            Catch ex As MetaBrainz.Common.HttpError
+            Catch ex As Exception
+                Debug.WriteLine("Fetch Back Error: " & ex.GetType().FullName & ": " & ex.Message)
             End Try
+
             LblStatus.Visible = False
             LVIDs.Enabled = True
             LVIDs.Select()
@@ -133,21 +146,19 @@ Public Class SelectOnlineImage
     Private Sub PicBoxFrontThumb_Click(sender As Object, e As EventArgs) Handles PicBoxFrontThumb.Click
         If MBImageFront IsNot Nothing Then
             PicBoxArt.Image = New Bitmap(MBImageFront.Data)
-            'selectedpic = New TagLib.Picture(DirectCast(MBImageFront.Data, MemoryStream).ToArray)
-            Dim ms As New MemoryStream
-            PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
-            selectedpic = New TagLib.Picture(ms.ToArray())
-            ms.Dispose()
+            Using ms As New MemoryStream
+                PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
+                selectedpic = New TagLib.Picture(ms.ToArray())
+            End Using
         End If
     End Sub
     Private Sub PicBoxBackThumb_Click(sender As Object, e As EventArgs) Handles PicBoxBackThumb.Click
         If MBImageBack IsNot Nothing Then
             PicBoxArt.Image = New Bitmap(MBImageBack.Data)
-            'selectedpic = New TagLib.Picture(DirectCast(MBImageBack.Data, MemoryStream).ToArray)
-            Dim ms As New MemoryStream
-            PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
-            selectedpic = New TagLib.Picture(ms.ToArray())
-            ms.Dispose()
+            Using ms As New MemoryStream
+                PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
+                selectedpic = New TagLib.Picture(ms.ToArray())
+            End Using
         End If
     End Sub
     Private Sub BtnSaveArt_Click(sender As Object, e As EventArgs) Handles BtnSaveArt.Click
@@ -185,28 +196,72 @@ Public Class SelectOnlineImage
     End Sub
 
     'Procedures
-    Private Sub Search()
-        If Not String.IsNullOrEmpty(query) Then
-            LVIDs.Enabled = False
-            LVIDs.Items.Clear()
-            LblDimFront.Text = String.Empty
-            LblDimBack.Text = String.Empty
-            PicBoxArt.Image = Nothing
-            PicBoxFrontThumb.Image = Nothing
-            PicBoxBackThumb.Image = Nothing
-            BtnSaveArt.Enabled = False
-            Dim results As MetaBrainz.MusicBrainz.Interfaces.Searches.ISearchResults(Of MetaBrainz.MusicBrainz.Interfaces.Searches.ISearchResult(Of MetaBrainz.MusicBrainz.Interfaces.Entities.IRelease)) = MBQuery.FindReleases(query)
-            For Each result As MetaBrainz.MusicBrainz.Interfaces.Searches.ISearchResult(Of MetaBrainz.MusicBrainz.Interfaces.Entities.IRelease) In results.Results
-                Dim lvitem As New ListViewItem
-                lvitem.Tag = result.Item.Id.ToString
-                lvitem.SubItems(0).Text = result.Item.ArtistCredit(0).Artist.Name.ToString
-                lvitem.SubItems(0).Text += ", " + result.Item.Title
-                LVIDs.Items.Add(lvitem)
-            Next
-            LVIDs.Enabled = True
-            LVIDs.Select()
-        End If
+    Private Async Sub Search()
+        Await SearchAsync()
     End Sub
+    Private Async Function SearchAsync() As Task
+        If String.IsNullOrWhiteSpace(query) Then Return
+
+        'Reset UI
+        LblSearchPhrase.Text = "Searching..."
+        LblSearchPhrase.Font = New Font(LblSearchPhrase.Font, FontStyle.Bold)
+        LblSearchPhrase.ForeColor = Color.Red
+        LVIDs.Items.Clear()
+        LVIDs.Enabled = False
+        LblDimFront.Text = String.Empty
+        LblDimBack.Text = String.Empty
+        PicBoxArt.Image = Nothing
+        PicBoxFrontThumb.Image = Nothing
+        PicBoxBackThumb.Image = Nothing
+        BtnSaveArt.Enabled = False
+
+        Dim items As New List(Of ListViewItem)()
+
+        Try
+            'New API: streaming search
+            Dim results As IStreamingQueryResults(Of ISearchResult(Of IRelease)) = MBQuery.FindAllReleases(query)
+
+            'Explicit async enumerator
+            Dim enumerator As IAsyncEnumerator(Of ISearchResult(Of IRelease)) = results.GetAsyncEnumerator(CancellationToken.None)
+
+            While Await enumerator.MoveNextAsync()
+                Dim result As ISearchResult(Of IRelease) = enumerator.Current
+                Dim release As IRelease = result.Item
+                Dim lvitem As New ListViewItem() With {
+                    .Tag = release.Id.ToString(),
+                    .Text = release.ArtistCredit(0).Artist.Name & ", " & release.Title}
+                items.Add(lvitem)
+            End While
+
+            Await enumerator.DisposeAsync()
+
+            'Update UI in one shot
+            LVIDs.Items.AddRange(items.ToArray())
+            LVIDs.Enabled = True
+
+            'Update status label
+            LblSearchPhrase.Text = "Search Phrase:"
+            LblSearchPhrase.Font = New Font(LblSearchPhrase.Font, FontStyle.Regular)
+            LblSearchPhrase.ForeColor = Color.Black
+
+        Catch ex As Exception
+            Debug.WriteLine("Search Error: " & ex.Message)
+            LVIDs.Enabled = True
+        End Try
+    End Function
+    Private Function BuildQuery(artist As String, album As String) As String
+        Dim parts As New List(Of String)
+        If Not String.IsNullOrWhiteSpace(artist) Then
+            parts.Add("artist:""" & artist & """")
+        End If
+        If Not String.IsNullOrWhiteSpace(album) Then
+            parts.Add("release:""" & album & """")
+        End If
+        If parts.Count = 0 Then
+            Return String.Empty
+        End If
+        Return String.Join(" AND ", parts)
+    End Function
     Private Sub ToggleMaximized()
         Select Case WindowState
             Case FormWindowState.Normal

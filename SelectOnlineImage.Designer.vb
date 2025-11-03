@@ -180,7 +180,7 @@ Partial Class SelectOnlineImage
         LblSearchPhrase.Size = New Size(94, 26)
         LblSearchPhrase.TabIndex = 103
         LblSearchPhrase.Text = "Search Phrase:"
-        LblSearchPhrase.TextAlign = ContentAlignment.MiddleCenter
+        LblSearchPhrase.TextAlign = ContentAlignment.MiddleLeft
         ' 
         ' tipInfo
         ' 
