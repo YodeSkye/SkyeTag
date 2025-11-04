@@ -219,6 +219,9 @@ Namespace My
 			Finally : fInfo = Nothing
 			End Try
 		End Sub
+		Friend Sub ShowChangeLog()
+			ChangeLog.ShowDialog()
+		End Sub
 		Friend Sub ShowLog()
 
 			'Set Form

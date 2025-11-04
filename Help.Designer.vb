@@ -28,6 +28,7 @@ Partial Class Help
         RTxBoxHelp = New RichTextBox()
         LblVersion = New Skye.UI.Label()
         tipInfo = New Skye.UI.ToolTipEX(components)
+        BtnChangeLog = New Button()
         SuspendLayout()
         ' 
         ' BtnClose
@@ -81,11 +82,23 @@ Partial Class Help
         tipInfo.ShowBorder = False
         tipInfo.ShowDelay = 100
         ' 
+        ' BtnChangeLog
+        ' 
+        tipInfo.SetImage(BtnChangeLog, Nothing)
+        BtnChangeLog.Image = My.Resources.Resources.ImageChangeLog32
+        BtnChangeLog.Location = New Point(824, 401)
+        BtnChangeLog.Name = "BtnChangeLog"
+        BtnChangeLog.Size = New Size(48, 48)
+        BtnChangeLog.TabIndex = 4
+        tipInfo.SetText(BtnChangeLog, "What's New")
+        BtnChangeLog.UseVisualStyleBackColor = True
+        ' 
         ' Help
         ' 
         AutoScaleDimensions = New SizeF(7F, 17F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(884, 461)
+        Controls.Add(BtnChangeLog)
         Controls.Add(RTxBoxHelp)
         Controls.Add(BtnClose)
         Controls.Add(LblVersion)
@@ -105,4 +118,5 @@ Partial Class Help
     Friend WithEvents BtnClose As Button
     Friend WithEvents RTxBoxHelp As RichTextBox
     Friend WithEvents tipInfo As Skye.UI.ToolTipEX
+    Friend WithEvents BtnChangeLog As Button
 End Class

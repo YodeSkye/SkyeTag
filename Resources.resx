@@ -223,4 +223,27 @@
   <data name="ImageOnline16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>My Project\ImageOnline16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ChangeLogRT" xml:space="preserve">
+    <value>{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Segoe UI;}{\f1\fnil\fcharset134 SimSun;}{\f2\fnil\fcharset1 Segoe UI Symbol;}{\f3\fnil\fcharset0 Segoe UI Symbol;}{\f4\fnil Segoe UI Symbol;}}
+{\colortbl ;\red0\green102\blue204;\red51\green153\blue102;}
+{\*\generator Riched20 10.0.26100}\viewkind4\uc1 
+\pard\cf1\b\f0\fs28\lang9 SkyeTag v2.3 What's New\fs24\par
+\cf0\b0 Released November 2025\cf1\b\fs28\par
+\par
+\cf2\fs24 New Features\par
+\cf0\b0\f1\lang1033\'a3\'ab\f0 New Album Art Interface.\lang9\par
+\cf2\b\par
+Improvements\par
+\cf0\b0\f2\u10003?\f0  \lang1033 Upgraded MetaBrainz MusicBrainz nuget package and refactored to new Async download model.\lang9\par
+\cf2\b\par
+Fixes\par
+\cf0\b0\f2\u10005? \f3\lang1033 Various Fixes.\f4\lang9\par
+\cf1\b\f0\par
+\fs28 Thank you for using SkyeTag!\cf0\b0\fs24\par
+}
+ </value>
+  </data>
+  <data name="ImageChangeLog32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>My Project\ImageChangeLog32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

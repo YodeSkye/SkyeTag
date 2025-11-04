@@ -61,6 +61,9 @@ Public Class Help
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Close()
     End Sub
+    Private Sub BtnChangeLog_Click(sender As Object, e As EventArgs) Handles BtnChangeLog.Click
+        My.App.ShowChangeLog()
+    End Sub
 
     'Procedures
     Private Sub ToggleMaximized()

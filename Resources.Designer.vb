@@ -65,6 +65,22 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Segoe UI;}{\f1\fnil\fcharset134 SimSun;}{\f2\fnil\fcharset1 Segoe UI Symbol;}{\f3\fnil\fcharset0 Segoe UI Symbol;}{\f4\fnil Segoe UI Symbol;}}
+        '''{\colortbl ;\red0\green102\blue204;\red51\green153\blue102;}
+        '''{\*\generator Riched20 10.0.26100}\viewkind4\uc1 
+        '''\pard\cf1\b\f0\fs28\lang9 SkyeTag v2.3 What&apos;s New\fs24\par
+        '''\cf0\b0 Released November 2025\cf1\b\fs28\par
+        '''\par
+        '''\cf2\fs24 New Features\par
+        '''\cf0\b0\f1\lang1033\&apos;a3\&apos;ab\f0 New Album Art  [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend Shared ReadOnly Property ChangeLogRT() As String
+            Get
+                Return ResourceManager.GetString("ChangeLogRT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
         Friend Shared ReadOnly Property iconApp() As System.Drawing.Icon
@@ -110,6 +126,16 @@ Namespace My.Resources
         Friend Shared ReadOnly Property imageAdvanceRight() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("imageAdvanceRight", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend Shared ReadOnly Property ImageChangeLog32() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ImageChangeLog32", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
