@@ -12,7 +12,7 @@ Public Class Help
     Private Sub Help_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RTxBoxHelp.ContextMenuStrip = RTxBoxCM
     End Sub
-    Private Sub frm_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown, LblVersion.MouseDown
+    Private Sub Frm_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown, LblVersion.MouseDown
         Dim cSender As Control
         If e.Button = MouseButtons.Left AndAlso Me.WindowState = FormWindowState.Normal Then
             mMove = True
@@ -22,9 +22,8 @@ Public Class Help
             Else : mOffset = New Point(-e.X - SystemInformation.FrameBorderSize.Width - 4, -e.Y - SystemInformation.FrameBorderSize.Height - SystemInformation.CaptionHeight - 4)
             End If
         End If
-        cSender = Nothing
     End Sub
-    Private Sub frm_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove, LblVersion.MouseMove
+    Private Sub Frm_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove, LblVersion.MouseMove
         If mMove Then
             mPosition = Control.MousePosition
             mPosition.Offset(mOffset.X, mOffset.Y)
@@ -32,18 +31,18 @@ Public Class Help
             Location = mPosition
         End If
     End Sub
-    Private Sub frm_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp, LblVersion.MouseUp
+    Private Sub Frm_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp, LblVersion.MouseUp
         mMove = False
     End Sub
-    Private Sub frm_Move(sender As Object, e As EventArgs) Handles MyBase.Move
+    Private Sub Frm_Move(sender As Object, e As EventArgs) Handles MyBase.Move
         If Not mMove AndAlso Me.WindowState = FormWindowState.Normal Then
             CheckMove(Me.Location)
         End If
     End Sub
-    Private Sub Help_DoubleClick(sender As Object, e As EventArgs) Handles MyBase.DoubleClick, LblVersion.DoubleClick
+    Private Sub Frm_DoubleClick(sender As Object, e As EventArgs) Handles MyBase.DoubleClick, LblVersion.DoubleClick
         ToggleMaximized()
     End Sub
-    Private Sub frm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub Frm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         Select Case e.KeyData
             Case Keys.W Or Keys.Control
                 Close()

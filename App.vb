@@ -84,7 +84,7 @@ Namespace My
 		Friend FrmLog As Log
 		Private FrmHelp As Help
 		Private FrmSettings As Settings
-		Friend ReadOnly CMFont As Font = New Font("Segoe UI", 10, FontStyle.Regular) 'Font for context menus
+		Friend ReadOnly CMFont As New Font("Segoe UI", 10, FontStyle.Regular) 'Font for context menus
 		Friend ReadOnly InactiveTitleBarColor As Color = Color.FromArgb(255, 243, 243, 243)
 		Friend Const AdjustScreenBoundsNormalWindow As Byte = 8
 		Friend Const AdjustScreenBoundsDialogWindow As Byte = 10
@@ -194,11 +194,11 @@ Namespace My
 			Select Case mode
 				Case True
 					AppAlert = True
-					If Not frmMain Is Nothing Then frmMain.SetError()
+					If frmMain IsNot Nothing Then frmMain.SetError()
 				Case False
 					If AppAlert Then
 						AppAlert = False
-						If Not frmMain Is Nothing Then frmMain.ClearError()
+						If frmMain IsNot Nothing Then frmMain.ClearError()
 					End If
 			End Select
 			My.AppAlertMessage = String.Empty
@@ -299,15 +299,13 @@ Namespace My
 			End If
 		End Sub
 		Friend Sub OpenFileLocation(filename As String)
-			Dim psi As New Diagnostics.ProcessStartInfo("EXPLORER.EXE")
-			psi.Arguments = "/SELECT," + """" + filename + """"
+			Dim psi As New Diagnostics.ProcessStartInfo("EXPLORER.EXE") With {
+				.Arguments = "/SELECT," + """" + filename + """"}
 			Try
 				Diagnostics.Process.Start(psi)
 				WriteToLog("File Location Opened (" + filename + ")")
 			Catch ex As Exception
 				App.WriteToLog("Error Opening File Location (" + filename + ")" + vbCr + ex.Message)
-			Finally
-				psi = Nothing
 			End Try
 		End Sub
 		Friend Sub ProcessPassedParameters(ByRef parameters As Collections.ObjectModel.ReadOnlyCollection(Of String))
@@ -344,8 +342,8 @@ Namespace My
 		Friend Sub PlayMedia()
 			If Not String.IsNullOrEmpty(My.tagPath) Then
 				Static psi As Diagnostics.ProcessStartInfo
-				psi = New Diagnostics.ProcessStartInfo(My.tagPath)
-				psi.UseShellExecute = True
+				psi = New Diagnostics.ProcessStartInfo(My.tagPath) With {
+					.UseShellExecute = True}
 				Try : Diagnostics.Process.Start(psi)
 				Catch
 					My.App.WriteToLog("Error Playing Media")
@@ -355,10 +353,10 @@ Namespace My
 			End If
 		End Sub
 		Friend Sub OpenSkyeTag(filename As String)
-			Dim pInfo As New Diagnostics.ProcessStartInfo
-			pInfo.UseShellExecute = False
-			pInfo.FileName = My.Application.Info.AssemblyName
-			pInfo.Arguments = """" + filename + """"
+			Dim pInfo As New Diagnostics.ProcessStartInfo With {
+				.UseShellExecute = False,
+				.FileName = My.Application.Info.AssemblyName,
+				.Arguments = """" + filename + """"}
 			Diagnostics.Process.Start(pInfo)
 			pInfo = Nothing
 		End Sub
@@ -369,9 +367,9 @@ Namespace My
 					Else : GetNewPic = Nothing
 					End If
 				Case ImageSource.SelectFile
-					Dim ofd As New OpenFileDialog
-					ofd.Title = "Select An Image File"
-					ofd.Filter = "Image Files|*.jpg;*.jpeg;*.bmp;*.png;*.tif;*.tiff"
+					Dim ofd As New OpenFileDialog With {
+						.Title = "Select An Image File",
+						.Filter = "Image Files|*.jpg;*.jpeg;*.bmp;*.png;*.tif;*.tiff"}
 					Dim result As DialogResult = ofd.ShowDialog(frmMain)
 					If result = DialogResult.OK AndAlso Not String.IsNullOrEmpty(ofd.FileName) Then : GetNewPic = New TagLib.Picture(ofd.FileName)
 					Else : GetNewPic = Nothing

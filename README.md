@@ -24,7 +24,6 @@ Install these via **Package Manager Console** or `.csproj` references:
 ```powershell
 Install-Package SkyeLibrary
 Install-Package TagLibSharp
-Install-Package Microsoft.VisualBasic
 Install-Package MetaBrainz.MusicBrainz
 Install-Package MetaBrainz.MusicBrainz.CoverArt
 ```
@@ -33,7 +32,6 @@ Install-Package MetaBrainz.MusicBrainz.CoverArt
 
 - **SkyeLibrary**: Utilities and UI controls for SkyeTag (local or GitHub-hosted `.nupkg`)
 - **TagLibSharp**: Reads/writes metadata from audio files
-- **Microsoft.VisualBasic**: Required for legacy compatibility and certain WinForms features
 - **MetaBrainz.MusicBrainz**: Interfaces with the MusicBrainz API for album and artist data
 - **MetaBrainz.MusicBrainz.CoverArt**: Retrieves album artwork from the Cover Art Archive
 

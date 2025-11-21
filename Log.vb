@@ -10,13 +10,13 @@ Public Class Log
     Private LogSearchTitle As String
     Private LogSearchInActiveColor As Color
     Private DeleteLogConfirm As Boolean = False
-    Private WithEvents timerDeleteLog As New Timer
+    Private WithEvents TimerDeleteLog As New Timer
 
     'Form Events
-    Private Sub frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'Initialize
-        timerDeleteLog.Interval = 5000
+        TimerDeleteLog.Interval = 5000
         LogSearchTitle = TxbxSearch.Text
         LogSearchInActiveColor = TxbxSearch.ForeColor
         RTxBoxLog.ContextMenuStrip = RTxBoxCM
@@ -30,11 +30,11 @@ Public Class Log
         If Bottom > My.Computer.Screen.WorkingArea.Height Then Top = My.Computer.Screen.WorkingArea.Height - Height
 
     End Sub
-    Private Sub Log_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+    Private Sub Frm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         App.FrmLog.Dispose()
         App.FrmLog = Nothing
     End Sub
-    Private Sub frm_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown, Lblnfo.MouseDown
+    Private Sub Frm_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown, Lblnfo.MouseDown
         Dim cSender As Control
         If e.Button = MouseButtons.Left AndAlso Me.WindowState = FormWindowState.Normal Then
             mMove = True
@@ -44,9 +44,8 @@ Public Class Log
             Else : mOffset = New Point(-e.X - SystemInformation.FrameBorderSize.Width - 4, -e.Y - SystemInformation.FrameBorderSize.Height - SystemInformation.CaptionHeight - 4)
             End If
         End If
-        cSender = Nothing
     End Sub
-    Private Sub frm_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove, Lblnfo.MouseMove
+    Private Sub Frm_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove, Lblnfo.MouseMove
         If mMove Then
             mPosition = Control.MousePosition
             mPosition.Offset(mOffset.X, mOffset.Y)
@@ -54,18 +53,18 @@ Public Class Log
             Location = mPosition
         End If
     End Sub
-    Private Sub frm_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp, Lblnfo.MouseUp
+    Private Sub Frm_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp, Lblnfo.MouseUp
         mMove = False
     End Sub
-    Private Sub frm_Move(sender As Object, e As EventArgs) Handles MyBase.Move
+    Private Sub Frm_Move(sender As Object, e As EventArgs) Handles MyBase.Move
         If Not mMove AndAlso Me.WindowState = FormWindowState.Normal Then
             CheckMove(Me.Location)
         End If
     End Sub
-    Private Sub Log_DoubleClick(sender As Object, e As EventArgs) Handles MyBase.DoubleClick, LblSearch.DoubleClick
+    Private Sub Frm_DoubleClick(sender As Object, e As EventArgs) Handles MyBase.DoubleClick, LblSearch.DoubleClick
         ToggleMaximized()
     End Sub
-    Private Sub frm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub Frm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         Select Case e.KeyData
             Case Keys.W Or Keys.Control
                 Close()
@@ -88,7 +87,7 @@ Public Class Log
         End If
         SetDeleteLogConfirm()
     End Sub
-    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+    Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         SetDeleteLogConfirm(True)
         App.ShowLog()
     End Sub
@@ -149,14 +148,14 @@ Public Class Log
     End Sub
 
     'Handlers
-    Private Sub timerDeleteLog_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles timerDeleteLog.Tick
+    Private Sub TimerDeleteLog_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles TimerDeleteLog.Tick
         SetDeleteLogConfirm()
     End Sub
 
     'Procedures
     Private Sub SetDeleteLogConfirm(Optional forcereset As Boolean = False)
         If DeleteLogConfirm Or forcereset Then
-            timerDeleteLog.Stop()
+            TimerDeleteLog.Stop()
             DeleteLogConfirm = False
             Me.BtnDelete.ResetBackColor()
             tipAlert.HideTooltip()
@@ -165,7 +164,7 @@ Public Class Log
             Me.BtnDelete.BackColor = Color.Red
             tipInfo.HideTooltip()
             tipAlert.ShowTooltipAtCursor("Are You Sure?")
-            timerDeleteLog.Start()
+            TimerDeleteLog.Start()
         End If
     End Sub
     Private Sub ToggleMaximized()

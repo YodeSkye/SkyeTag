@@ -46,15 +46,10 @@ Public Class SelectOnlineImage
     End Sub
     Private Sub SelectOnlineImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         MBImageFront?.Dispose()
-        MBImageFront = Nothing
         MBImageBack?.Dispose()
-        MBImageBack = Nothing
         MBArt?.Dispose()
-        MBArt = Nothing
         MBQuery?.Dispose()
-        MBQuery = Nothing
         NetClient?.Dispose()
-        NetClient = Nothing
     End Sub
     Private Sub Frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, PicBoxArt.MouseDown, PicBoxFrontThumb.MouseDown, PicBoxBackThumb.MouseDown, LblDimBack.MouseDown, LblStatus.MouseDown
         Dim cSender As Control
@@ -67,7 +62,6 @@ Public Class SelectOnlineImage
                 mOffset = New Point(-e.X - SystemInformation.FrameBorderSize.Width - 4, -e.Y - SystemInformation.FrameBorderSize.Height - SystemInformation.CaptionHeight - 4)
             End If
         End If
-        'cSender = Nothing
     End Sub
     Private Sub Frm_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseMove, PicBoxArt.MouseMove, PicBoxFrontThumb.MouseMove, PicBoxBackThumb.MouseMove, LblDimBack.MouseMove, LblStatus.MouseMove
         If mMove Then

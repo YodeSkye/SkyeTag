@@ -10,7 +10,7 @@ Imports SkyeTag.My
 Partial Friend Class MainForm
 
     'Declarations
-    Private Enum rMove
+    Private Enum RMove
         Left
         First
         Right
@@ -42,16 +42,18 @@ Partial Friend Class MainForm
         InitializeComponent()
         Text = My.Application.Info.ProductName
         lblFileInfo.Text = String.Empty
-        For Each name As String In System.Enum.GetNames(GetType(TagLib.PictureType)) : cobxAlbumArtType.Items.Add(name) : Next
+        For Each name As String In [Enum].GetNames(Of TagLib.PictureType)()
+            cobxAlbumArtType.Items.Add(name)
+        Next
         tipInfo.SetText(btnAlbumArt, App.hArt + " Menu")
         txtboxCM.ShowExtendedTools = True
         txtboxCM.Font = App.CMFont
         txtboxCMLyrics.ShowExtendedTools = False
         txtboxCMLyrics.Font = App.CMFont
         doubleclickMaxTime = TimeSpan.FromMilliseconds(SystemInformation.DoubleClickTime)
-        clickTimer = New Timer()
-        clickTimer.Interval = SystemInformation.DoubleClickTime
-        AddHandler clickTimer.Tick, AddressOf clickTimer_Tick
+        clickTimer = New Timer With {
+            .Interval = SystemInformation.DoubleClickTime}
+        AddHandler clickTimer.Tick, AddressOf ClickTimer_Tick
         SetLyrics()
         SetWindowState()
 #If DEBUG Then
@@ -102,7 +104,7 @@ Partial Friend Class MainForm
             MyBase.WndProc(m)
         End Try
     End Sub
-    Private Sub frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txbxTitle.ContextMenuStrip = txtboxCM
         txbxGenre.ContextMenuStrip = txtboxCM
         txbxComments.ContextMenuStrip = txtboxCM
@@ -119,11 +121,11 @@ Partial Friend Class MainForm
         SetTag()
         ShowTag()
     End Sub
-    Private Sub frm_Closing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub Frm_Closing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If App.FrmLog IsNot Nothing Then App.FrmLog.Close()
         My.App.Finalize()
     End Sub
-    Private Sub frm_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+    Private Sub Frm_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
         Dim g As Graphics = Me.CreateGraphics
         If tlFile Is Nothing Then
             Me.tipInfo.SetText(Me.txbxArtist, Nothing)
@@ -165,7 +167,7 @@ Partial Friend Class MainForm
         End If
         g.Dispose()
     End Sub
-    Private Sub frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picbxAlbumArt.MouseDown, MyBase.MouseDown, MenuMain.MouseDown, lblYear.MouseDown, lblTrackSeparator.MouseDown, lblTrack.MouseDown, lblTitle.MouseDown, lblGenre.MouseDown, lblDuration.MouseDown, lblComments.MouseDown, lblArtist.MouseDown, lblAlbumArt.MouseDown, lblAlbum.MouseDown
+    Private Sub Frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picbxAlbumArt.MouseDown, MyBase.MouseDown, MenuMain.MouseDown, lblYear.MouseDown, lblTrackSeparator.MouseDown, lblTrack.MouseDown, lblTitle.MouseDown, lblGenre.MouseDown, lblDuration.MouseDown, lblComments.MouseDown, lblArtist.MouseDown, lblAlbumArt.MouseDown, lblAlbum.MouseDown
         Dim cSender As Control
         If e.Button = MouseButtons.Left AndAlso Me.WindowState = FormWindowState.Normal Then
             mMove = True
@@ -180,9 +182,8 @@ Partial Friend Class MainForm
             Else : mOffset = New Point(-e.X - SystemInformation.FrameBorderSize.Width - 4, -e.Y - SystemInformation.FrameBorderSize.Height - SystemInformation.CaptionHeight - 4)
             End If
         End If
-        cSender = Nothing
     End Sub
-    Private Sub frm_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picbxAlbumArt.MouseMove, MyBase.MouseMove, MenuMain.MouseMove, lblYear.MouseMove, lblTrackSeparator.MouseMove, lblTrack.MouseMove, lblTitle.MouseMove, lblGenre.MouseMove, lblDuration.MouseMove, lblComments.MouseMove, lblArtist.MouseMove, lblAlbumArt.MouseMove, lblAlbum.MouseMove
+    Private Sub Frm_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picbxAlbumArt.MouseMove, MyBase.MouseMove, MenuMain.MouseMove, lblYear.MouseMove, lblTrackSeparator.MouseMove, lblTrack.MouseMove, lblTitle.MouseMove, lblGenre.MouseMove, lblDuration.MouseMove, lblComments.MouseMove, lblArtist.MouseMove, lblAlbumArt.MouseMove, lblAlbum.MouseMove
         If mMove Then
             mPosition = Control.MousePosition
             mPosition.Offset(mOffset.X, mOffset.Y)
@@ -190,31 +191,31 @@ Partial Friend Class MainForm
             Location = mPosition
         End If
     End Sub
-    Private Sub frm_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picbxAlbumArt.MouseUp, MyBase.MouseUp, MenuMain.MouseUp, lblYear.MouseUp, lblTrackSeparator.MouseUp, lblTrack.MouseUp, lblTitle.MouseUp, lblGenre.MouseUp, lblDuration.MouseUp, lblComments.MouseUp, lblArtist.MouseUp, lblAlbumArt.MouseUp, lblAlbum.MouseUp
+    Private Sub Frm_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picbxAlbumArt.MouseUp, MyBase.MouseUp, MenuMain.MouseUp, lblYear.MouseUp, lblTrackSeparator.MouseUp, lblTrack.MouseUp, lblTitle.MouseUp, lblGenre.MouseUp, lblDuration.MouseUp, lblComments.MouseUp, lblArtist.MouseUp, lblAlbumArt.MouseUp, lblAlbum.MouseUp
         mMove = False
     End Sub
-    Private Sub frm_Move(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Move
+    Private Sub Frm_Move(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Move
         If Not mMove AndAlso Me.WindowState = FormWindowState.Normal Then
             CheckMove(Me.Location)
         End If
     End Sub
-    Private Sub frm_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
+    Private Sub Frm_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
         If My.Settings.StartLocation <> Me.Location Then
             My.Settings.StartLocation = Me.Location
             My.Settings.MetricsNeedSaved = True
         End If
     End Sub
-    Private Sub frm_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+    Private Sub Frm_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If Visible AndAlso WindowState = FormWindowState.Normal Then
             App.Settings.StartSize = Me.Size
             App.Settings.MetricsNeedSaved = True
         End If
     End Sub
-    Private Sub frm_DoubleClick(sender As Object, e As EventArgs) Handles picbxAlbumArt.DoubleClick, panelAlbumArt.DoubleClick, MyBase.DoubleClick, MenuMain.DoubleClick, lblYear.DoubleClick, lblTrackSeparator.DoubleClick, lblTrack.DoubleClick, lblTitle.DoubleClick, lblGenre.DoubleClick, lblFileInfo.DoubleClick, lblDuration.DoubleClick, lblComments.DoubleClick, lblArtist.DoubleClick, lblAlbumArt.DoubleClick, lblAlbum.DoubleClick
+    Private Sub Frm_DoubleClick(sender As Object, e As EventArgs) Handles picbxAlbumArt.DoubleClick, panelAlbumArt.DoubleClick, MyBase.DoubleClick, MenuMain.DoubleClick, lblYear.DoubleClick, lblTrackSeparator.DoubleClick, lblTrack.DoubleClick, lblTitle.DoubleClick, lblGenre.DoubleClick, lblFileInfo.DoubleClick, lblDuration.DoubleClick, lblComments.DoubleClick, lblArtist.DoubleClick, lblAlbumArt.DoubleClick, lblAlbum.DoubleClick
         wMaximized = Not wMaximized
         SetWindowState()
     End Sub
-    Private Sub frm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub Frm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         Select Case e.KeyData
             Case Keys.W Or Keys.Control : Me.Close()
             Case Keys.W Or Keys.Control Or Keys.Shift : Me.WindowState = FormWindowState.Minimized
@@ -224,7 +225,7 @@ Partial Friend Class MainForm
                 SetWindowState()
         End Select
     End Sub
-    Private Sub frm_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
+    Private Sub Frm_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
         Me.Activate()
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             Dim filedrop As String() = DirectCast(e.Data.GetData(DataFormats.FileDrop, True), String())
@@ -240,7 +241,7 @@ Partial Friend Class MainForm
         Else : e.Effect = DragDropEffects.None
         End If
     End Sub
-    Private Sub frm_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
+    Private Sub Frm_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
         If e.Effect = DragDropEffects.Link Then
             Dim filedrop As String() = DirectCast(e.Data.GetData(DataFormats.FileDrop, True), String())
             Dim files As New Collections.Generic.List(Of String)
@@ -291,8 +292,8 @@ Partial Friend Class MainForm
     Private Sub MIOpenLocation_Click(sender As Object, e As EventArgs) Handles MIOpenLocation.Click
         If Not String.IsNullOrEmpty(My.tagPath) Then
             Static psi As Diagnostics.ProcessStartInfo
-            psi = New Diagnostics.ProcessStartInfo("EXPLORER.EXE")
-            psi.Arguments = "/SELECT," + """" + My.tagPath + """"
+            psi = New Diagnostics.ProcessStartInfo("EXPLORER.EXE") With {
+                .Arguments = "/SELECT," + """" + My.tagPath + """"}
             Try : Diagnostics.Process.Start(psi)
             Catch
                 My.App.WriteToLog("Error Opening File Location")
@@ -414,40 +415,38 @@ Partial Friend Class MainForm
     Private Sub MIPasteTag_Click(sender As Object, e As EventArgs) Handles MIPasteTag.Click
         PasteTag()
     End Sub
-    Private Sub cmiArtistInsert_Click(sender As Object, e As EventArgs) Handles cmiArtistInsert.Click
+    Private Sub CMIArtistInsert_Click(sender As Object, e As EventArgs) Handles cmiArtistInsert.Click
         InsertArtist()
     End Sub
-    Private Sub cmiArtistInsertFromClipboard_Click(sender As Object, e As EventArgs) Handles cmiArtistInsertFromClipboard.Click
+    Private Sub CMIArtistInsertFromClipboard_Click(sender As Object, e As EventArgs) Handles cmiArtistInsertFromClipboard.Click
         If My.Computer.Clipboard.ContainsText Then : InsertArtist(My.Computer.Clipboard.GetText)
         Else
-            'tipInfo.Tag = SystemIcons.Information.ToBitmap
-            'tipInfo.Show("No Text On ClipBoard", Me, Me.btnArtistInsert.Left + CInt(Me.btnArtistInsert.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnArtistInsert.Top + CInt(Me.btnArtistInsert.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
             tipInfo.ShowTooltip(btnArtistInsert, "No Text On ClipBoard", SystemIcons.Information.ToBitmap)
         End If
     End Sub
-    Private Sub cmiArtistPrevious_Click(sender As Object, e As EventArgs) Handles cmiArtistPrevious.Click
+    Private Sub CMIArtistPrevious_Click(sender As Object, e As EventArgs) Handles cmiArtistPrevious.Click
         My.tagArtistIndex -= 1
         If My.tagArtistIndex < 0 Then My.tagArtistIndex = 0
         ShowTag()
     End Sub
-    Private Sub cmiArtistMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveLeft.Click
-        MoveArtist(rMove.Left)
+    Private Sub CMIArtistMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveLeft.Click
+        MoveArtist(RMove.Left)
     End Sub
-    Private Sub cmiArtistMoveFirst_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveFirst.Click
-        MoveArtist(rMove.First)
+    Private Sub CMIArtistMoveFirst_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveFirst.Click
+        MoveArtist(RMove.First)
     End Sub
-    Private Sub cmiArtistNext_Click(sender As Object, e As EventArgs) Handles cmiArtistNext.Click
+    Private Sub CMIArtistNext_Click(sender As Object, e As EventArgs) Handles cmiArtistNext.Click
         My.tagArtistIndex += 1
         If My.tagArtistIndex > tlFile.Tag.Performers.Length - 1 Then My.tagArtistIndex = tlFile.Tag.Performers.Length - 1
         ShowTag()
     End Sub
-    Private Sub cmiArtistMoveRight_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveRight.Click
-        MoveArtist(rMove.Right)
+    Private Sub CMIArtistMoveRight_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveRight.Click
+        MoveArtist(RMove.Right)
     End Sub
-    Private Sub cmiArtistMoveLast_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveLast.Click
-        MoveArtist(rMove.Last)
+    Private Sub CMIArtistMoveLast_Click(sender As Object, e As EventArgs) Handles cmiArtistMoveLast.Click
+        MoveArtist(RMove.Last)
     End Sub
-    Private Sub cmAlbumArt_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmAlbumArt.Opening
+    Private Sub CMAlbumArt_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmAlbumArt.Opening
         If tlFile.Tag.Pictures.Length = 0 Then
             Me.cmiAlbumArtSelect.Enabled = False
             Me.cmiAlbumArtExport.Enabled = False
@@ -481,12 +480,11 @@ Partial Friend Class MainForm
         Else : Me.cmiAlbumArtInsert.Enabled = True
         End If
     End Sub
-    Private Sub cmImageSource_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmImageSource.Opening
-        'Debug.Print(cmImageSource.OwnerItem.Name)
+    Private Sub CMImageSource_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmImageSource.Opening
         cmImageSource.Tag = cmImageSource.OwnerItem.Name
     End Sub
-    Private Sub cmiSelectFromFile_Click(sender As Object, e As EventArgs) Handles cmiSelectFromFile.Click
-        Debug.Print("SelectFromFile For " + cmImageSource.Tag.ToString)
+    Private Sub CMISelectFromFile_Click(sender As Object, e As EventArgs) Handles cmiSelectFromFile.Click
+        'Debug.Print("SelectFromFile For " + cmImageSource.Tag.ToString)
         Select Case cmImageSource.Tag.ToString
             Case cmiAlbumArtSelect.Name
                 UpdateArt(ImageSource.SelectFile)
@@ -502,7 +500,7 @@ Partial Friend Class MainForm
                 InsertArt(tlFile.Tag.Pictures.Length, ImageSource.SelectFile)
         End Select
     End Sub
-    Private Sub cmiSelectFromOnline_Click(sender As Object, e As EventArgs) Handles cmiSelectFromOnline.Click
+    Private Sub CMISelectFromOnline_Click(sender As Object, e As EventArgs) Handles cmiSelectFromOnline.Click
         Debug.Print("SelectFromOnline For " + cmImageSource.Tag.ToString)
         Select Case cmImageSource.Tag.ToString
             Case cmiAlbumArtSelect.Name
@@ -519,7 +517,7 @@ Partial Friend Class MainForm
                 InsertArt(tlFile.Tag.Pictures.Length, ImageSource.SelectOnline)
         End Select
     End Sub
-    Private Sub cmiPasteFromClipboard_Click(sender As Object, e As EventArgs) Handles cmiPasteFromClipboard.Click
+    Private Sub CMIPasteFromClipboard_Click(sender As Object, e As EventArgs) Handles cmiPasteFromClipboard.Click
         Debug.Print("SelectPasteFromClipboard For " + cmImageSource.Tag.ToString)
         Select Case cmImageSource.Tag.ToString
             Case cmiAlbumArtSelect.Name
@@ -536,28 +534,28 @@ Partial Friend Class MainForm
                 InsertArt(tlFile.Tag.Pictures.Length, ImageSource.ClipBoard)
         End Select
     End Sub
-    Private Sub cmiExportToFile_Click(sender As Object, e As EventArgs) Handles cmiExportToFile.Click
+    Private Sub CMIExportToFile_Click(sender As Object, e As EventArgs) Handles cmiExportToFile.Click
         ExportArt(ExportDestination.File)
     End Sub
-    Private Sub cmiExportToBitmap_Click(sender As Object, e As EventArgs) Handles cmiExportToBitmap.Click
+    Private Sub CMIExportToBitmap_Click(sender As Object, e As EventArgs) Handles cmiExportToBitmap.Click
         ExportArt(ExportDestination.BitmapFile)
     End Sub
-    Private Sub cmiExportToClipboard_Click(sender As Object, e As EventArgs) Handles cmiExportToClipboard.Click
+    Private Sub CMIExportToClipboard_Click(sender As Object, e As EventArgs) Handles cmiExportToClipboard.Click
         ExportArt(ExportDestination.Clipboard)
     End Sub
-    Private Sub cmiAlbumArtMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveLeft.Click
-        MoveArt(rMove.Left)
+    Private Sub CMIAlbumArtMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveLeft.Click
+        MoveArt(RMove.Left)
     End Sub
-    Private Sub cmiAlbumArtMoveFirst_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveFirst.Click
-        MoveArt(rMove.First)
+    Private Sub CMIAlbumArtMoveFirst_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveFirst.Click
+        MoveArt(RMove.First)
     End Sub
-    Private Sub cmiAlbumArtMoveRight_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveRight.Click
-        MoveArt(rMove.Right)
+    Private Sub CMIAlbumArtMoveRight_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveRight.Click
+        MoveArt(RMove.Right)
     End Sub
-    Private Sub cmiAlbumArtMoveLast_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveLast.Click
-        MoveArt(rMove.Last)
+    Private Sub CMIAlbumArtMoveLast_Click(sender As Object, e As EventArgs) Handles cmiAlbumArtMoveLast.Click
+        MoveArt(RMove.Last)
     End Sub
-    Private Sub cmiAlbumArtDeleteMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtDelete.MouseUp
+    Private Sub CMIAlbumArtDeleteMouseUp(sender As Object, e As MouseEventArgs) Handles cmiAlbumArtDelete.MouseUp
         If tlFile.Tag.Pictures.Length > 0 Then
             Dim piclist As New Collections.Generic.List(Of TagLib.IPicture)
             If tlFile.Tag.Pictures.Length > 1 Then
@@ -572,7 +570,7 @@ Partial Friend Class MainForm
             SetSave()
         End If
     End Sub
-    Private Sub cmiArtPrevious_Click(sender As Object, e As EventArgs) Handles cmiArtPrevious.Click
+    Private Sub CMIArtPrevious_Click(sender As Object, e As EventArgs) Handles cmiArtPrevious.Click
         txbxAlbumArt.CausesValidation = False
         cobxAlbumArtType.CausesValidation = False
         My.tagArtIndex -= 1
@@ -582,13 +580,13 @@ Partial Friend Class MainForm
         txbxAlbumArt.CausesValidation = True
         cobxAlbumArtType.CausesValidation = True
     End Sub
-    Private Sub cmiArtMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiArtMoveLeft.Click
-        MoveArt(rMove.Left)
+    Private Sub CMIArtMoveLeft_Click(sender As Object, e As EventArgs) Handles cmiArtMoveLeft.Click
+        MoveArt(RMove.Left)
     End Sub
-    Private Sub cmiArtMoveFirst_Click(sender As Object, e As EventArgs) Handles cmiArtMoveFirst.Click
-        MoveArt(rMove.First)
+    Private Sub CMIArtMoveFirst_Click(sender As Object, e As EventArgs) Handles cmiArtMoveFirst.Click
+        MoveArt(RMove.First)
     End Sub
-    Private Sub cmiArtNext_Click(sender As Object, e As EventArgs) Handles cmiArtNext.Click
+    Private Sub CMIArtNext_Click(sender As Object, e As EventArgs) Handles cmiArtNext.Click
         txbxAlbumArt.CausesValidation = False
         cobxAlbumArtType.CausesValidation = False
         My.tagArtIndex += 1
@@ -598,16 +596,16 @@ Partial Friend Class MainForm
         txbxAlbumArt.CausesValidation = True
         cobxAlbumArtType.CausesValidation = True
     End Sub
-    Private Sub cmiArtMoveRight_Click(sender As Object, e As EventArgs) Handles cmiArtMoveRight.Click
-        MoveArt(rMove.Right)
+    Private Sub CMIArtMoveRight_Click(sender As Object, e As EventArgs) Handles cmiArtMoveRight.Click
+        MoveArt(RMove.Right)
     End Sub
-    Private Sub cmiArtMoveLast_Click(sender As Object, e As EventArgs) Handles cmiArtMoveLast.Click
-        MoveArt(rMove.Last)
+    Private Sub CMIArtMoveLast_Click(sender As Object, e As EventArgs) Handles cmiArtMoveLast.Click
+        MoveArt(RMove.Last)
     End Sub
-    Private Sub ctrlAlbumArtEnter(sender As Object, e As EventArgs) Handles txbxAlbumArt.Enter, cobxAlbumArtType.Enter
+    Private Sub CtrlAlbumArtEnter(sender As Object, e As EventArgs) Handles txbxAlbumArt.Enter, cobxAlbumArtType.Enter
         ResetLyrics()
     End Sub
-    Private Sub lblFileInfo_MouseDown(sender As Object, e As MouseEventArgs) Handles lblFileInfo.MouseDown
+    Private Sub LblFileInfo_MouseDown(sender As Object, e As MouseEventArgs) Handles lblFileInfo.MouseDown
         If inDoubleClick Then
             inDoubleClick = False
             Dim length As TimeSpan = DateTime.Now - lastClick
@@ -626,37 +624,33 @@ Partial Friend Class MainForm
         lastClick = DateTime.Now
         inDoubleClick = True
     End Sub
-    Private Sub lblFileInfo_MouseEnter(sender As Object, e As EventArgs) Handles lblFileInfo.MouseEnter
+    Private Sub LblFileInfo_MouseEnter(sender As Object, e As EventArgs) Handles lblFileInfo.MouseEnter
         If Not String.IsNullOrEmpty(lblFileInfo.Text) Then
             Cursor = Cursors.Hand
             lblFileInfo.ForeColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HOTLIGHT)
         End If
     End Sub
-    Private Sub lblFileInfo_MouseLeave(sender As Object, e As EventArgs) Handles lblFileInfo.MouseLeave
+    Private Sub LblFileInfo_MouseLeave(sender As Object, e As EventArgs) Handles lblFileInfo.MouseLeave
         ResetCursor()
         lblFileInfo.ResetForeColor()
     End Sub
-    Private Sub lblAlbumArtClick(sender As Object, e As EventArgs)
+    Private Sub LblAlbumArtClick(sender As Object, e As EventArgs)
         If tlFile.Tag.Pictures.Length > 0 Then ResetLyrics()
     End Sub
-    'Private Sub txbx_MouseLeave(sender As Object, e As EventArgs) Handles txbxYear.MouseLeave, txbxTrackCount.MouseLeave, txbxTrack.MouseLeave, txbxTitle.MouseLeave, txbxGenre.MouseLeave, txbxComments.MouseLeave, txbxArtist.MouseLeave, txbxAlbum.MouseLeave
-    '    'tipInfo.Active = False
-    '    'tipInfo.Active = True
-    'End Sub
-    Private Sub txtbox_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txbxYear.PreviewKeyDown, txbxTrackCount.PreviewKeyDown, txbxTrack.PreviewKeyDown, txbxTitle.PreviewKeyDown, txbxGenre.PreviewKeyDown, txbxDuration.PreviewKeyDown, txbxComments.PreviewKeyDown, txbxArtist.PreviewKeyDown, txbxAlbumArt.PreviewKeyDown, txbxAlbum.PreviewKeyDown
+    Private Sub Txtbox_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txbxYear.PreviewKeyDown, txbxTrackCount.PreviewKeyDown, txbxTrack.PreviewKeyDown, txbxTitle.PreviewKeyDown, txbxGenre.PreviewKeyDown, txbxDuration.PreviewKeyDown, txbxComments.PreviewKeyDown, txbxArtist.PreviewKeyDown, txbxAlbumArt.PreviewKeyDown, txbxAlbum.PreviewKeyDown
         txtboxCM.ShortcutKeys(DirectCast(sender, TextBox), e)
     End Sub
-    Private Sub txbxLyrics_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txbxLyrics.PreviewKeyDown
+    Private Sub TxbxLyrics_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txbxLyrics.PreviewKeyDown
         txtboxCMLyrics.ShortcutKeys(DirectCast(sender, TextBox), e)
     End Sub
-    Private Sub txtboxKeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txbxTitle.KeyDown, txbxGenre.KeyDown, txbxComments.KeyDown, txbxArtist.KeyDown, txbxAlbumArt.KeyDown, txbxAlbum.KeyDown
+    Private Sub TxtboxKeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txbxTitle.KeyDown, txbxGenre.KeyDown, txbxComments.KeyDown, txbxArtist.KeyDown, txbxAlbumArt.KeyDown, txbxAlbum.KeyDown
         If Not e.Control AndAlso Not e.Alt Then SetSave()
         If e.KeyCode = Keys.Enter Then Me.Validate()
     End Sub
-    Private Sub txbxNumbersOnly_KeyDown(sender As Object, e As KeyEventArgs) Handles txbxYear.KeyDown, txbxTrackCount.KeyDown, txbxTrack.KeyDown
+    Private Sub TxbxNumbersOnly_KeyDown(sender As Object, e As KeyEventArgs) Handles txbxYear.KeyDown, txbxTrackCount.KeyDown, txbxTrack.KeyDown
         If Not e.Control AndAlso Not e.Alt Then SetSave()
     End Sub
-    Private Sub txbxNumbersOnly_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txbxYear.KeyPress, txbxTrackCount.KeyPress, txbxTrack.KeyPress
+    Private Sub TxbxNumbersOnly_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txbxYear.KeyPress, txbxTrackCount.KeyPress, txbxTrack.KeyPress
         Static nonNumberEntered As Boolean
         nonNumberEntered = False
         If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then : nonNumberEntered = True
@@ -664,8 +658,8 @@ Partial Friend Class MainForm
         End If
         If nonNumberEntered Then e.Handled = True
     End Sub
-    Private Sub txbxArtistValidated(sender As Object, e As EventArgs) Handles txbxArtist.Validated
-        If Not tlFile Is Nothing Then
+    Private Sub TxbxArtistValidated(sender As Object, e As EventArgs) Handles txbxArtist.Validated
+        If tlFile IsNot Nothing Then
             If Not String.IsNullOrEmpty(Me.txbxArtist.Text) AndAlso tlFile.Tag.Performers.Length = 0 Then
                 tlFile.Tag.Performers = New String() {Me.txbxArtist.Text}
                 SetArtistControls(True)
@@ -691,8 +685,8 @@ Partial Friend Class MainForm
             End If
         End If
     End Sub
-    Private Sub txbxGenreValidated(sender As Object, e As EventArgs) Handles txbxGenre.Validated
-        If Not tlFile Is Nothing Then
+    Private Sub TxbxGenreValidated(sender As Object, e As EventArgs) Handles txbxGenre.Validated
+        If tlFile IsNot Nothing Then
             If Not String.Equals(IIf(tlFile.Tag.FirstGenre Is Nothing, String.Empty, tlFile.Tag.FirstGenre).ToString, Me.txbxGenre.Text) Then
                 Dim s() As String
                 If tlFile.Tag.Genres.Length = 0 Then
@@ -702,27 +696,20 @@ Partial Friend Class MainForm
                     s.SetValue(Me.txbxGenre.Text, 0)
                 End If
                 tlFile.Tag.Genres = s
-                s = Nothing
                 SetSave(True)
             End If
         End If
     End Sub
-    Private Sub txbxTitleValidated(sender As Object, e As EventArgs) Handles txbxTitle.Validated
-        If Not tlFile Is Nothing Then
-            'Me.txbxTitle.Select(0, 0)
-            'Me.txbxTitle.ScrollToCaret()
-
+    Private Sub TxbxTitleValidated(sender As Object, e As EventArgs) Handles txbxTitle.Validated
+        If tlFile IsNot Nothing Then
             If Not String.Equals(IIf(tlFile.Tag.Title Is Nothing, String.Empty, tlFile.Tag.Title).ToString, Me.txbxTitle.Text) Then
                 tlFile.Tag.Title = Me.txbxTitle.Text
                 SetSave(True)
             End If
         End If
     End Sub
-    Private Sub txbxTrackValidated(sender As Object, e As EventArgs) Handles txbxTrack.Validated
+    Private Sub TxbxTrackValidated(sender As Object, e As EventArgs) Handles txbxTrack.Validated
         If tlFile IsNot Nothing Then
-            'Me.txbxTrack.Select(0, 0)
-            'Me.txbxTrack.ScrollToCaret()
-
             If Not tlFile.Tag.Track = CUInt(Val(Me.txbxTrack.Text)) Then
                 tlFile.Tag.Track = CUInt(Val(Me.txbxTrack.Text))
                 Me.txbxTrack.Text = IIf(tlFile.Tag.Track = 0, String.Empty, tlFile.Tag.Track).ToString
@@ -730,11 +717,8 @@ Partial Friend Class MainForm
             End If
         End If
     End Sub
-    Private Sub txbxTrackCountValidated(sender As Object, e As EventArgs) Handles txbxTrackCount.Validated
-        If Not tlFile Is Nothing Then
-            'Me.txbxTrackCount.Select(0, 0)
-            'Me.txbxTrackCount.ScrollToCaret()
-
+    Private Sub TxbxTrackCountValidated(sender As Object, e As EventArgs) Handles txbxTrackCount.Validated
+        If tlFile IsNot Nothing Then
             If Not tlFile.Tag.TrackCount = CUInt(Val(Me.txbxTrackCount.Text)) Then
                 tlFile.Tag.TrackCount = CUInt(Val(Me.txbxTrackCount.Text))
                 Me.txbxTrackCount.Text = IIf(tlFile.Tag.TrackCount = 0, String.Empty, tlFile.Tag.TrackCount).ToString
@@ -742,22 +726,16 @@ Partial Friend Class MainForm
             End If
         End If
     End Sub
-    Private Sub txbxAlbumValidated(sender As Object, e As EventArgs) Handles txbxAlbum.Validated
-        If Not tlFile Is Nothing Then
-            'Me.txbxAlbum.Select(0, 0)
-            'Me.txbxAlbum.ScrollToCaret()
-
+    Private Sub TxbxAlbumValidated(sender As Object, e As EventArgs) Handles txbxAlbum.Validated
+        If tlFile IsNot Nothing Then
             If Not String.Equals(IIf(tlFile.Tag.Album Is Nothing, String.Empty, tlFile.Tag.Album).ToString, Me.txbxAlbum.Text) Then
                 tlFile.Tag.Album = Me.txbxAlbum.Text
                 SetSave(True)
             End If
         End If
     End Sub
-    Private Sub txbxYearValidated(sender As Object, e As EventArgs) Handles txbxYear.Validated
-        If Not tlFile Is Nothing Then
-            'Me.txbxYear.Select(0, 0)
-            'Me.txbxYear.ScrollToCaret()
-
+    Private Sub TxbxYearValidated(sender As Object, e As EventArgs) Handles txbxYear.Validated
+        If tlFile IsNot Nothing Then
             If Not tlFile.Tag.Year = CUInt(Val(Me.txbxYear.Text)) Then
                 tlFile.Tag.Year = CUInt(Val(Me.txbxYear.Text))
                 Me.txbxYear.Text = IIf(tlFile.Tag.Year = 0, String.Empty, tlFile.Tag.Year).ToString
@@ -765,15 +743,15 @@ Partial Friend Class MainForm
             End If
         End If
     End Sub
-    Private Sub txbxCommentsValidated(sender As Object, e As EventArgs) Handles txbxComments.Validated
-        If Not tlFile Is Nothing Then
+    Private Sub TxbxCommentsValidated(sender As Object, e As EventArgs) Handles txbxComments.Validated
+        If tlFile IsNot Nothing Then
             If Not String.Equals(IIf(tlFile.Tag.Comment Is Nothing, String.Empty, tlFile.Tag.Comment).ToString, Me.txbxComments.Text) Then
                 tlFile.Tag.Comment = Me.txbxComments.Text
                 SetSave(True)
             End If
         End If
     End Sub
-    Private Sub txbxAlbumArtValidated(sender As Object, e As EventArgs) Handles txbxAlbumArt.Validated
+    Private Sub TxbxAlbumArtValidated(sender As Object, e As EventArgs) Handles txbxAlbumArt.Validated
         If tlFile IsNot Nothing Then
             If tlFile.Tag.Pictures.Length > 0 AndAlso Not String.Equals(IIf(tlFile.Tag.Pictures(My.tagArtIndex).Description Is Nothing, String.Empty, tlFile.Tag.Pictures(My.tagArtIndex).Description).ToString, Me.txbxAlbumArt.Text) Then
                 tlFile.Tag.Pictures(My.tagArtIndex).Description = txbxAlbumArt.Text
@@ -781,12 +759,12 @@ Partial Friend Class MainForm
             End If
         End If
     End Sub
-    Private Sub txbxLyricsKeyUp(sender As Object, e As KeyEventArgs) Handles txbxLyrics.KeyUp
-        If Not tlFile Is Nothing AndAlso Not Me.txbxLyrics.Text Is Nothing Then
+    Private Sub TxbxLyricsKeyUp(sender As Object, e As KeyEventArgs) Handles txbxLyrics.KeyUp
+        If tlFile IsNot Nothing AndAlso txbxLyrics.Text IsNot Nothing Then
             If Not String.Equals(IIf(tlFile.Tag.Lyrics Is Nothing, String.Empty, tlFile.Tag.Lyrics).ToString, Me.txbxLyrics.Text) Then SetSave()
         End If
     End Sub
-    Private Sub txbxLyricsValidated(sender As Object, e As EventArgs) Handles txbxLyrics.Validated
+    Private Sub TxbxLyricsValidated(sender As Object, e As EventArgs) Handles txbxLyrics.Validated
         If tlFile IsNot Nothing Then
             If Not String.Equals(IIf(tlFile.Tag.Lyrics Is Nothing, String.Empty, tlFile.Tag.Lyrics).ToString, Me.txbxLyrics.Text) Then
                 tlFile.Tag.Lyrics = Me.txbxLyrics.Text
@@ -794,15 +772,15 @@ Partial Friend Class MainForm
             End If
         End If
     End Sub
-    Private Sub cobxGenreSelectionChangeCommitted(sender As Object, e As EventArgs) Handles cobxGenre.SelectionChangeCommitted
+    Private Sub CobxGenreSelectionChangeCommitted(sender As Object, e As EventArgs) Handles cobxGenre.SelectionChangeCommitted
         Me.txbxGenre.Text = Me.cobxGenre.SelectedItem.ToString
         Me.txbxGenre.Focus()
         Me.Validate()
     End Sub
-    Private Sub cobxAlbumArtTypeSelectionChangeCommitted(sender As Object, e As EventArgs) Handles cobxAlbumArtType.SelectionChangeCommitted
+    Private Sub CobxAlbumArtTypeSelectionChangeCommitted(sender As Object, e As EventArgs) Handles cobxAlbumArtType.SelectionChangeCommitted
         Me.Validate()
     End Sub
-    Private Sub cobxAlbumArtTypeValidated(sender As Object, e As EventArgs) Handles cobxAlbumArtType.Validated
+    Private Sub CobxAlbumArtTypeValidated(sender As Object, e As EventArgs) Handles cobxAlbumArtType.Validated
         If tlFile IsNot Nothing Then
             If tlFile.Tag.Pictures.Length > 0 AndAlso Not tlFile.Tag.Pictures(My.tagArtIndex).Type = Me.cobxAlbumArtType.SelectedIndex Then
                 Dim newpic As TagLib.IPicture = tlFile.Tag.Pictures(My.tagArtIndex)
@@ -822,7 +800,7 @@ Partial Friend Class MainForm
             End If
         End If
     End Sub
-    Private Sub btnErrorMouseUp(sender As Object, e As MouseEventArgs) Handles btnError.MouseUp
+    Private Sub BtnErrorMouseUp(sender As Object, e As MouseEventArgs) Handles btnError.MouseUp
         If My.App.MouseInBounds(CType(sender, Control), e.Location) Then
             My.App.ErrorNotification(False)
             If e.Button = MouseButtons.Right Then
@@ -835,10 +813,10 @@ Partial Friend Class MainForm
             End If
         End If
     End Sub
-    Private Sub btnMinimizeClick(sender As Object, e As EventArgs)
+    Private Sub BtnMinimizeClick(sender As Object, e As EventArgs)
         Me.WindowState = FormWindowState.Minimized
     End Sub
-    Private Sub btnSaveClick(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub BtnSaveClick(sender As Object, e As EventArgs) Handles btnSave.Click
         If NeedsSaved Then
             Try
                 tlFile.Save()
@@ -859,7 +837,7 @@ Partial Friend Class MainForm
             End Try
         End If
     End Sub
-    Private Sub btnRestoreClick(sender As Object, e As EventArgs) Handles btnRestore.Click
+    Private Sub BtnRestoreClick(sender As Object, e As EventArgs) Handles btnRestore.Click
 #If DEBUG Then
         SetTag()
         ShowTag()
@@ -874,25 +852,25 @@ Partial Friend Class MainForm
 		End If
 #End If
     End Sub
-    Private Sub btnArtistInsertDragEnter(sender As Object, e As DragEventArgs) Handles btnArtistInsert.DragEnter
+    Private Sub BtnArtistInsertDragEnter(sender As Object, e As DragEventArgs) Handles btnArtistInsert.DragEnter
         If e.Data.GetDataPresent(DataFormats.StringFormat) _
         AndAlso Not String.IsNullOrEmpty(e.Data.GetData(DataFormats.StringFormat, True).ToString) _
             Then : e.Effect = DragDropEffects.Copy
         Else : e.Effect = DragDropEffects.None
         End If
     End Sub
-    Private Sub btnArtistInsertDragDrop(sender As Object, e As DragEventArgs) Handles btnArtistInsert.DragDrop
+    Private Sub BtnArtistInsertDragDrop(sender As Object, e As DragEventArgs) Handles btnArtistInsert.DragDrop
         If e.Effect = DragDropEffects.Copy Then
             My.App.WriteToLog("Drag&Drop Performed (" + My.App.hArtist + " Text)", False)
             InsertArtist(e.Data.GetData(DataFormats.StringFormat, True).ToString)
         End If
     End Sub
-    Private Sub btnArtistInsertMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistInsert.MouseUp
+    Private Sub BtnArtistInsertMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistInsert.MouseUp
         If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) AndAlso Not tlFile.TagTypes = TagLib.TagTypes.None Then
             InsertArtist()
         End If
     End Sub
-    Private Sub btnArtistDeleteMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistDelete.MouseUp
+    Private Sub BtnArtistDeleteMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistDelete.MouseUp
         If e.Button = MouseButtons.Left AndAlso tlFile.Tag.Performers.Length > 1 AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
             Dim alist As New Collections.Generic.List(Of String)
             For Each s As String In tlFile.Tag.Performers : alist.Add(s) : Next
@@ -905,41 +883,21 @@ Partial Friend Class MainForm
             SetSave()
         End If
     End Sub
-    Private Sub btnArtistLeftMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistLeft.MouseUp
+    Private Sub BtnArtistLeftMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistLeft.MouseUp
         If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
             My.tagArtistIndex -= 1
             If My.tagArtistIndex < 0 Then My.tagArtistIndex = 0
             ShowTag()
-            'Select Case e.Button
-            '    Case MouseButtons.Left
-            '        My.tagArtistIndex -= 1
-            '        If My.tagArtistIndex < 0 Then My.tagArtistIndex = 0
-            '        ShowTag()
-            '    Case MouseButtons.Right
-            '        If My.Computer.Keyboard.CtrlKeyDown Then : MoveArtist(rMove.First)
-            '        Else : MoveArtist(rMove.Left)
-            '        End If
-            'End Select
         End If
     End Sub
-    Private Sub btnArtistRightMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistRight.MouseUp
+    Private Sub BtnArtistRightMouseUp(sender As Object, e As MouseEventArgs) Handles btnArtistRight.MouseUp
         If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
             My.tagArtistIndex += 1
             If My.tagArtistIndex > tlFile.Tag.Performers.Length - 1 Then My.tagArtistIndex = tlFile.Tag.Performers.Length - 1
             ShowTag()
-            'Select Case e.Button
-            '    Case MouseButtons.Left
-            '        My.tagArtistIndex += 1
-            '        If My.tagArtistIndex > tlFile.Tag.Performers.Length - 1 Then My.tagArtistIndex = tlFile.Tag.Performers.Length - 1
-            '        ShowTag()
-            '    Case MouseButtons.Right
-            '        If My.Computer.Keyboard.CtrlKeyDown Then : MoveArtist(rMove.Last)
-            '        Else : MoveArtist(rMove.Right)
-            '        End If
-            'End Select
         End If
     End Sub
-    Private Sub btnAlbumArtDragEnter(sender As Object, e As DragEventArgs) Handles btnAlbumArt.DragEnter
+    Private Sub BtnAlbumArtDragEnter(sender As Object, e As DragEventArgs) Handles btnAlbumArt.DragEnter
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             Dim filedrop As String() = DirectCast(e.Data.GetData(DataFormats.FileDrop, True), String())
             Dim files As New Collections.Generic.List(Of String)
@@ -954,7 +912,7 @@ Partial Friend Class MainForm
         Else : e.Effect = DragDropEffects.None
         End If
     End Sub
-    Private Sub btnAlbumArtDragDrop(sender As Object, e As DragEventArgs) Handles btnAlbumArt.DragDrop
+    Private Sub BtnAlbumArtDragDrop(sender As Object, e As DragEventArgs) Handles btnAlbumArt.DragDrop
         If e.Effect = DragDropEffects.Copy Then
             Dim filedrop As String() = DirectCast(e.Data.GetData(DataFormats.FileDrop, True), String())
             Dim files As New Collections.Generic.List(Of String)
@@ -969,14 +927,14 @@ Partial Friend Class MainForm
             filedrop = Nothing
         End If
     End Sub
-    Private Sub btnAlbumArtMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArt.MouseUp
+    Private Sub BtnAlbumArtMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArt.MouseUp
         If My.App.MouseInBounds(CType(sender, Control), e.Location) Then
             If tlFile.Tag.Pictures.Length > 0 Then ResetLyrics()
             Me.cmAlbumArt.Show(btnAlbumArt, btnAlbumArt.PointToClient(MousePosition)) 'Point.Subtract(Point.Subtract(MousePosition, New Size(Me.Location)), New Size(Me.btnAlbumArt.Location)))
             Me.txbxAlbumArt.Focus()
         End If
     End Sub
-    Private Sub btnAlbumArtLeftMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArtLeft.MouseUp
+    Private Sub BtnAlbumArtLeftMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArtLeft.MouseUp
         If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
             txbxAlbumArt.CausesValidation = False
             cobxAlbumArtType.CausesValidation = False
@@ -988,7 +946,7 @@ Partial Friend Class MainForm
             cobxAlbumArtType.CausesValidation = True
         End If
     End Sub
-    Private Sub btnAlbumArtRightMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArtRight.MouseUp
+    Private Sub BtnAlbumArtRightMouseUp(sender As Object, e As MouseEventArgs) Handles btnAlbumArtRight.MouseUp
         If e.Button = MouseButtons.Left AndAlso My.App.MouseInBounds(CType(sender, Control), e.Location) Then
             txbxAlbumArt.CausesValidation = False
             cobxAlbumArtType.CausesValidation = False
@@ -1000,13 +958,13 @@ Partial Friend Class MainForm
             cobxAlbumArtType.CausesValidation = True
         End If
     End Sub
-    Private Sub btnLyricsClick(sender As Object, e As EventArgs) Handles btnLyrics.Click
+    Private Sub BtnLyricsClick(sender As Object, e As EventArgs) Handles btnLyrics.Click
         wShowLyrics = Not wShowLyrics
         SetLyrics()
     End Sub
 
-    'Handlers
-    Private Sub clickTimer_Tick(sender As Object, e As EventArgs)
+    ' Handlers
+    Private Sub ClickTimer_Tick(sender As Object, e As EventArgs)
         'Clear double click watcher and timer
         inDoubleClick = False
         clickTimer.Stop()
@@ -1018,7 +976,7 @@ Partial Friend Class MainForm
         End If
     End Sub
 
-    'Procedures
+    ' Procedures
     Friend Sub SetError()
         Me.btnError.Visible = True
         If Not String.IsNullOrEmpty(My.AppAlertMessage) Then
@@ -1034,10 +992,10 @@ Partial Friend Class MainForm
 #End If
     End Sub
     Private Sub OpenFile()
-        Dim ofd As New OpenFileDialog
-        ofd.Title = "Select Media File(s)"
-        ofd.Filter = "All Files|*.*"
-        ofd.Multiselect = True
+        Dim ofd As New OpenFileDialog With {
+            .Title = "Select Media File(s)",
+            .Filter = "All Files|*.*",
+            .Multiselect = True}
         Dim result As DialogResult = ofd.ShowDialog(Me)
         If result = DialogResult.OK AndAlso ofd.FileNames.Length > 0 Then
             If ofd.FileNames.Length = 1 Then : My.tagPath = ofd.FileName
@@ -1049,7 +1007,6 @@ Partial Friend Class MainForm
         End If
         result = Nothing
         ofd.Dispose()
-        ofd = Nothing
     End Sub
     Private Sub CloseFile()
         If Not String.IsNullOrEmpty(My.tagPath) Then
@@ -1074,7 +1031,7 @@ Partial Friend Class MainForm
             Static sExtendedInfo As String
             Try
                 tlFile = TagLib.File.Create(My.tagPath)
-                If tlFile.Tag.Performers Is Nothing Then tlFile.Tag.Performers = New String() {}
+                If tlFile.Tag.Performers Is Nothing Then tlFile.Tag.Performers = Array.Empty(Of String)()
                 fInfo = New IO.FileInfo(My.tagPath)
                 sExtendedInfo = fInfo.Name
                 lblFileInfo.Text = fInfo.Name
@@ -1295,7 +1252,6 @@ Partial Friend Class MainForm
                         s.SetValue(App.tagCopy.Genre, 0)
                     End If
                     tlFile.Tag.Genres = s
-                    s = Nothing
                     tlFile.Tag.Title = App.tagCopy.Title
                     tlFile.Tag.Track = App.tagCopy.Track
                     tlFile.Tag.TrackCount = App.tagCopy.TrackCount
@@ -1319,7 +1275,6 @@ Partial Friend Class MainForm
                         s.SetValue(App.tagCopy.Genre, 0)
                     End If
                     tlFile.Tag.Genres = s
-                    s = Nothing
                     tlFile.Tag.Title = App.tagCopy.Title
                     tlFile.Tag.Track = App.tagCopy.Track
                     tlFile.Tag.TrackCount = App.tagCopy.TrackCount
@@ -1395,7 +1350,7 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub SetArtistControls(enabled As Boolean)
-        If enabled AndAlso Not tlFile Is Nothing AndAlso Not tlFile.TagTypes = TagLib.TagTypes.None AndAlso tlFile.Tag IsNot Nothing Then
+        If enabled AndAlso tlFile IsNot Nothing AndAlso Not tlFile.TagTypes = TagLib.TagTypes.None AndAlso tlFile.Tag IsNot Nothing Then
             If tlFile.Tag.Performers.Length = 0 Then
                 Me.btnArtistInsert.Enabled = False
             Else
@@ -1428,7 +1383,7 @@ Partial Friend Class MainForm
     End Sub
     Private Sub SetArtControls(enabled As Boolean)
         If enabled _
-        AndAlso Not tlFile Is Nothing _
+        AndAlso tlFile IsNot Nothing _
         AndAlso Not tlFile.TagTypes = TagLib.TagTypes.None _
         AndAlso (tlFile.Properties IsNot Nothing AndAlso Not tlFile.Properties.MediaTypes = TagLib.MediaTypes.Photo) _
         Then
@@ -1469,23 +1424,23 @@ Partial Friend Class MainForm
         ShowTag()
         SetSave()
     End Sub
-    Private Sub MoveArtist(move As rMove)
+    Private Sub MoveArtist(move As RMove)
         If tlFile.Tag.Performers.Length > 1 Then
             Dim alist As New Collections.Generic.List(Of String)
             For Each s As String In tlFile.Tag.Performers : alist.Add(s) : Next
             Dim smove As String = alist(My.tagArtistIndex)
             alist.RemoveAt(My.tagArtistIndex)
             Select Case move
-                Case rMove.Left
+                Case RMove.Left
                     alist.Insert(My.tagArtistIndex - 1, smove)
                     My.tagArtistIndex -= 1
-                Case rMove.First
+                Case RMove.First
                     alist.Insert(0, smove)
                     My.tagArtistIndex = 0
-                Case rMove.Right
+                Case RMove.Right
                     alist.Insert(My.tagArtistIndex + 1, smove)
                     My.tagArtistIndex += 1
-                Case rMove.Last
+                Case RMove.Last
                     alist.Insert(alist.Count, smove)
                     My.tagArtistIndex = tlFile.Tag.Performers.Length - 1
             End Select
@@ -1514,9 +1469,6 @@ Partial Friend Class MainForm
                 piclist(tagArtIndex) = newpic
                 tlFile.Tag.Pictures = piclist.ToArray
                 piclist.Clear()
-                piclist = Nothing
-                newpic = Nothing
-                picsource = Nothing
                 ShowTag()
                 SetSave()
             End If
@@ -1558,10 +1510,9 @@ Partial Friend Class MainForm
                 Dim ms As New IO.MemoryStream(tlFile.Tag.Pictures(tagArtIndex).Data.Data)
                 Computer.Clipboard.SetImage(Image.FromStream(ms))
                 ms.Dispose()
-                ms = Nothing
             Case ExportDestination.File, ExportDestination.BitmapFile
-                Dim sfd As New SaveFileDialog
-                sfd.Title = "Save Image File"
+                Dim sfd As New SaveFileDialog With {
+                    .Title = "Save Image File"}
                 Dim saveFormat As Imaging.ImageFormat
                 If destination = ExportDestination.BitmapFile Then
                     saveFormat = Imaging.ImageFormat.Bmp
@@ -1586,34 +1537,29 @@ Partial Friend Class MainForm
                     Dim im As Image = Image.FromStream(ms)
                     im.Save(sfd.FileName, saveFormat)
                     im.Dispose()
-                    im = Nothing
                     ms.Dispose()
-                    ms = Nothing
                 End If
                 WriteToLog("Album Art Exported To " + sfd.FileName)
-                result = Nothing
-                saveFormat = Nothing
                 sfd.Dispose()
-                sfd = Nothing
         End Select
     End Sub
-    Private Sub MoveArt(move As rMove)
+    Private Sub MoveArt(move As RMove)
         If tlFile.Tag.Pictures.Length > 1 Then
             Dim piclist As New Collections.Generic.List(Of TagLib.IPicture)
             For Each pic As TagLib.IPicture In tlFile.Tag.Pictures : piclist.Add(pic) : Next
             Dim movepic As TagLib.IPicture = piclist(My.tagArtIndex)
             piclist.RemoveAt(My.tagArtIndex)
             Select Case move
-                Case rMove.Left
+                Case RMove.Left
                     piclist.Insert(My.tagArtIndex - 1, movepic)
                     My.tagArtIndex -= 1
-                Case rMove.First
+                Case RMove.First
                     piclist.Insert(0, movepic)
                     My.tagArtIndex = 0
-                Case rMove.Right
+                Case RMove.Right
                     piclist.Insert(My.tagArtIndex + 1, movepic)
                     My.tagArtIndex += 1
-                Case rMove.Last
+                Case RMove.Last
                     piclist.Insert(piclist.Count, movepic)
                     My.tagArtIndex = tlFile.Tag.Pictures.Length - 1
             End Select

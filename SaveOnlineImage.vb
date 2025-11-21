@@ -26,16 +26,14 @@ Public Class SaveOnlineImage
 
 	'Control Events
 	Private Sub BtnLocation_Click(sender As Object, e As EventArgs) Handles BtnLocation.Click
-		Dim ofd As New FolderBrowserDialog
-		ofd.Description = "Select File Location"
-		ofd.Multiselect = False
+		Dim ofd As New FolderBrowserDialog With {
+			.Description = "Select File Location",
+			.Multiselect = False}
 		Dim result As DialogResult = ofd.ShowDialog(Me)
 		If result = DialogResult.OK AndAlso Not String.IsNullOrEmpty(ofd.SelectedPath) Then
 			TxtBoxLocation.Text = ofd.SelectedPath
 		End If
-		result = Nothing
 		ofd.Dispose()
-		ofd = Nothing
 	End Sub
 	Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
 		filename = TxtBoxLocation.Text.Trim + "\" + TxtBoxFilename.Text.Trim

@@ -3,16 +3,16 @@ Imports SkyeTag.My
 
 Partial Friend Class Settings
 
-    'Declarations
+    ' Declarations
     Private mMove As Boolean = False
     Private mOffset, mPosition As Point
 
-    'Form Events
+    ' Form Events
     Public Sub New()
 
         InitializeComponent()
 
-        'Form Settings
+        ' Form Settings
         Text = "Settings For " + My.Application.Info.ProductName
         If App.frmMain Is Nothing Then
             StartPosition = FormStartPosition.CenterScreen
@@ -20,7 +20,7 @@ Partial Friend Class Settings
             Location = New Point(CInt(App.frmMain.Left + (App.frmMain.Width / 2) - (Width / 2)), CInt(App.frmMain.Top + (App.frmMain.Height / 2) - (Height / 2)))
         End If
 
-        'Control Settings
+        ' Control Settings
         chkboxSaveMetrics.Checked = App.Settings.SaveMetrics
 
     End Sub
@@ -37,10 +37,10 @@ Partial Friend Class Settings
         Catch ex As Exception : My.App.WriteToLog("MainForm WndProc Handler Error" + Chr(13) + ex.ToString)
         End Try
     End Sub
-    Private Sub Settings_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub Frm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         App.SaveSettings()
     End Sub
-    Private Sub frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown
+    Private Sub Frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown
         '	Dim cSender As Control
         If e.Button = MouseButtons.Left AndAlso Me.WindowState = FormWindowState.Normal Then
             mMove = True
@@ -51,9 +51,8 @@ Partial Friend Class Settings
             mOffset = New Point(-e.X - SystemInformation.FrameBorderSize.Width - 4, -e.Y - SystemInformation.FrameBorderSize.Height - SystemInformation.CaptionHeight - 4)
             'End If
         End If
-        'cSender = Nothing
     End Sub
-    Private Sub frm_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseMove
+    Private Sub Frm_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseMove
         If mMove Then
             mPosition = Control.MousePosition
             mPosition.Offset(mOffset.X, mOffset.Y)
@@ -61,13 +60,13 @@ Partial Friend Class Settings
             Location = mPosition
         End If
     End Sub
-    Private Sub frm_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseUp
+    Private Sub Frm_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseUp
         mMove = False
     End Sub
-    Private Sub frm_Move(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Move
+    Private Sub Frm_Move(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Move
         If Not mMove AndAlso Me.WindowState = FormWindowState.Normal Then CheckMove(Me.Location)
     End Sub
-    Private Sub frm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub Frm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         Select Case e.KeyData
             Case Keys.W Or Keys.Control
                 App.CloseSettings()
@@ -76,17 +75,17 @@ Partial Friend Class Settings
         End Select
     End Sub
 
-    'Control Events
-    Private Sub chkboxSaveMetrics_Click(sender As Object, e As EventArgs) Handles chkboxSaveMetrics.Click
+    ' Control Events
+    Private Sub ChkboxSaveMetrics_Click(sender As Object, e As EventArgs) Handles chkboxSaveMetrics.Click
         App.Settings.SaveMetrics = chkboxSaveMetrics.Checked
         App.Settings.NeedsSaved = True
         Me.btnClose.Focus()
     End Sub
-    Private Sub btnCloseClick(sender As Object, e As EventArgs) Handles btnClose.Click
+    Private Sub BtnCloseClick(sender As Object, e As EventArgs) Handles btnClose.Click
         App.CloseSettings()
     End Sub
 
-    'Procedures
+    ' Methods
     Private Sub CheckMove(ByRef location As Point)
         If location.X + Width > My.Computer.Screen.WorkingArea.Right Then location.X = My.Computer.Screen.WorkingArea.Right - Width + App.AdjustScreenBoundsDialogWindow
         If location.Y + Height > My.Computer.Screen.WorkingArea.Bottom Then location.Y = My.Computer.Screen.WorkingArea.Bottom - Height + App.AdjustScreenBoundsDialogWindow
