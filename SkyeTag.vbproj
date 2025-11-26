@@ -74,7 +74,7 @@
     </Compile>
     <PackageReference Include="MetaBrainz.MusicBrainz" Version="7.0.0" />
     <PackageReference Include="MetaBrainz.MusicBrainz.CoverArt" Version="7.0.0" />
-    <PackageReference Include="SkyeLibrary" Version="1.3.3" />
+    <PackageReference Include="SkyeLibrary" Version="1.3.12" />
     <PackageReference Include="TagLibSharp" Version="2.3.0" />
   </ItemGroup>
   <ItemGroup>
