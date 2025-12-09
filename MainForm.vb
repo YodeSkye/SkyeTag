@@ -1496,11 +1496,7 @@ Partial Friend Class MainForm
                 End If
                 SetSave()
             Else
-                If picsource = My.App.ImageSource.ClipBoard Then
-                    'tipInfo.Tag = SystemIcons.Information.ToBitmap
-                    'tipInfo.Show("No Image On ClipBoard", Me, Me.btnAlbumArt.Left + CInt(Me.btnAlbumArt.Width / 2) + SystemInformation.FrameBorderSize.Width, Me.btnAlbumArt.Top + CInt(Me.btnAlbumArt.Height / 2) + SystemInformation.FrameBorderSize.Height + SystemInformation.CaptionHeight, 4000)
-                    tipInfo.ShowTooltip(btnAlbumArt, "No Image On ClipBoard", SystemIcons.Information.ToBitmap)
-                End If
+                If picsource = My.App.ImageSource.ClipBoard Then tipInfo.ShowTooltip(btnAlbumArt, "No Image On ClipBoard", SystemIcons.Information.ToBitmap)
             End If
         End If
     End Sub
