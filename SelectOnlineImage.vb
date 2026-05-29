@@ -1,0 +1,295 @@
+﻿
+Imports System.ComponentModel
+Imports System.Drawing.Imaging
+Imports System.IO
+Imports System.Net.Http
+Imports System.Threading
+Imports MetaBrainz.MusicBrainz.Interfaces
+Imports MetaBrainz.MusicBrainz.Interfaces.Entities
+Imports MetaBrainz.MusicBrainz.Interfaces.Searches
+Imports MetaBrainz.Common
+Imports MetaBrainz.MusicBrainz
+Imports SkyeTag.My
+
+Public Class SelectOnlineImage
+
+    'Declarations
+    Private mMove As Boolean = False
+    Private mOffset, mPosition As Point
+    Private FrmArtViewer As ArtViewer
+    Private NetClient As System.Net.Http.HttpClient
+    Private MBQuery As MetaBrainz.MusicBrainz.Query
+    Private MBArt As MetaBrainz.MusicBrainz.CoverArt.CoverArt
+    Private MBImageFront As MetaBrainz.MusicBrainz.CoverArt.CoverArtImage = Nothing
+    Private MBImageBack As MetaBrainz.MusicBrainz.CoverArt.CoverArtImage = Nothing
+    Private query As String = String.Empty
+    Private selectedpic As TagLib.IPicture = Nothing
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    Friend ReadOnly Property NewPic As TagLib.IPicture
+        Get
+            Return selectedpic
+        End Get
+    End Property
+
+    'Form Events
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        Try
+            If m.Msg = Skye.WinAPI.WM_SYSCOMMAND AndAlso m.WParam.ToInt32 = Skye.WinAPI.SC_CLOSE Then
+                DialogResult = DialogResult.Cancel
+            End If
+        Catch ex As Exception
+            My.App.WriteToLog("SelectOnlineImage WndProc Handler Error" + Chr(13) + ex.ToString)
+        Finally
+            MyBase.WndProc(m)
+        End Try
+    End Sub
+    Private Sub Frm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        Dim handler As New HttpClientHandler() With {.SslProtocols = Security.Authentication.SslProtocols.Tls12}
+        NetClient = New HttpClient(handler)
+        MBQuery = New MetaBrainz.MusicBrainz.Query(NetClient)
+        MBArt = New MetaBrainz.MusicBrainz.CoverArt.CoverArt(NetClient)
+        query = BuildQuery(App.FrmMain.txbxArtist.Text.Trim(), App.FrmMain.txbxAlbum.Text.Trim())
+        TxtBoxSearchPhrase.Text = query
+        Search()
+    End Sub
+    Private Sub SelectOnlineImage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        MBImageFront?.Dispose()
+        MBImageBack?.Dispose()
+        MBArt?.Dispose()
+        MBQuery?.Dispose()
+        NetClient?.Dispose()
+    End Sub
+    Private Sub Frm_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown, PicBoxArt.MouseDown, PicBoxFrontThumb.MouseDown, PicBoxBackThumb.MouseDown, LblDimBack.MouseDown, LblStatus.MouseDown
+        Dim cSender As Control
+        Select Case e.Button
+            Case MouseButtons.Left
+                If WindowState = FormWindowState.Normal Then
+                    mMove = True
+                    cSender = DirectCast(sender, Control)
+                    If cSender Is PicBoxArt OrElse cSender Is PicBoxFrontThumb OrElse cSender Is PicBoxBackThumb OrElse cSender Is LblDimFront OrElse cSender Is LblDimBack OrElse cSender Is LblStatus Then
+                        mOffset = New Point(-e.X - cSender.Left - SystemInformation.FrameBorderSize.Width - 4, -e.Y - cSender.Top - SystemInformation.FrameBorderSize.Height - SystemInformation.CaptionHeight - 4)
+                    Else
+                        mOffset = New Point(-e.X - SystemInformation.FrameBorderSize.Width - 4, -e.Y - SystemInformation.FrameBorderSize.Height - SystemInformation.CaptionHeight - 4)
+                    End If
+                End If
+            Case MouseButtons.Right
+                Dim pSender As PictureBox = TryCast(sender, PictureBox)
+                If pSender IsNot Nothing AndAlso pSender.Image IsNot Nothing Then
+                    tipInfo.HideTooltip()
+                    FrmArtViewer = New ArtViewer(pSender.Image, MousePosition) With {.Owner = Me}
+                    FrmArtViewer.Show()
+                End If
+        End Select
+    End Sub
+    Private Sub Frm_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseMove, PicBoxArt.MouseMove, PicBoxFrontThumb.MouseMove, PicBoxBackThumb.MouseMove, LblDimBack.MouseMove, LblStatus.MouseMove
+        If mMove Then
+            mPosition = MousePosition
+            mPosition.Offset(mOffset.X, mOffset.Y)
+            CheckMove(mPosition)
+            Location = mPosition
+        End If
+    End Sub
+    Private Sub Frm_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseUp, PicBoxArt.MouseUp, PicBoxFrontThumb.MouseUp, PicBoxBackThumb.MouseUp, LblDimBack.MouseUp, LblStatus.MouseUp
+        mMove = False
+        If e.Button = MouseButtons.Right Then
+            FrmArtViewer?.Close()
+        End If
+    End Sub
+    Private Sub Frm_Move(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Move
+        If Not mMove AndAlso Me.WindowState = FormWindowState.Normal Then CheckMove(Me.Location)
+    End Sub
+    Private Sub Frm_DoubleClick(sender As Object, e As EventArgs) Handles MyBase.DoubleClick, PicBoxArt.DoubleClick
+        ToggleMaximized()
+    End Sub
+
+    'Control Events
+    Private Sub TxtBoxSearchPhrase_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtBoxSearchPhrase.KeyPress
+        If e.KeyChar = Chr(Keys.Enter) Then
+            e.Handled = True
+            Validate()
+        End If
+    End Sub
+    Private Sub TxtBoxSearchPhrase_Validated(sender As Object, e As EventArgs) Handles TxtBoxSearchPhrase.Validated
+        LVIDs.Focus()
+        If Not query = TxtBoxSearchPhrase.Text.Trim Then
+            query = TxtBoxSearchPhrase.Text.Trim
+            Search()
+        End If
+    End Sub
+    Private Async Sub LVIDs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LVIDs.SelectedIndexChanged
+        If LVIDs.SelectedItems.Count > 0 Then
+            LVIDs.Enabled = False
+            LblStatus.Visible = True
+            LblDimFront.Text = String.Empty
+            LblDimBack.Text = String.Empty
+            PicBoxArt.Image = Nothing
+            PicBoxFrontThumb.Image = Nothing
+            PicBoxBackThumb.Image = Nothing
+            BtnSaveArt.Enabled = False
+            Refresh()
+
+            Try
+                MBImageFront = Await MBArt.FetchFrontAsync(Guid.Parse(LVIDs.SelectedItems(0).Tag.ToString))
+                PicBoxArt.Image = New Bitmap(MBImageFront.Data)
+                PicBoxFrontThumb.Image = New Bitmap(MBImageFront.Data)
+                Using ms As New MemoryStream
+                    PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
+                    selectedpic = New TagLib.Picture(ms.ToArray())
+                End Using
+                LblDimFront.Text = PicBoxFrontThumb.Image.Width.ToString + " x " + PicBoxFrontThumb.Image.Height.ToString
+                BtnSaveArt.Enabled = True
+            Catch ex As Exception
+                Debug.WriteLine("Fetch Front Error: " & ex.GetType().FullName & ": " & ex.Message)
+            End Try
+
+            Try
+                MBImageBack = Await MBArt.FetchBackAsync(Guid.Parse(LVIDs.SelectedItems(0).Tag.ToString))
+                PicBoxBackThumb.Image = New Bitmap(MBImageBack.Data)
+                LblDimBack.Text = PicBoxBackThumb.Image.Width.ToString + " x " + PicBoxBackThumb.Image.Height.ToString
+            Catch ex As Exception
+                Debug.WriteLine("Fetch Back Error: " & ex.GetType().FullName & ": " & ex.Message)
+            End Try
+
+            LblStatus.Visible = False
+            LVIDs.Enabled = True
+            LVIDs.Select()
+        End If
+    End Sub
+    Private Sub LVIDs_SizeChanged(sender As Object, e As EventArgs) Handles LVIDs.SizeChanged
+        LVIDs.Columns(0).Width = LVIDs.Width - SystemInformation.VerticalScrollBarWidth - 4
+    End Sub
+    Private Sub PicBoxFrontThumb_Click(sender As Object, e As EventArgs) Handles PicBoxFrontThumb.Click
+        If MBImageFront IsNot Nothing Then
+            PicBoxArt.Image = New Bitmap(MBImageFront.Data)
+            Using ms As New MemoryStream
+                PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
+                selectedpic = New TagLib.Picture(ms.ToArray())
+            End Using
+        End If
+    End Sub
+    Private Sub PicBoxBackThumb_Click(sender As Object, e As EventArgs) Handles PicBoxBackThumb.Click
+        If MBImageBack IsNot Nothing Then
+            PicBoxArt.Image = New Bitmap(MBImageBack.Data)
+            Using ms As New MemoryStream
+                PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
+                selectedpic = New TagLib.Picture(ms.ToArray())
+            End Using
+        End If
+    End Sub
+    Private Sub BtnSaveArt_Click(sender As Object, e As EventArgs) Handles BtnSaveArt.Click
+        Dim frmSaveOnlineImage As New SaveOnlineImage
+        frmSaveOnlineImage.PicBoxThumb.Image = PicBoxArt.Image
+        frmSaveOnlineImage.ShowDialog()
+        If frmSaveOnlineImage.DialogResult = DialogResult.OK Then
+            Select Case frmSaveOnlineImage.GetFilename
+                Case String.Empty
+                    'Do nothing, user cancelled
+                Case Else
+                    If PicBoxArt.Image IsNot Nothing Then
+                        Dim ext As String = Path.GetExtension(frmSaveOnlineImage.GetFilename).ToLowerInvariant()
+                        Try
+                            Select Case ext
+                                Case ".jpg", ".jpeg"
+                                    PicBoxArt.Image.Save(frmSaveOnlineImage.GetFilename, ImageFormat.Jpeg)
+                                Case ".png"
+                                    PicBoxArt.Image.Save(frmSaveOnlineImage.GetFilename, ImageFormat.Png)
+                                Case ".bmp"
+                                    PicBoxArt.Image.Save(frmSaveOnlineImage.GetFilename, ImageFormat.Bmp)
+                            End Select
+                            App.WriteToLog("Saved cover art to " + frmSaveOnlineImage.GetFilename, False)
+                        Catch ex As Exception
+                            App.WriteToLog("Error saving cover art to " + frmSaveOnlineImage.GetFilename + vbCr + ex.Message, False)
+                        End Try
+                    End If
+            End Select
+        End If
+        frmSaveOnlineImage.Dispose()
+    End Sub
+    Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles BtnOK.Click
+        DialogResult = DialogResult.OK
+        Close()
+    End Sub
+
+    'Procedures
+    Private Async Sub Search()
+        Await SearchAsync()
+    End Sub
+    Private Async Function SearchAsync() As Task
+        If String.IsNullOrWhiteSpace(query) Then Return
+
+        'Reset UI
+        LblSearchPhrase.Text = "Searching..."
+        LblSearchPhrase.Font = New Font(LblSearchPhrase.Font, FontStyle.Bold)
+        LblSearchPhrase.ForeColor = Color.Red
+        LVIDs.Items.Clear()
+        LVIDs.Enabled = False
+        LblDimFront.Text = String.Empty
+        LblDimBack.Text = String.Empty
+        PicBoxArt.Image = Nothing
+        PicBoxFrontThumb.Image = Nothing
+        PicBoxBackThumb.Image = Nothing
+        BtnSaveArt.Enabled = False
+
+        Dim items As New List(Of ListViewItem)()
+
+        Try
+            'New API: streaming search
+            Dim results As IStreamingQueryResults(Of ISearchResult(Of IRelease)) = MBQuery.FindAllReleases(query)
+
+            'Explicit async enumerator
+            Dim enumerator As IAsyncEnumerator(Of ISearchResult(Of IRelease)) = results.GetAsyncEnumerator(CancellationToken.None)
+
+            While Await enumerator.MoveNextAsync()
+                Dim result As ISearchResult(Of IRelease) = enumerator.Current
+                Dim release As IRelease = result.Item
+                Dim lvitem As New ListViewItem() With {
+                    .Tag = release.Id.ToString(),
+                    .Text = release.ArtistCredit(0).Artist.Name & ", " & release.Title}
+                items.Add(lvitem)
+            End While
+
+            Await enumerator.DisposeAsync()
+
+            'Update UI in one shot
+            LVIDs.Items.AddRange(items.ToArray())
+            LVIDs.Enabled = True
+
+            'Update status label
+            LblSearchPhrase.Text = "Search Phrase:"
+            LblSearchPhrase.Font = New Font(LblSearchPhrase.Font, FontStyle.Regular)
+            LblSearchPhrase.ForeColor = Color.Black
+
+        Catch ex As Exception
+            Debug.WriteLine("Search Error: " & ex.Message)
+            LVIDs.Enabled = True
+        End Try
+    End Function
+    Private Function BuildQuery(artist As String, album As String) As String
+        Dim parts As New List(Of String)
+        If Not String.IsNullOrWhiteSpace(artist) Then
+            parts.Add("artist:""" & artist & """")
+        End If
+        If Not String.IsNullOrWhiteSpace(album) Then
+            parts.Add("release:""" & album & """")
+        End If
+        If parts.Count = 0 Then
+            Return String.Empty
+        End If
+        Return String.Join(" AND ", parts)
+    End Function
+    Private Sub ToggleMaximized()
+        Select Case WindowState
+            Case FormWindowState.Normal
+                WindowState = FormWindowState.Maximized
+            Case FormWindowState.Maximized, FormWindowState.Minimized
+                WindowState = FormWindowState.Normal
+        End Select
+    End Sub
+    Private Sub CheckMove(ByRef location As Point)
+        If location.X + Width > My.Computer.Screen.WorkingArea.Right Then location.X = My.Computer.Screen.WorkingArea.Right - Width + App.AdjustScreenBoundsDialogWindow
+        If location.Y + Height > My.Computer.Screen.WorkingArea.Bottom Then location.Y = My.Computer.Screen.WorkingArea.Bottom - Height + App.AdjustScreenBoundsDialogWindow
+        If location.X < My.Computer.Screen.WorkingArea.Left Then location.X = My.Computer.Screen.WorkingArea.Left - App.AdjustScreenBoundsDialogWindow
+        If location.Y < App.AdjustScreenBoundsDialogWindow Then location.Y = My.Computer.Screen.WorkingArea.Top
+    End Sub
+
+End Class
