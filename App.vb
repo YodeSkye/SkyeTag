@@ -1,4 +1,6 @@
 ﻿
+Imports Skye.UI
+
 Namespace My
 
 	Friend Module App
@@ -94,13 +96,14 @@ Namespace My
 
 			Friend Shared StartLocation As Point ' StartLocation is the location of the Main Window on the screen.
 			Friend Shared StartSize As Size ' StartSize is the size of the Main Window.
-            Friend Shared SaveMetrics As Boolean ' SaveMetrics determines whether the application saves the StartLocation and StartSize when it closes.
-            Friend Shared Theme As Skye.UI.SkyeTheme = Skye.UI.SkyeThemes.Dark ' Theme is the current theme of the application. Default is Light.
-			Friend Shared ThemeAuto As Boolean = False ' ThemeAuto determines whether the application theme changes automatically based on the current Windows theme. Default is False.
+			Friend Shared SaveMetrics As Boolean ' SaveMetrics determines whether the application saves the StartLocation and StartSize when it closes.
+			Friend Shared Theme As Skye.UI.SkyeTheme ' Theme is the current theme of the application. Default is Light.
+			Friend Shared ThemeAuto As Boolean ' ThemeAuto determines whether the application theme changes automatically based on the current Windows theme. Default is True.
 
 			Friend Shared Sub Load()
 				Dim starttime As TimeSpan = DateTime.Now.TimeOfDay
 
+				' Metrics
 				Dim x As Integer = Skye.Common.RegistryHelper.GetInt("StartLocationX", 80)
 				Dim y As Integer = Skye.Common.RegistryHelper.GetInt("StartLocationY", 120)
 				StartLocation = New Point(x, y)
@@ -109,21 +112,37 @@ Namespace My
 				StartSize = New Size(w, h)
 				SaveMetrics = Skye.Common.RegistryHelper.GetBool("SaveMetrics", False)
 
+				' Theme
+				Dim themeName As String = Skye.Common.RegistryHelper.GetString("Theme", "Light")
+				Theme = SkyeThemes.GetTheme(themeName)
+				ThemeAuto = Skye.Common.RegistryHelper.GetBool("ThemeAuto", True)
+
 				WriteToLog("Settings Loaded (" & Skye.Common.GenerateLogTime(starttime, DateTime.Now.TimeOfDay, True) & ")", False)
 			End Sub
 			Friend Shared Sub Save()
 				Dim starttime As TimeSpan = DateTime.Now.TimeOfDay
 
+				' Metrics
 				Skye.Common.RegistryHelper.SetInt("StartLocationX", StartLocation.X)
 				Skye.Common.RegistryHelper.SetInt("StartLocationY", StartLocation.Y)
 				Skye.Common.RegistryHelper.SetInt("StartSizeW", StartSize.Width)
 				Skye.Common.RegistryHelper.SetInt("StartSizeH", StartSize.Height)
 				Skye.Common.RegistryHelper.SetBool("SaveMetrics", SaveMetrics)
 
+				' Theme
+				Skye.Common.RegistryHelper.SetString("Theme", Theme.Name)
+				Skye.Common.RegistryHelper.SetBool("ThemeAuto", ThemeAuto)
+
+
 				WriteToLog("Settings Saved (" & Skye.Common.GenerateLogTime(starttime, DateTime.Now.TimeOfDay, True) & ")", False)
 			End Sub
 
 		End Class
+
+		' Handlers
+		Private Sub OnThemeChanged(sender As Object, e As EventArgs)
+			Skye.UI.ThemeManager.ApplyThemeToAllOpenForms()
+		End Sub
 
 		' Methods
 		Friend Sub Initialize()
@@ -139,6 +158,12 @@ Namespace My
 				ProcessPassedParameters(My.Application.CommandLineArgs)
 			End If
 			Settings.Load()
+			If Settings.ThemeAuto Then
+				Skye.UI.ThemeManager.SetTheme(Skye.UI.ThemeManager.DetectWindowsTheme())
+			Else
+				Skye.UI.ThemeManager.CurrentTheme = Settings.Theme
+			End If
+			AddHandler Skye.UI.ThemeManager.ThemeChanged, AddressOf OnThemeChanged
 #If DEBUG Then
 			tagPaths(0) = "C:\Users\YodeS\Dev\TESTDATA\AvrilLavigne Smile (Multiple Art).mp3"
 #End If

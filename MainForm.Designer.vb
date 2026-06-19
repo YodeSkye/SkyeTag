@@ -73,7 +73,6 @@
         txbxArtist = New TextBox()
         txbxAlbum = New TextBox()
         txbxAlbumArt = New TextBox()
-        cobxAlbumArtType = New ComboBox()
         txbxTitle = New TextBox()
         txbxYear = New TextBox()
         txbxTrack = New TextBox()
@@ -116,6 +115,7 @@
         lblYear = New Skye.UI.Label()
         tipInfo = New Skye.UI.ToolTipEX(components)
         CoBoxGenre = New Skye.UI.ComboBox()
+        cobxAlbumArtType = New Skye.UI.ComboBox()
         cmArtRight.SuspendLayout()
         cmArtLeft.SuspendLayout()
         cmArtistLeft.SuspendLayout()
@@ -720,22 +720,6 @@
         txbxAlbumArt.TabIndex = 100
         tipInfo.SetText(txbxAlbumArt, "Art Description")
         ' 
-        ' cobxAlbumArtType
-        ' 
-        cobxAlbumArtType.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        cobxAlbumArtType.DropDownStyle = ComboBoxStyle.DropDownList
-        cobxAlbumArtType.DropDownWidth = 130
-        cobxAlbumArtType.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
-        cobxAlbumArtType.FormattingEnabled = True
-        tipInfo.SetImage(cobxAlbumArtType, Nothing)
-        cobxAlbumArtType.ItemHeight = 17
-        cobxAlbumArtType.Location = New Point(256, 251)
-        cobxAlbumArtType.MaxDropDownItems = 7
-        cobxAlbumArtType.Name = "cobxAlbumArtType"
-        cobxAlbumArtType.Size = New Size(117, 25)
-        cobxAlbumArtType.TabIndex = 110
-        tipInfo.SetText(cobxAlbumArtType, "Art Type")
-        ' 
         ' txbxTitle
         ' 
         txbxTitle.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
@@ -1179,6 +1163,17 @@
         CoBoxGenre.TabIndex = 15
         tipInfo.SetText(CoBoxGenre, "Genre")
         ' 
+        ' cobxAlbumArtType
+        ' 
+        cobxAlbumArtType.DropDownStyle = ComboBoxStyle.DropDownList
+        cobxAlbumArtType.FormattingEnabled = True
+        tipInfo.SetImage(cobxAlbumArtType, Nothing)
+        cobxAlbumArtType.Location = New Point(256, 251)
+        cobxAlbumArtType.Name = "cobxAlbumArtType"
+        cobxAlbumArtType.Size = New Size(117, 26)
+        cobxAlbumArtType.TabIndex = 1027
+        tipInfo.SetText(cobxAlbumArtType, Nothing)
+        ' 
         ' MainForm
         ' 
         AllowDrop = True
@@ -1187,6 +1182,7 @@
         AutoSizeMode = AutoSizeMode.GrowAndShrink
         AutoValidate = AutoValidate.EnableAllowFocusChange
         ClientSize = New Size(384, 561)
+        Controls.Add(cobxAlbumArtType)
         Controls.Add(CoBoxGenre)
         Controls.Add(lblFileInfo)
         Controls.Add(MenuMain)
@@ -1212,7 +1208,6 @@
         Controls.Add(btnAlbumArtLeft)
         Controls.Add(btnAlbumArtRight)
         Controls.Add(btnAlbumArt)
-        Controls.Add(cobxAlbumArtType)
         Controls.Add(lblArtist)
         Controls.Add(lblGenre)
         Controls.Add(lblTitle)
@@ -1253,7 +1248,6 @@
     End Sub
     Private WithEvents picbxAlbumArt As System.Windows.Forms.PictureBox
     Private WithEvents txbxAlbumArt As System.Windows.Forms.TextBox
-    Private WithEvents cobxAlbumArtType As System.Windows.Forms.ComboBox
     Private WithEvents txbxYear As System.Windows.Forms.TextBox
     Private WithEvents txbxComments As System.Windows.Forms.TextBox
     Private WithEvents txbxLyrics As System.Windows.Forms.TextBox
@@ -1355,4 +1349,5 @@
     Friend WithEvents tipInfo As Skye.UI.ToolTipEX
     Friend WithEvents CoBoxGenre As Skye.UI.ComboBox
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents cobxAlbumArtType As Skye.UI.ComboBox
 End Class

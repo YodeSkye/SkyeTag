@@ -67,30 +67,19 @@ Partial Friend Class MainForm
                             wMaximized = True
                             SetWindowState()
                         Case Skye.WinAPI.SC_RESTORE, Skye.WinAPI.SC_RESTORE_TBAR
-                            If Me.WindowState = FormWindowState.Minimized Then
+                            If WindowState = FormWindowState.Minimized Then
                                 Select Case wMaximized
-                                    Case True : Me.WindowState = FormWindowState.Maximized
-                                    Case False : Me.WindowState = FormWindowState.Normal
+                                    Case True : WindowState = FormWindowState.Maximized
+                                    Case False : WindowState = FormWindowState.Normal
                                 End Select
                             Else
                                 wMaximized = False
                                 SetWindowState()
                             End If
                     End Select
-                Case Skye.WinAPI.WM_ACTIVATE
-                    Select Case CInt(m.WParam)
-                        Case 0
-                            IsFocused = False
-                            SetInactiveColor()
-                        Case 1, 2
-                            IsFocused = True
-                            SetAccentColor()
-                    End Select
-                Case Skye.WinAPI.WM_DWMCOLORIZATIONCOLORCHANGED
-                    SetAccentColor()
             End Select
         Catch ex As Exception
-            My.App.WriteToLog("WndProc Handler Error" + Chr(13) + ex.ToString)
+            App.WriteToLog("WndProc Handler Error" + Chr(13) + ex.ToString)
         Finally
             MyBase.WndProc(m)
         End Try
@@ -115,10 +104,11 @@ Partial Friend Class MainForm
         AddHandler clickTimer.Tick, AddressOf ClickTimer_Tick
         SetLyrics()
         SetWindowState()
-
         Skye.UI.ThemeManager.RegisterComponent(tipInfo)
         Skye.UI.ThemeManager.ApplyTheme(Me)
-
+        MenuMain.Renderer = New Skye.UI.SkyeMenuRenderer
+        txtboxCM.Renderer = New Skye.UI.SkyeMenuRenderer
+        txtboxCMLyrics.Renderer = New Skye.UI.SkyeMenuRenderer
 #If DEBUG Then
         'Location = App.Settings.StartLocation
         'Size = App.Settings.StartSize
@@ -135,6 +125,7 @@ Partial Friend Class MainForm
             StartPosition = FormStartPosition.CenterScreen
         End If
 #End If
+
     End Sub
     Private Sub Frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -146,12 +137,8 @@ Partial Friend Class MainForm
         txbxAlbumArt.ContextMenuStrip = txtboxCM
         txbxLyrics.ContextMenuStrip = txtboxCMLyrics
         CustomDrawToolTip(MIEdit.DropDown)
-
         LoadTags()
-
         ActiveControl = lblFileInfo
-
-        'CheckDirtyState()
 
     End Sub
     Private Sub Frm_Closing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -791,7 +778,7 @@ Partial Friend Class MainForm
     Private Sub CMIArtMoveLast_Click(sender As Object, e As EventArgs) Handles cmiArtMoveLast.Click
         MoveArt(RMove.Last)
     End Sub
-    Private Sub CtrlAlbumArtEnter(sender As Object, e As EventArgs) Handles txbxAlbumArt.Enter, cobxAlbumArtType.Enter
+    Private Sub CtrlAlbumArtEnter(sender As Object, e As EventArgs) Handles txbxAlbumArt.Enter
         ResetLyrics()
     End Sub
     Private Sub LblFileInfo_MouseDown(sender As Object, e As MouseEventArgs) Handles lblFileInfo.MouseDown
@@ -1107,19 +1094,19 @@ Partial Friend Class MainForm
             End If
         End If
     End Sub
-    Private Sub CobxAlbumArtTypeSelectionChangeCommitted(sender As Object, e As EventArgs) Handles cobxAlbumArtType.SelectionChangeCommitted
-        Me.Validate()
+    Private Sub CobxAlbumArtTypeSelectionChangeCommitted(sender As Object, e As EventArgs)
+        Validate()
     End Sub
-    Private Sub CobxAlbumArtTypeValidated(sender As Object, e As EventArgs) Handles cobxAlbumArtType.Validated
+    Private Sub CobxAlbumArtTypeValidated(sender As Object, e As EventArgs)
 
         ' MULTI-FILE MODE
         If IsMultiFile Then
             If nArt IsNot Nothing AndAlso nArt.Count > 0 AndAlso
-           My.tagArtIndex >= 0 AndAlso My.tagArtIndex < nArt.Count Then
+           tagArtIndex >= 0 AndAlso tagArtIndex < nArt.Count Then
 
-                Dim pic = nArt(My.tagArtIndex)
-                Dim currentType As TagLib.PictureType = pic.Type
-                Dim newType As TagLib.PictureType = CType(cobxAlbumArtType.SelectedIndex, TagLib.PictureType)
+                Dim pic = nArt(tagArtIndex)
+                Dim currentType = pic.Type
+                Dim newType = CType(cobxAlbumArtType.SelectedIndex, TagLib.PictureType)
 
                 If currentType <> newType Then
                     pic.Type = newType
@@ -1136,11 +1123,11 @@ Partial Friend Class MainForm
         If tlFile IsNot Nothing AndAlso
        tlFile.Tag.Pictures IsNot Nothing AndAlso
        tlFile.Tag.Pictures.Length > 0 AndAlso
-       My.tagArtIndex >= 0 AndAlso My.tagArtIndex < tlFile.Tag.Pictures.Length Then
+       tagArtIndex >= 0 AndAlso tagArtIndex < tlFile.Tag.Pictures.Length Then
 
-            Dim pic = tlFile.Tag.Pictures(My.tagArtIndex)
-            Dim currentType As TagLib.PictureType = pic.Type
-            Dim newType As TagLib.PictureType = CType(cobxAlbumArtType.SelectedIndex, TagLib.PictureType)
+            Dim pic = tlFile.Tag.Pictures(tagArtIndex)
+            Dim currentType = pic.Type
+            Dim newType = CType(cobxAlbumArtType.SelectedIndex, TagLib.PictureType)
 
             If currentType <> newType Then
                 pic.Type = newType
@@ -3164,53 +3151,30 @@ Partial Friend Class MainForm
         Return pic
     End Function
     Private Sub SetWindowState()
-        Me.SuspendLayout()
+        SuspendLayout()
         Select Case wMaximized
             Case True
-                Me.WindowState = FormWindowState.Maximized
-                Me.panelAlbumArt.AutoScroll = True
-                Me.picbxAlbumArt.Dock = DockStyle.None
-                Me.picbxAlbumArt.SizeMode = PictureBoxSizeMode.AutoSize
-                Me.txbxLyrics.Font = New Font(Me.Font.Name, 14, FontStyle.Bold)
-                Me.txbxLyrics.TextAlign = HorizontalAlignment.Center
+                WindowState = FormWindowState.Maximized
+                panelAlbumArt.AutoScroll = True
+                picbxAlbumArt.Dock = DockStyle.None
+                picbxAlbumArt.SizeMode = PictureBoxSizeMode.AutoSize
+                txbxLyrics.Font = New Font(Font.Name, 14, FontStyle.Bold)
+                txbxLyrics.TextAlign = HorizontalAlignment.Center
             Case False
-                Me.WindowState = FormWindowState.Normal
-                Me.panelAlbumArt.AutoScroll = False
-                Me.picbxAlbumArt.Dock = DockStyle.Fill
-                Me.picbxAlbumArt.SizeMode = PictureBoxSizeMode.Zoom
-                Me.txbxLyrics.Font = New Font(Me.Font.Name, 10, FontStyle.Regular)
-                Me.txbxLyrics.TextAlign = HorizontalAlignment.Left
+                WindowState = FormWindowState.Normal
+                panelAlbumArt.AutoScroll = False
+                picbxAlbumArt.Dock = DockStyle.Fill
+                picbxAlbumArt.SizeMode = PictureBoxSizeMode.Zoom
+                txbxLyrics.Font = New Font(Font.Name, 10, FontStyle.Regular)
+                txbxLyrics.TextAlign = HorizontalAlignment.Left
         End Select
-        Me.ResumeLayout()
+        ResumeLayout()
     End Sub
     Private Sub CheckMove(ByRef location As Point)
         If location.X + Me.Width > My.Computer.Screen.WorkingArea.Right Then location.X = My.Computer.Screen.WorkingArea.Right - Me.Width + App.AdjustScreenBoundsNormalWindow
         If location.Y + Me.Height > My.Computer.Screen.WorkingArea.Bottom Then location.Y = My.Computer.Screen.WorkingArea.Bottom - Me.Height + App.AdjustScreenBoundsNormalWindow
         If location.X < My.Computer.Screen.WorkingArea.Left Then location.X = My.Computer.Screen.WorkingArea.Left - App.AdjustScreenBoundsNormalWindow
         If location.Y < App.AdjustScreenBoundsNormalWindow Then location.Y = My.Computer.Screen.WorkingArea.Top
-    End Sub
-    Private Sub SetAccentColor()
-        If IsFocused Then
-            '
-            'API Method
-            'Dim params As WinAPI.DWMCOLORIZATIONPARAMS
-            'WinAPI.DwmGetColorizationParameters(params)
-            'c = Color.FromArgb(255, App.GetRValue(params.ColorizationColor), App.GetGValue(params.ColorizationColor), App.GetBValue(params.ColorizationColor))
-            '
-            Dim c As Color
-            Dim regkey As RegistryKey
-            Dim regvalue As Integer
-            regkey = Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\DWM")
-            regvalue = CInt(regkey.GetValue("AccentColor"))
-            c = Color.FromArgb(255, Skye.WinAPI.GetRValue(regvalue), Skye.WinAPI.GetGValue(regvalue), Skye.WinAPI.GetBValue(regvalue))
-            MenuMain.BackColor = c
-            regkey.Close()
-            regkey.Dispose()
-            Debug.Print("Accent Color Changed")
-        End If
-    End Sub
-    Private Sub SetInactiveColor()
-        MenuMain.BackColor = App.InactiveTitleBarColor
     End Sub
     Private Sub CustomDrawToolTip(MyToolStrip As ToolStrip)
 
