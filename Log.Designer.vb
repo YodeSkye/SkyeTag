@@ -48,14 +48,16 @@ Partial Class Log
         RTxBoxLog.Size = New Size(905, 395)
         RTxBoxLog.TabIndex = 0
         RTxBoxLog.Text = ""
+        tipInfo.SetText(RTxBoxLog, Nothing)
+        tipAlert.SetText(RTxBoxLog, Nothing)
         RTxBoxLog.WordWrap = False
         ' 
         ' BtnDelete
         ' 
         BtnDelete.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+        tipAlert.SetImage(BtnDelete, Nothing)
         BtnDelete.Image = My.Resources.Resources.ImageDeleteLog32
         tipInfo.SetImage(BtnDelete, Nothing)
-        tipAlert.SetImage(BtnDelete, Nothing)
         BtnDelete.Location = New Point(13, 484)
         BtnDelete.Margin = New Padding(4, 3, 4, 3)
         BtnDelete.Name = "BtnDelete"
@@ -63,14 +65,15 @@ Partial Class Log
         BtnDelete.TabIndex = 2
         BtnDelete.TabStop = False
         tipInfo.SetText(BtnDelete, "Delete Log")
+        tipAlert.SetText(BtnDelete, Nothing)
         BtnDelete.UseVisualStyleBackColor = True
         ' 
         ' BtnClose
         ' 
         BtnClose.Anchor = AnchorStyles.Bottom
-        BtnClose.Image = My.Resources.Resources.ImageOK64
-        tipInfo.SetImage(BtnClose, Nothing)
         tipAlert.SetImage(BtnClose, Nothing)
+        BtnClose.Image = My.Resources.Resources.ImageOK96
+        tipInfo.SetImage(BtnClose, Nothing)
         BtnClose.Location = New Point(434, 468)
         BtnClose.Margin = New Padding(4, 3, 4, 3)
         BtnClose.Name = "BtnClose"
@@ -78,14 +81,15 @@ Partial Class Log
         BtnClose.TabIndex = 3
         BtnClose.TabStop = False
         tipInfo.SetText(BtnClose, "Close (CtrlW)")
+        tipAlert.SetText(BtnClose, Nothing)
         BtnClose.UseVisualStyleBackColor = True
         ' 
         ' btnRefresh
         ' 
         btnRefresh.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        tipAlert.SetImage(btnRefresh, Nothing)
         btnRefresh.Image = My.Resources.Resources.ImageRefreshLog32
         tipInfo.SetImage(btnRefresh, Nothing)
-        tipAlert.SetImage(btnRefresh, Nothing)
         btnRefresh.Location = New Point(872, 484)
         btnRefresh.Margin = New Padding(4, 3, 4, 3)
         btnRefresh.Name = "btnRefresh"
@@ -93,6 +97,7 @@ Partial Class Log
         btnRefresh.TabIndex = 4
         btnRefresh.TabStop = False
         tipInfo.SetText(btnRefresh, "Refresh Log")
+        tipAlert.SetText(btnRefresh, Nothing)
         btnRefresh.UseVisualStyleBackColor = True
         ' 
         ' Lblnfo
@@ -106,7 +111,9 @@ Partial Class Log
         Lblnfo.Name = "Lblnfo"
         Lblnfo.Size = New Size(905, 29)
         Lblnfo.TabIndex = 1
+        tipInfo.SetText(Lblnfo, Nothing)
         Lblnfo.Text = "File Info"
+        tipAlert.SetText(Lblnfo, Nothing)
         Lblnfo.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' TxbxSearch
@@ -122,6 +129,8 @@ Partial Class Log
         TxbxSearch.Size = New Size(406, 18)
         TxbxSearch.TabIndex = 5
         TxbxSearch.Text = "Search Log"
+        tipInfo.SetText(TxbxSearch, Nothing)
+        tipAlert.SetText(TxbxSearch, Nothing)
         ' 
         ' LblSearch
         ' 
@@ -135,7 +144,9 @@ Partial Class Log
         LblSearch.Name = "LblSearch"
         LblSearch.Size = New Size(131, 17)
         LblSearch.TabIndex = 6
+        tipInfo.SetText(LblSearch, Nothing)
         LblSearch.Text = "Searching the Log..."
+        tipAlert.SetText(LblSearch, Nothing)
         LblSearch.TextAlign = ContentAlignment.MiddleRight
         LblSearch.Visible = False
         ' 
@@ -143,21 +154,25 @@ Partial Class Log
         ' 
         tipInfo.BackColor = Color.White
         tipInfo.BorderColor = Color.Gainsboro
+        tipInfo.BorderThickness = 2
         tipInfo.FadeInRate = 25
         tipInfo.FadeOutRate = 25
-        tipInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipInfo.ShowBorder = False
+        tipInfo.Font = New Font("Segoe UI", 12F)
+        tipInfo.ShadowAlpha = 0
+        tipInfo.ShadowThickness = 0
         tipInfo.ShowDelay = 100
         ' 
         ' tipAlert
         ' 
         tipAlert.BackColor = Color.White
         tipAlert.BorderColor = Color.Gainsboro
+        tipAlert.BorderThickness = 2
         tipAlert.FadeInRate = 25
         tipAlert.FadeOutRate = 25
-        tipAlert.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipAlert.Font = New Font("Segoe UI", 12F)
         tipAlert.HideDelay = 5000
-        tipAlert.ShowBorder = False
+        tipAlert.ShadowAlpha = 0
+        tipAlert.ShadowThickness = 0
         tipAlert.ShowDelay = 100
         ' 
         ' Log
@@ -180,6 +195,8 @@ Partial Class Log
         MinimumSize = New Size(697, 340)
         Name = "Log"
         StartPosition = FormStartPosition.Manual
+        tipInfo.SetText(Me, Nothing)
+        tipAlert.SetText(Me, Nothing)
         Text = "Log"
         ResumeLayout(False)
         PerformLayout()

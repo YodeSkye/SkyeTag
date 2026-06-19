@@ -11,6 +11,9 @@ Public Class Help
     'Form Events
     Private Sub Help_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RTxBoxHelp.ContextMenuStrip = RTxBoxCM
+        Skye.UI.ThemeManager.RegisterComponent(tipInfo)
+        RTxBoxCM.Renderer = New Skye.UI.SkyeMenuRenderer
+        Skye.UI.ThemeManager.ApplyTheme(Me)
     End Sub
     Private Sub Frm_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown, LblVersion.MouseDown
         Dim cSender As Control

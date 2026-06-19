@@ -178,10 +178,12 @@ Partial Class SaveOnlineImage
         ' 
         tipInfo.BackColor = Color.White
         tipInfo.BorderColor = Color.Gainsboro
+        tipInfo.BorderThickness = 2
         tipInfo.FadeInRate = 25
         tipInfo.FadeOutRate = 25
-        tipInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipInfo.ShowBorder = False
+        tipInfo.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        tipInfo.ShadowAlpha = 0
+        tipInfo.ShadowThickness = 0
         tipInfo.ShowDelay = 100
         ' 
         ' SaveOnlineImage

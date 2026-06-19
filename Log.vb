@@ -20,6 +20,10 @@ Public Class Log
         LogSearchTitle = TxbxSearch.Text
         LogSearchInActiveColor = TxbxSearch.ForeColor
         RTxBoxLog.ContextMenuStrip = RTxBoxCM
+        Skye.UI.ThemeManager.RegisterComponent(tipInfo)
+        Skye.UI.ThemeManager.RegisterComponent(tipAlert)
+        RTxBoxCM.Renderer = New Skye.UI.SkyeMenuRenderer
+        Skye.UI.ThemeManager.ApplyTheme(Me)
 
         'Center in FrmMain
         Left = CType((FrmMain.Left + FrmMain.Width / 2) - Width / 2, Integer)

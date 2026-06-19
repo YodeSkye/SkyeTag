@@ -105,10 +105,13 @@ Partial Friend Class MainForm
         SetLyrics()
         SetWindowState()
         Skye.UI.ThemeManager.RegisterComponent(tipInfo)
-        Skye.UI.ThemeManager.ApplyTheme(Me)
         MenuMain.Renderer = New Skye.UI.SkyeMenuRenderer
+        cmAlbumArtInsert.Renderer = New Skye.UI.SkyeMenuRenderer
+        cmImageSource.Renderer = New Skye.UI.SkyeMenuRenderer
+        cmExport.Renderer = New Skye.UI.SkyeMenuRenderer
         txtboxCM.Renderer = New Skye.UI.SkyeMenuRenderer
         txtboxCMLyrics.Renderer = New Skye.UI.SkyeMenuRenderer
+        Skye.UI.ThemeManager.ApplyTheme(Me)
 #If DEBUG Then
         'Location = App.Settings.StartLocation
         'Size = App.Settings.StartSize

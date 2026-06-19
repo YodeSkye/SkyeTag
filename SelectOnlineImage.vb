@@ -43,6 +43,10 @@ Public Class SelectOnlineImage
             MyBase.WndProc(m)
         End Try
     End Sub
+    Private Sub Frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Skye.UI.ThemeManager.RegisterComponent(tipInfo)
+        Skye.UI.ThemeManager.ApplyTheme(Me)
+    End Sub
     Private Sub Frm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         Dim handler As New HttpClientHandler() With {.SslProtocols = Security.Authentication.SslProtocols.Tls12}
         NetClient = New HttpClient(handler)
@@ -134,12 +138,12 @@ Public Class SelectOnlineImage
                 PicBoxFrontThumb.Image = New Bitmap(MBImageFront.Data)
                 Using ms As New MemoryStream
                     PicBoxArt.Image.Save(ms, ImageFormat.Jpeg)
-                    selectedpic = New TagLib.Picture(ms.ToArray())
+                    selectedpic = New TagLib.Picture(ms.ToArray)
                 End Using
                 LblDimFront.Text = PicBoxFrontThumb.Image.Width.ToString + " x " + PicBoxFrontThumb.Image.Height.ToString
                 BtnSaveArt.Enabled = True
             Catch ex As Exception
-                Debug.WriteLine("Fetch Front Error: " & ex.GetType().FullName & ": " & ex.Message)
+                Debug.WriteLine("Fetch Front Error: " & ex.GetType.FullName & ": " & ex.Message)
             End Try
 
             Try
@@ -147,7 +151,7 @@ Public Class SelectOnlineImage
                 PicBoxBackThumb.Image = New Bitmap(MBImageBack.Data)
                 LblDimBack.Text = PicBoxBackThumb.Image.Width.ToString + " x " + PicBoxBackThumb.Image.Height.ToString
             Catch ex As Exception
-                Debug.WriteLine("Fetch Back Error: " & ex.GetType().FullName & ": " & ex.Message)
+                Debug.WriteLine("Fetch Back Error: " & ex.GetType.FullName & ": " & ex.Message)
             End Try
 
             LblStatus.Visible = False

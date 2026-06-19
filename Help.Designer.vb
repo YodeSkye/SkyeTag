@@ -33,7 +33,7 @@ Partial Class Help
         ' BtnClose
         ' 
         BtnClose.Anchor = AnchorStyles.Bottom
-        BtnClose.Image = My.Resources.Resources.ImageOK64
+        BtnClose.Image = My.Resources.Resources.ImageOK96
         tipInfo.SetImage(BtnClose, Nothing)
         BtnClose.Location = New Point(497, 430)
         BtnClose.Margin = New Padding(5, 4, 5, 4)
@@ -48,12 +48,12 @@ Partial Class Help
         RTxBoxHelp.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         RTxBoxHelp.BorderStyle = BorderStyle.None
         tipInfo.SetImage(RTxBoxHelp, Nothing)
-        RTxBoxHelp.Location = New Point(18, 20)
+        RTxBoxHelp.Location = New Point(14, 13)
         RTxBoxHelp.Margin = New Padding(5, 4, 5, 4)
         RTxBoxHelp.Name = "RTxBoxHelp"
         RTxBoxHelp.ReadOnly = True
         RTxBoxHelp.ShortcutsEnabled = False
-        RTxBoxHelp.Size = New Size(1022, 367)
+        RTxBoxHelp.Size = New Size(1030, 374)
         RTxBoxHelp.TabIndex = 3
         RTxBoxHelp.Text = ""
         tipInfo.SetText(RTxBoxHelp, Nothing)
@@ -62,10 +62,10 @@ Partial Class Help
         ' 
         LblVersion.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         tipInfo.SetImage(LblVersion, Nothing)
-        LblVersion.Location = New Point(22, 391)
+        LblVersion.Location = New Point(14, 391)
         LblVersion.Margin = New Padding(5, 0, 5, 0)
         LblVersion.Name = "LblVersion"
-        LblVersion.Size = New Size(1022, 35)
+        LblVersion.Size = New Size(1030, 35)
         LblVersion.TabIndex = 1
         LblVersion.Text = "LabelCSY2"
         tipInfo.SetText(LblVersion, Nothing)
@@ -75,10 +75,12 @@ Partial Class Help
         ' 
         tipInfo.BackColor = Color.White
         tipInfo.BorderColor = Color.Gainsboro
+        tipInfo.BorderThickness = 2
         tipInfo.FadeInRate = 25
         tipInfo.FadeOutRate = 25
-        tipInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tipInfo.ShowBorder = False
+        tipInfo.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        tipInfo.ShadowAlpha = 0
+        tipInfo.ShadowThickness = 0
         tipInfo.ShowDelay = 100
         ' 
         ' Help

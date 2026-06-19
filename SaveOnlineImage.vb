@@ -24,6 +24,10 @@ Public Class SaveOnlineImage
             MyBase.WndProc(m)
         End Try
     End Sub
+    Private Sub Frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Skye.UI.ThemeManager.RegisterComponent(tipInfo)
+        Skye.UI.ThemeManager.ApplyTheme(Me)
+    End Sub
 
     'Control Events
     Private Sub PicBoxThumb_MouseDown(sender As Object, e As MouseEventArgs) Handles PicBoxThumb.MouseDown
