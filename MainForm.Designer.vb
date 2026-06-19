@@ -50,12 +50,12 @@
         cmiSelectFromFile = New ToolStripMenuItem()
         cmiSelectFromOnline = New ToolStripMenuItem()
         cmiPasteFromClipboard = New ToolStripMenuItem()
-        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
+        cmiAlbumArtInsertLast = New ToolStripMenuItem()
         cmiAlbumArtInsert = New ToolStripMenuItem()
         cmAlbumArtInsert = New ContextMenuStrip(components)
         cmiAlbumArtInsertBefore = New ToolStripMenuItem()
         cmiAlbumArtInsertFirst = New ToolStripMenuItem()
-        cmiAlbumArtInsertLast = New ToolStripMenuItem()
+        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
         cmiAlbumArtExport = New ToolStripMenuItem()
         cmExport = New ContextMenuStrip(components)
         cmiExportToFile = New ToolStripMenuItem()
@@ -495,7 +495,7 @@
         tipInfo.SetImage(cmImageSource, Nothing)
         cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
         cmImageSource.Name = "cm"
-        cmImageSource.OwnerItem = cmiAlbumArtInsertLast
+        cmImageSource.OwnerItem = cmiAlbumArtInsertAfter
         cmImageSource.Size = New Size(189, 70)
         tipInfo.SetText(cmImageSource, Nothing)
         ' 
@@ -520,13 +520,13 @@
         cmiPasteFromClipboard.Size = New Size(188, 22)
         cmiPasteFromClipboard.Text = "Paste From Clipboard"
         ' 
-        ' cmiAlbumArtInsertAfter
+        ' cmiAlbumArtInsertLast
         ' 
-        cmiAlbumArtInsertAfter.DropDown = cmImageSource
-        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
-        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
-        cmiAlbumArtInsertAfter.Size = New Size(114, 22)
-        cmiAlbumArtInsertAfter.Text = "After"
+        cmiAlbumArtInsertLast.DropDown = cmImageSource
+        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
+        cmiAlbumArtInsertLast.Size = New Size(114, 22)
+        cmiAlbumArtInsertLast.Text = "Last"
         ' 
         ' cmiAlbumArtInsert
         ' 
@@ -562,13 +562,13 @@
         cmiAlbumArtInsertFirst.Size = New Size(114, 22)
         cmiAlbumArtInsertFirst.Text = "First"
         ' 
-        ' cmiAlbumArtInsertLast
+        ' cmiAlbumArtInsertAfter
         ' 
-        cmiAlbumArtInsertLast.DropDown = cmImageSource
-        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
-        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
-        cmiAlbumArtInsertLast.Size = New Size(114, 22)
-        cmiAlbumArtInsertLast.Text = "Last"
+        cmiAlbumArtInsertAfter.DropDown = cmImageSource
+        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
+        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
+        cmiAlbumArtInsertAfter.Size = New Size(114, 22)
+        cmiAlbumArtInsertAfter.Text = "After"
         ' 
         ' cmiAlbumArtExport
         ' 
@@ -1155,12 +1155,14 @@
         ' 
         tipInfo.BackColor = Color.White
         tipInfo.BorderColor = Color.Gainsboro
+        tipInfo.BorderThickness = 2
         tipInfo.CopyOnRightClick = True
         tipInfo.FadeInRate = 25
         tipInfo.FadeOutRate = 25
-        tipInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        tipInfo.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.HideDelay = 3000
-        tipInfo.ShowBorder = False
+        tipInfo.ShadowAlpha = 0
+        tipInfo.ShadowThickness = 0
         tipInfo.ShowDelay = 100
         ' 
         ' CoBoxGenre

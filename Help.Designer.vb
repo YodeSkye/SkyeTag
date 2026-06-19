@@ -35,10 +35,10 @@ Partial Class Help
         BtnClose.Anchor = AnchorStyles.Bottom
         BtnClose.Image = My.Resources.Resources.ImageOK64
         tipInfo.SetImage(BtnClose, Nothing)
-        BtnClose.Location = New Point(410, 375)
-        BtnClose.Margin = New Padding(4, 3, 4, 3)
+        BtnClose.Location = New Point(497, 430)
+        BtnClose.Margin = New Padding(5, 4, 5, 4)
         BtnClose.Name = "BtnClose"
-        BtnClose.Size = New Size(64, 73)
+        BtnClose.Size = New Size(64, 64)
         BtnClose.TabIndex = 2
         tipInfo.SetText(BtnClose, "Close (CtrlW)")
         BtnClose.UseVisualStyleBackColor = True
@@ -47,14 +47,13 @@ Partial Class Help
         ' 
         RTxBoxHelp.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         RTxBoxHelp.BorderStyle = BorderStyle.None
-        RTxBoxHelp.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(RTxBoxHelp, Nothing)
-        RTxBoxHelp.Location = New Point(14, 16)
-        RTxBoxHelp.Margin = New Padding(4, 3, 4, 3)
+        RTxBoxHelp.Location = New Point(18, 20)
+        RTxBoxHelp.Margin = New Padding(5, 4, 5, 4)
         RTxBoxHelp.Name = "RTxBoxHelp"
         RTxBoxHelp.ReadOnly = True
         RTxBoxHelp.ShortcutsEnabled = False
-        RTxBoxHelp.Size = New Size(856, 315)
+        RTxBoxHelp.Size = New Size(1022, 367)
         RTxBoxHelp.TabIndex = 3
         RTxBoxHelp.Text = ""
         tipInfo.SetText(RTxBoxHelp, Nothing)
@@ -62,12 +61,11 @@ Partial Class Help
         ' LblVersion
         ' 
         LblVersion.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        LblVersion.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(LblVersion, Nothing)
-        LblVersion.Location = New Point(14, 338)
-        LblVersion.Margin = New Padding(4, 0, 4, 0)
+        LblVersion.Location = New Point(22, 391)
+        LblVersion.Margin = New Padding(5, 0, 5, 0)
         LblVersion.Name = "LblVersion"
-        LblVersion.Size = New Size(856, 28)
+        LblVersion.Size = New Size(1022, 35)
         LblVersion.TabIndex = 1
         LblVersion.Text = "LabelCSY2"
         tipInfo.SetText(LblVersion, Nothing)
@@ -85,18 +83,18 @@ Partial Class Help
         ' 
         ' Help
         ' 
-        AutoScaleDimensions = New SizeF(7F, 17F)
+        AutoScaleDimensions = New SizeF(9F, 21F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(884, 461)
+        ClientSize = New Size(1058, 507)
         Controls.Add(RTxBoxHelp)
         Controls.Add(BtnClose)
         Controls.Add(LblVersion)
-        Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         tipInfo.SetImage(Me, Nothing)
         KeyPreview = True
-        Margin = New Padding(4, 3, 4, 3)
-        MinimumSize = New Size(600, 300)
+        Margin = New Padding(5, 4, 5, 4)
+        MinimumSize = New Size(767, 361)
         Name = "Help"
         StartPosition = FormStartPosition.CenterParent
         tipInfo.SetText(Me, Nothing)

@@ -94,7 +94,9 @@ Namespace My
 
 			Friend Shared StartLocation As Point ' StartLocation is the location of the Main Window on the screen.
 			Friend Shared StartSize As Size ' StartSize is the size of the Main Window.
-			Friend Shared SaveMetrics As Boolean ' SaveMetrics determines whether the application saves the StartLocation and StartSize when it closes.
+            Friend Shared SaveMetrics As Boolean ' SaveMetrics determines whether the application saves the StartLocation and StartSize when it closes.
+            Friend Shared Theme As Skye.UI.SkyeTheme = Skye.UI.SkyeThemes.Dark ' Theme is the current theme of the application. Default is Light.
+			Friend Shared ThemeAuto As Boolean = False ' ThemeAuto determines whether the application theme changes automatically based on the current Windows theme. Default is False.
 
 			Friend Shared Sub Load()
 				Dim starttime As TimeSpan = DateTime.Now.TimeOfDay

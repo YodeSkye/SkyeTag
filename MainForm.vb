@@ -97,7 +97,7 @@ Partial Friend Class MainForm
     End Sub
     Friend Sub New()
 
-        'Initialize Form
+        ' Initialize Form
         InitializeComponent()
         Text = My.Application.Info.ProductName
         lblFileInfo.Text = String.Empty
@@ -115,6 +115,10 @@ Partial Friend Class MainForm
         AddHandler clickTimer.Tick, AddressOf ClickTimer_Tick
         SetLyrics()
         SetWindowState()
+
+        Skye.UI.ThemeManager.RegisterComponent(tipInfo)
+        Skye.UI.ThemeManager.ApplyTheme(Me)
+
 #If DEBUG Then
         'Location = App.Settings.StartLocation
         'Size = App.Settings.StartSize
@@ -3235,16 +3239,16 @@ Partial Friend Class MainForm
                 Dim g As Graphics = e.Graphics
 
                 'Draw background
-                Dim brbg As New SolidBrush(tipInfo.BackColor)
+                Dim brbg As New SolidBrush(App.Settings.Theme.TooltipBack)
                 g.FillRectangle(brbg, e.Bounds)
 
                 'Draw border
-                'Using p As New Pen(tipInfoEX.BorderColor, CInt(tipInfoEX.Font.Size / 4)) 'Scale border thickness with font
-                '    g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
-                'End Using
+                Using p As New Pen(App.Settings.Theme.TooltipBorder, CInt(tipInfo.Font.Size / 4)) 'Scale border thickness with font
+                    g.DrawRectangle(p, 0, 0, e.Bounds.Width - 1, e.Bounds.Height - 1)
+                End Using
 
                 'Draw text
-                TextRenderer.DrawText(g, e.ToolTipText, tipInfo.Font, New Point(7, 7), tipInfo.ForeColor)
+                TextRenderer.DrawText(g, e.ToolTipText, tipInfo.Font, New Point(7, 7), App.Settings.Theme.TooltipFore)
 
                 'Finalize
                 brbg.Dispose()
