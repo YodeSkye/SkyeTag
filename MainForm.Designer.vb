@@ -50,12 +50,12 @@
         cmiSelectFromFile = New ToolStripMenuItem()
         cmiSelectFromOnline = New ToolStripMenuItem()
         cmiPasteFromClipboard = New ToolStripMenuItem()
-        cmiAlbumArtInsertLast = New ToolStripMenuItem()
+        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
         cmiAlbumArtInsert = New ToolStripMenuItem()
         cmAlbumArtInsert = New ContextMenuStrip(components)
         cmiAlbumArtInsertBefore = New ToolStripMenuItem()
         cmiAlbumArtInsertFirst = New ToolStripMenuItem()
-        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
+        cmiAlbumArtInsertLast = New ToolStripMenuItem()
         cmiAlbumArtExport = New ToolStripMenuItem()
         cmExport = New ContextMenuStrip(components)
         cmiExportToFile = New ToolStripMenuItem()
@@ -497,7 +497,7 @@
         tipInfo.SetImage(cmImageSource, Nothing)
         cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
         cmImageSource.Name = "cm"
-        cmImageSource.OwnerItem = cmiAlbumArtInsertAfter
+        cmImageSource.OwnerItem = cmiAlbumArtInsertLast
         cmImageSource.Size = New Size(230, 82)
         tipInfo.SetText(cmImageSource, Nothing)
         ' 
@@ -522,13 +522,13 @@
         cmiPasteFromClipboard.Size = New Size(229, 26)
         cmiPasteFromClipboard.Text = "Paste From Clipboard"
         ' 
-        ' cmiAlbumArtInsertLast
+        ' cmiAlbumArtInsertAfter
         ' 
-        cmiAlbumArtInsertLast.DropDown = cmImageSource
-        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
-        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
-        cmiAlbumArtInsertLast.Size = New Size(125, 26)
-        cmiAlbumArtInsertLast.Text = "Last"
+        cmiAlbumArtInsertAfter.DropDown = cmImageSource
+        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
+        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
+        cmiAlbumArtInsertAfter.Size = New Size(125, 26)
+        cmiAlbumArtInsertAfter.Text = "After"
         ' 
         ' cmiAlbumArtInsert
         ' 
@@ -564,13 +564,13 @@
         cmiAlbumArtInsertFirst.Size = New Size(125, 26)
         cmiAlbumArtInsertFirst.Text = "First"
         ' 
-        ' cmiAlbumArtInsertAfter
+        ' cmiAlbumArtInsertLast
         ' 
-        cmiAlbumArtInsertAfter.DropDown = cmImageSource
-        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
-        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
-        cmiAlbumArtInsertAfter.Size = New Size(125, 26)
-        cmiAlbumArtInsertAfter.Text = "After"
+        cmiAlbumArtInsertLast.DropDown = cmImageSource
+        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
+        cmiAlbumArtInsertLast.Size = New Size(125, 26)
+        cmiAlbumArtInsertLast.Text = "Last"
         ' 
         ' cmiAlbumArtExport
         ' 
@@ -1055,7 +1055,7 @@
         ' 
         lblGenre.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         tipInfo.SetImage(lblGenre, Nothing)
-        lblGenre.Location = New Point(327, 81)
+        lblGenre.Location = New Point(327, 82)
         lblGenre.Margin = New Padding(4, 0, 4, 0)
         lblGenre.Name = "lblGenre"
         lblGenre.Size = New Size(80, 25)
@@ -1067,7 +1067,7 @@
         ' lblTitle
         ' 
         tipInfo.SetImage(lblTitle, Nothing)
-        lblTitle.Location = New Point(14, 132)
+        lblTitle.Location = New Point(14, 131)
         lblTitle.Margin = New Padding(4, 0, 4, 0)
         lblTitle.Name = "lblTitle"
         lblTitle.Size = New Size(54, 25)
@@ -1079,7 +1079,7 @@
         ' lblAlbum
         ' 
         tipInfo.SetImage(lblAlbum, Nothing)
-        lblAlbum.Location = New Point(14, 184)
+        lblAlbum.Location = New Point(14, 183)
         lblAlbum.Margin = New Padding(4, 0, 4, 0)
         lblAlbum.Name = "lblAlbum"
         lblAlbum.Size = New Size(77, 25)
@@ -1091,7 +1091,7 @@
         ' lblComments
         ' 
         tipInfo.SetImage(lblComments, Nothing)
-        lblComments.Location = New Point(14, 236)
+        lblComments.Location = New Point(14, 235)
         lblComments.Margin = New Padding(4, 0, 4, 0)
         lblComments.Name = "lblComments"
         lblComments.Size = New Size(127, 25)
@@ -1116,7 +1116,7 @@
         ' 
         lblTrack.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         tipInfo.SetImage(lblTrack, Nothing)
-        lblTrack.Location = New Point(329, 132)
+        lblTrack.Location = New Point(329, 131)
         lblTrack.Margin = New Padding(4, 0, 4, 0)
         lblTrack.Name = "lblTrack"
         lblTrack.Size = New Size(76, 25)
@@ -1142,7 +1142,7 @@
         ' 
         lblDuration.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         tipInfo.SetImage(lblDuration, Nothing)
-        lblDuration.Location = New Point(410, 132)
+        lblDuration.Location = New Point(410, 131)
         lblDuration.Margin = New Padding(4, 0, 4, 0)
         lblDuration.Name = "lblDuration"
         lblDuration.Size = New Size(75, 25)
@@ -1155,7 +1155,7 @@
         ' 
         lblYear.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         tipInfo.SetImage(lblYear, Nothing)
-        lblYear.Location = New Point(417, 184)
+        lblYear.Location = New Point(417, 183)
         lblYear.Margin = New Padding(4, 0, 4, 0)
         lblYear.Name = "lblYear"
         lblYear.Size = New Size(64, 25)
