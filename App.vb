@@ -88,23 +88,25 @@ Namespace My
 		End Property
 		Friend Class Settings
 
+			Friend Shared SaveMetrics As Boolean ' SaveMetrics determines whether the application saves the StartLocation and StartSize when it closes.
+			Friend Shared IsMaximized As Boolean ' IsMaximized determines whether the Main Window is maximized.
 			Friend Shared StartLocation As Point ' StartLocation is the location of the Main Window on the screen.
 			Friend Shared StartSize As Size ' StartSize is the size of the Main Window.
-			Friend Shared SaveMetrics As Boolean ' SaveMetrics determines whether the application saves the StartLocation and StartSize when it closes.
 			Friend Shared Theme As Skye.UI.SkyeTheme ' Theme is the current theme of the application. Default is Light.
 			Friend Shared ThemeAuto As Boolean ' ThemeAuto determines whether the application theme changes automatically based on the current Windows theme. Default is True.
 
 			Friend Shared Sub Load()
 				Dim starttime As TimeSpan = DateTime.Now.TimeOfDay
 
-				' Metrics
-				Dim x As Integer = Skye.Common.RegistryHelper.GetInt("StartLocationX", 80)
+                ' Metrics
+                SaveMetrics = Skye.Common.RegistryHelper.GetBool("SaveMetrics", False)
+                IsMaximized = Skye.Common.RegistryHelper.GetBool("IsMaximized", False)
+                Dim x As Integer = Skye.Common.RegistryHelper.GetInt("StartLocationX", 80)
 				Dim y As Integer = Skye.Common.RegistryHelper.GetInt("StartLocationY", 120)
 				StartLocation = New Point(x, y)
 				Dim w As Integer = Skye.Common.RegistryHelper.GetInt("StartSizeW", 400)
 				Dim h As Integer = Skye.Common.RegistryHelper.GetInt("StartSizeH", 600)
 				StartSize = New Size(w, h)
-				SaveMetrics = Skye.Common.RegistryHelper.GetBool("SaveMetrics", False)
 
 				' Theme
 				Dim themeName As String = Skye.Common.RegistryHelper.GetString("Theme", "Light")
@@ -116,17 +118,17 @@ Namespace My
 			Friend Shared Sub Save()
 				Dim starttime As TimeSpan = DateTime.Now.TimeOfDay
 
-				' Metrics
+                ' Metrics
+                Skye.Common.RegistryHelper.SetBool("SaveMetrics", SaveMetrics)
+				Skye.Common.RegistryHelper.SetBool("IsMaximized", IsMaximized)
 				Skye.Common.RegistryHelper.SetInt("StartLocationX", StartLocation.X)
 				Skye.Common.RegistryHelper.SetInt("StartLocationY", StartLocation.Y)
 				Skye.Common.RegistryHelper.SetInt("StartSizeW", StartSize.Width)
 				Skye.Common.RegistryHelper.SetInt("StartSizeH", StartSize.Height)
-				Skye.Common.RegistryHelper.SetBool("SaveMetrics", SaveMetrics)
 
 				' Theme
 				Skye.Common.RegistryHelper.SetString("Theme", Theme.Name)
 				Skye.Common.RegistryHelper.SetBool("ThemeAuto", ThemeAuto)
-
 
 				WriteToLog("Settings Saved (" & Skye.Common.GenerateLogTime(starttime, DateTime.Now.TimeOfDay, True) & ")", False)
 			End Sub
@@ -215,16 +217,16 @@ Namespace My
 			Dim logtext As String = String.Empty
 			logtext += "Interface -->"
 			logtext += vbCr + vbTab + "Hovering over the Filename will briefly show extended media information."
-			logtext += vbCr + vbTab + "Clicking Insert on the Album Art Menu will perform the default insertion behavior, Insert Last."
-			logtext += vbCr + vbTab + "You may drag an image file or files onto the Album Art Menu Button. The file or files will be added using the default insertion behavior, Insert Last."
+			logtext += vbCr + vbTab + "Clicking Insert On the Album Art Menu will perform the Default insertion behavior, Insert Last."
+			logtext += vbCr + vbTab + "You may drag an image file Or files onto the Album Art Menu Button. The file Or files will be added Using the Default insertion behavior, Insert Last."
 			logtext += vbCr + vbCr + "Settings -->"
-			logtext += vbCr + vbTab + "Save Window Metrics will save the location of the Main Window and its size each time you exit the App."
+			logtext += vbCr + vbTab + "Save Window Metrics will save the location Of the Main Window And its size Each time you Exit the App."
 			logtext += vbCr + vbCr + "KeyBoard -->"
 			logtext += vbCr + vbTab + "Pressing CtrlW will close a window without saving."
-			logtext += vbCr + vbTab + "Pressing CtrlShiftW or Escape will minimize the window."
+			logtext += vbCr + vbTab + "Pressing CtrlShiftW Or Escape will minimize the window."
 			logtext += vbCr + vbTab + "Pressing F12 will toggle the window state."
 			logtext += vbCr + vbCr + "Opening Files -->"
-			logtext += vbCr + vbTab + "Because of the way Windows works, 'Open With' from the Shell Context Menu only opens a single file. However, you may put a link to " + My.Application.Info.ProductName + ".exe in the 'SendTo' menu. This will allow you to open single or multiple files."
+			logtext += vbCr + vbTab + "Because Of the way Windows works, 'Open With' from the Shell Context Menu only opens a single file. However, you may put a link to " + My.Application.Info.ProductName + ".exe in the 'SendTo' menu. This will allow you to open single or multiple files."
 			logtext += vbCr + vbTab + "You may use the 'Open' button to open single or multiple files."
 			logtext += vbCr + vbTab + "You may drag any file or files onto any part of the window, except the Album Art Menu Button."
 			logtext += vbCr + vbTab + "You may open one or more files from the command line. For each file you wish to open, provide the full path to the file in quotation marks(" + My.Application.Info.ProductName + ".exe " + """" + "filepath" + """" + "). Separate each file with a single space(" + My.Application.Info.ProductName + ".exe " + """" + "filepath1" + """" + " " + """" + "filepath2" + """" + "). Make sure the path to " + My.Application.Info.ProductName + ".exe is set in the Windows Environment Variable 'Path'."

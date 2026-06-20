@@ -103,7 +103,6 @@ Partial Friend Class MainForm
             .Interval = SystemInformation.DoubleClickTime}
         AddHandler clickTimer.Tick, AddressOf ClickTimer_Tick
         SetLyrics()
-        SetWindowState()
         Skye.UI.ThemeManager.RegisterComponent(tipInfo)
         MenuMain.Renderer = New Skye.UI.SkyeMenuRenderer
         cmAlbumArtInsert.Renderer = New Skye.UI.SkyeMenuRenderer
@@ -124,10 +123,12 @@ Partial Friend Class MainForm
             StartPosition = FormStartPosition.Manual
             Location = App.Settings.StartLocation
             Size = App.Settings.StartSize
+            If App.Settings.IsMaximized Then wMaximized = True
         Else
             StartPosition = FormStartPosition.CenterScreen
         End If
 #End If
+        SetWindowState()
 
     End Sub
     Private Sub Frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -3137,6 +3138,10 @@ Partial Friend Class MainForm
         Return pic
     End Function
     Private Sub SetWindowState()
+        If App.Settings.IsMaximized <> wMaximized Then
+            App.Settings.IsMaximized = wMaximized
+            App.Settings.Save()
+        End If
         SuspendLayout()
         Select Case wMaximized
             Case True
