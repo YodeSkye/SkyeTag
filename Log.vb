@@ -6,9 +6,6 @@ Public Class Log
     'Declarations
     Private mMove As Boolean = False
     Private mOffset, mPosition As Point
-    Private RTxBoxCM As New Skye.UI.RichTextBoxContextMenu
-    Private LogSearchTitle As String
-    Private LogSearchInActiveColor As Color
     Private DeleteLogConfirm As Boolean = False
     Private WithEvents TimerDeleteLog As New Timer
 
@@ -17,12 +14,9 @@ Public Class Log
 
         'Initialize
         TimerDeleteLog.Interval = 5000
-        LogSearchTitle = TxbxSearch.Text
-        LogSearchInActiveColor = TxbxSearch.ForeColor
-        RTxBoxLog.ContextMenuStrip = RTxBoxCM
+        Lblnfo.Text = Skye.Common.Log.LogFilePath
         Skye.UI.ThemeManager.RegisterComponent(tipInfo)
         Skye.UI.ThemeManager.RegisterComponent(tipAlert)
-        RTxBoxCM.Renderer = New Skye.UI.SkyeMenuRenderer
         Skye.UI.ThemeManager.ApplyTheme(Me)
 
         'Center in FrmMain
@@ -65,16 +59,14 @@ Public Class Log
             CheckMove(Me.Location)
         End If
     End Sub
-    Private Sub Frm_DoubleClick(sender As Object, e As EventArgs) Handles MyBase.DoubleClick, LblSearch.DoubleClick
-        ToggleMaximized()
+    Private Sub Frm_DoubleClick(sender As Object, e As EventArgs) Handles MyBase.DoubleClick
+        ToggleMaximized
     End Sub
     Private Sub Frm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         Select Case e.KeyData
             Case Keys.W Or Keys.Control
                 Close()
             Case Keys.W Or Keys.Control Or Keys.Shift, Keys.Escape
-                ResetRTxBoxLogFind()
-                RTxBoxLog.Focus()
                 WindowState = FormWindowState.Minimized
             Case Keys.F12
                 ToggleMaximized()
@@ -88,67 +80,12 @@ Public Class Log
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
         If DeleteLogConfirm Then
             App.DeleteLog()
+            LogViewer.RefreshContent()
         End If
         SetDeleteLogConfirm()
     End Sub
-    Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        SetDeleteLogConfirm(True)
-        App.ShowLog()
-    End Sub
     Private Sub Lblnfo_DoubleClick(sender As Object, e As EventArgs) Handles Lblnfo.DoubleClick
         App.OpenFileLocation(Skye.Common.Log.LogFilePath)
-    End Sub
-    Private Sub RTxBoxLog_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles RTxBoxLog.PreviewKeyDown
-        RTxBoxCM.ShortcutKeys(DirectCast(sender, RichTextBox), e)
-    End Sub
-    Private Sub TxBxSearch_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxbxSearch.KeyPress
-        Select Case e.KeyChar
-            Case Convert.ToChar(Keys.Escape)
-                ResetRTxBoxLogFind()
-                RTxBoxLog.Focus()
-                e.Handled = True
-        End Select
-    End Sub
-    Private Sub TxBxSearch_Enter(sender As Object, e As EventArgs) Handles TxbxSearch.Enter
-        If TxbxSearch.Text = LogSearchTitle Then TxbxSearch.ResetText()
-    End Sub
-    Private Sub TxBxSearch_Leave(sender As Object, e As EventArgs) Handles TxbxSearch.Leave
-        TxbxSearch.Text = LogSearchTitle
-        TxbxSearch.ForeColor = LogSearchInActiveColor
-    End Sub
-    Private Sub TxBxSearch_TextChanged(sender As Object, e As EventArgs) Handles TxbxSearch.TextChanged
-        If TxbxSearch.Text Is String.Empty Or RTxBoxLog.Focused Then
-            ResetRTxBoxLogFind()
-        ElseIf TxbxSearch.Text.Length <= 4 Then
-            TxbxSearch.ResetForeColor()
-            ResetRTxBoxLogFind()
-        ElseIf Not TxbxSearch.Text = LogSearchTitle AndAlso TxbxSearch.Text.Length > 4 AndAlso IsHandleCreated Then
-            Debug.Print("Searching Log...")
-            LblSearch.Visible = True
-            LblSearch.Refresh()
-            Dim foundindex As Integer
-            Dim searchtext As String = RTxBoxLog.Text
-            ResetRTxBoxLogFind()
-            'Try To Find First Occurrence
-            foundindex = searchtext.IndexOf(TxbxSearch.Text, 0, StringComparison.CurrentCultureIgnoreCase)
-            If foundindex < 0 Then
-                TxbxSearch.ForeColor = Color.Red
-            Else
-                TxbxSearch.ResetForeColor()
-                RTxBoxLog.Select(foundindex, 0)
-                RTxBoxLog.ScrollToCaret()
-            End If
-            Do Until foundindex < 0
-                'Highlight Current Match
-                RTxBoxLog.SelectionStart = foundindex
-                RTxBoxLog.SelectionLength = TxbxSearch.Text.Length
-                RTxBoxLog.SelectionBackColor = RTxBoxLog.ForeColor
-                RTxBoxLog.SelectionColor = RTxBoxLog.BackColor
-                'Try To Find Next Occurrence
-                foundindex = searchtext.IndexOf(TxbxSearch.Text, foundindex + TxbxSearch.Text.Length, StringComparison.CurrentCultureIgnoreCase)
-            Loop
-            LblSearch.Visible = False
-        End If
     End Sub
 
     'Handlers
@@ -178,15 +115,6 @@ Public Class Log
             Case FormWindowState.Maximized, FormWindowState.Minimized
                 WindowState = FormWindowState.Normal
         End Select
-    End Sub
-    Private Sub ResetRTxBoxLogFind()
-        RTxBoxLog.SelectAll()
-        RTxBoxLog.SelectionBackColor = SystemColors.Window
-        RTxBoxLog.SelectionColor = SystemColors.WindowText
-        RTxBoxLog.DeselectAll()
-        RTxBoxLog.SelectionStart = RTxBoxLog.TextLength
-        RTxBoxLog.SelectionLength = 0
-        RTxBoxLog.ScrollToCaret()
     End Sub
     Private Sub CheckMove(ByRef location As Point)
         If location.X + Width > My.Computer.Screen.WorkingArea.Right Then location.X = My.Computer.Screen.WorkingArea.Right - Width + App.AdjustScreenBoundsNormalWindow
