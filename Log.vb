@@ -96,7 +96,7 @@ Public Class Log
         App.ShowLog()
     End Sub
     Private Sub Lblnfo_DoubleClick(sender As Object, e As EventArgs) Handles Lblnfo.DoubleClick
-        App.OpenFileLocation(LogPath)
+        App.OpenFileLocation(Skye.Common.Log.LogFilePath)
     End Sub
     Private Sub RTxBoxLog_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles RTxBoxLog.PreviewKeyDown
         RTxBoxCM.ShortcutKeys(DirectCast(sender, RichTextBox), e)

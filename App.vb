@@ -86,11 +86,11 @@ Namespace My
 				Return App.tagPaths IsNot Nothing AndAlso App.tagPaths.Count > 1
 			End Get
 		End Property
-#If DEBUG Then
-		Friend ReadOnly LogPath As String = Computer.FileSystem.SpecialDirectories.Temp + "\" + Application.Info.ProductName + "LogDEV.txt" 'LogPath is the path to the log file.
-#Else
-		Friend ReadOnly LogPath As String = My.Computer.FileSystem.SpecialDirectories.Temp + "\" + My.Application.Info.ProductName + "Log.txt" 'LogPath is the path to the log file.
-#End If
+		'#If DEBUG Then
+		'		Friend ReadOnly LogPath As String = Computer.FileSystem.SpecialDirectories.Temp + "\" + Application.Info.ProductName + "LogDEV.txt" 'LogPath is the path to the log file.
+		'#Else
+		'		Friend ReadOnly LogPath As String = My.Computer.FileSystem.SpecialDirectories.Temp + "\" + My.Application.Info.ProductName + "Log.txt" 'LogPath is the path to the log file.
+		'#End If
 		Friend Class Settings
 
 			Friend Shared StartLocation As Point ' StartLocation is the location of the Main Window on the screen.
@@ -145,13 +145,15 @@ Namespace My
 
 		' Methods
 		Friend Sub Initialize()
-			WriteToLog(My.Application.Info.ProductName + " Started", False)
-			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance) 'Allows use of Windows-1252 character encoding, needed for Skye Library context menu Proper Case function.
 #If DEBUG Then
+			Skye.Common.Log.Initialize(Application.Info.ProductName + "DEV") 'Use separate log file for debug builds
 			Skye.Common.RegistryHelper.BaseKey = "Software\" + My.Application.Info.ProductName + "DEV" 'Use separate registry key for debug builds
 #Else
-			Skye.Common.RegistryHelper.BaseKey = "Software\" + My.Application.Info.ProductName 'Use standard registry key for release builds
+            Skye.Common.Log.Initialize(My.Application.Info.ProductName) 'Initialize the log file
+            Skye.Common.RegistryHelper.BaseKey = "Software\" + My.Application.Info.ProductName 'Use standard registry key for release builds
 #End If
+			WriteToLog(My.Application.Info.ProductName + " Started", False)
+			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance) 'Allows use of Windows-1252 character encoding, needed for Skye Library context menu Proper Case function.
 			If My.Application.CommandLineArgs.Count > 0 Then
 				WriteToLog("Processing CommandLine (" + My.Application.CommandLineArgs.Count.ToString + ")", False)
 				ProcessPassedParameters(My.Application.CommandLineArgs)
@@ -189,50 +191,59 @@ Namespace My
 			End Select
 			My.AppAlertMessage = String.Empty
 		End Sub
-		''' <summary>
-		''' Writes Text To The Log File
-		''' </summary>
-		''' <param name="logtext">Text to be written.</param>
-		''' <param name="showfilename">Optional. True = Show [tagPath] after the Text, False = DO NOT Show [tagPath], Default = True.</param>
-		Friend Sub WriteToLog(logtext As String, Optional showfilename As Boolean = True)
-			Static fInfo As IO.FileInfo
-
-			Try
-				fInfo = New IO.FileInfo(LogPath)
-
-				' Backup rotation
-				If fInfo.Exists AndAlso fInfo.Length >= 1000000 Then
-					IO.File.Move(LogPath,
-						 LogPath.Insert(LogPath.Length - 4,
-						 "Backup@" & My.Computer.Clock.LocalTime.ToString("yyyyMMdd") &
-						 "@" & My.Computer.Clock.LocalTime.ToString("HHmmss")))
+        ''' <summary>
+        ''' Writes Text To The Log File
+        ''' </summary>
+        ''' <param name="logtext">Text to be written.</param>
+        ''' <param name="showfilename">Optional. True = Show [tagPath] after the Text, False = DO NOT Show [tagPath], Default = True.</param>
+        Friend Sub WriteToLog(logtext As String, Optional showfilename As Boolean = True)
+			Dim finalText As String = logtext
+			If showfilename Then
+				If IsMultiFile Then
+					finalText &= $" (Multiple Files ({tagPaths.Count}))"
+				Else
+					finalText &= $" ({If(String.IsNullOrEmpty(tagPath), sNoFile, tagPath)})"
 				End If
-
-				' Build filename/mode suffix
-				Dim fileInfoText As String = ""
-				If showfilename Then
-					If IsMultiFile Then
-						fileInfoText = $" (Multiple Files ({tagPaths.Count}))"
-					Else
-						fileInfoText = $" ({If(String.IsNullOrEmpty(tagPath), sNoFile, tagPath)})"
-					End If
-				End If
-
-				' Build final log line
-				Dim timestamp As String = $"{My.Computer.Clock.LocalTime:yyyy/MM/dd} @ {My.Computer.Clock.LocalTime:HH:mm:ss}"
-				Dim finalText As String = $"{timestamp} --> {logtext}{fileInfoText}{vbCrLf}"
-
-				IO.File.AppendAllText(LogPath, finalText)
-				Debug.Print("WriteToLog: " & logtext & fileInfoText)
-
-			Catch
-			Finally
-				fInfo = Nothing
-			End Try
+			End If
+			Skye.Common.Log.Write(finalText)
 		End Sub
-		Friend Sub ShowLog()
+		'Friend Sub WriteToLog(logtext As String, Optional showfilename As Boolean = True)
+		'	Static fInfo As IO.FileInfo
 
-			'Set Form
+		'	Try
+		'		fInfo = New IO.FileInfo(LogPath)
+
+		'		' Backup rotation
+		'		If fInfo.Exists AndAlso fInfo.Length >= 1000000 Then
+		'			IO.File.Move(LogPath,
+		'				 LogPath.Insert(LogPath.Length - 4,
+		'				 "Backup@" & My.Computer.Clock.LocalTime.ToString("yyyyMMdd") &
+		'				 "@" & My.Computer.Clock.LocalTime.ToString("HHmmss")))
+		'		End If
+
+		'		' Build filename/mode suffix
+		'		Dim fileInfoText As String = ""
+		'		If showfilename Then
+		'			If IsMultiFile Then
+		'				fileInfoText = $" (Multiple Files ({tagPaths.Count}))"
+		'			Else
+		'				fileInfoText = $" ({If(String.IsNullOrEmpty(tagPath), sNoFile, tagPath)})"
+		'			End If
+		'		End If
+
+		'		' Build final log line
+		'		Dim timestamp As String = $"{My.Computer.Clock.LocalTime:yyyy/MM/dd} @ {My.Computer.Clock.LocalTime:HH:mm:ss}"
+		'		Dim finalText As String = $"{timestamp} --> {logtext}{fileInfoText}{vbCrLf}"
+
+		'		IO.File.AppendAllText(LogPath, finalText)
+		'		Debug.Print("WriteToLog: " & logtext & fileInfoText)
+
+		'	Catch
+		'	Finally
+		'		fInfo = Nothing
+		'	End Try
+		'End Sub
+		Friend Sub ShowLog()
 			If FrmLog Is Nothing Then
 				FrmLog = New Log
 				FrmLog.Text = My.Application.Info.ProductName + " " + FrmLog.Text
@@ -242,34 +253,47 @@ Namespace My
 				FrmLog.BringToFront()
 				FrmLog.Focus()
 			End If
-
-			'Show Log
-			Dim logtext As String = String.Empty
-			Dim lines As Integer = 0
-			FrmLog.RTxBoxLog.Clear()
-			Try : logtext = IO.File.ReadAllText(LogPath)
-			Catch
-			Finally
-				If String.IsNullOrEmpty(logtext) Then logtext = "Log Empty"
-				FrmLog.RTxBoxLog.AppendText(logtext)
-				FrmLog.Lblnfo.Text = LogPath
-				If FrmLog.RTxBoxLog.Lines.Length > 0 AndAlso FrmLog.RTxBoxLog.Lines(0).Length > 0 Then lines = FrmLog.RTxBoxLog.GetLineFromCharIndex(FrmLog.RTxBoxLog.Text.Length)
-				FrmLog.Lblnfo.Text += " (" + lines.ToString + IIf(lines = 1, " Line", " Lines").ToString + ")"
-				If lines > 0 Then
-					FrmLog.BtnDelete.Visible = True
-					FrmLog.btnRefresh.Visible = True
-					FrmLog.RTxBoxLog.ScrollToCaret()
-				Else
-					FrmLog.BtnDelete.Visible = False
-				End If
-				FrmLog.RTxBoxLog.ReadOnly = True
-				FrmLog.BtnClose.Select()
-			End Try
-
 		End Sub
+		'Friend Sub ShowLog()
+
+		'	'Set Form
+		'	If FrmLog Is Nothing Then
+		'		FrmLog = New Log
+		'		FrmLog.Text = My.Application.Info.ProductName + " " + FrmLog.Text
+		'		FrmLog.Show()
+		'	Else
+		'		FrmLog.WindowState = FormWindowState.Normal
+		'		FrmLog.BringToFront()
+		'		FrmLog.Focus()
+		'	End If
+
+		'	'Show Log
+		'	Dim logtext As String = String.Empty
+		'	Dim lines As Integer = 0
+		'	FrmLog.RTxBoxLog.Clear()
+		'	Try : logtext = IO.File.ReadAllText(LogPath)
+		'	Catch
+		'	Finally
+		'		If String.IsNullOrEmpty(logtext) Then logtext = "Log Empty"
+		'		FrmLog.RTxBoxLog.AppendText(logtext)
+		'		FrmLog.Lblnfo.Text = LogPath
+		'		If FrmLog.RTxBoxLog.Lines.Length > 0 AndAlso FrmLog.RTxBoxLog.Lines(0).Length > 0 Then lines = FrmLog.RTxBoxLog.GetLineFromCharIndex(FrmLog.RTxBoxLog.Text.Length)
+		'		FrmLog.Lblnfo.Text += " (" + lines.ToString + IIf(lines = 1, " Line", " Lines").ToString + ")"
+		'		If lines > 0 Then
+		'			FrmLog.BtnDelete.Visible = True
+		'			FrmLog.btnRefresh.Visible = True
+		'			FrmLog.RTxBoxLog.ScrollToCaret()
+		'		Else
+		'			FrmLog.BtnDelete.Visible = False
+		'		End If
+		'		FrmLog.RTxBoxLog.ReadOnly = True
+		'		FrmLog.BtnClose.Select()
+		'	End Try
+
+		'End Sub
 		Friend Sub DeleteLog()
-			If IO.File.Exists(LogPath) Then IO.File.Delete(LogPath)
-			ShowLog()
+			If IO.File.Exists(Skye.Common.Log.LogFilePath) Then IO.File.Delete(Skye.Common.Log.LogFilePath)
+
 		End Sub
 		Friend Sub ShowHelp()
 			Dim logtext As String = String.Empty
