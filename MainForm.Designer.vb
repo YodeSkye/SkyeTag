@@ -140,10 +140,10 @@
         btnError.FlatAppearance.MouseOverBackColor = Color.Transparent
         btnError.Image = My.Resources.Resources.ImageError32
         tipInfo.SetImage(btnError, My.Resources.Resources.ImageError32)
-        btnError.Location = New Point(417, 640)
+        btnError.Location = New Point(433, 656)
         btnError.Margin = New Padding(4)
         btnError.Name = "btnError"
-        btnError.Size = New Size(64, 64)
+        btnError.Size = New Size(48, 48)
         btnError.TabIndex = 25
         btnError.TabStop = False
         tipInfo.SetText(btnError, "An Error Has Occurred" & vbCrLf & "Click To Clear Error" & vbCrLf & "RightClick = View Log")
@@ -156,13 +156,13 @@
         btnSave.FlatAppearance.BorderSize = 2
         btnSave.FlatAppearance.MouseDownBackColor = Color.GhostWhite
         btnSave.FlatAppearance.MouseOverBackColor = SystemColors.Info
-        btnSave.Image = My.Resources.Resources.ImageSave64
+        btnSave.Image = My.Resources.Resources.ImageSave32
         tipInfo.SetImage(btnSave, My.Resources.Resources.ImageSave64)
         btnSave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSave.Location = New Point(15, 640)
+        btnSave.Location = New Point(13, 656)
         btnSave.Margin = New Padding(4)
         btnSave.Name = "btnSave"
-        btnSave.Size = New Size(128, 64)
+        btnSave.Size = New Size(96, 48)
         btnSave.TabIndex = 1000
         tipInfo.SetText(btnSave, "Save Tag To File")
         btnSave.Text = "Save"
@@ -290,10 +290,10 @@
         btnRestore.FlatAppearance.MouseOverBackColor = SystemColors.Info
         btnRestore.Image = My.Resources.Resources.ImageRestore32
         tipInfo.SetImage(btnRestore, My.Resources.Resources.ImageRestore32)
-        btnRestore.Location = New Point(151, 640)
+        btnRestore.Location = New Point(117, 656)
         btnRestore.Margin = New Padding(4)
         btnRestore.Name = "btnRestore"
-        btnRestore.Size = New Size(64, 64)
+        btnRestore.Size = New Size(48, 48)
         btnRestore.TabIndex = 1005
         tipInfo.SetText(btnRestore, "Restore Original Tag")
         btnRestore.TextAlign = ContentAlignment.MiddleRight
@@ -683,7 +683,7 @@
         picbxAlbumArt.Location = New Point(0, 0)
         picbxAlbumArt.Margin = New Padding(4)
         picbxAlbumArt.Name = "picbxAlbumArt"
-        picbxAlbumArt.Size = New Size(463, 285)
+        picbxAlbumArt.Size = New Size(463, 299)
         picbxAlbumArt.TabIndex = 1001
         picbxAlbumArt.TabStop = False
         tipInfo.SetText(picbxAlbumArt, "Album Art")
@@ -800,7 +800,7 @@
         txbxLyrics.Name = "txbxLyrics"
         txbxLyrics.ScrollBars = ScrollBars.Both
         txbxLyrics.ShortcutsEnabled = False
-        txbxLyrics.Size = New Size(462, 285)
+        txbxLyrics.Size = New Size(462, 299)
         txbxLyrics.TabIndex = 0
         txbxLyrics.TabStop = False
         tipInfo.SetText(txbxLyrics, Nothing)
@@ -864,7 +864,7 @@
         panelAlbumArt.Location = New Point(17, 342)
         panelAlbumArt.Margin = New Padding(4)
         panelAlbumArt.Name = "panelAlbumArt"
-        panelAlbumArt.Size = New Size(463, 285)
+        panelAlbumArt.Size = New Size(463, 299)
         panelAlbumArt.TabIndex = 0
         tipInfo.SetText(panelAlbumArt, Nothing)
         ' 
