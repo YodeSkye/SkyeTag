@@ -150,28 +150,6 @@ Partial Friend Class MainForm
     End Sub
     Private Sub Frm_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
         Dim g As Graphics = Me.CreateGraphics
-        'If IsMultiFile Then
-        '    If g.MeasureString(txbxArtist.Text, txbxArtist.Font).Width > txbxArtist.Width Then
-        '        tipInfo.SetText(txbxArtist, txbxArtist.Text)
-        '    Else
-        '        tipInfo.SetText(txbxArtist, Nothing)
-        '    End If
-        'Else
-        '    If tlFile Is Nothing Then
-        '        tipInfo.SetText(txbxArtist, Nothing)
-        '    Else
-        '        If tlFile.Tag.Performers.Length = 1 Then
-        '            If g.MeasureString(txbxArtist.Text, txbxArtist.Font).Width > txbxArtist.Width Then
-        '                tipInfo.SetText(txbxArtist, txbxArtist.Text)
-        '            Else : tipInfo.SetText(txbxArtist, Nothing)
-        '            End If
-        '        ElseIf tlFile.Tag.Performers.Length > 1 Then
-        '            tipInfo.SetText(txbxArtist, tlFile.Tag.JoinedPerformers)
-        '        Else
-        '            tipInfo.SetText(txbxArtist, Nothing)
-        '        End If
-        '    End If
-        'End If
         If IsMultiFile Then
 
             ' Multi-file: always use textbox text
@@ -1713,21 +1691,26 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub SetLyrics()
-        Select Case wShowLyrics
-            Case True
-                Me.panelAlbumArt.SendToBack()
-                Me.btnLyrics.BackColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HIGHLIGHT) 'Color.Linen
-                Me.btnLyrics.FlatAppearance.MouseDownBackColor = SystemColors.Control
-                Me.btnLyrics.FlatAppearance.MouseOverBackColor = SystemColors.Control
-                Me.txbxLyrics.Focus()
-            Case False
-                Me.txbxLyrics.SendToBack()
-                Me.btnLyrics.Image = Resources.Resources.imageDocument 'DirectCast(My.AppResources.GetObject("imageDocument"), Image)
-                Me.btnLyrics.BackColor = SystemColors.Control
-                Me.btnLyrics.FlatAppearance.MouseDownBackColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HIGHLIGHT) 'Color.Linen
-                Me.btnLyrics.FlatAppearance.MouseOverBackColor = Skye.WinAPI.GetSystemColor(Skye.WinAPI.COLOR_HIGHLIGHT) 'Color.Linen
-                Me.tipInfo.SetText(Me.btnLyrics, "Show Lyrics")
-        End Select
+        Dim hover = App.Blend(Skye.UI.CurrentTheme.ButtonBack, Skye.UI.CurrentTheme.ButtonFore, 0.15)
+        Dim pressed = App.Blend(Skye.UI.CurrentTheme.ButtonBack, Skye.UI.CurrentTheme.ButtonFore, 0.35)
+        Dim toggleOnBack = App.Blend(Skye.UI.CurrentTheme.ButtonBack, Skye.UI.CurrentTheme.ButtonFore, 0.25)
+        Dim toggleOnBorder = App.Blend(Skye.UI.CurrentTheme.ButtonBack, Skye.UI.CurrentTheme.ButtonFore, 0.45)
+        If wShowLyrics Then
+            panelAlbumArt.SendToBack()
+            btnLyrics.BackColor = toggleOnBack
+            btnLyrics.FlatAppearance.BorderColor = toggleOnBorder
+            btnLyrics.FlatAppearance.MouseOverBackColor = hover
+            btnLyrics.FlatAppearance.MouseDownBackColor = pressed
+            btnLyrics.ForeColor = Skye.UI.CurrentTheme.ButtonFore
+            txbxLyrics.Focus()
+        Else
+            txbxLyrics.SendToBack()
+            btnLyrics.BackColor = Skye.UI.CurrentTheme.ButtonBack
+            btnLyrics.FlatAppearance.BorderColor = Skye.UI.CurrentTheme.ButtonFore
+            btnLyrics.FlatAppearance.MouseOverBackColor = hover
+            btnLyrics.FlatAppearance.MouseDownBackColor = pressed
+            btnLyrics.ForeColor = Skye.UI.CurrentTheme.ButtonFore
+        End If
     End Sub
     Private Sub ResetLyrics()
         If wShowLyrics Then
@@ -3161,14 +3144,14 @@ Partial Friend Class MainForm
                 panelAlbumArt.AutoScroll = True
                 picbxAlbumArt.Dock = DockStyle.None
                 picbxAlbumArt.SizeMode = PictureBoxSizeMode.AutoSize
-                txbxLyrics.Font = New Font(Font.Name, 14, FontStyle.Bold)
+                txbxLyrics.Font = New Font(txbxLyrics.Font.Name, 16)
                 txbxLyrics.TextAlign = HorizontalAlignment.Center
             Case False
                 WindowState = FormWindowState.Normal
                 panelAlbumArt.AutoScroll = False
                 picbxAlbumArt.Dock = DockStyle.Fill
                 picbxAlbumArt.SizeMode = PictureBoxSizeMode.Zoom
-                txbxLyrics.Font = New Font(Font.Name, 10, FontStyle.Regular)
+                txbxLyrics.Font = New Font(txbxLyrics.Font.Name, 12)
                 txbxLyrics.TextAlign = HorizontalAlignment.Left
         End Select
         ResumeLayout()

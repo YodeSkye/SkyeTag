@@ -69,8 +69,7 @@ Namespace My
 		Friend FrmLog As Log
 		Private FrmHelp As Help
 		Private FrmSettings As SkyeTag.Settings
-		Friend ReadOnly CMFont As New Font("Segoe UI", 10, FontStyle.Regular) 'Font for context menus
-		Friend ReadOnly InactiveTitleBarColor As Color = Color.FromArgb(255, 243, 243, 243)
+		Friend ReadOnly CMFont As New Font("Segoe UI", 12, FontStyle.Regular) 'Font for context menus
 		Friend Const AdjustScreenBoundsNormalWindow As Byte = 8
 		Friend Const AdjustScreenBoundsDialogWindow As Byte = 10
 		Friend Const sError As String = "Error Opening File"
@@ -287,9 +286,8 @@ Namespace My
 			logtext += vbCr + vbCr + "Opening Files -->"
 			logtext += vbCr + vbTab + "Because of the way Windows works, 'Open With' from the Shell Context Menu only opens a single file. However, you may put a link to " + My.Application.Info.ProductName + ".exe in the 'SendTo' menu. This will allow you to open single or multiple files."
 			logtext += vbCr + vbTab + "You may use the 'Open' button to open single or multiple files."
-			logtext += vbCr + vbTab + "You may drag any file or files onto any other part of the window. A single file will be loaded in the current window. Additional files will be loaded into separate windows."
+			logtext += vbCr + vbTab + "You may drag any file or files onto any part of the window, except the Album Art Menu Button."
 			logtext += vbCr + vbTab + "You may open one or more files from the command line. For each file you wish to open, provide the full path to the file in quotation marks(" + My.Application.Info.ProductName + ".exe " + """" + "filepath" + """" + "). Separate each file with a single space(" + My.Application.Info.ProductName + ".exe " + """" + "filepath1" + """" + " " + """" + "filepath2" + """" + "). Make sure the path to " + My.Application.Info.ProductName + ".exe is set in the Windows Environment Variable 'Path'."
-			logtext += vbCr + vbTab + "Regardless of method used, a maximum of ten files can be opened at one time to keep from overloading the system. Each file over ten will be ignored."
 			FrmHelp = New Help
 			FrmHelp.Text = My.Application.Info.ProductName + " " + FrmHelp.Text
 			FrmHelp.RTxBoxHelp.Text = logtext
@@ -413,6 +411,15 @@ Namespace My
 		Friend Function MouseInBounds(ByRef control As Control, ByRef mouseposition As Point) As Boolean
 			If mouseposition.X >= 0 AndAlso mouseposition.X <= control.Width AndAlso mouseposition.Y >= 0 AndAlso mouseposition.Y <= control.Height Then Return True
 			Return False
+		End Function
+		Friend Function Blend(c1 As Color, c2 As Color, amount As Double) As Color
+			' amount = how much of c2 to add in (0.0–1.0)
+			Dim a = Math.Max(0.0, Math.Min(1.0, amount))
+			Return Color.FromArgb(
+				CInt(c1.R * (1 - a) + c2.R * a),
+				CInt(c1.G * (1 - a) + c2.G * a),
+				CInt(c1.B * (1 - a) + c2.B * a)
+			)
 		End Function
 
 	End Module

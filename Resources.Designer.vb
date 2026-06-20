@@ -273,6 +273,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend Shared ReadOnly Property ImageError32() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ImageError32", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend Shared ReadOnly Property imageFolder() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("imageFolder", resourceCulture)
@@ -306,6 +316,16 @@ Namespace My.Resources
         Friend Shared ReadOnly Property imageLog() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("imageLog", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend Shared ReadOnly Property ImageLyrics32() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ImageLyrics32", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -416,6 +436,16 @@ Namespace My.Resources
         Friend Shared ReadOnly Property imageRestore() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("imageRestore", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend Shared ReadOnly Property ImageRestore32() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ImageRestore32", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

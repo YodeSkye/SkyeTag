@@ -138,11 +138,12 @@
         btnError.FlatAppearance.BorderSize = 0
         btnError.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnError.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnError.Image = My.Resources.Resources.imageError
-        tipInfo.SetImage(btnError, My.Resources.Resources.imageError)
-        btnError.Location = New Point(340, 517)
+        btnError.Image = My.Resources.Resources.ImageError32
+        tipInfo.SetImage(btnError, My.Resources.Resources.ImageError32)
+        btnError.Location = New Point(417, 640)
+        btnError.Margin = New Padding(4)
         btnError.Name = "btnError"
-        btnError.Size = New Size(32, 32)
+        btnError.Size = New Size(64, 64)
         btnError.TabIndex = 25
         btnError.TabStop = False
         tipInfo.SetText(btnError, "An Error Has Occurred" & vbCrLf & "Click To Clear Error" & vbCrLf & "RightClick = View Log")
@@ -155,12 +156,13 @@
         btnSave.FlatAppearance.BorderSize = 2
         btnSave.FlatAppearance.MouseDownBackColor = Color.GhostWhite
         btnSave.FlatAppearance.MouseOverBackColor = SystemColors.Info
-        btnSave.Image = My.Resources.Resources.imageSave
-        tipInfo.SetImage(btnSave, My.Resources.Resources.imageSave)
+        btnSave.Image = My.Resources.Resources.ImageSave64
+        tipInfo.SetImage(btnSave, My.Resources.Resources.ImageSave64)
         btnSave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSave.Location = New Point(10, 518)
+        btnSave.Location = New Point(15, 640)
+        btnSave.Margin = New Padding(4)
         btnSave.Name = "btnSave"
-        btnSave.Size = New Size(79, 32)
+        btnSave.Size = New Size(128, 64)
         btnSave.TabIndex = 1000
         tipInfo.SetText(btnSave, "Save Tag To File")
         btnSave.Text = "Save"
@@ -174,12 +176,12 @@
         btnAlbumArtRight.FlatAppearance.BorderSize = 0
         btnAlbumArtRight.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnAlbumArtRight.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnAlbumArtRight.FlatStyle = FlatStyle.Flat
         btnAlbumArtRight.Image = My.Resources.Resources.imageAdvanceRight
         tipInfo.SetImage(btnAlbumArtRight, My.Resources.Resources.imageAdvanceRight)
-        btnAlbumArtRight.Location = New Point(233, 236)
+        btnAlbumArtRight.Location = New Point(296, 288)
+        btnAlbumArtRight.Margin = New Padding(4)
         btnAlbumArtRight.Name = "btnAlbumArtRight"
-        btnAlbumArtRight.Size = New Size(16, 16)
+        btnAlbumArtRight.Size = New Size(24, 24)
         btnAlbumArtRight.TabIndex = 0
         btnAlbumArtRight.TabStop = False
         tipInfo.SetText(btnAlbumArtRight, "LeftClick = Next Image")
@@ -188,38 +190,38 @@
         ' 
         ' cmArtRight
         ' 
-        cmArtRight.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmArtRight.Font = New Font("Segoe UI", 12F)
         tipInfo.SetImage(cmArtRight, Nothing)
         cmArtRight.Items.AddRange(New ToolStripItem() {cmiArtNext, ToolStripSeparator5, cmiArtMoveRight, cmiArtMoveLast})
         cmArtRight.Name = "cmArtRight"
-        cmArtRight.Size = New Size(184, 76)
+        cmArtRight.Size = New Size(208, 88)
         tipInfo.SetText(cmArtRight, Nothing)
         ' 
         ' cmiArtNext
         ' 
-        cmiArtNext.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmiArtNext.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         cmiArtNext.Image = My.Resources.Resources.imageAdvanceRight
         cmiArtNext.Name = "cmiArtNext"
-        cmiArtNext.Size = New Size(183, 22)
+        cmiArtNext.Size = New Size(207, 26)
         cmiArtNext.Text = "Next Image"
         ' 
         ' ToolStripSeparator5
         ' 
         ToolStripSeparator5.Name = "ToolStripSeparator5"
-        ToolStripSeparator5.Size = New Size(180, 6)
+        ToolStripSeparator5.Size = New Size(204, 6)
         ' 
         ' cmiArtMoveRight
         ' 
         cmiArtMoveRight.Image = My.Resources.Resources.imageAdvanceRight
         cmiArtMoveRight.Name = "cmiArtMoveRight"
-        cmiArtMoveRight.Size = New Size(183, 22)
+        cmiArtMoveRight.Size = New Size(207, 26)
         cmiArtMoveRight.Text = "Move Image Right"
         ' 
         ' cmiArtMoveLast
         ' 
         cmiArtMoveLast.Image = My.Resources.Resources.imageAdvanceLast
         cmiArtMoveLast.Name = "cmiArtMoveLast"
-        cmiArtMoveLast.Size = New Size(183, 22)
+        cmiArtMoveLast.Size = New Size(207, 26)
         cmiArtMoveLast.Text = "Move Image Last"
         ' 
         ' btnAlbumArtLeft
@@ -230,12 +232,12 @@
         btnAlbumArtLeft.FlatAppearance.BorderSize = 0
         btnAlbumArtLeft.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnAlbumArtLeft.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnAlbumArtLeft.FlatStyle = FlatStyle.Flat
         btnAlbumArtLeft.Image = My.Resources.Resources.imageAdvanceLeft
         tipInfo.SetImage(btnAlbumArtLeft, My.Resources.Resources.imageAdvanceLeft)
-        btnAlbumArtLeft.Location = New Point(217, 236)
+        btnAlbumArtLeft.Location = New Point(274, 288)
+        btnAlbumArtLeft.Margin = New Padding(4)
         btnAlbumArtLeft.Name = "btnAlbumArtLeft"
-        btnAlbumArtLeft.Size = New Size(16, 16)
+        btnAlbumArtLeft.Size = New Size(24, 24)
         btnAlbumArtLeft.TabIndex = 0
         btnAlbumArtLeft.TabStop = False
         tipInfo.SetText(btnAlbumArtLeft, "LeftClick = Previous Image")
@@ -244,38 +246,38 @@
         ' 
         ' cmArtLeft
         ' 
-        cmArtLeft.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmArtLeft.Font = New Font("Segoe UI", 12F)
         tipInfo.SetImage(cmArtLeft, Nothing)
         cmArtLeft.Items.AddRange(New ToolStripItem() {cmiArtPrevious, ToolStripSeparator4, cmiArtMoveLeft, cmiArtMoveFirst})
         cmArtLeft.Name = "cmArtLeft"
-        cmArtLeft.Size = New Size(178, 76)
+        cmArtLeft.Size = New Size(201, 88)
         tipInfo.SetText(cmArtLeft, Nothing)
         ' 
         ' cmiArtPrevious
         ' 
-        cmiArtPrevious.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmiArtPrevious.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         cmiArtPrevious.Image = My.Resources.Resources.imageAdvanceLeft
         cmiArtPrevious.Name = "cmiArtPrevious"
-        cmiArtPrevious.Size = New Size(177, 22)
+        cmiArtPrevious.Size = New Size(200, 26)
         cmiArtPrevious.Text = "Previous Image"
         ' 
         ' ToolStripSeparator4
         ' 
         ToolStripSeparator4.Name = "ToolStripSeparator4"
-        ToolStripSeparator4.Size = New Size(174, 6)
+        ToolStripSeparator4.Size = New Size(197, 6)
         ' 
         ' cmiArtMoveLeft
         ' 
         cmiArtMoveLeft.Image = My.Resources.Resources.imageAdvanceLeft
         cmiArtMoveLeft.Name = "cmiArtMoveLeft"
-        cmiArtMoveLeft.Size = New Size(177, 22)
+        cmiArtMoveLeft.Size = New Size(200, 26)
         cmiArtMoveLeft.Text = "Move Image Left"
         ' 
         ' cmiArtMoveFirst
         ' 
         cmiArtMoveFirst.Image = My.Resources.Resources.imageAdvanceFirst
         cmiArtMoveFirst.Name = "cmiArtMoveFirst"
-        cmiArtMoveFirst.Size = New Size(177, 22)
+        cmiArtMoveFirst.Size = New Size(200, 26)
         cmiArtMoveFirst.Text = "Move Image First"
         ' 
         ' btnRestore
@@ -286,15 +288,14 @@
         btnRestore.FlatAppearance.BorderSize = 2
         btnRestore.FlatAppearance.MouseDownBackColor = Color.GhostWhite
         btnRestore.FlatAppearance.MouseOverBackColor = SystemColors.Info
-        btnRestore.Image = My.Resources.Resources.imageRestore
-        tipInfo.SetImage(btnRestore, My.Resources.Resources.imageRestore)
-        btnRestore.ImageAlign = ContentAlignment.MiddleLeft
-        btnRestore.Location = New Point(95, 518)
+        btnRestore.Image = My.Resources.Resources.ImageRestore32
+        tipInfo.SetImage(btnRestore, My.Resources.Resources.ImageRestore32)
+        btnRestore.Location = New Point(151, 640)
+        btnRestore.Margin = New Padding(4)
         btnRestore.Name = "btnRestore"
-        btnRestore.Size = New Size(79, 32)
+        btnRestore.Size = New Size(64, 64)
         btnRestore.TabIndex = 1005
         tipInfo.SetText(btnRestore, "Restore Original Tag")
-        btnRestore.Text = "Undo"
         btnRestore.TextAlign = ContentAlignment.MiddleRight
         ' 
         ' btnArtistLeft
@@ -305,12 +306,12 @@
         btnArtistLeft.FlatAppearance.BorderSize = 0
         btnArtistLeft.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnArtistLeft.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnArtistLeft.FlatStyle = FlatStyle.Flat
         btnArtistLeft.Image = My.Resources.Resources.imageAdvanceLeft
         tipInfo.SetImage(btnArtistLeft, My.Resources.Resources.imageAdvanceLeft)
-        btnArtistLeft.Location = New Point(217, 68)
+        btnArtistLeft.Location = New Point(276, 80)
+        btnArtistLeft.Margin = New Padding(4)
         btnArtistLeft.Name = "btnArtistLeft"
-        btnArtistLeft.Size = New Size(16, 16)
+        btnArtistLeft.Size = New Size(24, 24)
         btnArtistLeft.TabIndex = 1012
         btnArtistLeft.TabStop = False
         tipInfo.SetText(btnArtistLeft, "LeftClick = Previous Artist")
@@ -319,38 +320,38 @@
         ' 
         ' cmArtistLeft
         ' 
-        cmArtistLeft.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmArtistLeft.Font = New Font("Segoe UI", 12F)
         tipInfo.SetImage(cmArtistLeft, Nothing)
         cmArtistLeft.Items.AddRange(New ToolStripItem() {cmiArtistPrevious, ToolStripSeparator2, cmiArtistMoveLeft, cmiArtistMoveFirst})
         cmArtistLeft.Name = "ContextMenuStrip1"
-        cmArtistLeft.Size = New Size(172, 76)
+        cmArtistLeft.Size = New Size(195, 88)
         tipInfo.SetText(cmArtistLeft, Nothing)
         ' 
         ' cmiArtistPrevious
         ' 
-        cmiArtistPrevious.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmiArtistPrevious.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         cmiArtistPrevious.Image = My.Resources.Resources.imageAdvanceLeft
         cmiArtistPrevious.Name = "cmiArtistPrevious"
-        cmiArtistPrevious.Size = New Size(171, 22)
+        cmiArtistPrevious.Size = New Size(194, 26)
         cmiArtistPrevious.Text = "Previous Artist"
         ' 
         ' ToolStripSeparator2
         ' 
         ToolStripSeparator2.Name = "ToolStripSeparator2"
-        ToolStripSeparator2.Size = New Size(168, 6)
+        ToolStripSeparator2.Size = New Size(191, 6)
         ' 
         ' cmiArtistMoveLeft
         ' 
         cmiArtistMoveLeft.Image = My.Resources.Resources.imageAdvanceLeft
         cmiArtistMoveLeft.Name = "cmiArtistMoveLeft"
-        cmiArtistMoveLeft.Size = New Size(171, 22)
+        cmiArtistMoveLeft.Size = New Size(194, 26)
         cmiArtistMoveLeft.Text = "Move Artist Left"
         ' 
         ' cmiArtistMoveFirst
         ' 
         cmiArtistMoveFirst.Image = My.Resources.Resources.imageAdvanceFirst
         cmiArtistMoveFirst.Name = "cmiArtistMoveFirst"
-        cmiArtistMoveFirst.Size = New Size(171, 22)
+        cmiArtistMoveFirst.Size = New Size(194, 26)
         cmiArtistMoveFirst.Text = "Move Artist First"
         ' 
         ' btnArtistRight
@@ -361,12 +362,12 @@
         btnArtistRight.FlatAppearance.BorderSize = 0
         btnArtistRight.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnArtistRight.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnArtistRight.FlatStyle = FlatStyle.Flat
         btnArtistRight.Image = My.Resources.Resources.imageAdvanceRight
         tipInfo.SetImage(btnArtistRight, My.Resources.Resources.imageAdvanceRight)
-        btnArtistRight.Location = New Point(233, 68)
+        btnArtistRight.Location = New Point(297, 80)
+        btnArtistRight.Margin = New Padding(4)
         btnArtistRight.Name = "btnArtistRight"
-        btnArtistRight.Size = New Size(16, 16)
+        btnArtistRight.Size = New Size(24, 24)
         btnArtistRight.TabIndex = 1011
         btnArtistRight.TabStop = False
         tipInfo.SetText(btnArtistRight, "LeftClick = Next Artist")
@@ -375,38 +376,38 @@
         ' 
         ' cmArtistRight
         ' 
-        cmArtistRight.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmArtistRight.Font = New Font("Segoe UI", 12F)
         tipInfo.SetImage(cmArtistRight, Nothing)
         cmArtistRight.Items.AddRange(New ToolStripItem() {cmiArtistNext, ToolStripSeparator3, cmiArtistMoveRight, cmiArtistMoveLast})
         cmArtistRight.Name = "cmArtistRight"
-        cmArtistRight.Size = New Size(178, 76)
+        cmArtistRight.Size = New Size(202, 88)
         tipInfo.SetText(cmArtistRight, Nothing)
         ' 
         ' cmiArtistNext
         ' 
-        cmiArtistNext.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmiArtistNext.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         cmiArtistNext.Image = My.Resources.Resources.imageAdvanceRight
         cmiArtistNext.Name = "cmiArtistNext"
-        cmiArtistNext.Size = New Size(177, 22)
+        cmiArtistNext.Size = New Size(201, 26)
         cmiArtistNext.Text = "Next Artist"
         ' 
         ' ToolStripSeparator3
         ' 
         ToolStripSeparator3.Name = "ToolStripSeparator3"
-        ToolStripSeparator3.Size = New Size(174, 6)
+        ToolStripSeparator3.Size = New Size(198, 6)
         ' 
         ' cmiArtistMoveRight
         ' 
         cmiArtistMoveRight.Image = My.Resources.Resources.imageAdvanceRight
         cmiArtistMoveRight.Name = "cmiArtistMoveRight"
-        cmiArtistMoveRight.Size = New Size(177, 22)
+        cmiArtistMoveRight.Size = New Size(201, 26)
         cmiArtistMoveRight.Text = "Move Artist Right"
         ' 
         ' cmiArtistMoveLast
         ' 
         cmiArtistMoveLast.Image = My.Resources.Resources.imageAdvanceLast
         cmiArtistMoveLast.Name = "cmiArtistMoveLast"
-        cmiArtistMoveLast.Size = New Size(177, 22)
+        cmiArtistMoveLast.Size = New Size(201, 26)
         cmiArtistMoveLast.Text = "Move Artist Last"
         ' 
         ' btnArtistInsert
@@ -418,12 +419,12 @@
         btnArtistInsert.FlatAppearance.BorderSize = 0
         btnArtistInsert.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnArtistInsert.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnArtistInsert.FlatStyle = FlatStyle.Flat
         btnArtistInsert.Image = My.Resources.Resources.imageNew
         tipInfo.SetImage(btnArtistInsert, My.Resources.Resources.imageNew)
-        btnArtistInsert.Location = New Point(116, 67)
+        btnArtistInsert.Location = New Point(149, 80)
+        btnArtistInsert.Margin = New Padding(4)
         btnArtistInsert.Name = "btnArtistInsert"
-        btnArtistInsert.Size = New Size(16, 16)
+        btnArtistInsert.Size = New Size(24, 24)
         btnArtistInsert.TabIndex = 1014
         btnArtistInsert.TabStop = False
         tipInfo.SetText(btnArtistInsert, "LeftClick = Add New Artist")
@@ -432,26 +433,26 @@
         ' 
         ' cmNewArtist
         ' 
-        cmNewArtist.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmNewArtist.Font = New Font("Segoe UI", 12F)
         tipInfo.SetImage(cmNewArtist, Nothing)
         cmNewArtist.Items.AddRange(New ToolStripItem() {cmiArtistInsert, cmiArtistInsertFromClipboard})
         cmNewArtist.Name = "ContextMenuStrip1"
-        cmNewArtist.Size = New Size(197, 48)
+        cmNewArtist.Size = New Size(222, 56)
         tipInfo.SetText(cmNewArtist, Nothing)
         ' 
         ' cmiArtistInsert
         ' 
-        cmiArtistInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmiArtistInsert.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         cmiArtistInsert.Image = My.Resources.Resources.imageNew
         cmiArtistInsert.Name = "cmiArtistInsert"
-        cmiArtistInsert.Size = New Size(196, 22)
+        cmiArtistInsert.Size = New Size(221, 26)
         cmiArtistInsert.Text = "Add New Artist"
         ' 
         ' cmiArtistInsertFromClipboard
         ' 
         cmiArtistInsertFromClipboard.Image = My.Resources.Resources.imageNew
         cmiArtistInsertFromClipboard.Name = "cmiArtistInsertFromClipboard"
-        cmiArtistInsertFromClipboard.Size = New Size(196, 22)
+        cmiArtistInsertFromClipboard.Size = New Size(221, 26)
         cmiArtistInsertFromClipboard.Text = "Add From Clipboard"
         ' 
         ' btnArtistDelete
@@ -461,12 +462,12 @@
         btnArtistDelete.FlatAppearance.BorderSize = 0
         btnArtistDelete.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnArtistDelete.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnArtistDelete.FlatStyle = FlatStyle.Flat
         btnArtistDelete.Image = My.Resources.Resources.imageDelete
         tipInfo.SetImage(btnArtistDelete, My.Resources.Resources.imageDelete)
-        btnArtistDelete.Location = New Point(140, 66)
+        btnArtistDelete.Location = New Point(180, 80)
+        btnArtistDelete.Margin = New Padding(4)
         btnArtistDelete.Name = "btnArtistDelete"
-        btnArtistDelete.Size = New Size(16, 16)
+        btnArtistDelete.Size = New Size(24, 24)
         btnArtistDelete.TabIndex = 1013
         btnArtistDelete.TabStop = False
         tipInfo.SetText(btnArtistDelete, "LeftClick = Remove This Artist")
@@ -475,11 +476,11 @@
         ' 
         ' cmAlbumArt
         ' 
-        cmAlbumArt.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmAlbumArt.Font = New Font("Segoe UI", 12F)
         tipInfo.SetImage(cmAlbumArt, Nothing)
         cmAlbumArt.Items.AddRange(New ToolStripItem() {cmiAlbumArtSelect, cmiAlbumArtInsert, cmiAlbumArtExport, tsSeparator1, cmiAlbumArtMoveLeft, cmiAlbumArtMoveFirst, cmiAlbumArtMoveRight, cmiAlbumArtMoveLast, tsSeparator2, cmiAlbumArtDelete})
         cmAlbumArt.Name = "cmAlbumArt"
-        cmAlbumArt.Size = New Size(184, 192)
+        cmAlbumArt.Size = New Size(208, 224)
         tipInfo.SetText(cmAlbumArt, Nothing)
         ' 
         ' cmiAlbumArtSelect
@@ -487,37 +488,38 @@
         cmiAlbumArtSelect.DropDown = cmImageSource
         cmiAlbumArtSelect.Image = My.Resources.Resources.imageOpenImage
         cmiAlbumArtSelect.Name = "cmiAlbumArtSelect"
-        cmiAlbumArtSelect.Size = New Size(183, 22)
+        cmiAlbumArtSelect.Size = New Size(207, 26)
         cmiAlbumArtSelect.Text = "Select Image"
         ' 
         ' cmImageSource
         ' 
+        cmImageSource.Font = New Font("Segoe UI", 12F)
         tipInfo.SetImage(cmImageSource, Nothing)
         cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
         cmImageSource.Name = "cm"
         cmImageSource.OwnerItem = cmiAlbumArtInsertAfter
-        cmImageSource.Size = New Size(189, 70)
+        cmImageSource.Size = New Size(230, 82)
         tipInfo.SetText(cmImageSource, Nothing)
         ' 
         ' cmiSelectFromFile
         ' 
         cmiSelectFromFile.Image = My.Resources.Resources.imageOpen
         cmiSelectFromFile.Name = "cmiSelectFromFile"
-        cmiSelectFromFile.Size = New Size(188, 22)
+        cmiSelectFromFile.Size = New Size(229, 26)
         cmiSelectFromFile.Text = "Select From File"
         ' 
         ' cmiSelectFromOnline
         ' 
         cmiSelectFromOnline.Image = My.Resources.Resources.ImageOnline16
         cmiSelectFromOnline.Name = "cmiSelectFromOnline"
-        cmiSelectFromOnline.Size = New Size(188, 22)
+        cmiSelectFromOnline.Size = New Size(229, 26)
         cmiSelectFromOnline.Text = "Select From Online"
         ' 
         ' cmiPasteFromClipboard
         ' 
         cmiPasteFromClipboard.Image = My.Resources.Resources.ImageEditPaste16
         cmiPasteFromClipboard.Name = "cmiPasteFromClipboard"
-        cmiPasteFromClipboard.Size = New Size(188, 22)
+        cmiPasteFromClipboard.Size = New Size(229, 26)
         cmiPasteFromClipboard.Text = "Paste From Clipboard"
         ' 
         ' cmiAlbumArtInsertLast
@@ -525,7 +527,7 @@
         cmiAlbumArtInsertLast.DropDown = cmImageSource
         cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
         cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
-        cmiAlbumArtInsertLast.Size = New Size(114, 22)
+        cmiAlbumArtInsertLast.Size = New Size(125, 26)
         cmiAlbumArtInsertLast.Text = "Last"
         ' 
         ' cmiAlbumArtInsert
@@ -533,17 +535,17 @@
         cmiAlbumArtInsert.DropDown = cmAlbumArtInsert
         cmiAlbumArtInsert.Image = My.Resources.Resources.imageNew
         cmiAlbumArtInsert.Name = "cmiAlbumArtInsert"
-        cmiAlbumArtInsert.Size = New Size(183, 22)
+        cmiAlbumArtInsert.Size = New Size(207, 26)
         cmiAlbumArtInsert.Text = "Add New Image"
         ' 
         ' cmAlbumArtInsert
         ' 
-        cmAlbumArtInsert.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cmAlbumArtInsert.Font = New Font("Segoe UI", 12F)
         tipInfo.SetImage(cmAlbumArtInsert, Nothing)
         cmAlbumArtInsert.Items.AddRange(New ToolStripItem() {cmiAlbumArtInsertBefore, cmiAlbumArtInsertFirst, cmiAlbumArtInsertAfter, cmiAlbumArtInsertLast})
         cmAlbumArtInsert.Name = "cmAlbumArtInsert"
         cmAlbumArtInsert.OwnerItem = cmiAlbumArtInsert
-        cmAlbumArtInsert.Size = New Size(115, 92)
+        cmAlbumArtInsert.Size = New Size(126, 108)
         tipInfo.SetText(cmAlbumArtInsert, Nothing)
         ' 
         ' cmiAlbumArtInsertBefore
@@ -551,7 +553,7 @@
         cmiAlbumArtInsertBefore.DropDown = cmImageSource
         cmiAlbumArtInsertBefore.Image = My.Resources.Resources.imageAdvanceLeft
         cmiAlbumArtInsertBefore.Name = "cmiAlbumArtInsertBefore"
-        cmiAlbumArtInsertBefore.Size = New Size(114, 22)
+        cmiAlbumArtInsertBefore.Size = New Size(125, 26)
         cmiAlbumArtInsertBefore.Text = "Before"
         ' 
         ' cmiAlbumArtInsertFirst
@@ -559,7 +561,7 @@
         cmiAlbumArtInsertFirst.DropDown = cmImageSource
         cmiAlbumArtInsertFirst.Image = My.Resources.Resources.imageAdvanceFirst
         cmiAlbumArtInsertFirst.Name = "cmiAlbumArtInsertFirst"
-        cmiAlbumArtInsertFirst.Size = New Size(114, 22)
+        cmiAlbumArtInsertFirst.Size = New Size(125, 26)
         cmiAlbumArtInsertFirst.Text = "First"
         ' 
         ' cmiAlbumArtInsertAfter
@@ -567,7 +569,7 @@
         cmiAlbumArtInsertAfter.DropDown = cmImageSource
         cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
         cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
-        cmiAlbumArtInsertAfter.Size = New Size(114, 22)
+        cmiAlbumArtInsertAfter.Size = New Size(125, 26)
         cmiAlbumArtInsertAfter.Text = "After"
         ' 
         ' cmiAlbumArtExport
@@ -575,82 +577,83 @@
         cmiAlbumArtExport.DropDown = cmExport
         cmiAlbumArtExport.Image = My.Resources.Resources.imageSave
         cmiAlbumArtExport.Name = "cmiAlbumArtExport"
-        cmiAlbumArtExport.Size = New Size(183, 22)
+        cmiAlbumArtExport.Size = New Size(207, 26)
         cmiAlbumArtExport.Text = "Export Image"
         ' 
         ' cmExport
         ' 
+        cmExport.Font = New Font("Segoe UI", 12F)
         tipInfo.SetImage(cmExport, Nothing)
         cmExport.Items.AddRange(New ToolStripItem() {cmiExportToFile, cmiExportToBitmap, cmiExportToClipboard})
         cmExport.Name = "cmExport"
         cmExport.OwnerItem = cmiAlbumArtExport
-        cmExport.Size = New Size(150, 70)
+        cmExport.Size = New Size(177, 82)
         tipInfo.SetText(cmExport, Nothing)
         ' 
         ' cmiExportToFile
         ' 
         cmiExportToFile.Image = My.Resources.Resources.imageOpen
         cmiExportToFile.Name = "cmiExportToFile"
-        cmiExportToFile.Size = New Size(149, 22)
+        cmiExportToFile.Size = New Size(176, 26)
         cmiExportToFile.Text = "To File"
         ' 
         ' cmiExportToBitmap
         ' 
         cmiExportToBitmap.Image = My.Resources.Resources.imageOpen
         cmiExportToBitmap.Name = "cmiExportToBitmap"
-        cmiExportToBitmap.Size = New Size(149, 22)
+        cmiExportToBitmap.Size = New Size(176, 26)
         cmiExportToBitmap.Text = "To Bitmap File"
         ' 
         ' cmiExportToClipboard
         ' 
         cmiExportToClipboard.Image = My.Resources.Resources.ImageEditPaste16
         cmiExportToClipboard.Name = "cmiExportToClipboard"
-        cmiExportToClipboard.Size = New Size(149, 22)
+        cmiExportToClipboard.Size = New Size(176, 26)
         cmiExportToClipboard.Text = "To Clipboard"
         ' 
         ' tsSeparator1
         ' 
         tsSeparator1.Name = "tsSeparator1"
-        tsSeparator1.Size = New Size(180, 6)
+        tsSeparator1.Size = New Size(204, 6)
         ' 
         ' cmiAlbumArtMoveLeft
         ' 
         cmiAlbumArtMoveLeft.Image = My.Resources.Resources.imageAdvanceLeft
         cmiAlbumArtMoveLeft.Name = "cmiAlbumArtMoveLeft"
-        cmiAlbumArtMoveLeft.Size = New Size(183, 22)
+        cmiAlbumArtMoveLeft.Size = New Size(207, 26)
         cmiAlbumArtMoveLeft.Text = "Move Image Left"
         ' 
         ' cmiAlbumArtMoveFirst
         ' 
         cmiAlbumArtMoveFirst.Image = My.Resources.Resources.imageAdvanceFirst
         cmiAlbumArtMoveFirst.Name = "cmiAlbumArtMoveFirst"
-        cmiAlbumArtMoveFirst.Size = New Size(183, 22)
+        cmiAlbumArtMoveFirst.Size = New Size(207, 26)
         cmiAlbumArtMoveFirst.Text = "Move Image First"
         ' 
         ' cmiAlbumArtMoveRight
         ' 
         cmiAlbumArtMoveRight.Image = My.Resources.Resources.imageAdvanceRight
         cmiAlbumArtMoveRight.Name = "cmiAlbumArtMoveRight"
-        cmiAlbumArtMoveRight.Size = New Size(183, 22)
+        cmiAlbumArtMoveRight.Size = New Size(207, 26)
         cmiAlbumArtMoveRight.Text = "Move Image Right"
         ' 
         ' cmiAlbumArtMoveLast
         ' 
         cmiAlbumArtMoveLast.Image = My.Resources.Resources.imageAdvanceLast
         cmiAlbumArtMoveLast.Name = "cmiAlbumArtMoveLast"
-        cmiAlbumArtMoveLast.Size = New Size(183, 22)
+        cmiAlbumArtMoveLast.Size = New Size(207, 26)
         cmiAlbumArtMoveLast.Text = "Move Image Last"
         ' 
         ' tsSeparator2
         ' 
         tsSeparator2.Name = "tsSeparator2"
-        tsSeparator2.Size = New Size(180, 6)
+        tsSeparator2.Size = New Size(204, 6)
         ' 
         ' cmiAlbumArtDelete
         ' 
         cmiAlbumArtDelete.Image = My.Resources.Resources.imageDelete
         cmiAlbumArtDelete.Name = "cmiAlbumArtDelete"
-        cmiAlbumArtDelete.Size = New Size(183, 22)
+        cmiAlbumArtDelete.Size = New Size(207, 26)
         cmiAlbumArtDelete.Text = "Delete"
         ' 
         ' btnAlbumArt
@@ -661,12 +664,12 @@
         btnAlbumArt.FlatAppearance.BorderSize = 0
         btnAlbumArt.FlatAppearance.MouseDownBackColor = Color.Transparent
         btnAlbumArt.FlatAppearance.MouseOverBackColor = Color.Transparent
-        btnAlbumArt.FlatStyle = FlatStyle.Flat
         btnAlbumArt.Image = My.Resources.Resources.imageImage
         tipInfo.SetImage(btnAlbumArt, My.Resources.Resources.imageImage)
-        btnAlbumArt.Location = New Point(140, 233)
+        btnAlbumArt.Location = New Point(180, 287)
+        btnAlbumArt.Margin = New Padding(4)
         btnAlbumArt.Name = "btnAlbumArt"
-        btnAlbumArt.Size = New Size(16, 17)
+        btnAlbumArt.Size = New Size(23, 25)
         btnAlbumArt.TabIndex = 0
         btnAlbumArt.TabStop = False
         tipInfo.SetText(btnAlbumArt, "Art Menu")
@@ -678,8 +681,9 @@
         picbxAlbumArt.ContextMenuStrip = cmAlbumArt
         tipInfo.SetImage(picbxAlbumArt, Nothing)
         picbxAlbumArt.Location = New Point(0, 0)
+        picbxAlbumArt.Margin = New Padding(4)
         picbxAlbumArt.Name = "picbxAlbumArt"
-        picbxAlbumArt.Size = New Size(360, 229)
+        picbxAlbumArt.Size = New Size(463, 285)
         picbxAlbumArt.TabIndex = 1001
         picbxAlbumArt.TabStop = False
         tipInfo.SetText(picbxAlbumArt, "Album Art")
@@ -687,61 +691,66 @@
         ' txbxArtist
         ' 
         txbxArtist.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        txbxArtist.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txbxArtist.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(txbxArtist, Nothing)
-        txbxArtist.Location = New Point(12, 83)
+        txbxArtist.Location = New Point(15, 103)
+        txbxArtist.Margin = New Padding(4)
         txbxArtist.Name = "txbxArtist"
         txbxArtist.ShortcutsEnabled = False
-        txbxArtist.Size = New Size(238, 25)
+        txbxArtist.Size = New Size(305, 29)
         txbxArtist.TabIndex = 10
         tipInfo.SetText(txbxArtist, "Artist")
         ' 
         ' txbxAlbum
         ' 
         txbxAlbum.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        txbxAlbum.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txbxAlbum.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(txbxAlbum, Nothing)
-        txbxAlbum.Location = New Point(12, 167)
+        txbxAlbum.Location = New Point(15, 206)
+        txbxAlbum.Margin = New Padding(4)
         txbxAlbum.Name = "txbxAlbum"
         txbxAlbum.ShortcutsEnabled = False
-        txbxAlbum.Size = New Size(304, 25)
+        txbxAlbum.Size = New Size(390, 29)
         txbxAlbum.TabIndex = 30
         tipInfo.SetText(txbxAlbum, "Album")
         ' 
         ' txbxAlbumArt
         ' 
         txbxAlbumArt.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        txbxAlbumArt.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        txbxAlbumArt.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(txbxAlbumArt, Nothing)
-        txbxAlbumArt.Location = New Point(50, 251)
+        txbxAlbumArt.Location = New Point(64, 311)
+        txbxAlbumArt.Margin = New Padding(4)
         txbxAlbumArt.Name = "txbxAlbumArt"
         txbxAlbumArt.ShortcutsEnabled = False
-        txbxAlbumArt.Size = New Size(200, 25)
+        txbxAlbumArt.Size = New Size(256, 29)
         txbxAlbumArt.TabIndex = 100
         tipInfo.SetText(txbxAlbumArt, "Art Description")
         ' 
         ' txbxTitle
         ' 
         txbxTitle.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        txbxTitle.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txbxTitle.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(txbxTitle, Nothing)
-        txbxTitle.Location = New Point(12, 125)
+        txbxTitle.Location = New Point(15, 154)
+        txbxTitle.Margin = New Padding(4)
         txbxTitle.Name = "txbxTitle"
         txbxTitle.ShortcutsEnabled = False
-        txbxTitle.Size = New Size(238, 25)
+        txbxTitle.Size = New Size(305, 29)
         txbxTitle.TabIndex = 20
         tipInfo.SetText(txbxTitle, "Title")
         ' 
         ' txbxYear
         ' 
         txbxYear.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        txbxYear.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        txbxYear.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(txbxYear, Nothing)
-        txbxYear.Location = New Point(322, 167)
+        txbxYear.Location = New Point(414, 206)
+        txbxYear.Margin = New Padding(4)
         txbxYear.MaxLength = 4
         txbxYear.Name = "txbxYear"
         txbxYear.ShortcutsEnabled = False
-        txbxYear.Size = New Size(50, 25)
+        txbxYear.Size = New Size(63, 29)
         txbxYear.TabIndex = 35
         tipInfo.SetText(txbxYear, "Year")
         txbxYear.Text = "8888"
@@ -750,13 +759,14 @@
         ' txbxTrack
         ' 
         txbxTrack.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        txbxTrack.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        txbxTrack.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(txbxTrack, Nothing)
-        txbxTrack.Location = New Point(256, 125)
+        txbxTrack.Location = New Point(329, 154)
+        txbxTrack.Margin = New Padding(4)
         txbxTrack.MaxLength = 2
         txbxTrack.Name = "txbxTrack"
         txbxTrack.ShortcutsEnabled = False
-        txbxTrack.Size = New Size(27, 25)
+        txbxTrack.Size = New Size(34, 29)
         txbxTrack.TabIndex = 25
         tipInfo.SetText(txbxTrack, "Track Number")
         txbxTrack.Text = "88"
@@ -765,12 +775,13 @@
         ' txbxComments
         ' 
         txbxComments.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        txbxComments.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        txbxComments.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(txbxComments, Nothing)
-        txbxComments.Location = New Point(12, 209)
+        txbxComments.Location = New Point(15, 258)
+        txbxComments.Margin = New Padding(4)
         txbxComments.Name = "txbxComments"
         txbxComments.ShortcutsEnabled = False
-        txbxComments.Size = New Size(361, 25)
+        txbxComments.Size = New Size(463, 29)
         txbxComments.TabIndex = 50
         tipInfo.SetText(txbxComments, "Comments")
         ' 
@@ -780,15 +791,16 @@
         txbxLyrics.AcceptsTab = True
         txbxLyrics.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         txbxLyrics.BackColor = Color.Linen
-        txbxLyrics.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txbxLyrics.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         txbxLyrics.HideSelection = False
         tipInfo.SetImage(txbxLyrics, Nothing)
-        txbxLyrics.Location = New Point(13, 277)
+        txbxLyrics.Location = New Point(17, 342)
+        txbxLyrics.Margin = New Padding(4)
         txbxLyrics.Multiline = True
         txbxLyrics.Name = "txbxLyrics"
         txbxLyrics.ScrollBars = ScrollBars.Both
         txbxLyrics.ShortcutsEnabled = False
-        txbxLyrics.Size = New Size(360, 229)
+        txbxLyrics.Size = New Size(462, 285)
         txbxLyrics.TabIndex = 0
         txbxLyrics.TabStop = False
         tipInfo.SetText(txbxLyrics, Nothing)
@@ -799,23 +811,26 @@
         btnLyrics.CausesValidation = False
         btnLyrics.FlatAppearance.BorderColor = Color.Black
         btnLyrics.FlatStyle = FlatStyle.Flat
-        tipInfo.SetImage(btnLyrics, Nothing)
-        btnLyrics.Location = New Point(13, 240)
+        btnLyrics.Image = My.Resources.Resources.ImageLyrics32
+        tipInfo.SetImage(btnLyrics, My.Resources.Resources.ImageLyrics32)
+        btnLyrics.Location = New Point(18, 296)
+        btnLyrics.Margin = New Padding(4)
         btnLyrics.Name = "btnLyrics"
-        btnLyrics.Size = New Size(32, 36)
+        btnLyrics.Size = New Size(44, 44)
         btnLyrics.TabIndex = 95
         btnLyrics.TabStop = False
-        tipInfo.SetText(btnLyrics, "Lyrics")
+        tipInfo.SetText(btnLyrics, "Show Lyrics")
         ' 
         ' txbxDuration
         ' 
         txbxDuration.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        txbxDuration.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        txbxDuration.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(txbxDuration, Nothing)
-        txbxDuration.Location = New Point(322, 125)
+        txbxDuration.Location = New Point(414, 154)
+        txbxDuration.Margin = New Padding(4)
         txbxDuration.Name = "txbxDuration"
         txbxDuration.ReadOnly = True
-        txbxDuration.Size = New Size(50, 25)
+        txbxDuration.Size = New Size(63, 29)
         txbxDuration.TabIndex = 28
         txbxDuration.TabStop = False
         tipInfo.SetText(txbxDuration, Nothing)
@@ -825,13 +840,14 @@
         ' txbxTrackCount
         ' 
         txbxTrackCount.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        txbxTrackCount.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold)
+        txbxTrackCount.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(txbxTrackCount, Nothing)
-        txbxTrackCount.Location = New Point(289, 125)
+        txbxTrackCount.Location = New Point(371, 154)
+        txbxTrackCount.Margin = New Padding(4)
         txbxTrackCount.MaxLength = 2
         txbxTrackCount.Name = "txbxTrackCount"
         txbxTrackCount.ShortcutsEnabled = False
-        txbxTrackCount.Size = New Size(27, 25)
+        txbxTrackCount.Size = New Size(34, 29)
         txbxTrackCount.TabIndex = 26
         tipInfo.SetText(txbxTrackCount, "Total Tracks")
         txbxTrackCount.Text = "88"
@@ -845,20 +861,22 @@
         panelAlbumArt.ContextMenuStrip = cmAlbumArt
         panelAlbumArt.Controls.Add(picbxAlbumArt)
         tipInfo.SetImage(panelAlbumArt, Nothing)
-        panelAlbumArt.Location = New Point(13, 277)
+        panelAlbumArt.Location = New Point(17, 342)
+        panelAlbumArt.Margin = New Padding(4)
         panelAlbumArt.Name = "panelAlbumArt"
-        panelAlbumArt.Size = New Size(360, 229)
+        panelAlbumArt.Size = New Size(463, 285)
         panelAlbumArt.TabIndex = 0
         tipInfo.SetText(panelAlbumArt, Nothing)
         ' 
         ' MenuMain
         ' 
-        MenuMain.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        MenuMain.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(MenuMain, Nothing)
         MenuMain.Items.AddRange(New ToolStripItem() {MIFile, MIEdit, MIView, MIPlay, MIAbout, ToolStripMenuItem1})
         MenuMain.Location = New Point(0, 0)
         MenuMain.Name = "MenuMain"
-        MenuMain.Size = New Size(384, 25)
+        MenuMain.Padding = New Padding(8, 2, 0, 2)
+        MenuMain.Size = New Size(494, 29)
         MenuMain.TabIndex = 1015
         MenuMain.Text = "MenuStrip1"
         tipInfo.SetText(MenuMain, Nothing)
@@ -869,47 +887,47 @@
         MIFile.ForeColor = Color.White
         MIFile.Image = My.Resources.Resources.imageOpen
         MIFile.Name = "MIFile"
-        MIFile.Size = New Size(55, 21)
+        MIFile.Size = New Size(62, 25)
         MIFile.Text = "File"
         ' 
         ' MIOpenFile
         ' 
         MIOpenFile.Image = My.Resources.Resources.imageOpen
         MIOpenFile.Name = "MIOpenFile"
-        MIOpenFile.Size = New Size(152, 22)
+        MIOpenFile.Size = New Size(167, 26)
         MIOpenFile.Text = "Open File(s)"
         ' 
         ' MITrimFile
         ' 
         MITrimFile.Image = My.Resources.Resources.imageSave
         MITrimFile.Name = "MITrimFile"
-        MITrimFile.Size = New Size(152, 22)
+        MITrimFile.Size = New Size(167, 26)
         MITrimFile.Text = "Trim MP3"
         ' 
         ' MIOpenLocation
         ' 
         MIOpenLocation.Image = My.Resources.Resources.imageFolder
         MIOpenLocation.Name = "MIOpenLocation"
-        MIOpenLocation.Size = New Size(152, 22)
+        MIOpenLocation.Size = New Size(167, 26)
         MIOpenLocation.Text = "Go To Folder"
         ' 
         ' MICloseFile
         ' 
         MICloseFile.Image = My.Resources.Resources.imageClose
         MICloseFile.Name = "MICloseFile"
-        MICloseFile.Size = New Size(152, 22)
+        MICloseFile.Size = New Size(167, 26)
         MICloseFile.Text = "Close File(s)"
         ' 
         ' ToolStripSeparator1
         ' 
         ToolStripSeparator1.Name = "ToolStripSeparator1"
-        ToolStripSeparator1.Size = New Size(149, 6)
+        ToolStripSeparator1.Size = New Size(164, 6)
         ' 
         ' MIExit
         ' 
         MIExit.Image = My.Resources.Resources.imageClose
         MIExit.Name = "MIExit"
-        MIExit.Size = New Size(152, 22)
+        MIExit.Size = New Size(167, 26)
         MIExit.Text = "Exit"
         MIExit.ToolTipText = "Ctrl+W"
         ' 
@@ -920,14 +938,14 @@
         MIEdit.ForeColor = Color.White
         MIEdit.Image = My.Resources.Resources.ImageEdit16
         MIEdit.Name = "MIEdit"
-        MIEdit.Size = New Size(58, 21)
+        MIEdit.Size = New Size(64, 25)
         MIEdit.Text = "Edit"
         ' 
         ' MICopyTagBasic
         ' 
         MICopyTagBasic.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagBasic.Name = "MICopyTagBasic"
-        MICopyTagBasic.Size = New Size(164, 22)
+        MICopyTagBasic.Size = New Size(182, 26)
         MICopyTagBasic.Text = "Copy Basic Tag"
         MICopyTagBasic.ToolTipText = "Copy Tag without Album Art or Lyrics"
         ' 
@@ -935,7 +953,7 @@
         ' 
         MICopyTagArt.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagArt.Name = "MICopyTagArt"
-        MICopyTagArt.Size = New Size(164, 22)
+        MICopyTagArt.Size = New Size(182, 26)
         MICopyTagArt.Text = "Copy Art Only"
         MICopyTagArt.ToolTipText = "Copy only Album Art"
         ' 
@@ -943,7 +961,7 @@
         ' 
         MICopyTagFull.Image = My.Resources.Resources.ImageEditCopy16
         MICopyTagFull.Name = "MICopyTagFull"
-        MICopyTagFull.Size = New Size(164, 22)
+        MICopyTagFull.Size = New Size(182, 26)
         MICopyTagFull.Text = "Copy Full Tag"
         MICopyTagFull.ToolTipText = "Copy Tag with Album Art and Lyrics"
         ' 
@@ -951,7 +969,7 @@
         ' 
         MIPasteTag.Image = My.Resources.Resources.ImageEditPaste16
         MIPasteTag.Name = "MIPasteTag"
-        MIPasteTag.Size = New Size(164, 22)
+        MIPasteTag.Size = New Size(182, 26)
         MIPasteTag.Text = "Paste Tag"
         ' 
         ' MIView
@@ -961,14 +979,14 @@
         MIView.ForeColor = Color.White
         MIView.Image = My.Resources.Resources.ImageView
         MIView.Name = "MIView"
-        MIView.Size = New Size(63, 21)
+        MIView.Size = New Size(72, 25)
         MIView.Text = "View"
         ' 
         ' MISettings
         ' 
         MISettings.Image = My.Resources.Resources.imageSettings
         MISettings.Name = "MISettings"
-        MISettings.Size = New Size(122, 22)
+        MISettings.Size = New Size(136, 26)
         MISettings.Text = "Settings"
         ' 
         ' MIPlay
@@ -976,7 +994,7 @@
         MIPlay.ForeColor = Color.White
         MIPlay.Image = My.Resources.Resources.imageSound
         MIPlay.Name = "MIPlay"
-        MIPlay.Size = New Size(59, 21)
+        MIPlay.Size = New Size(67, 25)
         MIPlay.Text = "Play"
         ' 
         ' MIAbout
@@ -985,36 +1003,37 @@
         MIAbout.ForeColor = Color.White
         MIAbout.Image = My.Resources.Resources.imageInfo
         MIAbout.Name = "MIAbout"
-        MIAbout.Size = New Size(71, 21)
+        MIAbout.Size = New Size(80, 25)
         MIAbout.Text = "About"
         ' 
         ' MIHelp
         ' 
         MIHelp.Image = My.Resources.Resources.imageInfo
         MIHelp.Name = "MIHelp"
-        MIHelp.Size = New Size(156, 22)
+        MIHelp.Size = New Size(175, 26)
         MIHelp.Text = "Help && About"
         ' 
         ' MILog
         ' 
         MILog.Image = My.Resources.Resources.imageLog
         MILog.Name = "MILog"
-        MILog.Size = New Size(156, 22)
+        MILog.Size = New Size(175, 26)
         MILog.Text = "Log"
         ' 
         ' ToolStripMenuItem1
         ' 
         ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        ToolStripMenuItem1.Size = New Size(12, 21)
+        ToolStripMenuItem1.Size = New Size(12, 25)
         ' 
         ' lblFileInfo
         ' 
         lblFileInfo.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        lblFileInfo.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold Or FontStyle.Underline, GraphicsUnit.Point, CByte(0))
+        lblFileInfo.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         tipInfo.SetImage(lblFileInfo, Nothing)
-        lblFileInfo.Location = New Point(12, 38)
+        lblFileInfo.Location = New Point(15, 47)
+        lblFileInfo.Margin = New Padding(4, 0, 4, 0)
         lblFileInfo.Name = "lblFileInfo"
-        lblFileInfo.Size = New Size(360, 23)
+        lblFileInfo.Size = New Size(463, 28)
         lblFileInfo.TabIndex = 0
         lblFileInfo.Text = "File Info"
         tipInfo.SetText(lblFileInfo, "File Info")
@@ -1023,9 +1042,10 @@
         ' lblArtist
         ' 
         tipInfo.SetImage(lblArtist, Nothing)
-        lblArtist.Location = New Point(11, 65)
+        lblArtist.Location = New Point(14, 80)
+        lblArtist.Margin = New Padding(4, 0, 4, 0)
         lblArtist.Name = "lblArtist"
-        lblArtist.Size = New Size(99, 20)
+        lblArtist.Size = New Size(127, 25)
         lblArtist.TabIndex = 1017
         lblArtist.Text = "Artist"
         tipInfo.SetText(lblArtist, Nothing)
@@ -1035,9 +1055,10 @@
         ' 
         lblGenre.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         tipInfo.SetImage(lblGenre, Nothing)
-        lblGenre.Location = New Point(254, 64)
+        lblGenre.Location = New Point(327, 81)
+        lblGenre.Margin = New Padding(4, 0, 4, 0)
         lblGenre.Name = "lblGenre"
-        lblGenre.Size = New Size(62, 20)
+        lblGenre.Size = New Size(80, 25)
         lblGenre.TabIndex = 1018
         lblGenre.Text = "Genre"
         tipInfo.SetText(lblGenre, Nothing)
@@ -1046,9 +1067,10 @@
         ' lblTitle
         ' 
         tipInfo.SetImage(lblTitle, Nothing)
-        lblTitle.Location = New Point(11, 107)
+        lblTitle.Location = New Point(14, 132)
+        lblTitle.Margin = New Padding(4, 0, 4, 0)
         lblTitle.Name = "lblTitle"
-        lblTitle.Size = New Size(42, 20)
+        lblTitle.Size = New Size(54, 25)
         lblTitle.TabIndex = 1019
         lblTitle.Text = "Title"
         tipInfo.SetText(lblTitle, Nothing)
@@ -1057,9 +1079,10 @@
         ' lblAlbum
         ' 
         tipInfo.SetImage(lblAlbum, Nothing)
-        lblAlbum.Location = New Point(11, 149)
+        lblAlbum.Location = New Point(14, 184)
+        lblAlbum.Margin = New Padding(4, 0, 4, 0)
         lblAlbum.Name = "lblAlbum"
-        lblAlbum.Size = New Size(60, 20)
+        lblAlbum.Size = New Size(77, 25)
         lblAlbum.TabIndex = 1020
         lblAlbum.Text = "Album"
         tipInfo.SetText(lblAlbum, Nothing)
@@ -1068,9 +1091,10 @@
         ' lblComments
         ' 
         tipInfo.SetImage(lblComments, Nothing)
-        lblComments.Location = New Point(11, 191)
+        lblComments.Location = New Point(14, 236)
+        lblComments.Margin = New Padding(4, 0, 4, 0)
         lblComments.Name = "lblComments"
-        lblComments.Size = New Size(99, 20)
+        lblComments.Size = New Size(127, 25)
         lblComments.TabIndex = 1021
         lblComments.Text = "Comments"
         tipInfo.SetText(lblComments, Nothing)
@@ -1079,9 +1103,10 @@
         ' lblAlbumArt
         ' 
         tipInfo.SetImage(lblAlbumArt, Nothing)
-        lblAlbumArt.Location = New Point(49, 233)
+        lblAlbumArt.Location = New Point(63, 288)
+        lblAlbumArt.Margin = New Padding(4, 0, 4, 0)
         lblAlbumArt.Name = "lblAlbumArt"
-        lblAlbumArt.Size = New Size(88, 20)
+        lblAlbumArt.Size = New Size(113, 25)
         lblAlbumArt.TabIndex = 1022
         lblAlbumArt.Text = "Art"
         tipInfo.SetText(lblAlbumArt, Nothing)
@@ -1091,9 +1116,10 @@
         ' 
         lblTrack.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         tipInfo.SetImage(lblTrack, Nothing)
-        lblTrack.Location = New Point(258, 107)
+        lblTrack.Location = New Point(329, 132)
+        lblTrack.Margin = New Padding(4, 0, 4, 0)
         lblTrack.Name = "lblTrack"
-        lblTrack.Size = New Size(59, 20)
+        lblTrack.Size = New Size(76, 25)
         lblTrack.TabIndex = 1023
         lblTrack.Text = "Track"
         tipInfo.SetText(lblTrack, Nothing)
@@ -1103,9 +1129,10 @@
         ' 
         lblTrackSeparator.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         tipInfo.SetImage(lblTrackSeparator, Nothing)
-        lblTrackSeparator.Location = New Point(277, 126)
+        lblTrackSeparator.Location = New Point(355, 154)
+        lblTrackSeparator.Margin = New Padding(4, 0, 4, 0)
         lblTrackSeparator.Name = "lblTrackSeparator"
-        lblTrackSeparator.Size = New Size(20, 20)
+        lblTrackSeparator.Size = New Size(26, 25)
         lblTrackSeparator.TabIndex = 1024
         lblTrackSeparator.Text = "/"
         tipInfo.SetText(lblTrackSeparator, Nothing)
@@ -1115,9 +1142,10 @@
         ' 
         lblDuration.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         tipInfo.SetImage(lblDuration, Nothing)
-        lblDuration.Location = New Point(319, 107)
+        lblDuration.Location = New Point(410, 132)
+        lblDuration.Margin = New Padding(4, 0, 4, 0)
         lblDuration.Name = "lblDuration"
-        lblDuration.Size = New Size(58, 20)
+        lblDuration.Size = New Size(75, 25)
         lblDuration.TabIndex = 1025
         lblDuration.Text = "Duration"
         tipInfo.SetText(lblDuration, Nothing)
@@ -1127,9 +1155,10 @@
         ' 
         lblYear.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         tipInfo.SetImage(lblYear, Nothing)
-        lblYear.Location = New Point(324, 149)
+        lblYear.Location = New Point(417, 184)
+        lblYear.Margin = New Padding(4, 0, 4, 0)
         lblYear.Name = "lblYear"
-        lblYear.Size = New Size(50, 20)
+        lblYear.Size = New Size(64, 25)
         lblYear.TabIndex = 1026
         lblYear.Text = "Year"
         tipInfo.SetText(lblYear, Nothing)
@@ -1152,36 +1181,42 @@
         ' CoBoxGenre
         ' 
         CoBoxGenre.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        CoBoxGenre.Font = New Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        CoBoxGenre.DropDownWidth = 149
+        CoBoxGenre.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         CoBoxGenre.FormattingEnabled = True
         tipInfo.SetImage(CoBoxGenre, Nothing)
-        CoBoxGenre.ItemHeight = 18
-        CoBoxGenre.Location = New Point(256, 84)
+        CoBoxGenre.ItemHeight = 22
+        CoBoxGenre.Location = New Point(329, 104)
+        CoBoxGenre.Margin = New Padding(4)
         CoBoxGenre.Name = "CoBoxGenre"
-        CoBoxGenre.Size = New Size(116, 24)
+        CoBoxGenre.Size = New Size(148, 28)
         CoBoxGenre.Sorted = True
         CoBoxGenre.TabIndex = 15
         tipInfo.SetText(CoBoxGenre, "Genre")
         ' 
         ' cobxAlbumArtType
         ' 
+        cobxAlbumArtType.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
         cobxAlbumArtType.DropDownStyle = ComboBoxStyle.DropDownList
+        cobxAlbumArtType.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         cobxAlbumArtType.FormattingEnabled = True
         tipInfo.SetImage(cobxAlbumArtType, Nothing)
-        cobxAlbumArtType.Location = New Point(256, 251)
+        cobxAlbumArtType.ItemHeight = 22
+        cobxAlbumArtType.Location = New Point(329, 312)
+        cobxAlbumArtType.Margin = New Padding(4)
         cobxAlbumArtType.Name = "cobxAlbumArtType"
-        cobxAlbumArtType.Size = New Size(117, 26)
+        cobxAlbumArtType.Size = New Size(149, 28)
         cobxAlbumArtType.TabIndex = 1027
         tipInfo.SetText(cobxAlbumArtType, Nothing)
         ' 
         ' MainForm
         ' 
         AllowDrop = True
-        AutoScaleDimensions = New SizeF(7F, 17F)
+        AutoScaleDimensions = New SizeF(9F, 21F)
         AutoScaleMode = AutoScaleMode.Font
         AutoSizeMode = AutoSizeMode.GrowAndShrink
         AutoValidate = AutoValidate.EnableAllowFocusChange
-        ClientSize = New Size(384, 561)
+        ClientSize = New Size(494, 717)
         Controls.Add(cobxAlbumArtType)
         Controls.Add(CoBoxGenre)
         Controls.Add(lblFileInfo)
@@ -1218,13 +1253,13 @@
         Controls.Add(lblTrackSeparator)
         Controls.Add(lblDuration)
         Controls.Add(lblYear)
-        Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         tipInfo.SetImage(Me, Nothing)
         KeyPreview = True
         MainMenuStrip = MenuMain
-        Margin = New Padding(3, 4, 3, 4)
-        MinimumSize = New Size(400, 600)
+        Margin = New Padding(4, 5, 4, 5)
+        MinimumSize = New Size(510, 732)
         Name = "MainForm"
         SizeGripStyle = SizeGripStyle.Show
         StartPosition = FormStartPosition.Manual
