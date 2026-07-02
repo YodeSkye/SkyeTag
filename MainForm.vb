@@ -1692,25 +1692,25 @@ Partial Friend Class MainForm
         End If
     End Sub
     Private Sub SetLyrics()
-        Dim hover = App.Blend(Skye.UI.CurrentTheme.ButtonBack, Skye.UI.CurrentTheme.ButtonFore, 0.15)
-        Dim pressed = App.Blend(Skye.UI.CurrentTheme.ButtonBack, Skye.UI.CurrentTheme.ButtonFore, 0.35)
-        Dim toggleOnBack = App.Blend(Skye.UI.CurrentTheme.ButtonBack, Skye.UI.CurrentTheme.ButtonFore, 0.25)
-        Dim toggleOnBorder = App.Blend(Skye.UI.CurrentTheme.ButtonBack, Skye.UI.CurrentTheme.ButtonFore, 0.45)
+        Dim hover = App.Blend(Skye.UI.ThemeManager.CurrentTheme.ButtonBack, Skye.UI.ThemeManager.CurrentTheme.ButtonFore, 0.15)
+        Dim pressed = App.Blend(Skye.UI.ThemeManager.CurrentTheme.ButtonBack, Skye.UI.ThemeManager.CurrentTheme.ButtonFore, 0.35)
+        Dim toggleOnBack = App.Blend(Skye.UI.ThemeManager.CurrentTheme.ButtonBack, Skye.UI.ThemeManager.CurrentTheme.ButtonFore, 0.25)
+        Dim toggleOnBorder = App.Blend(Skye.UI.ThemeManager.CurrentTheme.ButtonBack, Skye.UI.ThemeManager.CurrentTheme.ButtonFore, 0.45)
         If wShowLyrics Then
             panelAlbumArt.SendToBack()
             btnLyrics.BackColor = toggleOnBack
             btnLyrics.FlatAppearance.BorderColor = toggleOnBorder
             btnLyrics.FlatAppearance.MouseOverBackColor = hover
             btnLyrics.FlatAppearance.MouseDownBackColor = pressed
-            btnLyrics.ForeColor = Skye.UI.CurrentTheme.ButtonFore
+            btnLyrics.ForeColor = Skye.UI.ThemeManager.CurrentTheme.ButtonFore
             txbxLyrics.Focus()
         Else
             txbxLyrics.SendToBack()
-            btnLyrics.BackColor = Skye.UI.CurrentTheme.ButtonBack
-            btnLyrics.FlatAppearance.BorderColor = Skye.UI.CurrentTheme.ButtonFore
+            btnLyrics.BackColor = Skye.UI.ThemeManager.CurrentTheme.ButtonBack
+            btnLyrics.FlatAppearance.BorderColor = Skye.UI.ThemeManager.CurrentTheme.ButtonFore
             btnLyrics.FlatAppearance.MouseOverBackColor = hover
             btnLyrics.FlatAppearance.MouseDownBackColor = pressed
-            btnLyrics.ForeColor = Skye.UI.CurrentTheme.ButtonFore
+            btnLyrics.ForeColor = Skye.UI.ThemeManager.CurrentTheme.ButtonFore
         End If
     End Sub
     Private Sub ResetLyrics()
@@ -2479,7 +2479,7 @@ Partial Friend Class MainForm
         Else
 
             ' Artist
-            Dim currentPerformers As List(Of String) = New List(Of String)
+            Dim currentPerformers As New List(Of String)
             If tlFile IsNot Nothing Then currentPerformers = If(tlFile.Tag.Performers IsNot Nothing, tlFile.Tag.Performers.ToList(), New List(Of String))
             If Not currentPerformers.SequenceEqual(sPerformers) Then
                 lblArtist.Font = New Font(lblArtist.Font, FontStyle.Bold)
@@ -3129,11 +3129,11 @@ Partial Friend Class MainForm
     End Function
     Private Function ClonePicture(src As TagLib.IPicture) As TagLib.IPicture
         Dim dataClone As Byte() = src.Data.Data.ToArray() ' deep copy bytes
-        Dim pic As New TagLib.Picture(New TagLib.ByteVector(dataClone))
-
-        pic.Type = src.Type
-        pic.Description = src.Description
-        pic.MimeType = src.MimeType
+        Dim pic As New TagLib.Picture(New TagLib.ByteVector(dataClone)) With {
+            .Type = src.Type,
+            .Description = src.Description,
+            .MimeType = src.MimeType
+        }
 
         Return pic
     End Function

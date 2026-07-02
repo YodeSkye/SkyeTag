@@ -79,7 +79,7 @@ Partial Friend Class Settings
         Dim selected As Skye.UI.SkyeTheme = Skye.UI.SkyeThemes.GetTheme(selectedName)
         App.Settings.Theme = selected
         If Not App.Settings.ThemeAuto Then
-            SetTheme(selected)
+            Skye.UI.ThemeManager.SetTheme(selected)
             ShowSettings()
         End If
         App.Settings.Save()
