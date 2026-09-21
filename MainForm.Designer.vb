@@ -50,12 +50,12 @@
         cmiSelectFromFile = New ToolStripMenuItem()
         cmiSelectFromOnline = New ToolStripMenuItem()
         cmiPasteFromClipboard = New ToolStripMenuItem()
-        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
+        cmiAlbumArtInsertLast = New ToolStripMenuItem()
         cmiAlbumArtInsert = New ToolStripMenuItem()
         cmAlbumArtInsert = New ContextMenuStrip(components)
         cmiAlbumArtInsertBefore = New ToolStripMenuItem()
         cmiAlbumArtInsertFirst = New ToolStripMenuItem()
-        cmiAlbumArtInsertLast = New ToolStripMenuItem()
+        cmiAlbumArtInsertAfter = New ToolStripMenuItem()
         cmiAlbumArtExport = New ToolStripMenuItem()
         cmExport = New ContextMenuStrip(components)
         cmiExportToFile = New ToolStripMenuItem()
@@ -497,7 +497,7 @@
         tipInfo.SetImage(cmImageSource, Nothing)
         cmImageSource.Items.AddRange(New ToolStripItem() {cmiSelectFromFile, cmiSelectFromOnline, cmiPasteFromClipboard})
         cmImageSource.Name = "cm"
-        cmImageSource.OwnerItem = cmiAlbumArtInsertLast
+        cmImageSource.OwnerItem = cmiAlbumArtInsertAfter
         cmImageSource.Size = New Size(230, 82)
         tipInfo.SetText(cmImageSource, Nothing)
         ' 
@@ -522,13 +522,13 @@
         cmiPasteFromClipboard.Size = New Size(229, 26)
         cmiPasteFromClipboard.Text = "Paste From Clipboard"
         ' 
-        ' cmiAlbumArtInsertAfter
+        ' cmiAlbumArtInsertLast
         ' 
-        cmiAlbumArtInsertAfter.DropDown = cmImageSource
-        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
-        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
-        cmiAlbumArtInsertAfter.Size = New Size(125, 26)
-        cmiAlbumArtInsertAfter.Text = "After"
+        cmiAlbumArtInsertLast.DropDown = cmImageSource
+        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
+        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
+        cmiAlbumArtInsertLast.Size = New Size(125, 26)
+        cmiAlbumArtInsertLast.Text = "Last"
         ' 
         ' cmiAlbumArtInsert
         ' 
@@ -564,13 +564,13 @@
         cmiAlbumArtInsertFirst.Size = New Size(125, 26)
         cmiAlbumArtInsertFirst.Text = "First"
         ' 
-        ' cmiAlbumArtInsertLast
+        ' cmiAlbumArtInsertAfter
         ' 
-        cmiAlbumArtInsertLast.DropDown = cmImageSource
-        cmiAlbumArtInsertLast.Image = My.Resources.Resources.imageAdvanceLast
-        cmiAlbumArtInsertLast.Name = "cmiAlbumArtInsertLast"
-        cmiAlbumArtInsertLast.Size = New Size(125, 26)
-        cmiAlbumArtInsertLast.Text = "Last"
+        cmiAlbumArtInsertAfter.DropDown = cmImageSource
+        cmiAlbumArtInsertAfter.Image = My.Resources.Resources.imageAdvanceRight
+        cmiAlbumArtInsertAfter.Name = "cmiAlbumArtInsertAfter"
+        cmiAlbumArtInsertAfter.Size = New Size(125, 26)
+        cmiAlbumArtInsertAfter.Text = "After"
         ' 
         ' cmiAlbumArtExport
         ' 
@@ -1038,6 +1038,7 @@
         lblFileInfo.Text = "File Info"
         tipInfo.SetText(lblFileInfo, "File Info")
         lblFileInfo.TextAlign = ContentAlignment.TopCenter
+        lblFileInfo.UseMnemonic = False
         ' 
         ' lblArtist
         ' 
